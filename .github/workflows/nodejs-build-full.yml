@@ -24,4 +24,6 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - run: cd invoice-tracker-front-end && npm ci && npm test
+        cache-dependency-path: ./invoice-tracker-frontend/package-lock.json
+        cache: 'npm'
+    - run: cd invoice-tracker-frontend && npm ci && npm test
