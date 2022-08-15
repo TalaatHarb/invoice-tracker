@@ -7,18 +7,32 @@ logging:
   level[org.springframework.web]: DEBUG
 
 spring:
+  main:
+    allow-circular-references: true
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
-  jpa:
-    open-in-view: false
-    database: default
-    hibernate:
-      ddl-auto: update
+#  jpa:
+#    open-in-view: false
+#    database: default
+#    hibernate:
+#      ddl-auto: update
+#  datasource:
+#    url: jdbc:h2:file:./db/invoice-tracker;AUTO_SERVER=TRUE;
+#    username: sa
+#    password:
   datasource:
-    url: jdbc:h2:file:./db/invoice-tracker;AUTO_SERVER=TRUE;
-    username: sa
-    password:
+      driverClassName: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/othercode
+      username: root
+      password: awad36148
+  jpa:
+      hibernate.ddl-auto: create-drop
+      generate-ddl: true
+      show-sql: true
+
+
+
   application:
     name: invoice-tracker-backend
   lifecycle:
