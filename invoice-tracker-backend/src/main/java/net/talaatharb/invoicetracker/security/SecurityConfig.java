@@ -1,6 +1,7 @@
 package net.talaatharb.invoicetracker.security;
 
 import lombok.RequiredArgsConstructor;
+import net.talaatharb.invoicetracker.config.PasswordEncoder;
 import net.talaatharb.invoicetracker.filter.CustomAuthenticationFilter;
 import net.talaatharb.invoicetracker.filter.CustomAuthorizationFilter;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +12,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static org.springframework.http.HttpMethod.GET;
@@ -22,15 +22,12 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @Configuration @EnableWebSecurity @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
+    private final PasswordEncoder passwordEncoder;
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder.passwordEncodered());
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
