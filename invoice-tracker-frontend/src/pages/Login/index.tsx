@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
 import { toast } from 'react-toastify'
-import { useAppDispatch, useAppSelector } from '../../hooks/toolkit-types'
+import { useAppDispatch } from '../../hooks/toolkit-types'
 import { loginUser } from '../../services/redux/slices/AuthenticationSlice'
 import CegedimLogo from '../../assets/Cegedim_Logo.jpg'
 import LoginImage from '../../assets/LOGIN_IMAGE.avif'
@@ -12,7 +12,6 @@ import InputComponent from '../../components/Input'
 const LoginPage = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
-  const { error } = useAppSelector((state) => state.AuthenticationSlice)
 
   const formik = useFormik({
     initialValues: {
