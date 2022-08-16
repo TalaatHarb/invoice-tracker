@@ -14,7 +14,14 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long> {
                     "e.empName LIKE CONCAT('%',:name,'%')"
 
     )
+
     List<Employee> filterEmployeesByName(String name);
+    @Query(
+            "SELECT e FROM Employee e WHERE " +
+                    "e.empArabicName LIKE CONCAT('%',:arabicName,'%')"
+
+    )
+    List<Employee> filterEmployeesByArabicName(String arabicName);
     @Query(
             "SELECT e FROM Employee e WHERE " +
                     "e.teamName LIKE CONCAT('%',:teamName,'%')"

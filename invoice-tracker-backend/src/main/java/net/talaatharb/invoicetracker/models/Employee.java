@@ -20,6 +20,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String empName;
+    private String empArabicName;
     private String jobTitle;
     private String teamName;
     private int balance;

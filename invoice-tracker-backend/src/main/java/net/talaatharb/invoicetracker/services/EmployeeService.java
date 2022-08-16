@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface EmployeeService {
     List<Employee> filterEmployeeByName(String name);
+    List<Employee>filterEmployeeByArabicName(String arabicName);
     List<Employee>filterEmployeeByTeamName(String teamName);
     List<Employee>filterEmployeeByJobTitle(String jobTitle);
     List<Employee>filterEmployeeByJoinDate(String joinDate);

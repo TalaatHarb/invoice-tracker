@@ -22,6 +22,10 @@ public class EmployeeController {
     public ResponseEntity<List<Employee>> filterEmployeesByName(@RequestParam("name") String name){
         return  ResponseEntity.ok(employeeService.filterEmployeeByName(name));
     }
+    @GetMapping("/filter/arabicName")
+    public ResponseEntity<List<Employee>>filterEmployeesByArabicName(@RequestParam("arabicName") String arabicName){
+        return  ResponseEntity.ok(employeeService.filterEmployeeByArabicName(arabicName));
+    }
     @GetMapping("/filter/jobTitle")
     public ResponseEntity<List<Employee>>filterEmployeesByJobTitle(@RequestParam("jobTitle") String jobTitle){
         return  ResponseEntity.ok(employeeService.filterEmployeeByJobTitle(jobTitle));

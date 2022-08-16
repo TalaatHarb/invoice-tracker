@@ -22,6 +22,11 @@ public class EmployeeServiceImp implements EmployeeService {
         return  employeeList;
     }
     @Override
+    public List<Employee> filterEmployeeByArabicName(String arabicName) {
+        List<Employee>employeeList=employeeRepository.filterEmployeesByArabicName(arabicName);
+        return  employeeList;
+    }
+    @Override
     public List<Employee>filterEmployeeByTeamName(String teamName) {
         List<Employee>employeeList=employeeRepository.filterEmployeesByTeamName(teamName);
         return  employeeList;
