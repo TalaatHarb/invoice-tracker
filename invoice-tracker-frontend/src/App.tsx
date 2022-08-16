@@ -9,6 +9,7 @@ import {
   Route,
   Routes
 } from "react-router-dom";
+import Navbar from './components/navbar/admin-nav-bar';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
           path="*"
           element={<Navigate to="/page1" replace />}
         />
-        <Route path="page1" element={<Page1 />} />
+        <Route path="page1" element={<Navbar />} />
         <Route path="page2" element={<Page2 />} />
       </Routes>
     </BrowserRouter>
