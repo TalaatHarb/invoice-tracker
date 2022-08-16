@@ -1,4 +1,4 @@
-package net.talaatharb.invoicetracker.filter;
+package net.talaatharb.invoicetracker.security;
 
 public class JwtProperties {
     public static final String SECRET = "SomeSecretForJWTGeneration";
