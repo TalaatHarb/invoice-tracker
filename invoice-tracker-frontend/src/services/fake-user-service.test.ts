@@ -1,43 +1,42 @@
-import axios from "axios";
-import { FakeUser } from "../models/fake-user.model";
-import { getUserById } from "./fake-user-service";
+import axios from 'axios'
+import { FakeUser } from '../models/fake-user.model'
+import { getUserById } from './fake-user-service'
 
-jest.mock("axios");
-
+jest.mock('axios')
 
 const fakeUser: FakeUser = {
-    id: 1,
-    name: "Leanne Graham",
-    username: "Bret",
-    email: "Sincere@april.biz",
-    address: {
-        street: "Kulas Light",
-        suite: "Apt. 556",
-        city: "Gwenborough",
-        zipcode: "92998-3874",
-        geo: {
-            lat: "-37.3159",
-            lng: "81.1496"
-        }
+  id: 1,
+  name: 'Leanne Graham',
+  username: 'Bret',
+  email: 'Sincere@april.biz',
+  address: {
+    street: 'Kulas Light',
+    suite: 'Apt. 556',
+    city: 'Gwenborough',
+    zipcode: '92998-3874',
+    geo: {
+      lat: '-37.3159',
+      lng: '81.1496',
     },
-    phone: "1-770-736-8031 x56442",
-    website: "hildegard.org",
-    company: {
-        name: "Romaguera-Crona",
-        catchPhrase: "Multi-layered client-server neural-net",
-        bs: "harness real-time e-markets"
-    }
-};
+  },
+  phone: '1-770-736-8031 x56442',
+  website: 'hildegard.org',
+  company: {
+    name: 'Romaguera-Crona',
+    catchPhrase: 'Multi-layered client-server neural-net',
+    bs: 'harness real-time e-markets',
+  },
+}
 
 describe('getUserById calls api', () => {
-    const mockedAxios = axios as jest.Mocked<typeof axios>;
-    
-    it('should return user when api call successful', async () => {
-        mockedAxios.get.mockResolvedValueOnce(fakeUser);
+  const mockedAxios = axios as jest.Mocked<typeof axios>
 
-        const user = await getUserById(1);
+  it('should return user when api call successful', async () => {
+    mockedAxios.get.mockResolvedValueOnce(fakeUser)
 
-        expect(mockedAxios.get).toHaveBeenCalled();
-        expect(user).toEqual(fakeUser);
-    });
-});
+    const user = await getUserById(1)
+
+    expect(mockedAxios.get).toHaveBeenCalled()
+    expect(user).toEqual(fakeUser)
+  })
+})

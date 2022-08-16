@@ -3,7 +3,9 @@ package net.talaatharb.invoicetracker.filter;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -33,8 +35,15 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        String email;
+        String password;
+        try {
+            Map<String, String> requestMap = new ObjectMapper().readValue(request.getInputStream(), Map.class);
+            email = requestMap.get("email");
+            password = requestMap.get("password");
+        } catch (IOException e) {
+              throw new AuthenticationServiceException("Invalid credentials");
+        }
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, password);
         return authenticationManager.authenticate(authenticationToken);
     }
@@ -63,7 +72,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 //        tokens.put("refresh_token", refresh_token);
 //       put the array of roles to response
 //        put access token expiration time to response
-
         tokens.put("expires_in", String.valueOf(new Date(System.currentTimeMillis() + JwtProperties.EXPIRATION_TIME).getTime()));
         map.put("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
         map.put("tokens", tokens);

@@ -33,6 +33,7 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class UserController {
     private final UserService userService;
 

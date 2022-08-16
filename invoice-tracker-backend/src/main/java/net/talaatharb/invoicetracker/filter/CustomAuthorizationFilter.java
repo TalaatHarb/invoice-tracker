@@ -5,6 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -50,13 +51,11 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                     filterChain.doFilter(request, response);
                 }catch (Exception exception) {
-                    response.setHeader("error", exception.getMessage());
                     response.setStatus(FORBIDDEN.value());
-                    response.sendError(FORBIDDEN.value());
-                    Map<String, String> error = new HashMap<>();
-                    error.put("error_message", exception.getMessage());
                     response.setContentType(APPLICATION_JSON_VALUE);
-                    new ObjectMapper().writeValue(response.getOutputStream(), error);
+                    response.getWriter().write(new ObjectMapper().writeValueAsString(new HashMap<String, String>() {{
+                        put("message", "Invalid token");
+                    }}));
                 }
             } else {
                 filterChain.doFilter(request, response);
