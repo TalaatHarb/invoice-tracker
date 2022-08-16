@@ -1,15 +1,22 @@
 import React, {useState} from "react";
-import { useParams } from "react-router";
-import { SERVER } from "../utils/config";
+import { useNavigate, useParams } from "react-router";
+import { ERROR, passwordRegex, SERVER } from "../utils/config";
 import { FetchFacad } from "../utils/FetchFacad";
 import { IMessageBar, IResetPasswrodBody, MessageBar } from "../utils/types";
 
 function ResetToken(){
+    // states
     const [password, setPassword] = useState("");
     const [rPassword, setRPassword] = useState("");
+
     const [barMessage, setBarMessage] = useState(null as unknown as MessageBar);
 
+    const [passwordInvalid, setPasswordInvalid] = useState(false);
+    const [rPasswordInvalid ,setRPasswordInvalid] = useState(false);
+
+    // router
     const {resetToken} = useParams();
+    const navigatTo = useNavigate();
 
 
     // handlers
@@ -29,24 +36,47 @@ function ResetToken(){
             return;
         }
 
-        // to-do : validation of passwords for the provided regex in config file
-        
-        console.log(resetToken);
+        if(!passwordRegex.test(password)){
+            !passwordInvalid && setPasswordInvalid(true);
+            return;
+        }
+        passwordInvalid && setPasswordInvalid(false);
+
+        if(password !== rPassword){
+            !rPasswordInvalid && setRPasswordInvalid(true);
+            return;
+        }
+        rPasswordInvalid && setRPasswordInvalid(false);
 
         const data = {resetToken, password};
-        const fetchFacad = FetchFacad.getFetchFacad();
-        const result = await fetchFacad.postData<IResetPasswrodBody, IMessageBar>(`${SERVER}/password/reset`, data);
+        const result = await FetchFacad.getFetchFacad().postData<IResetPasswrodBody, IMessageBar>(`${SERVER}/password/reset`, data);
+        
+        if(result.type !== ERROR){
+            navigatTo("/login");
+        }
+        
         console.log(result);
         setBarMessage(result);
-
     }
 
     return (
         <div className="w-screen h-screen flex items-center justify-center text-center">
-            <form  className="text-gray-500 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
-                <input type="password" value={password} onChange={handlePasswordChange} />
-                <input type="password" value={rPassword} onChange={handleRPasswordChange} />
-                <input type="submit" onClick={handleSubmitClick} />
+            <form  className="text-gray-500 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col w-96"
+            onSubmit={handleSubmitClick}>
+                <div className="mb-4">
+                    <input type="password" className={"shadow appearance-none border rounded w-full h-12 py-2 px-3 text-gray-700 leading-tight focus:border focus:outline-none focus:border-blueCegedim focus:shadow-outline" + (passwordInvalid ? " border-1 border-red" : "")} placeholder="Enter New Password" 
+                    value = {password} onChange = {handlePasswordChange}/>
+                    <p className={"text-red text-xs" + (!passwordInvalid ? " hidden" : "")}> &gt; 12 characters, 1 uppercase, 1 number or special character</p>
+                </div>
+                <div className="mb-4">
+                    <input type="password" className={"shadow appearance-none border rounded w-full h-12 py-2 px-3 text-gray-700 leading-tight focus:border focus:outline-none focus:border-blueCegedim focus:shadow-outline" + (rPasswordInvalid ? " border-1 border-red" : "")} placeholder="Confirm Password" 
+                    value = {rPassword} onChange = {handleRPasswordChange}/>    
+                    <p className={"text-red text-sm" + (!rPasswordInvalid ? " hidden" : "")}>Please enter the same password</p>
+                </div>
+                <div className="flex items-center justify-center">    
+                    <input type="submit" className=" bg-blueCegedim  w-full h-12 hover:bg-darkBlue transition-colors text-white font-bold text-lg py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer"
+                    value="Reset" />
+                </div>
             </form>
         </div>
     )

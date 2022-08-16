@@ -1,3 +1,5 @@
+// types used
+
 export interface IForgotPasswordBody {
     email:string
 }

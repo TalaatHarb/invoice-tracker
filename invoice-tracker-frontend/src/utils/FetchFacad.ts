@@ -1,3 +1,6 @@
+// handling get and post requests
+
+
 export class FetchFacad{
     private static fetchFacad:FetchFacad|null;
 
@@ -30,17 +33,17 @@ export class FetchFacad{
         return result as ReturnType;
     }
 
-    // almost the same as postData, the only difference is the method, leave it for later
-    async putData<DataType, ReturnType>(url:string, data:DataType):Promise<ReturnType>{
-        const response = await fetch(url,{
-            method:"POST",
-            body:JSON.stringify(data),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        const result = await response.json();
+    // almost the same as postData, the only difference is the method, leave it for later, #error with cors policy
+    // async putData<DataType, ReturnType>(url:string, data:DataType):Promise<ReturnType>{
+    //     const response = await fetch(url,{
+    //         method:"POST",
+    //         body:JSON.stringify(data),
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         }
+    //     });
+    //     const result = await response.json();
         
-        return result as ReturnType;
-    }
+    //     return result as ReturnType;
+    // }
 }

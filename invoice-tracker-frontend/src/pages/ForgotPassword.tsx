@@ -20,6 +20,7 @@ function ForgotPassword(){
     const handleSubmitClick = async (e:any)=>{
         e.preventDefault();
         if(!emailRegex.test(email)){
+            setErrMessage(new MessageBar(ERROR, "Please Enter a Valid Email"))
             !isInvalid && setIsInvalid(true);
             return;
         }
@@ -44,7 +45,7 @@ function ForgotPassword(){
 
     return(
 
-        <div className="w-screen h-screen flex items-center justify-center text-center">
+        <div className="w-screen h-screen flex items-center justify-center text-center text-darkGrey">
 
             {/* <div className="mb-6 w64 "> */}
 
@@ -55,14 +56,14 @@ function ForgotPassword(){
                 <h3 className="font-bold">Password Recovery Information</h3>
                 <h4>We will send your instructions on how to reset your password</h4>
                 <br/>
-                <div className="mb-4">
-                    <input className={"shadow appearance-none border rounded w-full h-12 py-2 px-3 text-gray-700 leading-tight focus:border focus:outline-none focus:border-blue-500 focus:shadow-outline" + (isInvalid ? " border-2 border-red-300" : "")} type="text" placeholder="Enter Your Email" 
+                <div className="mb-4 text-left">
+                    <input className={"shadow text-black appearance-none border focus:border-blueCegedim rounded w-full h-12 py-2 px-3 text-gray-700 leading-tight focus:border focus:outline-none focus:border-blue-500 focus:shadow-outline" + (isInvalid ? " border-red" : "")} type="text" placeholder="Enter Your Email" 
                     value = {email} onChange = {handleEmailChange}/>
                     
-                    <p className={"text-red-400 text-sm" + (!isInvalid ? " hidden" : "")}>{errMessage.message}</p>
+                    <p className={"text-red text-sm" + (!isInvalid ? " hidden" : "")}>{errMessage.message.slice(0, 40) + (errMessage.message.length > 40 ? "..." : "")}</p>
                 </div>
                 <div className="flex items-center justify-center">    
-                    <input type="submit" className="bg-blue-500 w-full h-12 hover:bg-blue-700 text-white font-bold text-lg py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer" value="Send Me Email" />
+                    <input type="submit" className="transition-colors bg-blueCegedim w-full h-12 hover:bg-darkBlue text-white font-bold text-lg py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer" value="Send Me Email" />
                 </div>
                 {/* <a href="/home">Go Back</a> */}
             </form>

@@ -2,6 +2,7 @@ package net.talaatharb.invoicetracker.services;
 
 import net.bytebuddy.utility.RandomString;
 import net.talaatharb.invoicetracker.exceptions.UserException;
+import net.talaatharb.invoicetracker.helper.RegexHelper;
 import net.talaatharb.invoicetracker.models.UserEntity;
 import net.talaatharb.invoicetracker.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,13 @@ public class PasswordService {
     private String appUrl;
 
     public void sendResetLink(String email) {
+        // email validation
+        if(!RegexHelper.testWithPattern(RegexHelper.emailPattern, email)){
+            throw new UserException("Something went wrong");
+        }
+
         String token = RandomString.make(45);
-        String resetLink = appUrl + "/reset-password/" +
-                "" + token;
+        String resetLink = appUrl + "/reset-password/" + token;
 
 
         String mailSubject = "Reset password request";
@@ -46,6 +51,11 @@ public class PasswordService {
     }
 
     public void resetPassword(String resetToken, String newPassword) {
+        // token and password validation
+        if(!RegexHelper.testWithPattern(RegexHelper.noSpecialCharsRegex,resetToken) || !RegexHelper.testWithPattern(RegexHelper.passwordPattern, newPassword)){
+            throw new UserException("Something went wrong");
+        }
+
         Optional<UserEntity> userReturnedOptional = userRepo.findByResetToken(resetToken);
 
         if(userReturnedOptional.isEmpty()) {
@@ -54,7 +64,7 @@ public class PasswordService {
 
         UserEntity userReturned = userReturnedOptional.get();
 
-        // to-do : using bcrypt to hash the password
+        // to-do : using bcrypt to hash the password//getting GADO config if there is pepper and salt stf
         String hashedPassword = newPassword;
 
         userReturned.setPassword(hashedPassword);

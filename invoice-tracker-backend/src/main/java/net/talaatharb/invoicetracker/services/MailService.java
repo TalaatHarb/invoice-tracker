@@ -36,7 +36,7 @@ public class MailService implements IMail {
 
         // to-do : handle mail error
         try {
-            helper.setFrom("CegedimTeam");
+            helper.setFrom("CegeTeam");
             helper.setTo(to);
             helper.setSubject(subject);
             helper.setText(body, true);
