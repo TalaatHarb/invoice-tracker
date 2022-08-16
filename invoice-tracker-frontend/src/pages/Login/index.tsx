@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
 import { toast } from 'react-toastify'
-import { useAppDispatch } from '../../hooks/toolkit-types'
+import { useAppDispatch, useAppSelector } from '../../hooks/toolkit-types'
 import { loginUser } from '../../services/redux/slices/AuthenticationSlice'
 import CegedimLogo from '../../assets/Cegedim_Logo.jpg'
 import LoginImage from '../../assets/LOGIN_IMAGE.avif'
@@ -12,6 +12,7 @@ import InputComponent from '../../components/Input'
 const LoginPage = () => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const { error } = useAppSelector((state) => state.AuthenticationSlice)
 
   const formik = useFormik({
     initialValues: {
@@ -35,8 +36,21 @@ const LoginPage = () => {
       return errors
     },
     onSubmit: (values) => {
-      console.log(values)
-      dispatch(loginUser(values))
+      dispatch(loginUser(values)).then((res) => {
+        if (res?.payload?.email) {
+          toast.success('Login successful')
+          const { roles } = res.payload
+          if (roles.includes('ROLE_ADMIN')) {
+            navigate('/admin')
+          } else if (roles.includes('ROLE_EMPLOYEE')) {
+            navigate('/employee')
+          } else if (roles.includes('ROLE_USER')) {
+            navigate('/user')
+          }
+        } else {
+          toast.error('Wrong email or password')
+        }
+      })
     },
   })
 

@@ -4,18 +4,16 @@ import Cookies from 'universal-cookie'
 const cookies = new Cookies()
 
 interface AuthenticationState {
-  error: string | null
-  token: string | null
-  isAuthenticated: boolean
-  userRole: string | null
+  error: string | undefined
+  isAuthenticated: string | null
+  userRole: string[] | null
   isLoading: boolean
 }
 
 const initialState: AuthenticationState = {
-  isAuthenticated: false,
-  token: null,
-  userRole: null,
-  error: null,
+  error: undefined,
+  isAuthenticated: cookies.get('token') || null,
+  userRole: [],
   isLoading: false,
 }
 
@@ -23,14 +21,14 @@ export const loginUser = createAsyncThunk(
   'authentication/loginUser',
   async (credentials: any, { rejectWithValue }) => {
     try {
-      const response = await fetch(`${CONSTANTS.BACKEND_URL}/api/auth/signin`, {
+      const response = await fetch(`${CONSTANTS.BACKEND_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(credentials),
       })
-      const data = await response.json()
+      const data = response.json()
       if (response.status === 200) {
         return data
       } else {
@@ -48,40 +46,34 @@ const AuthenticationSlice = createSlice({
   reducers: {
     logoutUser: (state) => {
       cookies.remove('token')
-      state.isAuthenticated = false
-      state.token = null
+      state.isAuthenticated = null
       state.userRole = null
-      state.error = null
+      state.error = undefined
       state.isLoading = false
     },
   },
   extraReducers: (builder) => {
     builder.addCase(loginUser.pending, (state, action) => {
-      state.isAuthenticated = false
-      state.token = null
       state.userRole = null
-      state.error = null
+      state.error = undefined
       state.isLoading = true
     })
     builder.addCase(loginUser.fulfilled, (state, action) => {
-      state.isAuthenticated = true
-      state.token = action.payload.tokens.access_token
+      state.isAuthenticated = action.payload.token
       state.userRole = action.payload.roles
-      state.error = null
-      cookies.set('token', action.payload.token.access_token, {
+      state.error = undefined
+      cookies.set('token', action.payload.token, {
         path: '/',
         // parse string to date
-        expires: new Date(action.payload.tokens.expires_in),
+        expires: new Date(action.payload.expiryTime),
       })
-      //   cookies.set('userRole', action.payload.userRole, { path: '/' })
       state.isLoading = false
     })
     builder.addCase(loginUser.rejected, (state, action) => {
-      state.isAuthenticated = false
-      state.token = null
+      state.isAuthenticated = null
       state.userRole = null
-      state.error = action.error.message || 'Wrong Username or Password'
-      state.isLoading = true
+      state.error = action?.error?.message
+      state.isLoading = false
     })
   },
 })
