@@ -1,27 +1,30 @@
 import React, { useState } from "react";
-import { ERROR, SERVER } from "../utils/config";
+import { emailRegex, ERROR, SERVER } from "../utils/config";
 import { FetchFacad } from "../utils/FetchFacad";
 import { IForgotPasswordBody, IMessageBar, MessageBar } from "../utils/types";
+
 
 function ForgotPassword(){
     const [email, setEmail] = useState("");
 
     const [isInvalid, setIsInvalid] = useState(false);
 
-    const [errMessage, setErrMessage] = useState(new MessageBar(ERROR, "Please Enter a Valid Email"))
+    const [errMessage, setErrMessage] = useState(new MessageBar(ERROR, "Please Enter a Valid Email"));
 
 
     const handleEmailChange = (ev:any)=> {
         setEmail(ev.target.value);
     }
 
-    const handleSubmitClick = async ()=>{
-        if(email === "some"){
-            setIsInvalid(true);
+    // email validation: contains "@" , "." and multible characters within them.
+    const handleSubmitClick = async (e:any)=>{
+        e.preventDefault();
+        if(!emailRegex.test(email)){
+            !isInvalid && setIsInvalid(true);
             return;
-        }else{
-            setIsInvalid(false);
         }
+
+        isInvalid && setIsInvalid(false);
 
         const fetchFacad = FetchFacad.getFetchFacad();
         
@@ -41,24 +44,28 @@ function ForgotPassword(){
 
     return(
 
-        <div className="w-screen h-screen flex items-center justify-center">
+        <div className="w-screen h-screen flex items-center justify-center text-center">
 
             {/* <div className="mb-6 w64 "> */}
 
-                <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    <div className="mb-4">
-                        <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Enter Your Email" 
-                        value = {email} onChange = {handleEmailChange}/>
-                        
-                        <p className={"text-red-400 text-sm" + (!isInvalid ? " hidden" : "")}>{errMessage.message}</p>
-                    </div>
-                    <div className="flex items-center justify-between">    
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button"
-                        onClick={handleSubmitClick}>
-                            Submit
-                        </button>
-                    </div>
-                </form>
+            <form className="text-gray-500 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+                  onSubmit={handleSubmitClick}>
+                <h1 className="text-3xl font-bold">Reset Your Password</h1>
+                <br/>
+                <h3 className="font-bold">Password Recovery Information</h3>
+                <h4>We will send your instructions on how to reset your password</h4>
+                <br/>
+                <div className="mb-4">
+                    <input className={"shadow appearance-none border rounded w-full h-12 py-2 px-3 text-gray-700 leading-tight focus:border focus:outline-none focus:border-blue-500 focus:shadow-outline" + (isInvalid ? " border-2 border-red-300" : "")} type="text" placeholder="Enter Your Email" 
+                    value = {email} onChange = {handleEmailChange}/>
+                    
+                    <p className={"text-red-400 text-sm" + (!isInvalid ? " hidden" : "")}>{errMessage.message}</p>
+                </div>
+                <div className="flex items-center justify-center">    
+                    <input type="submit" className="bg-blue-500 w-full h-12 hover:bg-blue-700 text-white font-bold text-lg py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer" value="Send Me Email" />
+                </div>
+                {/* <a href="/home">Go Back</a> */}
+            </form>
         </div>
 
     )

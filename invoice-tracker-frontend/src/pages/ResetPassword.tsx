@@ -42,8 +42,8 @@ function ResetToken(){
     }
 
     return (
-        <div>
-            <form>
+        <div className="w-screen h-screen flex items-center justify-center text-center">
+            <form  className="text-gray-500 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
                 <input type="password" value={password} onChange={handlePasswordChange} />
                 <input type="password" value={rPassword} onChange={handleRPasswordChange} />
                 <input type="submit" onClick={handleSubmitClick} />

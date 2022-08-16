@@ -5,12 +5,13 @@ import net.talaatharb.invoicetracker.exceptions.UserException;
 import net.talaatharb.invoicetracker.models.UserEntity;
 import net.talaatharb.invoicetracker.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class PasswordService {
 
     @Autowired
     private UserRepository userRepo;
@@ -18,14 +19,18 @@ public class UserService {
     @Autowired
     private MailService mailService;
 
-    public void sendResetLink(String email, String host) {
+    @Value("${APPLICATION_URL}")
+    private String appUrl;
+
+    public void sendResetLink(String email) {
         String token = RandomString.make(45);
-        String resetLink = host + "/reset_password?token=" + token;
+        String resetLink = appUrl + "/reset-password/" +
+                "" + token;
 
 
         String mailSubject = "Reset password request";
         String mailBody = "<h2>Reset Password Request</h2>" +
-                "<p>Please visit <a href=\"http://" + resetLink + "\"> <bold>this link</bold> </a> to reset your password </p>";
+                          "<p>Please visit <a href=\"http://" + resetLink + "\"><bold>this link</bold> </a> to reset your password </p>";
 
 
         Optional<UserEntity> userReturnedOptional = userRepo.findByEmail(email);
@@ -40,14 +45,12 @@ public class UserService {
         mailService.sendMail(email, mailSubject, mailBody);
     }
 
-    public void resetPassword(String newPassword, String resetToken) {
+    public void resetPassword(String resetToken, String newPassword) {
         Optional<UserEntity> userReturnedOptional = userRepo.findByResetToken(resetToken);
 
         if(userReturnedOptional.isEmpty()) {
             throw new UserException("You are not authorized to make this operation");
         }
-
-        System.out.println("after throwing ");
 
         UserEntity userReturned = userReturnedOptional.get();
 
@@ -55,6 +58,7 @@ public class UserService {
         String hashedPassword = newPassword;
 
         userReturned.setPassword(hashedPassword);
+        userReturned.setResetToken(null);
 
         userRepo.save(userReturned);
     }
