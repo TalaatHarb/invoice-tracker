@@ -9,6 +9,7 @@ import {
   Route,
   Routes
 } from "react-router-dom";
+import AbsenceHistoryAccordionList from './components/absence-history-accordion/absence-history-accordion-list';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
           element={<Navigate to="/page1" replace />}
         />
         <Route path="page1" element={<Navbar />} />
-        <Route path="page2" element={<Page2 />} />
+        <Route path="page2" element={<AbsenceHistoryAccordionList />} />
       </Routes>
     </BrowserRouter>
   );
