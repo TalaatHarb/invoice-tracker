@@ -1,11 +1,12 @@
 package net.talaatharb.invoicetracker.dtos;
 
-import lombok.Data;
+import java.util.Set;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Set;
+
+import lombok.Data;
 
 @Data
 public class SignUpRequest {

@@ -1,9 +1,9 @@
 package net.talaatharb.invoicetracker.dtos;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 @AllArgsConstructor
