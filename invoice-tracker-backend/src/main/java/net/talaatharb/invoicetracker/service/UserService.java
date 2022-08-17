@@ -2,7 +2,6 @@ package net.talaatharb.invoicetracker.service;
 
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import net.talaatharb.invoicetracker.models.ERole;
 import net.talaatharb.invoicetracker.models.Role;
 import net.talaatharb.invoicetracker.models.User;

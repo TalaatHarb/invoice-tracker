@@ -1,6 +1,5 @@
 package net.talaatharb.invoicetracker.api;
 
-import lombok.RequiredArgsConstructor;
 import net.talaatharb.invoicetracker.dtos.JwtResponse;
 import net.talaatharb.invoicetracker.dtos.LoginRequest;
 import net.talaatharb.invoicetracker.dtos.MessageResponse;

@@ -1,7 +1,6 @@
 package net.talaatharb.invoicetracker.service;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
 import net.talaatharb.invoicetracker.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
