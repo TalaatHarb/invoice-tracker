@@ -18,6 +18,7 @@ spring:
       username: root
       password: awad36148
   jpa:
+      database: mysql
       open-in-view: false
       hibernate.ddl-auto: create-drop
       generate-ddl: true
