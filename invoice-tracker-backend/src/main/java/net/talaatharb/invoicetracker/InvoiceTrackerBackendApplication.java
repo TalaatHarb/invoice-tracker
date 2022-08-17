@@ -4,7 +4,6 @@ import static net.talaatharb.invoicetracker.models.ERole.ROLE_ADMIN;
 import static net.talaatharb.invoicetracker.models.ERole.ROLE_EMPLOYEE;
 import static net.talaatharb.invoicetracker.models.ERole.ROLE_HR;
 import static net.talaatharb.invoicetracker.models.ERole.ROLE_USER;
-
 import java.util.HashSet;
 
 import org.springframework.boot.CommandLineRunner;
