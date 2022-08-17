@@ -6,24 +6,26 @@ import javax.persistence.*;
 @Table
 public class ResetTokenEntity {
     @Id
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
-    )
+    @Column(name="user_id")
     private Long id;
 
     @Column
     private String resetToken;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="user_id", referencedColumnName="id")
+    @OneToOne
+    @MapsId
+    @JoinColumn(name="user_id")
     private UserEntity user;
+    @Column
+    private Long expTimeStamp;
 
+    public Long getExpTimeStamp() {
+        return expTimeStamp;
+    }
+
+    public void setExpTimeStamp(Long expTimeStamp) {
+        this.expTimeStamp = expTimeStamp;
+    }
     public Long getId() {
         return id;
     }

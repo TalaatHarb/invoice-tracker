@@ -1,12 +1,6 @@
 package net.talaatharb.invoicetracker.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Data;
 
@@ -31,9 +25,17 @@ public class UserEntity {
     private String email;
     @Column
     private String password;
-    @Column
-    private String resetToken;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private ResetTokenEntity resetToken;
 
+    public ResetTokenEntity getResetToken() {
+        return resetToken;
+    }
+
+    public void setResetToken(ResetTokenEntity resetToken) {
+        this.resetToken = resetToken;
+    }
 
     public Long getId() {
         return id;
@@ -58,12 +60,6 @@ public class UserEntity {
     }
     public void setPassword(String password) {
         this.password = password;
-    }
-    public String getResetToken() {
-        return resetToken;
-    }
-    public void setResetToken(String resetToken) {
-        this.resetToken = resetToken;
     }
 
 }

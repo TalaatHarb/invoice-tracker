@@ -16,7 +16,7 @@ function ResetToken(){
 
     // router
     const {resetToken} = useParams();
-    const navigatTo = useNavigate();
+    const navigateTo = useNavigate();
 
 
     // handlers
@@ -52,7 +52,9 @@ function ResetToken(){
         const result = await FetchFacad.getFetchFacad().postData<IResetPasswrodBody, IMessageBar>(`${SERVER}/password/reset`, data);
         
         if(result.type !== ERROR){
-            navigatTo("/login");
+            navigateTo("/login");
+        }else{
+            navigateTo("/forgot-password");
         }
         
         console.log(result);
