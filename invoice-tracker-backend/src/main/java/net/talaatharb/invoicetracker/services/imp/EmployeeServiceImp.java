@@ -68,9 +68,9 @@ public class EmployeeServiceImp implements EmployeeService {
         return employeeRepository.save(employee);
     }
     @Override
-    public List<Employee> getAllEmployees(){
+    public List<Employee> getAllEmployeesByTeamName(String teamName){
         List<Employee> employees = new ArrayList<Employee>();
-        employees.addAll(employeeRepository.findAll());
+        employees.addAll(employeeRepository.filterEmployeesByTeamName(teamName));
         return employees;
     }
 

@@ -18,41 +18,32 @@ public class EmployeeController {
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
-    @GetMapping("/filter/name")
-    public ResponseEntity<List<Employee>> filterEmployeesByName(@RequestParam("name") String name){
-        return  ResponseEntity.ok(employeeService.filterEmployeeByName(name));
-    }
-    @GetMapping("/filter/arabicName")
-    public ResponseEntity<List<Employee>>filterEmployeesByArabicName(@RequestParam("arabicName") String arabicName){
-        return  ResponseEntity.ok(employeeService.filterEmployeeByArabicName(arabicName));
-    }
-    @GetMapping("/filter/jobTitle")
-    public ResponseEntity<List<Employee>>filterEmployeesByJobTitle(@RequestParam("jobTitle") String jobTitle){
-        return  ResponseEntity.ok(employeeService.filterEmployeeByJobTitle(jobTitle));
-    }
-    @GetMapping("/filter/teamName")
-    public ResponseEntity<List<Employee>>filterEmployeesByTeamName(@RequestParam("teamName") String teamName){
-        return  ResponseEntity.ok(employeeService.filterEmployeeByTeamName(teamName));
-    }
-    @GetMapping("/filter/joinDate")
-    public ResponseEntity<List<Employee>>filterEmployeesByJoinDate(@RequestParam("joinDate") String joinDate){
-        return  ResponseEntity.ok(employeeService.filterEmployeeByJoinDate(joinDate));
-    }
-    @GetMapping("/filter/endDate")
-    public ResponseEntity<List<Employee>>filterEmployeesByEndDate(@RequestParam("endDate") String endDate){
-        return  ResponseEntity.ok(employeeService.filterEmployeeByEndDate(endDate));
-    }
-    @GetMapping("/filter/id")
-    public ResponseEntity<List<Employee>>filterEmployeesById(@RequestParam("id") Long id){
-        return  ResponseEntity.ok(employeeService.filterEmployeeById(id));
-    }
-    @GetMapping("/filter/balance")
-    public ResponseEntity<List<Employee>>filterEmployeesByBalance(@RequestParam("balance") int balance){
-        return  ResponseEntity.ok(employeeService.filterEmployeeByBalance(balance));
-    }
-    @GetMapping("/filter/remainBalance")
-    public ResponseEntity<List<Employee>>filterEmployeesByRemainBalance(@RequestParam("remainBalance") int remainBalance){
-        return  ResponseEntity.ok(employeeService.filterEmployeeByRemainBalance(remainBalance));
+
+    @GetMapping("/filter")
+    public ResponseEntity<List<Employee>>filterEmployeesByName(@RequestParam("type") String type,@RequestParam("value") String value){
+
+        if(type.equals("name"))
+            return  ResponseEntity.ok(employeeService.filterEmployeeByName(value));
+        else if (type.equals("arabicName")) {
+            return  ResponseEntity.ok(employeeService.filterEmployeeByArabicName(value));
+        } else if (type.equals("jobTitle")) {
+            return  ResponseEntity.ok(employeeService.filterEmployeeByJobTitle(value));
+        } else if (type.equals("teamName")) {
+            return  ResponseEntity.ok(employeeService.filterEmployeeByTeamName(value));
+        } else if (type.equals("joinDate")) {
+            return  ResponseEntity.ok(employeeService.filterEmployeeByJoinDate(value));
+        } else if (type.equals("endDate")) {
+            return  ResponseEntity.ok(employeeService.filterEmployeeByEndDate(value));
+        } else if (type.equals("id")) {
+            return  ResponseEntity.ok(employeeService.filterEmployeeById(Long.parseLong(value)));
+        } else if (type.equals("balance")) {
+            return  ResponseEntity.ok(employeeService.filterEmployeeByBalance(Integer.parseInt(value)));
+
+        } else if (type.equals("remainBalance")) {
+            return  ResponseEntity.ok(employeeService.filterEmployeeByRemainBalance(Integer.parseInt(value)));
+        }
+
+        return null;
     }
 
     @PostMapping
@@ -61,7 +52,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/employeesList")
-    public List<Employee> getAllEmployees(){
-        return employeeService.getAllEmployees();
+    public List<Employee> getAllEmployees(@RequestParam("type") String TeamNAme){
+        return employeeService.getAllEmployeesByTeamName(TeamNAme);
     }
 }
