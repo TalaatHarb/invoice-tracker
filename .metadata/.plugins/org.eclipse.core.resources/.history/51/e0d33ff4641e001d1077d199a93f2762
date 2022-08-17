@@ -1,0 +1,52 @@
+package net.talaatharb.invoicetracker.service;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import io.micrometer.core.ipc.http.HttpSender.Request;
+import lombok.AllArgsConstructor;
+import net.talaatharb.invoicetracker.models.Employee;
+import net.talaatharb.invoicetracker.models.Requests;
+import net.talaatharb.invoicetracker.repository.EmployeeRepo;
+import net.talaatharb.invoicetracker.repository.RequestsRepo;
+
+
+@Service
+@AllArgsConstructor
+@Transactional
+public class ServicesDB {
+
+	EmployeeRepo employeeRepo;
+	RequestsRepo requestsrepo;
+
+	public ArrayList<Employee> get_EmployeesRequests() {
+		ArrayList<Employee> emp_Requests = new ArrayList<>();
+		ArrayList<Requests> requests = new ArrayList<>();
+		requestsrepo.findAll().forEach(requests::add);
+		for (int i = 0; i < requests.size(); i++) {
+			emp_Requests.add(requests.get(i).getEmployee());
+		}
+		return emp_Requests;
+	}
+
+	public Requests update_a_leave_request(int requrst_id, Requests request) {
+		Requests requestFromDB = requestsrepo.findById(requrst_id).get();
+		System.out.println(requestFromDB.toString());
+		requestFromDB.setComments(request.getComments());
+		requestFromDB.setEnd_date(request.getEnd_date());
+		requestFromDB.setStart_date(request.getStart_date());
+		requestFromDB.setIs_full_day(request.GetisIs_full_day());
+		requestFromDB.setRequest_type(request.getRequest_type());
+		requestsrepo.save(requestFromDB);
+		
+		return requestFromDB;
+
+	}
+
+}

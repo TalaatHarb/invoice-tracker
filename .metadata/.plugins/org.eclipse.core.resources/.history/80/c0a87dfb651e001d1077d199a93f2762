@@ -1,0 +1,10 @@
+package net.talaatharb.invoicetracker.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import net.talaatharb.invoicetracker.models.Employee;
+
+
+public interface EmployeeRepo extends JpaRepository<Employee, Integer>{
+
+}
