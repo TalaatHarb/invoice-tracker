@@ -57,7 +57,7 @@ function ForgotPassword(){
                 <h4>We will send your instructions on how to reset your password</h4>
                 <br/>
                 <div className="mb-4 text-left">
-                    <input className={"shadow text-black appearance-none border focus:border-blueCegedim rounded w-full h-12 py-2 px-3 text-gray-700 leading-tight focus:border focus:outline-none focus:border-blue-500 focus:shadow-outline" + (isInvalid ? " border-red" : "")} type="text" placeholder="Enter Your Email" 
+                    <input className={"shadow text-black appearance-none border focus:border-blueCegedim rounded w-full h-12 py-2 px-3 text-gray-700 leading-tight focus:border focus:outline-none focus:border-blue-500 focus:shadow-outline" + (isInvalid ? " border-red" : "")} type="text" placeholder="Enter Your Email" autoFocus
                     value = {email} onChange = {handleEmailChange}/>
                     
                     <p className={"text-red text-sm" + (!isInvalid ? " hidden" : "")}>{errMessage.message.slice(0, 40) + (errMessage.message.length > 40 ? "..." : "")}</p>

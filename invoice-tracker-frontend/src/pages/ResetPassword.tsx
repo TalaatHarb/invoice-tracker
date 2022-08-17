@@ -66,7 +66,7 @@ function ResetToken(){
             <form  className="text-gray-500 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col w-96"
             onSubmit={handleSubmitClick}>
                 <div className="mb-4">
-                    <input type="password" className={"shadow appearance-none border rounded w-full h-12 py-2 px-3 text-gray-700 leading-tight focus:border focus:outline-none focus:border-blueCegedim focus:shadow-outline" + (passwordInvalid ? " border-1 border-red" : "")} placeholder="Enter New Password" 
+                    <input type="password" className={"shadow appearance-none border rounded w-full h-12 py-2 px-3 text-gray-700 leading-tight focus:border focus:outline-none focus:border-blueCegedim focus:shadow-outline" + (passwordInvalid ? " border-1 border-red" : "")} placeholder="Enter New Password" autoFocus
                     value = {password} onChange = {handlePasswordChange}/>
                     <p className={"text-red text-xs" + (!passwordInvalid ? " hidden" : "")}> &gt; 12 characters, 1 uppercase, 1 number or special character</p>
                 </div>

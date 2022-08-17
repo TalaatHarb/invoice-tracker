@@ -12,6 +12,8 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -57,19 +59,15 @@ public class PasswordService {
         resetToken.setUser(userReturned);
 
         if(resetTokenReturnedOptional.isPresent()){
+            userReturned.setResetToken(null);
             resetTokenRepo.deleteById(userReturned.getId());
         }
-//        userReturned.setResetToken(resetToken);
-//        userRepo.save(userReturned);
+
         resetTokenRepo.save(resetToken);
         mailService.sendMail(email, mailSubject, mailBody);
     }
 
     public void resetPassword(String resetToken, String newPassword) {
-
-//        Session session = SessionFactory.openSession();
-//        Transaction tx = session.beginTransaction();
-
 
         // token and password validation
         if(!RegexHelper.testWithPattern(RegexHelper.noSpecialCharsRegex,resetToken) || !RegexHelper.testWithPattern(RegexHelper.passwordPattern, newPassword)){
@@ -95,9 +93,8 @@ public class PasswordService {
 
         userReturned.setPassword(hashedPassword);
         userRepo.save(userReturned);
-        System.out.println(resetTokenReturned.getResetToken());
 
-        // delete doesn't work
-        resetTokenRepo.delete(resetTokenReturned);
+        userReturned.setResetToken(null);
+        resetTokenRepo.deleteById(resetTokenReturned.getId());
     }
 }
