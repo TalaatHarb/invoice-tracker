@@ -1,5 +1,22 @@
 package net.talaatharb.invoicetracker.api;
 
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+
 import net.talaatharb.invoicetracker.dtos.JwtResponse;
 import net.talaatharb.invoicetracker.dtos.LoginRequest;
 import net.talaatharb.invoicetracker.dtos.MessageResponse;
@@ -12,22 +29,6 @@ import net.talaatharb.invoicetracker.repository.UserRepository;
 import net.talaatharb.invoicetracker.security.JwtProperties;
 import net.talaatharb.invoicetracker.security.JwtUtils;
 import net.talaatharb.invoicetracker.service.UserDetailsImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 
 @CrossOrigin(origins = "*")
 @RestController

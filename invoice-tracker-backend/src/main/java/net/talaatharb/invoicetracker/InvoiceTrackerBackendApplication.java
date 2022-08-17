@@ -1,17 +1,18 @@
 package net.talaatharb.invoicetracker;
 
-import net.talaatharb.invoicetracker.models.Role;
-import net.talaatharb.invoicetracker.models.User;
-import net.talaatharb.invoicetracker.service.UserService;
+import static net.talaatharb.invoicetracker.models.ERole.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
-import static net.talaatharb.invoicetracker.models.ERole.*;
+import net.talaatharb.invoicetracker.models.Role;
+import net.talaatharb.invoicetracker.models.User;
+import net.talaatharb.invoicetracker.service.UserService;
 
 @SpringBootApplication
 public class InvoiceTrackerBackendApplication {

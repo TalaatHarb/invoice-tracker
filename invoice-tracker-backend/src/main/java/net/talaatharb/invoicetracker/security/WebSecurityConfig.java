@@ -1,7 +1,7 @@
 package net.talaatharb.invoicetracker.security;
 
-import lombok.RequiredArgsConstructor;
-import net.talaatharb.invoicetracker.service.UserDetailsServiceImpl;
+import static net.talaatharb.invoicetracker.config.PasswordEncoderBean.passwordEncoder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +14,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static net.talaatharb.invoicetracker.config.PasswordEncoderBean.passwordEncoder;
+import lombok.RequiredArgsConstructor;
+import net.talaatharb.invoicetracker.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
