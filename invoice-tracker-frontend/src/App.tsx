@@ -4,7 +4,6 @@ import AdminPage from './pages/AdminPage'
 import EmployeePage from './pages/EmployeePage'
 import PrivateRoute from './components/PrivateRoute'
 import UserPage from './pages/UserPage'
-import DefaultPage from './pages/DefaultPage'
 import { useAppSelector } from './hooks/toolkit-types'
 
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
@@ -17,7 +16,6 @@ function App() {
     <BrowserRouter>
       <Routes>
         {!isAuthenticated && <Route path='/login' element={<Login />} />}
-        <Route path='/' element={<DefaultPage />} />
         {/* protected user page */}
         <Route path='/user' element={<PrivateRoute />}>
           <Route path='/user' element={<UserPage />} />
@@ -30,7 +28,11 @@ function App() {
         <Route path='/employee' element={<PrivateRoute />}>
           <Route path='/employee' element={<EmployeePage />} />
         </Route>
-        <Route path='*' element={<Navigate to='/' replace />} />
+        {isAuthenticated ? (
+          <Route path='*' element={<Navigate to='/user' replace />} />
+        ) : (
+          <Route path='*' element={<Navigate to='/login' replace />} />
+        )}
       </Routes>
     </BrowserRouter>
   )
