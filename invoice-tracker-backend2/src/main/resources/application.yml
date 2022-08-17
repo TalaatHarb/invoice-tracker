@@ -1,0 +1,38 @@
+server:
+  port: 8080
+  shutdown: graceful
+
+logging:
+  level[net.talaatharb.invoicetracker]: DEBUG
+  level[org.springframework.web]: DEBUG
+
+spring:
+  main:
+    allow-circular-references: true
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  datasource:
+      driverClassName: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/othercode
+      username: root
+      password: awad36148
+  jpa:
+      open-in-view: false
+      hibernate.ddl-auto: create-drop
+      generate-ddl: true
+      show-sql: false
+  application:
+    name: invoice-tracker-backend
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
