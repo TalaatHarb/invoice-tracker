@@ -1,17 +1,20 @@
 package net.talaatharb.invoicetracker.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
-import java.util.Set;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity @Data @NoArgsConstructor @AllArgsConstructor
 @Table(name = "users",
@@ -42,10 +45,27 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(
+
+            cascade= CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Request> requests = new ArrayList<>();
+
+
 
     public User(String username, String email, String encode) {
         this.username = username;
         this.email = email;
         this.password = encode;
+    }
+
+    public User(String username, String email, String password, Set<Role> roles, List<Request> requests) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.requests = requests;
     }
 }

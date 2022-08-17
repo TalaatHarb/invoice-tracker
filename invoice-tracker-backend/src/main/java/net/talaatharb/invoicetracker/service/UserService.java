@@ -1,20 +1,20 @@
 package net.talaatharb.invoicetracker.service;
 
+import java.util.List;
+import java.util.Optional;
 
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import net.talaatharb.invoicetracker.models.ERole;
-import net.talaatharb.invoicetracker.models.Role;
-import net.talaatharb.invoicetracker.models.User;
-import net.talaatharb.invoicetracker.repository.RoleRepositry;
-import net.talaatharb.invoicetracker.repository.UserRepository;
+import javax.transaction.Transactional;
+
+import net.talaatharb.invoicetracker.models.*;
+import net.talaatharb.invoicetracker.repository.RequestRepository;
+import net.talaatharb.invoicetracker.repository.RequestTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
+import lombok.AllArgsConstructor;
+import net.talaatharb.invoicetracker.repository.RoleRepositry;
+import net.talaatharb.invoicetracker.repository.UserRepository;
 
 @Service
 @AllArgsConstructor
@@ -27,6 +27,10 @@ public class UserService {
     private final RoleRepositry  roleRepositry;
 
     private final PasswordEncoder passwordEncoder;
+    @Autowired
+    private final RequestRepository requestRepository;
+    @Autowired
+    private final RequestTypeRepository requestTypeRepository;
 
 
 
@@ -46,11 +50,29 @@ public class UserService {
             user.get().getRoles().add(role.get());
         }
     }
-    public User getUser(String username) {
-        return userRepository.findByUsername(username).orElse(null);
+    public User getUser(long ID) {
+        return userRepository.findById(ID).orElse(null);
     }
 
     public List<User> getUsers() {
         return userRepository.findAll();
     }
+
+    public void saveRequest(Long ID, String type, Request request) {
+        requestRepository.save(request);
+        User user = userRepository.findById(ID).get();
+        user.getRequests().add(request);
+        request.setRequested_by(ID);
+        RequestType Rtype= requestTypeRepository.findByName(type);
+        request.setType(type);
+        Rtype.getRequests().add(request);
+
+
+    }
+
+
+    public void saveRequestType(RequestType type) {
+        requestTypeRepository.save(type);
+    }
 }
+

@@ -1,17 +1,20 @@
 package net.talaatharb.invoicetracker;
 
-import net.talaatharb.invoicetracker.models.Role;
-import net.talaatharb.invoicetracker.models.User;
-import net.talaatharb.invoicetracker.service.UserService;
+import static net.talaatharb.invoicetracker.models.ERole.*;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+
+import net.talaatharb.invoicetracker.models.Request;
+import net.talaatharb.invoicetracker.models.RequestType;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
-import static net.talaatharb.invoicetracker.models.ERole.*;
+import net.talaatharb.invoicetracker.models.Role;
+import net.talaatharb.invoicetracker.models.User;
+import net.talaatharb.invoicetracker.service.UserService;
 
 @SpringBootApplication
 public class InvoiceTrackerBackendApplication {
@@ -31,11 +34,12 @@ public class InvoiceTrackerBackendApplication {
 //			new empty hashmap
 			ArrayList<Role> roles = new ArrayList<>();
 
-			userService.saveUser(new User(null,"Gado","boogado@yahoo.com", "awad36148",new HashSet<>()));
-			userService.saveUser(new User(null,"Gado1","boogado1@yahoo.com", "awad36148",new HashSet<>()));
-			userService.saveUser(new User(null,"Gado2","boogado2@yahoo.com", "awad36148",new HashSet<>()));
-			userService.saveUser(new User(null,"Gado3","boogado3@yahoo.com", "awad36148",new HashSet<>()));
-			userService.saveUser(new User(null,"Gado4","boogado4@yahoo.com", "awad36148",new HashSet<>()));
+
+			userService.saveUser(new User("Gado","boogado@yahoo.com", "awad36148",new HashSet<>(),new ArrayList<>()));
+			userService.saveUser(new User("Gado1","boogado1@yahoo.com", "awad36148",new HashSet<>(),new ArrayList<>()));
+			userService.saveUser(new User("Gado2","boogado2@yahoo.com", "awad36148",new HashSet<>(),new ArrayList<>()));
+			userService.saveUser(new User("Gado3","boogado3@yahoo.com", "awad36148",new HashSet<>(),new ArrayList<>()));
+			userService.saveUser(new User("Gado4","boogado4@yahoo.com", "awad36148",new HashSet<>(),new ArrayList<>()));
 
 
 			userService.addRoleToUser("boogado@yahoo.com", ROLE_USER);
@@ -44,6 +48,12 @@ public class InvoiceTrackerBackendApplication {
 			userService.addRoleToUser("boogado3@yahoo.com", ROLE_HR);
 			userService.addRoleToUser("boogado4@yahoo.com", ROLE_EMPLOYEE);
 			userService.addRoleToUser("boogado2@yahoo.com", ROLE_USER);
+
+			userService.saveRequestType(new RequestType("sickness",new ArrayList<>()));
+
+			//change first attribute to user ID instead of email
+			long l=1;
+			userService.saveRequest(l,"sickness",new Request("9-19-2022","9-19-2023",false,false,false));
 		};
 	}
 }

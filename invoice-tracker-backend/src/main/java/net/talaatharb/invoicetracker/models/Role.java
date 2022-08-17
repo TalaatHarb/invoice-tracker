@@ -1,13 +1,10 @@
 package net.talaatharb.invoicetracker.models;
 
+import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-
-import static javax.persistence.GenerationType.AUTO;
-
 
 @Entity
 @Data
