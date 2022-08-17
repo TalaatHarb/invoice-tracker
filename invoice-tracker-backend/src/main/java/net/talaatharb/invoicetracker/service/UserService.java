@@ -21,36 +21,35 @@ import net.talaatharb.invoicetracker.repository.UserRepository;
 @Transactional
 public class UserService {
 
-    @Autowired
-    private final UserRepository userRepository;
-    @Autowired
-    private final RoleRepositry  roleRepositry;
+	private final PasswordEncoder passwordEncoder;
+	@Autowired
+	private final RoleRepositry roleRepositry;
 
-    private final PasswordEncoder passwordEncoder;
+	@Autowired
+	private final UserRepository userRepository;
 
+	public void addRoleToUser(String email, ERole userRole) {
+		Optional<User> user = userRepository.findByEmail(email);
+		Optional<Role> role = roleRepositry.findByName(userRole);
+		if (user.isPresent() && role.isPresent()) {
+			user.get().getRoles().add(role.get());
+		}
+	}
 
+	public User getUser(String username) {
+		return userRepository.findByUsername(username).orElse(null);
+	}
 
-    public User saveUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
-    }
+	public List<User> getUsers() {
+		return userRepository.findAll();
+	}
 
-    public Role saveRole(Role role) {
-        return roleRepositry.save(role);
-    }
+	public Role saveRole(Role role) {
+		return roleRepositry.save(role);
+	}
 
-    public void addRoleToUser(String email, ERole userRole) {
-        Optional<User> user = userRepository.findByEmail(email);
-        Optional<Role> role = roleRepositry.findByName(userRole);
-        if (user.isPresent() && role.isPresent()) {
-            user.get().getRoles().add(role.get());
-        }
-    }
-    public User getUser(String username) {
-        return userRepository.findByUsername(username).orElse(null);
-    }
-
-    public List<User> getUsers() {
-        return userRepository.findAll();
-    }
+	public User saveUser(User user) {
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		return userRepository.save(user);
+	}
 }

@@ -8,5 +8,5 @@ import net.talaatharb.invoicetracker.models.ERole;
 import net.talaatharb.invoicetracker.models.Role;
 
 public interface RoleRepositry extends JpaRepository<Role, Long> {
-    Optional<Role> findByName(ERole name);
+	Optional<Role> findByName(ERole name);
 }
