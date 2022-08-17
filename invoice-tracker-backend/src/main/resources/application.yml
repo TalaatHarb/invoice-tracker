@@ -10,14 +10,15 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ANT_PATH_MATCHER
+#
   jpa:
-    open-in-view: false
-    database: default
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
+    generate-ddl: true
+    show-sql: false
   datasource:
-    url: jdbc:postgresql://localhost:5432/testdb
-    username: postgres
+    url: jdbc:mysql://localhost:3306/testdb
+    username: root
     password: test
   application:
     name: invoice-tracker-backend

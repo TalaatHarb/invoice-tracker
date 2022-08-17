@@ -1,5 +1,7 @@
 package net.talaatharb.invoicetracker.ExcelPackege;
 
+import net.talaatharb.invoicetracker.models.Employee;
+import net.talaatharb.invoicetracker.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,10 +11,10 @@ import java.util.List;
 public class ExcelService {
 
 
-    Employee_Repository employee_repository;
+    EmployeeRepository employee_repository;
     @Autowired
-    public ExcelService(Employee_Repository repository) {
-        this.employee_repository = repository;
+    public ExcelService(EmployeeRepository employee_repository) {
+        this.employee_repository = employee_repository;
     }
 
     public void save(List<Employee> Income_list) {

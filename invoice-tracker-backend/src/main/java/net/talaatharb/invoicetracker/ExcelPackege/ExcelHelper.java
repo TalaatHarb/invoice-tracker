@@ -1,4 +1,6 @@
 package net.talaatharb.invoicetracker.ExcelPackege;
+import net.talaatharb.invoicetracker.models.Employee;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class ExcelHelper {
                 employee.setEmployee_adress_english(income_list.get(i).getEmployee_adress_english());
                 employee.setIs_disabiled(income_list.get(i).isIs_disabiled());
                 employee.setIs_fullTime(income_list.get(i).isIs_fullTime());
-                employee.setTeam_name(employee.getTeam_name());
+                employee.setTeam_name(income_list.get(i).getTeam_name());
                 employee.setJop_title(income_list.get(i).getJop_title());
                 employee.setBillable(income_list.get(i).isBillable());
                 employee.setMobile_number(income_list.get(i).getMobile_number());

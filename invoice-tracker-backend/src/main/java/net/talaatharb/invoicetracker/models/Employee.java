@@ -1,4 +1,4 @@
-package net.talaatharb.invoicetracker.ExcelPackege;
+package net.talaatharb.invoicetracker.models;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,7 +9,7 @@ public class Employee {
 
 
     @Id
-    @Column(name = "employee_id")
+    @Column(name = "employee_id",nullable = false,unique = true)
     private long employee_id;
     @Column(name = "english_name")
     private String english_name;
@@ -17,13 +17,13 @@ public class Employee {
     @Column(name = "arabic_name")
     private String arabic_name;
 
-    @Column(name = "password")
+    @Column(name = "password" ,unique = true,nullable = false)
     private String password;
 
     @Column(name = "birth_date")
     private Date birth_date;
 
-    @Column(name = "national_id")
+    @Column(name = "national_id",unique = true)
     private String national_id;
 
     @Column(name = "employee_adress_english")
@@ -43,7 +43,7 @@ public class Employee {
     @Column(name = "team_name")
     private String team_name;
 
-    @Column(name = "email")
+    @Column(name = "email" ,unique = true, nullable = false)
     private String email;
 
     @Column(name = "mobile_number")
