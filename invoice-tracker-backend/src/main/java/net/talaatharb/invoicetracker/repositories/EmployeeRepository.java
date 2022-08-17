@@ -64,5 +64,23 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long> {
     )
     List<Employee> filterEmployeesByRemainBalance(int remainBalance);
 
+    @Query(
+            "SELECT e FROM Employee e WHERE e.billable=:billable"
+
+    )
+    List<Employee> filterEmployeesByBillable(boolean billable);
+
+    @Query(
+            "SELECT e FROM Employee e WHERE e.isDisabled=:isDisabled"
+
+    )
+    List<Employee> filterEmployeesByIsDisabled(boolean isDisabled);
+
+    @Query(
+            "SELECT e FROM Employee e WHERE e.fullTimeJob=:fullTimeJob"
+
+    )
+    List<Employee> filterEmployeesByIsFullTimeJob(boolean fullTimeJob);
+
 }
 

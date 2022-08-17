@@ -62,6 +62,22 @@ public class EmployeeServiceImp implements EmployeeService {
         return  employeeList;
     }
 
+    @Override
+    public List<Employee>filterEmployeeByIsBillable(boolean billable) {
+        List<Employee>employeeList=employeeRepository.filterEmployeesByBillable(billable);
+        return  employeeList;
+    }
+    @Override
+    public List<Employee>filterEmployeeByIsDisabled(boolean isDisabled) {
+        List<Employee>employeeList=employeeRepository.filterEmployeesByIsDisabled(isDisabled);
+        return  employeeList;
+    }
+
+    @Override
+    public List<Employee>filterEmployeeByIsFullTimeJob(boolean fullTimeJob) {
+        List<Employee>employeeList=employeeRepository.filterEmployeesByIsFullTimeJob(fullTimeJob);
+        return  employeeList;
+    }
 
     @Override
     public Employee createEmployee(Employee employee) {

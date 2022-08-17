@@ -15,6 +15,9 @@ public interface EmployeeService {
     List<Employee>filterEmployeeByBalance(int balance);
     List<Employee>filterEmployeeByRemainBalance(int remainBalance);
 
+    List<Employee>filterEmployeeByIsBillable(boolean billable);
+    List<Employee>filterEmployeeByIsDisabled(boolean isDisabled);
+    List<Employee>filterEmployeeByIsFullTimeJob(boolean fullTimeJob);
 
 
     Employee createEmployee(Employee employee);

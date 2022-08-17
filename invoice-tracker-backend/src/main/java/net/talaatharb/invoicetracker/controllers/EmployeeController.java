@@ -43,6 +43,16 @@ public class EmployeeController {
             return  ResponseEntity.ok(employeeService.filterEmployeeByRemainBalance(Integer.parseInt(value)));
         }
 
+        else if (type.equals("billable")) {
+            return  ResponseEntity.ok(employeeService.filterEmployeeByIsBillable(Boolean.parseBoolean(value)));
+        }
+        else if (type.equals("isDisabled")) {
+            return  ResponseEntity.ok(employeeService.filterEmployeeByIsDisabled(Boolean.parseBoolean(value)));
+        }
+        else if (type.equals("fullTime")) {
+            return  ResponseEntity.ok(employeeService.filterEmployeeByIsFullTimeJob(Boolean.parseBoolean(value)));
+        }
+
         return null;
     }
 

@@ -27,5 +27,8 @@ public class Employee {
     private int remainBalance;
     private String joinDate;
     private String endDate;
+    private boolean billable;
+    private boolean isDisabled;
+    private boolean fullTimeJob;
 
 }
