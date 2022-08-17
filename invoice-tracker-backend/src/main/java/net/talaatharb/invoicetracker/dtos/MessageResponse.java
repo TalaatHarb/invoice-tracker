@@ -21,6 +21,10 @@ public class MessageResponse {
         else this.message = "error";
     }
 
+    public MessageResponse(String message){
+        this.message = message;
+    }
+
     public String getMessage() {
         return message;
     }
@@ -29,4 +33,5 @@ public class MessageResponse {
         this.message = message;
     }
 }
+
 
