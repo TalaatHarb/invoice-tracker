@@ -16,9 +16,9 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:h2:file:./db/invoice-tracker;AUTO_SERVER=TRUE;
-    username: sa
-    password:
+    url: jdbc:postgresql://localhost:5432/testdb
+    username: postgres
+    password: test
   application:
     name: invoice-tracker-backend
   lifecycle:
