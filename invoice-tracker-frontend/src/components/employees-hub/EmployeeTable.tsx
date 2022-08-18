@@ -159,7 +159,7 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
     const id: number = event.target.value;
   };
   return (
-    <div className="w-9/12 flex flex-col">
+    <div className="w-10/12 flex flex-col">
       <ColumnSelect table={table} />
       <div className="overflow-x-auto shadow-lg rounded-lg">
         <table className=" text-black">

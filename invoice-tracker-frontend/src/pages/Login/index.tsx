@@ -8,7 +8,6 @@ import CegedimLogo from "../../assets/Cegedim_Logo.jpg";
 import LoginImage from "../../assets/LOGIN_IMAGE.avif";
 import Button from "../../components/Button";
 import InputComponent from "../../components/Input";
-import EmployeeTab from "../../components/employees-hub/EmployeeTable";
 
 const LoginPage = () => {
   const navigate = useNavigate();

@@ -2,10 +2,10 @@ import React from 'react'
 import Login from './pages/Login'
 import AdminPage from './pages/AdminPage'
 import EmployeePage from './pages/EmployeePage'
+import EmployeesHub from "./pages/EmployeesHub/EmployeesHub"
 import PrivateRoute from './components/PrivateRoute'
 import UserPage from './pages/UserPage'
 import { useAppSelector } from './hooks/toolkit-types'
-import FilterComboBox from './components/employee-hub/FilterComboBox'
 
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
@@ -16,7 +16,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<FilterComboBox/>} />
+        <Route path="/" element={<EmployeesHub/>} />
         {!isAuthenticated && <Route path='/login' element={<Login />} />}
         {/* protected user page */}
         <Route path='/user' element={<PrivateRoute />}>
