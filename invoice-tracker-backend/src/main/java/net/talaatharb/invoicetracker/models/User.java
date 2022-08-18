@@ -1,5 +1,6 @@
 package net.talaatharb.invoicetracker.models;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -47,10 +48,27 @@ public class User {
 	@NotBlank
 	@Size(max = 20)
 	private String username;
+	
+	private Boolean isEnabled;
+	
+	private static final long PASSWORD_EXPIRATION_TIME
+    = 30L * 24L * 60L * 60L * 1000L;
+	
+	private Date passwordChangedTime;
+
 
 	public User(String username, String email, String encode) {
 		this.username = username;
 		this.email = email;
 		this.password = encode;
 	}
+	
+	public boolean isNotPasswordExpired() {
+        if (this.passwordChangedTime == null) return true;
+         
+        long currentTime = System.currentTimeMillis();
+        long lastChangedTime = this.passwordChangedTime.getTime();
+         
+        return currentTime < lastChangedTime + PASSWORD_EXPIRATION_TIME;
+    }
 }

@@ -5,6 +5,9 @@ import static net.talaatharb.invoicetracker.models.ERole.ROLE_EMPLOYEE;
 import static net.talaatharb.invoicetracker.models.ERole.ROLE_HR;
 import static net.talaatharb.invoicetracker.models.ERole.ROLE_USER;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 
 import org.springframework.boot.CommandLineRunner;
@@ -25,6 +28,8 @@ public class InvoiceTrackerBackendApplication {
 	private static final String EMAIL_HR_2 = "boogado3@yahoo.com";
 	private static final String EMAIL_USER = "boogado@yahoo.com";
 	private static final String PASS_USER = "awad36148";
+	private static final Boolean IS_ENABLED = true;
+	private static final Date PASSWORD_EXPIRY_DATE = new GregorianCalendar(2022,Calendar.AUGUST,11).getTime();
 
 	public static void main(String[] args) {
 		SpringApplication.run(InvoiceTrackerBackendApplication.class, args);
@@ -38,11 +43,11 @@ public class InvoiceTrackerBackendApplication {
 			userService.saveRole(new Role(null, ROLE_EMPLOYEE));
 			userService.saveRole(new Role(null, ROLE_ADMIN));
 
-			userService.saveUser(new User(EMAIL_USER, null, PASS_USER, new HashSet<>(), "Gado"));
-			userService.saveUser(new User(EMAIL_HR, null, PASS_USER, new HashSet<>(), "Gado1"));
-			userService.saveUser(new User(EMAIL_ADMIN_USER, null, PASS_USER, new HashSet<>(), "Gado2"));
-			userService.saveUser(new User(EMAIL_HR_2, null, PASS_USER, new HashSet<>(), "Gado3"));
-			userService.saveUser(new User(EMAIL_EMPLOYEE, null, PASS_USER, new HashSet<>(), "Gado4"));
+			userService.saveUser(new User(EMAIL_USER, null, PASS_USER, new HashSet<>(), "Gado",IS_ENABLED, PASSWORD_EXPIRY_DATE));
+			userService.saveUser(new User(EMAIL_HR, null, PASS_USER, new HashSet<>(), "Gado1",IS_ENABLED, PASSWORD_EXPIRY_DATE));
+			userService.saveUser(new User(EMAIL_ADMIN_USER, null, PASS_USER, new HashSet<>(), "Gado2",IS_ENABLED, PASSWORD_EXPIRY_DATE));
+			userService.saveUser(new User(EMAIL_HR_2, null, PASS_USER, new HashSet<>(), "Gado3",IS_ENABLED, PASSWORD_EXPIRY_DATE));
+			userService.saveUser(new User(EMAIL_EMPLOYEE, null, PASS_USER, new HashSet<>(), "Gado4",IS_ENABLED, PASSWORD_EXPIRY_DATE));
 
 			userService.addRoleToUser(EMAIL_USER, ROLE_USER);
 			userService.addRoleToUser(EMAIL_HR, ROLE_HR);
