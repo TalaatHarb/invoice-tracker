@@ -41,16 +41,6 @@ logging:
   level[net.talaatharb.invoicetracker]: DEBUG
   level[org.springframework.web]: DEBUG
 
-#  jpa:
-#    open-in-view: false
-#    database: default
-#    hibernate:
-#      ddl-auto: update
-#  datasource:
-#    url: jdbc:h2:file:./db/invoice-tracker;AUTO_SERVER=TRUE;
-#    username: sa
-#    password:
-
 management:
   endpoints:
     web:

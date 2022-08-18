@@ -3,18 +3,31 @@ package net.talaatharb.invoicetracker;
 import net.talaatharb.invoicetracker.models.Role;
 import net.talaatharb.invoicetracker.models.User;
 import net.talaatharb.invoicetracker.services.UserService;
+import static net.talaatharb.invoicetracker.models.ERole.ROLE_ADMIN;
+import static net.talaatharb.invoicetracker.models.ERole.ROLE_EMPLOYEE;
+import static net.talaatharb.invoicetracker.models.ERole.ROLE_HR;
+import static net.talaatharb.invoicetracker.models.ERole.ROLE_USER;
+
+import java.util.HashSet;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-
-import static net.talaatharb.invoicetracker.models.ERole.*;
+import net.talaatharb.invoicetracker.models.Role;
+import net.talaatharb.invoicetracker.models.User;
+import net.talaatharb.invoicetracker.services.UserService;
 
 @SpringBootApplication
 public class InvoiceTrackerBackendApplication {
+
+	private static final String EMAIL_ADMIN_USER = "boogado2@yahoo.com";
+	private static final String EMAIL_EMPLOYEE = "boogado4@yahoo.com";
+	private static final String EMAIL_HR = "boogado1@yahoo.com";
+	private static final String EMAIL_HR_2 = "boogado3@yahoo.com";
+	private static final String EMAIL_USER = "boogado@yahoo.com";
+	private static final String PASS_USER = "awad36148";
 
 	public static void main(String[] args) {
 		SpringApplication.run(InvoiceTrackerBackendApplication.class, args);
@@ -29,22 +42,18 @@ public class InvoiceTrackerBackendApplication {
 			userService.saveRole(new Role(null, ROLE_EMPLOYEE));
 			userService.saveRole(new Role(null, ROLE_ADMIN));
 
-//			new empty hashmap
-			ArrayList<Role> roles = new ArrayList<>();
+			userService.saveUser(new User(EMAIL_USER, null, PASS_USER, new HashSet<>(), "Gado"));
+			userService.saveUser(new User(EMAIL_HR, null, PASS_USER, new HashSet<>(), "Gado1"));
+			userService.saveUser(new User(EMAIL_ADMIN_USER, null, PASS_USER, new HashSet<>(), "Gado2"));
+			userService.saveUser(new User(EMAIL_HR_2, null, PASS_USER, new HashSet<>(), "Gado3"));
+			userService.saveUser(new User(EMAIL_EMPLOYEE, null, PASS_USER, new HashSet<>(), "Gado4"));
 
-			userService.saveUser(new User(null,"Gado","boogado@yahoo.com", "awad36148",new HashSet<>()));
-			userService.saveUser(new User(null,"Gado1","boogado1@yahoo.com", "awad36148",new HashSet<>()));
-			userService.saveUser(new User(null,"Gado2","boogado2@yahoo.com", "awad36148",new HashSet<>()));
-			userService.saveUser(new User(null,"Gado3","boogado3@yahoo.com", "awad36148",new HashSet<>()));
-			userService.saveUser(new User(null,"Gado4","boogado4@yahoo.com", "awad36148",new HashSet<>()));
-
-
-			userService.addRoleToUser("boogado@yahoo.com", ROLE_USER);
-			userService.addRoleToUser("boogado1@yahoo.com", ROLE_HR);
-			userService.addRoleToUser("boogado2@yahoo.com", ROLE_ADMIN);
-			userService.addRoleToUser("boogado3@yahoo.com", ROLE_HR);
-			userService.addRoleToUser("boogado4@yahoo.com", ROLE_EMPLOYEE);
-			userService.addRoleToUser("boogado2@yahoo.com", ROLE_USER);
+			userService.addRoleToUser(EMAIL_USER, ROLE_USER);
+			userService.addRoleToUser(EMAIL_HR, ROLE_HR);
+			userService.addRoleToUser(EMAIL_ADMIN_USER, ROLE_ADMIN);
+			userService.addRoleToUser(EMAIL_HR_2, ROLE_HR);
+			userService.addRoleToUser(EMAIL_EMPLOYEE, ROLE_EMPLOYEE);
+			userService.addRoleToUser(EMAIL_ADMIN_USER, ROLE_USER);
 		};
 	}
 }

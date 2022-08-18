@@ -1,6 +1,7 @@
 package net.talaatharb.invoicetracker.dtos;
 
 public class MessageResponse {
+
     private String type;
 
     private String message;
@@ -32,6 +33,7 @@ public class MessageResponse {
     public void setMessage(String message) {
         this.message = message;
     }
+
 }
 
 
