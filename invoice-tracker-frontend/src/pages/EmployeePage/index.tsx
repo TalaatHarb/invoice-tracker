@@ -4,6 +4,9 @@ import axios from "axios";
 import { useAppDispatch, useAppSelector } from "../../hooks/toolkit-types";
 import { getID } from "../../services/redux/slices/AuthenticationSlice";
 import Button from "../../components/Button";
+import UserDisplay from "../../components/UserDisplay";
+import RequesCard from "../../components/RequestCard";
+import { logoutUser } from '../../services/redux/slices/AuthenticationSlice'
 
 const EmployeePage = (props: any) => {
   const { isAuthenticated } = useAppSelector(
@@ -21,7 +24,7 @@ const EmployeePage = (props: any) => {
     ],
   });
   const dispatch = useAppDispatch();
-  const [requests, setReuests] = useState([{ name: "", rating: null }]);
+  const [requests, setRequests] = useState([{ name: "", rating: null }]);
   const navigate = useNavigate();
   const { ID } = useAppSelector((state) => state.AuthenticationSlice);
 
@@ -56,88 +59,24 @@ const EmployeePage = (props: any) => {
     );
 
     
-    setReuests(objArray);
+    setRequests(objArray);
     dispatch(getID(res.data.id));
   };
 
   return (
     <div className="containerr p-11 b bg-lightGrey">
+      <Button className="w-48 ml-auto mb-7"
+          onClick={() => {
+            dispatch(logoutUser())
+          }}
+        >
+          Log Out
+        </Button>
       <div className="data flex ">
-        <div className="bg-white shadow overflow-hidden sm:rounded-lg flex-1 mr-40 max-w-screen-md ">
-          <div className="px-4 py-5 sm:px-6 bg-blueCegedim">
-            <h3 className="text-xl leading-6 text-gray-900 font-semibold text-white ">
-              Employee data
-            </h3>
-          </div>
-          <div className="border-t border-gray-200">
-            <dl>
-              <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500">Name</dt>
-                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {employee.username}
-                </dd>
-              </div>
-              <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500">Job title</dt>
-                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {employee.roles[0].name}
-                </dd>
-              </div>
-              <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500">Phone</dt>
-                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {employee.phoneNumber}
-                </dd>
-              </div>
-              <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500">Email</dt>
-                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {employee.email}
-                </dd>
-              </div>
-
-              <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500">
-                  Joining date
-                </dt>
-                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {employee.joiningDate}
-                </dd>
-              </div>
-            </dl>
-          </div>
-        </div>
-        <div className="w-80 text-center  bg-white rounded ">
-          <div className="bg-blueCegedim">
-            <h1 className="font-semibold w-40 h-16 ml-20 p-5 text-white rounded-xl text-xl  ">
-              All absence
-            </h1>
-          </div>
-          <div className="p-6">
-            <div className="flex justify-between">
-              {requests.map((req) => (
-                <div className=" text-center mt-10  text-lg " key={req.name}>
-                  <h1 className="  p-1 rounded">{req.name}</h1>
-                  <p className="mt-10 "> {req.rating}</p>
-                </div>
-              ))}
-            </div>
-            <div>
-              <h1 className="mt-10  rounded  text-lg ">
-                Anuual leaves to take
-              </h1>
-              <p className="mt-12  "> {employee.annuealLeaves}</p>
-              <Button
-                onClick={() => {
-                  navigate("/request");
-                }}
-                className="mt-9"
-              >
-                Request time off
-              </Button>
-            </div>
-          </div>
-        </div>
+        
+        <UserDisplay  name={employee.username} roles={employee.roles} phoneNumber={employee.phoneNumber} email={employee.email} joiningDate={employee.joiningDate}/>
+       <RequesCard requests={requests} annuealLeaves={employee.annuealLeaves}/>
+       
       </div>
       <div className="requests  bg-white mt-7 w-full border-12  rounded ">
         <div>

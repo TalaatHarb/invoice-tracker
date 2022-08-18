@@ -57,7 +57,7 @@ public class InvoiceTrackerBackendApplication {
 			long l=1;
 			userService.saveRequest(l,"sickness",new Request("9-19-2022","9-19-2023",false,false,false));
 			userService.saveRequest(l,"sickness",new Request("9-19-2022","9-19-2023",false,false,false));
-			userService.saveRequest(l,"vancation",new Request("9-19-2022","9-19-2023",false,false,true));
+			userService.saveRequest(l,"vacation",new Request("9-19-2022","9-19-2023",false,false,true));
 			userService.saveRequest(l,"troll",new Request("9-19-2022","9-19-2023",false,false,true));
 		};
 	}
