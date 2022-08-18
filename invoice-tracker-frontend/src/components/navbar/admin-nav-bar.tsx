@@ -1,8 +1,8 @@
 import { Menu, Transition } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
 import { Z_FIXED } from "zlib";
-import BellButton from "../Buttons/BellNotification";
-import Logo from "../cegedim-logo/Logo";
+import BellButton from "../Button/BellNotification";
+import Logo from "../company-logo/Logo";
 
 const styles = {
   inset: "0px auto auto 0px",
