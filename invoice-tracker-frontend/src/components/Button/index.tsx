@@ -14,7 +14,7 @@ const Button = (props: ButtonProps) => {
     <button
       type='button'
       className={classNames(
-        'w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-md shadow-sm text-2xl font-medium text-black bg-blueCegedim hover:bg-darkGrey hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blueCegedim',
+        'w-full flex justify-center items-center py-2 px-4 border border-transparent rounded-md shadow-sm text-2xl font-medium text-white bg-blueCegedim hover:bg-darkGrey hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blueCegedim',
         className
       )}
       onClick={onClick}

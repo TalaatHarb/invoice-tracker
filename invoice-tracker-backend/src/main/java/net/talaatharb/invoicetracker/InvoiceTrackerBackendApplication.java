@@ -35,14 +35,14 @@ public class InvoiceTrackerBackendApplication {
 			ArrayList<Role> roles = new ArrayList<>();
 
 
-			userService.saveUser(new User("Gado","boogado@yahoo.com", "awad36148",new HashSet<>(),new ArrayList<>()));
+			userService.saveUser(new User("Gado","boogado@yahoo.com", "awad36148",new HashSet<>(),new ArrayList<>(),"+20100324533","20-12-2022"));
 			userService.saveUser(new User("Gado1","boogado1@yahoo.com", "awad36148",new HashSet<>(),new ArrayList<>()));
 			userService.saveUser(new User("Gado2","boogado2@yahoo.com", "awad36148",new HashSet<>(),new ArrayList<>()));
 			userService.saveUser(new User("Gado3","boogado3@yahoo.com", "awad36148",new HashSet<>(),new ArrayList<>()));
 			userService.saveUser(new User("Gado4","boogado4@yahoo.com", "awad36148",new HashSet<>(),new ArrayList<>()));
 
 
-			userService.addRoleToUser("boogado@yahoo.com", ROLE_USER);
+			userService.addRoleToUser("boogado@yahoo.com", ROLE_EMPLOYEE);
 			userService.addRoleToUser("boogado1@yahoo.com", ROLE_HR);
 			userService.addRoleToUser("boogado2@yahoo.com", ROLE_ADMIN);
 			userService.addRoleToUser("boogado3@yahoo.com", ROLE_HR);
@@ -50,10 +50,15 @@ public class InvoiceTrackerBackendApplication {
 			userService.addRoleToUser("boogado2@yahoo.com", ROLE_USER);
 
 			userService.saveRequestType(new RequestType("sickness",new ArrayList<>()));
+			userService.saveRequestType(new RequestType("vancation",new ArrayList<>()));
+			userService.saveRequestType(new RequestType("troll",new ArrayList<>()));
 
 			//change first attribute to user ID instead of email
 			long l=1;
 			userService.saveRequest(l,"sickness",new Request("9-19-2022","9-19-2023",false,false,false));
+			userService.saveRequest(l,"sickness",new Request("9-19-2022","9-19-2023",false,false,false));
+			userService.saveRequest(l,"vancation",new Request("9-19-2022","9-19-2023",false,false,true));
+			userService.saveRequest(l,"troll",new Request("9-19-2022","9-19-2023",false,false,true));
 		};
 	}
 }

@@ -25,7 +25,7 @@ spring:
       driverClassName: com.mysql.cj.jdbc.Driver
       url: jdbc:mysql://localhost:3306/othercode
       username: root
-      password: awad36148
+      password: my-secret-pw
   jpa:
       hibernate.ddl-auto: create-drop
       generate-ddl: true

@@ -54,6 +54,20 @@ public class User {
     private List<Request> requests = new ArrayList<>();
 
 
+    private String phoneNumber;
+
+    private String JoiningDate;
+    private int annuealLeaves=0;
+
+    public User(String username, String email, String password, Set<Role> roles, List<Request> requests, String phoneNumber, String joiningDate) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.requests = requests;
+        this.phoneNumber = phoneNumber;
+        this.JoiningDate = joiningDate;
+    }
 
     public User(String username, String email, String encode) {
         this.username = username;

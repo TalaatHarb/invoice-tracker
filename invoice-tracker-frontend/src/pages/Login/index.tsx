@@ -35,8 +35,21 @@ const LoginPage = () => {
       return errors
     },
     onSubmit: (values) => {
-      console.log(values)
-      dispatch(loginUser(values))
+      dispatch(loginUser(values)).then((res) => {
+        if (res?.payload?.email) {
+          toast.success('Login successful')
+          const { roles } = res.payload
+          if (roles.includes('ROLE_ADMIN')) {
+            navigate('/admin')
+          } else if (roles.includes('ROLE_EMPLOYEE')) {
+            navigate('/employee')
+          } else if (roles.includes('ROLE_USER')) {
+            navigate('/user')
+          }
+        } else {
+          toast.error('Wrong email or password')
+        }
+      })
     },
   })
 
