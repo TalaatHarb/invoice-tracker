@@ -9,6 +9,8 @@ import {
   Route,
   Routes
 } from "react-router-dom";
+import PopUpStart from './components/fake-user-login/ecxel_component/PopUpStart';
+import Employee_Add from './components/fake-user-login/add_employee_component/Employee_Add';
 
 function App() {
   return (
@@ -18,7 +20,7 @@ function App() {
           path="*"
           element={<Navigate to="/page1" replace />}
         />
-        <Route path="page1" element={<Page1 />} />
+        <Route path="page1" element={<PopUpStart />} />
         <Route path="page2" element={<Page2 />} />
       </Routes>
     </BrowserRouter>

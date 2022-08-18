@@ -1,0 +1,19 @@
+.Start
+{
+    width: fit-content;
+    border-style:solid ;
+    padding: 4px;
+  
+}
+
+.hover:hover{
+    color: rgb(30, 64, 255);
+    cursor: pointer;
+    
+}
+.pic1{
+    float: left;
+    padding-right: 3px;
+    padding-top: 2px;
+}
+
