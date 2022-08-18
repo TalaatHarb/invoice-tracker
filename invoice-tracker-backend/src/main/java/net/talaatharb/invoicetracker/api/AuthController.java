@@ -34,7 +34,7 @@ import net.talaatharb.invoicetracker.security.JwtProperties;
 import net.talaatharb.invoicetracker.security.JwtUtils;
 import net.talaatharb.invoicetracker.service.UserDetailsImpl;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*" , maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {

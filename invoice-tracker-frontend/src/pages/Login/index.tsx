@@ -47,7 +47,11 @@ const LoginPage = () => {
             navigate('/user')
           }
         } else {
-          toast.error('Wrong email or password')
+          if (res.payload === 'Bad credentials') {
+            toast.error('Wrong email or password')
+          } else if (res.payload === 'User is disabled') {
+            toast.error('User is disabled. Please contact your administrator')
+          }
         }
       })
     },
