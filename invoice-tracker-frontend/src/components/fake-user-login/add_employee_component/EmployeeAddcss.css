@@ -1,0 +1,9 @@
+.select1
+{
+    marginTop: 50;
+    display : "flex";
+    flexDirection: "column";
+    alignItems: "center";
+    width: 200px;
+    
+}

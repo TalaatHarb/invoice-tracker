@@ -17,14 +17,14 @@ public class Employee {
     @Column(name = "arabic_name")
     private String arabic_name;
 
-    @Column(name = "password" ,unique = true,nullable = false)
+    @Column(name = "password" )
     private String password;
 
     @Column(name = "birth_date")
     private Date birth_date;
 
-    @Column(name = "national_id",unique = true)
-    private String national_id;
+    @Column(name = "national_id")
+    private Long national_id;
 
     @Column(name = "employee_adress_english")
     private String employee_adress_english;
@@ -43,7 +43,7 @@ public class Employee {
     @Column(name = "team_name")
     private String team_name;
 
-    @Column(name = "email" ,unique = true, nullable = false)
+    @Column(name = "email" )
     private String email;
 
     @Column(name = "mobile_number")
@@ -59,7 +59,7 @@ public class Employee {
     private boolean multible_team;
 
     @Column(name = "annual_balance")
-    private float annual_balance;
+    private int annual_balance;
 
 
 
@@ -114,11 +114,11 @@ public class Employee {
         this.birth_date = birth_date;
     }
 
-    public String getNational_id() {
+    public Long getNational_id() {
         return national_id;
     }
 
-    public void setNational_id(String national_id) {
+    public void setNational_id(Long national_id) {
         this.national_id = national_id;
     }
 
@@ -202,11 +202,11 @@ public class Employee {
         this.multible_team = multible_team;
     }
 
-    public float getAnnual_balance() {
+    public int getAnnual_balance() {
         return annual_balance;
     }
 
-    public void setAnnual_balance(float annual_balance) {
+    public void setAnnual_balance(int annual_balance) {
         this.annual_balance = annual_balance;
     }
 

@@ -21,7 +21,7 @@ function App() {
           element={<Navigate to="/page1" replace />}
         />
         <Route path="page1" element={<PopUpStart />} />
-        <Route path="page2" element={<Page2 />} />
+        <Route path="page2" element={<Employee_Add  />} />
       </Routes>
     </BrowserRouter>
   );
