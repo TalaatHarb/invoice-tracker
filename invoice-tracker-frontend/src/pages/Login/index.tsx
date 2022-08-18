@@ -36,7 +36,7 @@ const LoginPage = () => {
 		},
 		onSubmit: (values) => {
 			dispatch(loginUser(values)).then((res) => {
-        if (res?.payload?.email) {
+				if (res?.payload?.email) {
 					toast.success('Login successful');
 					const { roles } = res.payload;
 					if (roles.includes('ROLE_ADMIN')) {
@@ -47,7 +47,15 @@ const LoginPage = () => {
 						navigate('/user');
 					}
 				} else {
-					toast.error('Wrong email or password');
+					if (res.payload === 'Bad credentials') {
+						toast.error('Wrong email or password');
+					} else if (res.payload === 'User is disabled') {
+						toast.error('User is disabled. Please contact your administrator');
+					} else if (res.payload === 'User credentials have expired') {
+						toast.error(
+							'Your password is expired. Please contact your administrator'
+						);
+					}
 				}
 			});
 		},
