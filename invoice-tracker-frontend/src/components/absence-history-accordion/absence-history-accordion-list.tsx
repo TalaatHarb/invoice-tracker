@@ -1,6 +1,7 @@
 import React from 'react'
 import { AbsenseItem } from '../../models/absence-item';
 import AbsenceHistoryItem from './absence-history-accordion-item';
+import Navbar from "../navbar/admin-nav-bar";
 
 let dummyData:AbsenseItem = {
     absenceType: "Sick Leave",
@@ -14,6 +15,8 @@ let dummyData:AbsenseItem = {
 const AbsenceHistoryAccordionList = ()=> {
     return (
         <>
+            <Navbar />
+            <br></br>
             <h2 className="mx-56 leading-tight text-2xl mt-0 mb-2">Absence History</h2>
             <AbsenceHistoryItem record = {dummyData}/>
             <AbsenceHistoryItem record = {dummyData}/>
