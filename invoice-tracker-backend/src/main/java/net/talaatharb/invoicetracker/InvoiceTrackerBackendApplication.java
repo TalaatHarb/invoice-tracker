@@ -20,10 +20,10 @@ import net.talaatharb.invoicetracker.service.UserService;
 public class InvoiceTrackerBackendApplication {
 
 	private static final String EMAIL_ADMIN_USER = "boogado2@yahoo.com";
-	private static final String EMAIL_EMPLOYEE = "boogado4@yahoo.com";
+	private static final String EMAIL_EMPLOYEE = "boogado@yahoo.com";
 	private static final String EMAIL_HR = "boogado1@yahoo.com";
 	private static final String EMAIL_HR_2 = "boogado3@yahoo.com";
-	public static final String EMAIL_USER = "boogado@yahoo.com";
+	public static final String EMAIL_USER = "boogado4@yahoo.com";
 	public static final String PASS_USER = "awad36148";
 
 	public static void main(String[] args) {

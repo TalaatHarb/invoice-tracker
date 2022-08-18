@@ -7,7 +7,7 @@ const UserPage = () => {
   const dispatch = useAppDispatch()
   return (
     <div className='flex justify-center items-center gap-4'>
-      <h1>User Page</h1>
+      <h1>HR</h1>
       <div>
         <Button
           onClick={() => {

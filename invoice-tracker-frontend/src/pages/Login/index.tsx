@@ -29,8 +29,8 @@ const LoginPage = () => {
       }
       if (!values.password) {
         errors.password = 'Please Enter a valid Password'
-      } else if (values.password.length < 3) {
-        errors.password = 'Password must be at least 3 characters'
+      } else if (values.password.length < 8) {
+        errors.password = 'Password must be at least 8 characters'
       }
       return errors
     },
@@ -41,10 +41,10 @@ const LoginPage = () => {
           const { roles } = res.payload
           if (roles.includes('ROLE_ADMIN')) {
             navigate('/admin')
+          } else if (roles.includes('ROLE_HR')) {
+            navigate('/hr')
           } else if (roles.includes('ROLE_EMPLOYEE')) {
             navigate('/employee')
-          } else if (roles.includes('ROLE_USER')) {
-            navigate('/user')
           }
         } else {
           if (res.payload === 'Bad credentials') {
