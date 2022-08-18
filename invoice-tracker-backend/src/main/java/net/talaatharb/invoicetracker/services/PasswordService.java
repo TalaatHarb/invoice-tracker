@@ -87,7 +87,7 @@ public class PasswordService {
 
         UserEntity userReturned = resetTokenReturned.getUser();
 
-        // to-do : using bcrypt to hash the password//getting GADO config if there is pepper and salt stf
+        // using Password encoder bean to hash the new password
         String hashedPassword = passwordEncoder.encode(newPassword);
 
         userReturned.setPassword(hashedPassword);
