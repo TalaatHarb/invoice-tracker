@@ -34,7 +34,6 @@ public class UserController {
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers() {
-        System.out.println("hiiii");
         return ResponseEntity.ok().body(userService.getUsers());
     }
 

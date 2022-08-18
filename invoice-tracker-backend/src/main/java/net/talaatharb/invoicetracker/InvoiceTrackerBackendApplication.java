@@ -50,7 +50,7 @@ public class InvoiceTrackerBackendApplication {
 			userService.addRoleToUser("boogado2@yahoo.com", ROLE_USER);
 
 			userService.saveRequestType(new RequestType("sickness",new ArrayList<>()));
-			userService.saveRequestType(new RequestType("vancation",new ArrayList<>()));
+			userService.saveRequestType(new RequestType("vacation",new ArrayList<>()));
 			userService.saveRequestType(new RequestType("troll",new ArrayList<>()));
 
 			//change first attribute to user ID instead of email

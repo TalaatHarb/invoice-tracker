@@ -37,6 +37,7 @@ const LoginPage = () => {
     onSubmit: (values) => {
       dispatch(loginUser(values)).then((res) => {
         if (res?.payload?.email) {
+          
           toast.success('Login successful')
           const { roles } = res.payload
           if (roles.includes('ROLE_ADMIN')) {
