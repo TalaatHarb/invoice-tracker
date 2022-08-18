@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7a030102-318f-4c11-b5a0-96a41c092134" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/invoice-tracker-backend.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/invoice-tracker-frontend/src/assets/Logo.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/invoice-tracker-frontend/src/components/Button/BellNotification.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/invoice-tracker-frontend/src/components/absence-history-accordion/absence-history-accordion-item.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/invoice-tracker-frontend/src/components/absence-history-accordion/absence-history-accordion-list.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/invoice-tracker-frontend/src/components/company-logo/Logo.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/invoice-tracker-frontend/src/components/logo/Logo.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/invoice-tracker-frontend/src/components/navbar/admin-nav-bar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/invoice-tracker-frontend/src/models/absence-item.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/invoice-tracker-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/invoice-tracker-frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/invoice-tracker-frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/invoice-tracker-frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/invoice-tracker-frontend/src/components/Input/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/invoice-tracker-frontend/src/components/Input/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/invoice-tracker-frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/invoice-tracker-frontend/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/invoice-tracker-frontend/src/pages/Login/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/invoice-tracker-frontend/src/pages/Login/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/invoice-tracker-frontend/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/invoice-tracker-frontend/tailwind.config.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2DXMO45ynvrB5tPJVraNSOZ435x" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "D:/cegedim/invoice-tracker/invoice-tracker-backend"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7a030102-318f-4c11-b5a0-96a41c092134" name="Changes" comment="" />
+      <created>1660840943076</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1660840943076</updated>
+    </task>
+    <servers />
+  </component>
+</project>
