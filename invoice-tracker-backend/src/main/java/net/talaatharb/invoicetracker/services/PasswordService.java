@@ -34,7 +34,8 @@ public class PasswordService {
     public void sendResetLink(String email) {
         // email validation
         if(!RegexHelper.testWithPattern(RegexHelper.emailPattern, email)){
-            throw new UserException("Something went wrong");
+            return;
+//            throw new UserException("Something went wrong");
         }
 
         String token = RandomString.make(45);
@@ -46,7 +47,8 @@ public class PasswordService {
 
         Optional<UserEntity> userReturnedOptional = userRepo.findByEmail(email);
         if(userReturnedOptional.isEmpty()) {
-            throw new UserException("No user found with email " + email);
+            return;
+//            throw new UserException("No user found with email " + email);
         }
 
         UserEntity userReturned = userReturnedOptional.get();

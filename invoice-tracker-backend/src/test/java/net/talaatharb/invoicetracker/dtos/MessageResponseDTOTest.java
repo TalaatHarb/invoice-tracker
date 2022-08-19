@@ -8,5 +8,4 @@ public class MessageResponseDTOTest implements EqualityTest<MessageResponse> {
 	public MessageResponse create() {
 		return new MessageResponse("message");
 	}
-
 }
