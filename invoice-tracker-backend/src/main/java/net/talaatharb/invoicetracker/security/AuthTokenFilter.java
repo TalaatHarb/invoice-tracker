@@ -1,8 +1,7 @@
 package net.talaatharb.invoicetracker.security;
 
-import net.talaatharb.invoicetracker.services.UserDetailsServiceImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.talaatharb.invoicetracker.service.UserDetailsServiceImpl;
+
 import java.io.IOException;
 
 import javax.servlet.FilterChain;
@@ -19,7 +18,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import lombok.extern.slf4j.Slf4j;
-import net.talaatharb.invoicetracker.services.UserDetailsServiceImpl;
 
 @Slf4j
 public class AuthTokenFilter extends OncePerRequestFilter {

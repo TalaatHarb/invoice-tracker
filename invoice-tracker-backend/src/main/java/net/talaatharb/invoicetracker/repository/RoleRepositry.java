@@ -1,4 +1,4 @@
-package net.talaatharb.invoicetracker.repositories;
+package net.talaatharb.invoicetracker.repository;
 
 import java.util.Optional;
 

@@ -13,7 +13,7 @@ import lombok.AllArgsConstructor;
 import net.talaatharb.invoicetracker.models.ERole;
 import net.talaatharb.invoicetracker.models.Role;
 import net.talaatharb.invoicetracker.models.User;
-import net.talaatharb.invoicetracker.repositories.RoleRepositry;
+import net.talaatharb.invoicetracker.repository.RoleRepositry;
 import net.talaatharb.invoicetracker.repository.UserRepository;
 
 @Service
