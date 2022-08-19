@@ -8,6 +8,9 @@ import { useAppSelector } from './hooks/toolkit-types'
 import AbsenceHistoryAccordionList from './components/absence-history-accordion/absence-history-accordion-list'
 import Navbar from './components/navbar/admin-nav-bar'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import EmployeesList from './pages/EmployeesList/EmployeesList'
+import EmployeesHub from './pages/EmployeesHub/EmployeesHub'
+
 
 function App() {
   const { isAuthenticated } = useAppSelector(
@@ -16,6 +19,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+      
+      <Route path="/" element={<EmployeesList/>} />
+      <Route path="/" element={<EmployeesHub/>} />
         {!isAuthenticated && <Route path='/login' element={<Login />} />}
         <Route path='page1' element={<Navbar />} />
         <Route path='page2' element={<AbsenceHistoryAccordionList />} />
