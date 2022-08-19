@@ -1,10 +1,10 @@
 package net.talaatharb.invoicetracker.repository;
 
-import net.talaatharb.invoicetracker.models.User;
-import net.talaatharb.invoicetracker.models.UserEntity;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
+import net.talaatharb.invoicetracker.models.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     public Optional<User> findByUsername(String username);

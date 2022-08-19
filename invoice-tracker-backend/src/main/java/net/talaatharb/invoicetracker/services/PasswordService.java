@@ -1,5 +1,12 @@
 package net.talaatharb.invoicetracker.services;
 
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import net.bytebuddy.utility.RandomString;
 import net.talaatharb.invoicetracker.exceptions.UserException;
 import net.talaatharb.invoicetracker.helper.RegexHelper;
@@ -7,12 +14,6 @@ import net.talaatharb.invoicetracker.models.ResetTokenEntity;
 import net.talaatharb.invoicetracker.models.UserEntity;
 import net.talaatharb.invoicetracker.repositories.ResetTokenRepository;
 import net.talaatharb.invoicetracker.repositories.UserRepository1;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class PasswordService {
@@ -26,7 +27,7 @@ public class PasswordService {
 
     @Value("${APPLICATION_URL}")
     private String appUrl;
-    private final int FIVE_MINUTES = 5 * 60 * 60 * 1000;
+    private final int FIVE_MINUTES = 5 * 60 * 1000;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -47,6 +48,7 @@ public class PasswordService {
 
         Optional<UserEntity> userReturnedOptional = userRepo.findByEmail(email);
         if(userReturnedOptional.isEmpty()) {
+            System.out.println("no user found sdlfjkls oierow lsjdf");
             return;
 //            throw new UserException("No user found with email " + email);
         }

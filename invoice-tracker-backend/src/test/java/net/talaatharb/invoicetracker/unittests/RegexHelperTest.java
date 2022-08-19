@@ -1,8 +1,9 @@
 package net.talaatharb.invoicetracker.unittests;
 
-import net.talaatharb.invoicetracker.helper.RegexHelper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import net.talaatharb.invoicetracker.helper.RegexHelper;
 
 public class RegexHelperTest {
 

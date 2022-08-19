@@ -1,20 +1,19 @@
 package net.talaatharb.invoicetracker.services;
 
-import net.talaatharb.invoicetracker.exceptions.UserException;
-import net.talaatharb.invoicetracker.models.UserEntity;
-import net.talaatharb.invoicetracker.repositories.ResetTokenRepository;
-import net.talaatharb.invoicetracker.repositories.UserRepository1;
+import java.util.Optional;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.function.Executable;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Optional;
+import net.talaatharb.invoicetracker.exceptions.UserException;
+import net.talaatharb.invoicetracker.repositories.ResetTokenRepository;
+import net.talaatharb.invoicetracker.repositories.UserRepository1;
 
 @ExtendWith(MockitoExtension.class)
 public class PasswordServiceTest {

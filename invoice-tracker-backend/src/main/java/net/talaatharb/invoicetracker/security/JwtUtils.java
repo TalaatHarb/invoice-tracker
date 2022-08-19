@@ -1,5 +1,5 @@
 package net.talaatharb.invoicetracker.security;
-import net.talaatharb.invoicetracker.service.UserDetailsImpl;
+
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -13,6 +13,7 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
+import net.talaatharb.invoicetracker.service.UserDetailsImpl;
 
 @Component
 public class JwtUtils {

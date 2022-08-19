@@ -2,8 +2,6 @@ package net.talaatharb.invoicetracker.models;
 
 import javax.persistence.*;
 
-import lombok.Data;
-
 @Entity
 @Table
 public class UserEntity {

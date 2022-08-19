@@ -1,8 +1,5 @@
 package net.talaatharb.invoicetracker;
 
-import net.talaatharb.invoicetracker.models.Role;
-import net.talaatharb.invoicetracker.models.User;
-import net.talaatharb.invoicetracker.services.UserService;
 import static net.talaatharb.invoicetracker.models.ERole.ROLE_ADMIN;
 import static net.talaatharb.invoicetracker.models.ERole.ROLE_EMPLOYEE;
 import static net.talaatharb.invoicetracker.models.ERole.ROLE_HR;
@@ -17,7 +14,7 @@ import org.springframework.context.annotation.Bean;
 
 import net.talaatharb.invoicetracker.models.Role;
 import net.talaatharb.invoicetracker.models.User;
-import net.talaatharb.invoicetracker.services.UserService;
+import net.talaatharb.invoicetracker.service.UserService;
 
 @SpringBootApplication
 public class InvoiceTrackerBackendApplication {
