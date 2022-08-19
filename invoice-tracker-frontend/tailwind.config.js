@@ -5,7 +5,7 @@ module.exports = {
     screens: {
       sm: '480px',
       md: '768px',
-      lcdg: '976px',
+      lg: '976px',
       xl: '1440px',
     },
     colors: {
@@ -18,12 +18,11 @@ module.exports = {
       white: '#fff',
       darkBlue: '#4338ca',
       red: '#dc2626',
-      "logo-text-color": "#2f97da",
-      "active-link": "#2f97da",
-      "not-active-link": "#7b7979",
-      "active-icon": "#2f97da",
-      "navbar-border":"#7b7979",
-
+      'logo-text-color': '#2f97da',
+      'active-link': '#2f97da',
+      'not-active-link': '#7b7979',
+      'active-icon': '#2f97da',
+      'navbar-border': '#7b7979',
     },
   },
   plugins: [],
