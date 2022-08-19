@@ -12,6 +12,8 @@ interface InputProps {
   value: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
+
+
 const InputComponent = (props: InputProps) => {
   const id = useId()
   const { label, error, className, type, name, placeholder, value, onChange } =

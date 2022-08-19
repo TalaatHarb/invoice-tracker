@@ -5,7 +5,8 @@ import HrPage from './pages/HrPage'
 import EmployeePage from './pages/EmployeePage'
 import PrivateRoute from './components/PrivateRoute'
 import { useAppSelector } from './hooks/toolkit-types'
-
+import AbsenceHistoryAccordionList from './components/absence-history-accordion/absence-history-accordion-list'
+import Navbar from './components/navbar/admin-nav-bar'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 function App() {
@@ -16,7 +17,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         {!isAuthenticated && <Route path='/login' element={<Login />} />}
+        <Route path='page1' element={<Navbar />} />
+        <Route path='page2' element={<AbsenceHistoryAccordionList />} />
+
         {/* protected user page */}
+
         <Route path='/hr' element={<PrivateRoute />}>
           <Route path='/hr' element={<HrPage />} />
         </Route>
