@@ -1,7 +1,5 @@
 package net.talaatharb.invoicetracker.models;
 
-import net.talaatharb.invoicetracker.EqualityTest;
-
 public class RoleTest implements EqualityTest<Role>{
 
 	@Override
