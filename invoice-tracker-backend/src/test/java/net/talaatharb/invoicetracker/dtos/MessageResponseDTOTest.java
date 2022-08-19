@@ -1,6 +1,8 @@
 package net.talaatharb.invoicetracker.dtos;
 
-public class MessageResponseDTOTest implements EqualityTest<MessageResponse>{
+import net.talaatharb.invoicetracker.EqualityTest;
+
+public class MessageResponseDTOTest implements EqualityTest<MessageResponse> {
 
 	@Override
 	public MessageResponse create() {

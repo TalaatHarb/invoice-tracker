@@ -1,8 +1,10 @@
 package net.talaatharb.invoicetracker.models;
 
+import net.talaatharb.invoicetracker.EqualityTest;
+
 import java.util.HashSet;
 
-public class UserTest implements EqualityTest<User>{
+public class UserTest implements EqualityTest<User> {
 
 	@Override
 	public User create() {

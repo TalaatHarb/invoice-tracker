@@ -1,6 +1,8 @@
 package net.talaatharb.invoicetracker.dtos;
 
-public class LoginRequestDTOTest implements EqualityTest<LoginRequest>{
+import net.talaatharb.invoicetracker.EqualityTest;
+
+public class LoginRequestDTOTest implements EqualityTest<LoginRequest> {
 
 	@Override
 	public LoginRequest create() {

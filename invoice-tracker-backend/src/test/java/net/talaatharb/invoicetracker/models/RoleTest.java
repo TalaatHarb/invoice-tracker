@@ -1,6 +1,8 @@
 package net.talaatharb.invoicetracker.models;
 
-public class RoleTest implements EqualityTest<Role>{
+import net.talaatharb.invoicetracker.EqualityTest;
+
+public class RoleTest implements EqualityTest<Role> {
 
 	@Override
 	public Role create() {
