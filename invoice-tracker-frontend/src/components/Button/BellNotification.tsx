@@ -10,7 +10,7 @@ const BellButton = ({ count }: notificationProps): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const btnRef = React.useRef<HTMLButtonElement>(null);
   const onBellClickHandler = () => {
-    bellColor === "none" ? setBellColor("blue") : setBellColor("none");
+    bellColor === "none" ? setBellColor("#2f97da") : setBellColor("none");
     setNotiNumber(0);
     setIsOpen(true);
   };
