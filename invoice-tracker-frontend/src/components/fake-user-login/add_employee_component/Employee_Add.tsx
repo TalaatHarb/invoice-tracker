@@ -1,12 +1,22 @@
-import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
+
+
+import  './Addemployee.scss' 
+
+
 
 import React, { useState } from 'react';
-import { isDisabled } from '@testing-library/user-event/dist/utils';
-import Select from 'react-select';
-import  './EmployeeAddcss.css' 
 
+
+
+
+const Field = ({ label, id, error, ...rest } : any) => (
+  <div>
+    <label htmlFor={id}>{label}</label>
+    <input id={id} {...rest} />
+    {error && <p>{error}</p>}
+  </div>
+);
 
 
 
@@ -32,7 +42,7 @@ function Employee_Add() {
 
   const [Email, setEmail] = useState("");
   const [MobileNumber, setMobileNumber] = useState("");
-  const [AnnualBalance, setAnnualBalance] = useState("");
+  const [AnnualBalance, setAnnualBalance] = useState("0");
 
   const [ISFullTime, setIsFullTime] = useState(false);
   const [MultiplieTeams, setMultiplieTeam] = useState(false);
@@ -40,6 +50,7 @@ function Employee_Add() {
   const [IsDisabiled, setIsDisabiled] = useState(false);
 
   const [selectedOption, setSelectedOption] = useState<String>();
+
 
 
   const handleSubmit = (event  : any) => {
@@ -112,12 +123,13 @@ function Employee_Add() {
     //Then with the data from the response in JSON...
     .then((prop) => {
     
-      
+      alert('user has been added successfully')
       
     })
     //Then with the error genereted...
     .catch((error) => {
-      
+      alert('Faild to add user !')
+
     
     });
   }
@@ -129,111 +141,186 @@ function Employee_Add() {
 
   return (
    
-    <form onSubmit={handleSubmit}>
+    <div className="w-80 bg-white shadow rounded">
+    <form className="contact-form row" onSubmit={handleSubmit}>
       <div>
-      <label>English Name:
-        <input 
+       <div className="form-field col x-50">
+         
+          <input 
+          required
+          className="input-text js-input"
           type="text" 
           value={english_name}
           onChange={(e) => setEnglishName(e.target.value)}
         />
-      </label>
-
-      <label>Arabic Name:
-        <input 
+          <label className="label" >English Name</label>
+       </div>
+       <div className="form-field col x-50" >
+          <input 
+          required
           type="text" 
+          className="input-text js-input"
           value={Arabic_Name}
           onChange={(e) => setArabic_Name(e.target.value)}
         />
-      </label>
-      </div>
 
-      <br></br>
-      <div>
-      <label>Password :
-        <input 
+          <label className="label">Arabic Name</label>
+          
+       </div>
+       </div>
+   
+
+       <br></br>
+       <div>
+       <div className="form-field col x-50">
+
+          <input 
+          required
           type="password" 
+          className="input-text js-input"
           value={password}
           onChange={(e) => setpassword(e.target.value)}
         />
-      </label>
-      <label>Confirm Password :
-        <input 
+          <label className="label" >Password</label>
+       </div>
+       <div className="form-field col x-50">
+
+          <input 
+          required
           type="password" 
+          className="input-text js-input"
           value={confirm_password}
           onChange={(e) => setconfirm_password(e.target.value)}
         />
-        
-      </label>
-      </div>
+          <label className="label">Confirm Password</label>
+       </div>
+       
+      
+       </div>
+       <br></br>
 
-      <br></br>
-      <div>
-      <label>Birth Date :
-        <input 
+
+       <div>
+       <div className="form-field col x-50">
+         <label className="label">Birth Date</label>
+       <input 
+       required
           type="Date" 
+          className="input-text js-input"         
           value={Birth_date}
+          
           onChange={(e) => setBirth_date(e.target.value)}
         />
-      </label>
-       
-      <label>National ID :
-        <input 
+
+       </div>
+       <div className="form-field col x-50">
+
+          <input 
+          required
           type="number" 
+          className="input-text js-input"
           value={NationalId}
           onChange={(e) => setNationalId(e.target.value)}
         />
-      </label>
-      </div>
-      <br></br>
- 
-      <div>
-      <label>Employee Address English :
-        <input 
+          <label className="label">National ID</label>
+       </div>
+       
+      
+       </div>
+       <br></br>
+
+       <div>
+       <div className="form-field col x-50">
+          <input 
+          required
           type="text" 
+          className="input-text js-input"
           value={EmployeeAddressEnglish}
           onChange={(e) => setEmployeeAddressEnglish(e.target.value)}
         />
-      </label>
-      <label>Employee Address Arabic :
-        <input 
+
+          <label className="label" >Employee Address in English</label>
+       </div>
+       <div className="form-field col x-50">
+
+          <input 
+          required
           type="text" 
+          className="input-text js-input"
           value={EmployeeAddressArabic}
           onChange={(e) => setEmployeeAddressArabic(e.target.value)}
         />
-      </label>
-      </div>
-      <br></br>
-      <div>
-      <label>Job Title :
-        <input 
+          <label className="label">Employee Address in Arabic</label>
+       </div>
+       
+      
+       </div>
+       <br></br>
+
+
+       <div>
+       <div className="form-field col x-50">
+         <label className="label">Joining Date</label>
+       <input 
+       required
+          type="Date" 
+          className="input-text js-input"         
+          value={JoiningDate}
+          
+          onChange={(e) => setJoiningDate(e.target.value)}
+        />
+
+       </div>
+       
+       <div className="form-field col x-50">
+       <input
+       required 
           type="text" 
+          className="input-text js-input"
           value={JopTitle}
           onChange={(e) => setJopTitle(e.target.value)}
         />
-      </label>
+          <label className="label" >Jop Title</label>
+       </div>
+      
+       </div>
+       <br></br>
 
-      <label>Joining Date :
-        <input 
-          type="Date" 
-          value={JoiningDate}
-          onChange={(e) => setJoiningDate(e.target.value)}
+
+
+
+     
+
+
+
+       <div>
+       <div className="form-field col x-50">
+          <input 
+          required
+          className="input-text js-input"
+          type="email" 
+          value={Email}
+          onChange={(e) => setEmail(e.target.value)}
         />
-      </label>
-      </div>
-      <br></br>
-      <div>
-      <label>Employee ID :
-        <input 
-          type="number" 
-          value={EmployeeId}
-          onChange={(e) => setEmployeeId(e.target.value)}
+          <label className="label" >Email</label>
+       </div>
+       <div className="form-field col x-50">
+          <input 
+          className="input-text js-input"
+          type="text" 
+          value={MobileNumber}
+          onChange={(e) => setMobileNumber(e.target.value)}
         />
-      </label>
-      <br></br>
-<br></br>
-      <label>Team Name : 
-      <select className='select1' onChange={selectChange} >
+          <label className="label">Mobile Number</label>
+       </div>
+       
+      
+       </div>
+       <br></br>
+
+       <div>
+       <div className="form-field col x-50">
+          <select className="input-text js-input" onChange={selectChange} >
         <option defaultValue={""} >
          
         </option>
@@ -242,69 +329,68 @@ function Employee_Add() {
         <option value="team3">Team3</option>
         
       </select>
-
-
-      </label>
-      </div>
-      <br></br>
-      <div>
-      <label>Email :
-        <input 
-          type="email" 
-          value={Email}
-          onChange={(e) => setEmail(e.target.value)}
+      <label className="label">Team Name</label>
+       </div>
+       <div className="form-field col x-50">
+          
+          <input 
+          required
+          className="input-text js-input"
+          type="number" 
+          value={EmployeeId}
+          onChange={(e) => setEmployeeId(e.target.value)}
         />
-      </label>
-
-      <label>Mobile Number :
-        <input 
-          type="text" 
-          value={MobileNumber}
-          onChange={(e) => setMobileNumber(e.target.value)}
-        />
-      </label>
-      </div>
-      <br></br>
-      <label>Is FullTime :
-      <input
-          type="checkbox"
-          checked={ISFullTime}
-          onChange={handleOnChangeFullTime}
-        />
-      </label>
-      <br></br>
-      <label>Multiplie Teams :
-        
-      <input
-          type="checkbox"
-          checked={MultiplieTeams}
-          onChange={handleOnChangeMultiplieTeam}
-        />
-      </label>
-     
-
-      <br></br>
-      <label>Billable :
-      <input
-          type="checkbox"
-          checked={Billable}
-          onChange={handleOnChangeBillable}
-        />
-      </label>
+          <label className="label">Emoloyee ID</label>
+       </div>
+       
+      
+       </div>
        <br></br>
-      <label>Is Disabiled :
+
+
+       <div>
+       <div className="form-field col x-50">
+          
+       <label>Is Disabiled :
       <input
           type="checkbox"
           checked={IsDisabiled}
           onChange={handleOnChangeIsDisabiled}
         />
       </label>
-      
-     <br></br>
-      <input type="submit" />
-    </form>
 
-        
+      <label>&nbsp;&nbsp; Billable :
+      <input
+          type="checkbox"
+          checked={Billable}
+          onChange={handleOnChangeBillable}
+        /> 
+         </label>
+
+       </div>
+       <div className="form-field col x-50">
+     
+      <span> Annual Balance : </span>
+      <span className="dot">{AnnualBalance}</span>
+
+     
+       </div>
+       
+      
+       </div>
+       <br></br>
+
+
+
+
+       <div className="form-field col x-100 align-center">
+          <input className="submit-btn" type="submit" value="Add User"  />
+       </div>
+
+    </form>
+    </div>
+       
+    
   );
 }
 

@@ -20,11 +20,13 @@ function PopUpExcel(props :any) {
 
   // handle File
   const fileType=['application/vnd.ms-excel'];
+  const fileType2=['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+  const fileType3=['.csv'];
   const handleFile = (e:any)=>{
     let selectedFile = e.target.files[0];
     if(selectedFile){
       // console.log(selectedFile.type);
-      if(selectedFile&&fileType.includes(selectedFile.type)){
+      if(selectedFile&&(fileType.includes(selectedFile.type))||fileType2.includes(selectedFile.type)||fileType3.includes(selectedFile.type)){
         let reader = new FileReader();
         reader.readAsArrayBuffer(selectedFile);
         reader.onload=(e:any)=>{

@@ -47,7 +47,7 @@ function PopUpStart() {
        <BsFillArrowUpSquareFill  className='pic1'/>
        <div> <p className='hover' >Export Employees</p></div>
        <BsFillArrowDownSquareFill className='pic1' />
-        <p className='hover' onClick={() => setButtonpopup(true)}>Past From Clibord </p>
+        <p className='hover' onClick={() => setButtonpopup(true)}>Post From Clibord </p>
         <BsFillPlusSquareFill className='pic1' />
         <p onClick={() => OpenAddEmployee()} className='hover' >Add New Employee </p>
          <pre>                        </pre>
