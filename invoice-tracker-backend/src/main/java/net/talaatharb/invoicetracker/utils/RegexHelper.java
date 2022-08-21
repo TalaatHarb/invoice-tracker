@@ -1,4 +1,4 @@
-package net.talaatharb.invoicetracker.helper;
+package net.talaatharb.invoicetracker.utils;
 
 import java.util.regex.Pattern;
 

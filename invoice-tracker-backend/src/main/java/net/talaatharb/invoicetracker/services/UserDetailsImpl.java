@@ -1,4 +1,4 @@
-package net.talaatharb.invoicetracker.service;
+package net.talaatharb.invoicetracker.services;
 
 import java.util.Collection;
 import java.util.List;
