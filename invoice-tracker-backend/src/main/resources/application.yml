@@ -37,3 +37,57 @@ management:
       show-details: always
       probes:
         enabled: true
+
+#spring:
+#  jpa:
+#    hibernate.ddl-auto: create-drop
+#    show-sql: true
+#    #    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+#    properties.hibernate.format_sql: true
+#    generate-ddl: true
+#
+#  datasource:
+#    driverClassName: ${DB_DRIVER}
+#    url: ${DB_HOST}
+#    #    url: jdbc:postgresql://localhost:5432/company
+#    username: ${DB_USER}
+#    password: ${DB_PASSWORD}
+#
+#  mail:
+#    host: ${MAIL_HOST}
+#    port: ${MAIL_PORT}
+#    protocol: smtp
+#    username: ${MAIL_EMAIL}
+#    password: ${MAIL_PASSWORD}
+#    properties.mail.smtp.auth: true
+#    properties.mail.smtp.starttls.enable: true
+#
+#    mvc:
+#      pathmatch:
+#        matching-strategy: ANT_PATH_MATCHER
+#
+#    application:
+#      name: invoice-tracker-backend
+#    lifecycle:
+#      timeout-per-shutdown-phase: 30s
+#
+#
+#
+#server:
+#  port: 8080
+#  shutdown: graceful
+#
+#logging:
+#  level[net.talaatharb.invoicetracker]: DEBUG
+#  level[org.springframework.web]: DEBUG
+#
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'
+#  endpoint:
+#    health:
+#      show-details: always
+#      probes:
+#        enabled: true
