@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import {Link} from "react-router-dom";
+import { toast } from "react-toastify";
 import { emailRegex, ERROR, SERVER } from "../../utils/config";
 import { FetchFacad } from "../../utils/FetchFacad";
 import { IForgotPasswordBody, IMessageBar, MessageBar } from "../../utils/types";
@@ -32,10 +34,13 @@ function ForgotPassword(){
         try{
             const result = await fetchFacad.postData<IForgotPasswordBody, IMessageBar>(`${SERVER}/password/forgot`, {email: email});
             console.log(result);
+            const {message} = result;
             if(result.type === ERROR){
-                const {message} = result;
                 setIsInvalid(true);
-                setErrMessage((state)=>({...state, message}))                
+                // setErrMessage((state)=>({...state, message}));
+                toast.error(message);
+            }else{
+                toast.success(message);
             }
 
         }catch(e){
@@ -65,7 +70,8 @@ function ForgotPassword(){
                 <div className="flex items-center justify-center">    
                     <input type="submit" className="transition-colors bg-blueCegedim w-full h-12 hover:bg-darkBlue text-white font-bold text-lg py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer" value="Send Me Email" />
                 </div>
-                {/* <a href="/home">Go Back</a> */}
+                <br/>
+                <Link to="/login" className="text-darkBlue hover:text-blueCegedim transition-colors font-semibold text-right">Go Back</Link>
             </form>
         </div>
 

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { useNavigate, useParams } from "react-router";
+import { toast } from "react-toastify";
 import { ERROR, passwordRegex, SERVER } from "../../utils/config";
 import { FetchFacad } from "../../utils/FetchFacad";
 import { IMessageBar, IResetPasswrodBody, MessageBar } from "../../utils/types";
@@ -32,7 +33,8 @@ function ResetToken(){
         e.preventDefault();
 
         if(!resetToken){
-            setBarMessage(new MessageBar("error", "Something went wrong"));
+            // setBarMessage(new MessageBar("error", "Something went wrong"));
+            toast.error("someting went wrong");
             return;
         }
 
@@ -52,8 +54,10 @@ function ResetToken(){
         const result = await FetchFacad.getFetchFacad().postData<IResetPasswrodBody, IMessageBar>(`${SERVER}/password/reset`, data);
         
         if(result.type !== ERROR){
+            toast.success(result.message);
             navigateTo("/login");
         }else{
+            toast.error(result.message);
             navigateTo("/forgot-password");
         }
         
