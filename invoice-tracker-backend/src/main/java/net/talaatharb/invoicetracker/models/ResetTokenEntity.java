@@ -1,11 +1,10 @@
 package net.talaatharb.invoicetracker.models;
 
+import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-
 
 @Entity
 @Table
@@ -23,7 +22,7 @@ public class ResetTokenEntity {
     @OneToOne
     @MapsId
     @JoinColumn(name="user_id")
-    private UserEntity user;
+    private User user;
 
     @Column
     private Long expTimeStamp;

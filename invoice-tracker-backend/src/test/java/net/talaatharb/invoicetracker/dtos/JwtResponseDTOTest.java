@@ -1,8 +1,8 @@
 package net.talaatharb.invoicetracker.dtos;
 
-import net.talaatharb.invoicetracker.EqualityTest;
-
 import java.util.ArrayList;
+
+import net.talaatharb.invoicetracker.EqualityTest;
 
 public class JwtResponseDTOTest implements EqualityTest<JwtResponse> {
 

@@ -1,4 +1,4 @@
-package net.talaatharb.invoicetracker.service;
+package net.talaatharb.invoicetracker.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.talaatharb.invoicetracker.models.User;
-import net.talaatharb.invoicetracker.repository.UserRepository;
+import net.talaatharb.invoicetracker.repositories.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
