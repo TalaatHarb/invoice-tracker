@@ -8,6 +8,8 @@ import { useAppSelector } from './hooks/toolkit-types'
 import Navbar from './components/Navbar'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import AbsenceHistory from './pages/AbsenceHistory'
+import ForgotPassword from './pages/password/ForgotPassword'
+import ResetPassword from './pages/password/ResetPassword'
 
 function App() {
   const { isAuthenticated } = useAppSelector(
@@ -16,6 +18,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+         {/* reset password routes */}
+         <Route path="/forgot-password" element={<ForgotPassword/>} />
+        <Route path="/reset-password/:resetToken" element={<ResetPassword />}/>
+
         {!isAuthenticated && <Route path='/login' element={<Login />} />}
         <Route path='absencehistory' element={<AbsenceHistory />} />
 
