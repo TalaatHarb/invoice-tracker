@@ -7,6 +7,9 @@ on:
     branches: [ develop, master ]
   pull_request:
     branches: [ develop, master ]
+    paths:
+      - 'invoice-tracker-frontend/**'
+      - '.github/workflows/nodejs-build-full.yml'
 
 jobs:
   build:
@@ -19,11 +22,11 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-        cache-dependency-path: ./invoice-tracker-front-end/package-lock.json
+        cache-dependency-path: ./invoice-tracker-frontend/package-lock.json
         cache: 'npm'
-    - run: cd invoice-tracker-front-end && npm ci && npm run test
+    - run: cd invoice-tracker-frontend && npm ci && npm test
