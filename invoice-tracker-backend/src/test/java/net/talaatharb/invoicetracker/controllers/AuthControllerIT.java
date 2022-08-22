@@ -1,13 +1,14 @@
 package net.talaatharb.invoicetracker.controllers;
 
-import net.talaatharb.invoicetracker.InvoiceTrackerBackendApplication;
-import net.talaatharb.invoicetracker.api.AbstractControllerIT;
-import net.talaatharb.invoicetracker.dtos.LoginRequest;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import net.talaatharb.invoicetracker.InvoiceTrackerBackendApplication;
+import net.talaatharb.invoicetracker.api.AbstractControllerIT;
+import net.talaatharb.invoicetracker.dtos.LoginRequest;
 
 class AuthControllerIT extends AbstractControllerIT {
 

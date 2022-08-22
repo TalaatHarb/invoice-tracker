@@ -1,8 +1,8 @@
 package net.talaatharb.invoicetracker.dtos;
 
-import lombok.Data;
-
 import javax.validation.constraints.NotBlank;
+
+import lombok.Data;
 
 @Data
 public class LoginRequest {
