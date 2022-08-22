@@ -35,6 +35,8 @@ public class User {
 //		@NotBlank
 	private String arabicName;
 
+	private String jobTitle;
+
 		@NotBlank
 	@Size(max = 50)
 	@Email
