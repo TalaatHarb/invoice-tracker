@@ -26,57 +26,57 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
+	//	@NotBlank
 	private String nationalId;
 
-	@NotBlank
+	//	@NotBlank
 	private String englishName;
 
-	@NotBlank
+	//	@NotBlank
 	private String arabicName;
 
-	@NotBlank
+	//	@NotBlank
 	@Size(max = 50)
 	@Email
 	private String email;
 
-	@NotBlank
+		@NotBlank
 	@Size(min = 8, max = 120)
 	private String password;
 
-	@NotBlank
+	//	@NotBlank
 	private String englishAddress;
 
-	@NotBlank
+	//	@NotBlank
 	private String arabicAddress;
 
-	@NotBlank
+	//	@NotBlank
 	private int allowedBalance;
 
-	@NotBlank
+//	@NotBlank
 	private int remainingBalance;
 
-	@NotBlank
+//	@NotBlank
 	private boolean billable;
 
-	@NotBlank
+//	@NotBlank
 	private boolean isDisabled;
 
 	private boolean isResigned;
 
-	@NotBlank
+//	@NotBlank
 	private Date joiningDate;
 
 	private Date endDate;
 
-	@NotBlank
+//	@NotBlank
 	private Date birthDate;
 
 	private String imgUrl;
 
 	private String mobileNumber;
 
-	@NotBlank
+//	@NotBlank
 	private boolean isFullTime;
 
 	private Date insuranceDate;
@@ -107,7 +107,7 @@ public class User {
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 
-	@NotBlank
+//	@NotBlank
 	@Size(max = 20)
 	private String username;
 
@@ -119,5 +119,10 @@ public class User {
 		this.username = username;
 		this.email = email;
 		this.password = encode;
+	}
+
+	public User(String email, String password) {
+		this.email = email;
+		this.password = password;
 	}
 }
