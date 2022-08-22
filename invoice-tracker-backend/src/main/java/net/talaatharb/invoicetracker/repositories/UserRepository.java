@@ -1,9 +1,9 @@
 package net.talaatharb.invoicetracker.repositories;
 
-import net.talaatharb.invoicetracker.models.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import net.talaatharb.invoicetracker.models.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 	Boolean existsByEmail(String email);

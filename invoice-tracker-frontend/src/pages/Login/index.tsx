@@ -37,10 +37,12 @@ const LoginPage = () => {
     onSubmit: (values) => {
       dispatch(loginUser(values)).then((res) => {
         if (res?.payload?.email) {
+
           toast.success('Login successful')
           const { roles } = res.payload
           if (roles.includes('ROLE_ADMIN')) {
             navigate('/admin')
+
           } else if (roles.includes('ROLE_HR')) {
             navigate('/hr')
           } else if (roles.includes('ROLE_EMPLOYEE')) {
@@ -52,6 +54,7 @@ const LoginPage = () => {
           } else if (res.payload === 'User is disabled') {
             toast.error('User is disabled. Please contact your administrator')
           }
+
         }
       })
     },

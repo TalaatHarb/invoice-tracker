@@ -1,9 +1,9 @@
 package net.talaatharb.invoicetracker;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
+
+import org.junit.jupiter.api.Test;
 
 public interface EqualityTest<T> {
 
@@ -26,4 +26,6 @@ public interface EqualityTest<T> {
         // ToString is equal for equal entities
         assertEquals(t1.toString(), t2.toString());
     }
+
 }
+
