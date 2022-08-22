@@ -11,8 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import net.talaatharb.invoicetracker.models.User;
-import net.talaatharb.invoicetracker.repository.UserRepository;
-import net.talaatharb.invoicetracker.service.UserService;
+import net.talaatharb.invoicetracker.repositories.UserRepository;
 
 @ExtendWith(MockitoExtension.class)
 

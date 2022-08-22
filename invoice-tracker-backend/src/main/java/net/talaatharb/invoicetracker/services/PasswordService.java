@@ -1,24 +1,25 @@
 package net.talaatharb.invoicetracker.services;
 
-import net.bytebuddy.utility.RandomString;
-import net.talaatharb.invoicetracker.exceptions.UserException;
-import net.talaatharb.invoicetracker.helper.RegexHelper;
-import net.talaatharb.invoicetracker.models.ResetTokenEntity;
-import net.talaatharb.invoicetracker.models.UserEntity;
-import net.talaatharb.invoicetracker.repositories.ResetTokenRepository;
-import net.talaatharb.invoicetracker.repositories.UserRepository1;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import net.bytebuddy.utility.RandomString;
+import net.talaatharb.invoicetracker.exceptions.UserException;
+import net.talaatharb.invoicetracker.models.ResetTokenEntity;
+import net.talaatharb.invoicetracker.models.User;
+import net.talaatharb.invoicetracker.repositories.ResetTokenRepository;
+import net.talaatharb.invoicetracker.repositories.UserRepository;
+import net.talaatharb.invoicetracker.utils.RegexHelper;
 
 @Service
 public class PasswordService {
 
     @Autowired
-    private UserRepository1 userRepo;
+    private UserRepository userRepo;
     @Autowired
     private ResetTokenRepository resetTokenRepo;
     @Autowired
@@ -45,13 +46,13 @@ public class PasswordService {
         String mailBody = "<h2>Reset Password Request</h2>" +
                           "<p>Please visit <a href=\"http://" + resetLink + "\"><bold>this link</bold> </a> to reset your password </p>";
 
-        Optional<UserEntity> userReturnedOptional = userRepo.findByEmail(email);
+        Optional<User> userReturnedOptional = userRepo.findByEmail(email);
         if(userReturnedOptional.isEmpty()) {
             return;
 //            throw new UserException("No user found with email " + email);
         }
 
-        UserEntity userReturned = userReturnedOptional.get();
+        User userReturned = userReturnedOptional.get();
         Optional<ResetTokenEntity> resetTokenReturnedOptional = resetTokenRepo.findByUserId(userReturned.getId());
 
         ResetTokenEntity resetToken = new ResetTokenEntity();
@@ -70,15 +71,17 @@ public class PasswordService {
 
     public void resetPassword(String resetToken, String newPassword) {
 
+        UserException somethingWentWrong = new UserException("something went wrong");
+
         // token and password validation
-        if(!RegexHelper.testWithPattern(RegexHelper.noSpecialCharsRegex,resetToken) || !RegexHelper.testWithPattern(RegexHelper.passwordPattern, newPassword)){
-            throw new UserException("Something went wrong");
+        if(resetToken == null || !RegexHelper.testWithPattern(RegexHelper.noSpecialCharsRegex,resetToken) || newPassword != null || !RegexHelper.testWithPattern(RegexHelper.passwordPattern, newPassword)){
+            throw somethingWentWrong;
         }
 
         Optional<ResetTokenEntity> resetTokenReturnedOptional = resetTokenRepo.findByResetToken(resetToken);
 
         if(resetTokenReturnedOptional.isEmpty()) {
-            throw new UserException("You are not authorized to make this operation");
+            throw somethingWentWrong;
         }
 
         ResetTokenEntity resetTokenReturned = resetTokenReturnedOptional.get();
@@ -87,7 +90,7 @@ public class PasswordService {
             throw new UserException("Enter Your Email Again");
         }
 
-        UserEntity userReturned = resetTokenReturned.getUser();
+        User userReturned = resetTokenReturned.getUser();
 
         // using Password encoder bean to hash the new password
         String hashedPassword = passwordEncoder.encode(newPassword);

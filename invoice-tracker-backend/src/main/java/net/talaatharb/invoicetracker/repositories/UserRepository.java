@@ -1,4 +1,4 @@
-package net.talaatharb.invoicetracker.repository;
+package net.talaatharb.invoicetracker.repositories;
 
 import java.util.Optional;
 
@@ -14,4 +14,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	Optional<User> findByEmail(String email);
 
 	Optional<User> findByUsername(String username);
+
+	public Optional<User> findByResetToken(String resetToken);
+
 }

@@ -5,9 +5,9 @@ import HrPage from './pages/HrPage'
 import EmployeePage from './pages/EmployeePage'
 import PrivateRoute from './components/PrivateRoute'
 import { useAppSelector } from './hooks/toolkit-types'
-import AbsenceHistoryAccordionList from './components/absence-history-accordion/absence-history-accordion-list'
-import Navbar from './components/navbar/admin-nav-bar'
+import Navbar from './components/Navbar'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import AbsenceHistory from './pages/AbsenceHistory'
 import ForgotPassword from './pages/password/ForgotPassword'
 import ResetPassword from './pages/password/ResetPassword'
 
@@ -23,8 +23,7 @@ function App() {
         <Route path="/reset-password/:resetToken" element={<ResetPassword />}/>
 
         {!isAuthenticated && <Route path='/login' element={<Login />} />}
-        <Route path='page1' element={<Navbar />} />
-        <Route path='page2' element={<AbsenceHistoryAccordionList />} />
+        <Route path='absencehistory' element={<AbsenceHistory />} />
 
         {/* protected user page */}
 
