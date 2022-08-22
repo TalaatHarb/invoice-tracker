@@ -52,4 +52,17 @@ public class UserService {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		return userRepository.save(user);
 	}
+
+	public void SaveEmployee(User employee) {
+		try {
+
+
+				User employee1 = ExcelHelper.add_employee_helper(employee);
+				userRepository.save(employee1);
+
+
+		} catch (Exception e) {
+			throw new RuntimeException("fail to save New User : " + e.getMessage());
+		}
+	}
 }

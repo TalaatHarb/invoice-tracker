@@ -10,6 +10,8 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import AbsenceHistory from './pages/AbsenceHistory'
 import ForgotPassword from './pages/password/ForgotPassword'
 import ResetPassword from './pages/password/ResetPassword'
+import Employee_Add from './components/add-employee/Employee_Add'
+import PopUpStart from './components/import-excel/PopUpStart'
 
 function App() {
   const { isAuthenticated } = useAppSelector(
@@ -18,6 +20,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+      <Route path="/emp" element={<Employee_Add/>} />
+      <Route path="/import" element={<PopUpStart/>} />
          {/* reset password routes */}
          <Route path="/forgot-password" element={<ForgotPassword/>} />
         <Route path="/reset-password/:resetToken" element={<ResetPassword />}/>
