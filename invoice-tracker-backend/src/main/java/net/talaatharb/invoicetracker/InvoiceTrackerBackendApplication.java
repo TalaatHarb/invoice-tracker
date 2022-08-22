@@ -34,11 +34,11 @@ public class InvoiceTrackerBackendApplication {
 			userService.saveRole(new Role(null, ROLE_ADMIN));
 
 //			create new object of User Class
-			userService.saveUser(new User(EMAIL_USER, PASS_USER,"amr",true));
-			userService.saveUser(new User(EMAIL_EMPLOYEE, PASS_USER,"amr",true));
-			userService.saveUser(new User(EMAIL_HR, PASS_USER,"amr",true));
-			userService.saveUser(new User(EMAIL_ADMIN_USER, PASS_USER,"amr",true));
-			userService.saveUser(new User(EMAIL_HR_2, PASS_USER,"amr",true));
+			userService.saveUser(new User(EMAIL_USER, PASS_USER,"amr",false));
+			userService.saveUser(new User(EMAIL_EMPLOYEE, PASS_USER,"Gado",true));
+			userService.saveUser(new User(EMAIL_HR, PASS_USER,"Ahmed",true));
+			userService.saveUser(new User(EMAIL_ADMIN_USER, PASS_USER,"mostafa",true));
+			userService.saveUser(new User(EMAIL_HR_2, PASS_USER,"hamada",false));
 
 //			userService.saveUser(new User(EMAIL_HR, null, PASS_USER, new HashSet<>(), "Gado1"));
 //			userService.saveUser(new User(EMAIL_ADMIN_USER, null, PASS_USER, new HashSet<>(), "Gado2"));
