@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AbsenseItem } from "../../models/absence-item";
 import AbsenceHistoryItem from "./item";
-import Navbar from "../navbar";
+import Navbar from "../Navbar";
 
 let dummyData: AbsenseItem = {
   id: 1,

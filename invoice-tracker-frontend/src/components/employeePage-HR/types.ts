@@ -3,6 +3,8 @@ export type employeeType = {
   nationalId?: string;
   englishName?: string;
   arabicName?: string;
+  mobileNumber?: string;
+  email?: string;
   englishAddress?: string;
   arabicAddress?: string;
   jobTitle?: string;
@@ -14,4 +16,5 @@ export type employeeType = {
   isDisabled?: boolean;
   team?: string[];
   fulltime?: boolean;
+  isResigned?: boolean;
 };

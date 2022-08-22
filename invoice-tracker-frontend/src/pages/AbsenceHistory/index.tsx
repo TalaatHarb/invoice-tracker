@@ -1,6 +1,6 @@
 import React from "react";
 import AbsenceHistoryAccordionList from "../../components/absence-history-accordion";
-import Navbar from "../../components/navbar";
+import Navbar from "../../components/Navbar";
 
 function AbsenceHistory() {
   return (

@@ -5,7 +5,7 @@ import HrPage from "./pages/HrPage";
 import EmployeePage from "./pages/EmployeePage";
 import PrivateRoute from "./components/PrivateRoute";
 import { useAppSelector } from "./hooks/toolkit-types";
-import Navbar from "./components/navbar/index";
+import Navbar from "./components/Navbar/index";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import AbsenceHistory from "./pages/AbsenceHistory";
 import ForgotPassword from "./pages/password/ForgotPassword";
