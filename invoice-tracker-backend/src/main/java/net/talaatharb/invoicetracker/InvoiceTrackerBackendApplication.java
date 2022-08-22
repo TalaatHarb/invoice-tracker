@@ -1,7 +1,16 @@
 package net.talaatharb.invoicetracker;
 
+import net.talaatharb.invoicetracker.models.Role;
+import net.talaatharb.invoicetracker.services.UserService;
+import net.talaatharb.invoicetracker.models.User;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import java.util.Date;
+
+import static net.talaatharb.invoicetracker.models.ERole.*;
 
 @SpringBootApplication
 public class InvoiceTrackerBackendApplication {
@@ -18,26 +27,17 @@ public class InvoiceTrackerBackendApplication {
 		System.out.println("Hello som3a");
 	}
 
-//	@Bean
-//	CommandLineRunner run(UserService userService) {
-//		return args -> {
-//			userService.saveRole(new Role(null, ROLE_USER));
-//			userService.saveRole(new Role(null, ROLE_HR));
-//			userService.saveRole(new Role(null, ROLE_EMPLOYEE));
-//			userService.saveRole(new Role(null, ROLE_ADMIN));
-//
-//			userService.saveUser(new User(EMAIL_USER, null, PASS_USER, new HashSet<>(), "Gado"));
-//			userService.saveUser(new User(EMAIL_HR, null, PASS_USER, new HashSet<>(), "Gado1"));
-//			userService.saveUser(new User(EMAIL_ADMIN_USER, null, PASS_USER, new HashSet<>(), "Gado2"));
-//			userService.saveUser(new User(EMAIL_HR_2, null, PASS_USER, new HashSet<>(), "Gado3"));
-//			userService.saveUser(new User(EMAIL_EMPLOYEE, null, PASS_USER, new HashSet<>(), "Gado4"));
-//
-//			userService.addRoleToUser(EMAIL_USER, ROLE_USER);
-//			userService.addRoleToUser(EMAIL_HR, ROLE_HR);
-//			userService.addRoleToUser(EMAIL_ADMIN_USER, ROLE_ADMIN);
-//			userService.addRoleToUser(EMAIL_HR_2, ROLE_HR);
-//			userService.addRoleToUser(EMAIL_EMPLOYEE, ROLE_EMPLOYEE);
-//			userService.addRoleToUser(EMAIL_ADMIN_USER, ROLE_USER);
-//		};
-//	}
+	@Bean
+	CommandLineRunner run(UserService userService) {
+		return args -> {
+			userService.saveRole(new Role(null, ROLE_USER));
+			userService.saveRole(new Role(null, ROLE_HR));
+			userService.saveRole(new Role(null, ROLE_EMPLOYEE));
+			userService.saveRole(new Role(null, ROLE_ADMIN));
+
+			userService.saveUser(new User("2323232","Mohamed","N/A",EMAIL_HR,"12345678"));
+
+			userService.addRoleToUser(EMAIL_HR, ROLE_HR);
+		};
+	}
 }

@@ -92,8 +92,7 @@ public class User {
 	private Date lastTimePasswordChanged;
 
 	@ManyToMany
-	private List<Team> teams;
-
+	private List<Team> teams = new ArrayList<>();
 
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(
@@ -119,5 +118,34 @@ public class User {
 		this.username = username;
 		this.email = email;
 		this.password = encode;
+	}
+
+	public User(String nationalId, String englishName, String arabicName,
+				String email, String password) {
+		this.nationalId = nationalId;
+		this.englishName = englishName;
+		this.arabicName = arabicName;
+		this.email = email;
+		this.password = password;
+		this.englishAddress = englishAddress;
+		this.arabicAddress = arabicAddress;
+		this.allowedBalance = allowedBalance;
+		this.remainingBalance = remainingBalance;
+		this.billable = billable;
+		this.isDisabled = isDisabled;
+		this.isResigned = isResigned;
+		this.joiningDate = joiningDate;
+		this.endDate = endDate;
+		this.birthDate = birthDate;
+		this.imgUrl = imgUrl;
+		this.mobileNumber = mobileNumber;
+		this.isFullTime = isFullTime;
+		this.insuranceDate = insuranceDate;
+		this.yearsOfInsurance = yearsOfInsurance;
+		this.overtime = overtime;
+		this.payRate = payRate;
+		this.isEnabled = isEnabled;
+		this.lastTimePasswordChanged = lastTimePasswordChanged;
+		this.username = username;
 	}
 }
