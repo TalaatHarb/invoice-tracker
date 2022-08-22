@@ -1,31 +1,36 @@
 package net.talaatharb.invoicetracker.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
-@NoArgsConstructor
+@Setter
+@Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class RequestType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+
+    private String typeName;
+
     @OneToMany(
             cascade= CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.EAGER
     )
-    private Collection<Request> requests= new ArrayList<>();
+    private List<Request> requests= new ArrayList<>();
 
-    public RequestType(String name, Collection<Request> requests) {
-        this.name = name;
+    public RequestType(String typeName, List<Request> requests) {
+        this.typeName = typeName;
         this.requests = requests;
     }
 }

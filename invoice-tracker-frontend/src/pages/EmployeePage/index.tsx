@@ -16,9 +16,9 @@ const EmployeePage = (props: any) => {
     username: "",
     email: "",
     roles: [{ name: "" }],
-    phoneNumber: "",
+    mobileNumber: "",
     joiningDate: "",
-    annuealLeaves: null,
+    allowedBalance: 21,
     requests: [
       { id: null, type: "", startDate: "", endDate: "", accepted: false },
     ],
@@ -74,8 +74,8 @@ const EmployeePage = (props: any) => {
         </Button>
       <div className="data flex ">
         
-        <UserDisplay  name={employee.username} roles={employee.roles} phoneNumber={employee.phoneNumber} email={employee.email} joiningDate={employee.joiningDate}/>
-       <RequesCard requests={requests} annuealLeaves={employee.annuealLeaves}/>
+        <UserDisplay  name={employee.username} roles={employee.roles} phoneNumber={employee.mobileNumber} email={employee.email} joiningDate={employee.joiningDate.substring(0,10)}/>
+       <RequesCard requests={requests} annuealLeaves={employee.allowedBalance}/>
        
       </div>
       <div className="requests  bg-white mt-7 w-full border-12  rounded ">
@@ -139,10 +139,10 @@ const EmployeePage = (props: any) => {
                             {req.type}
                           </td>
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            {req.startDate}
+                            {req.startDate.substring(0,10)}
                           </td>
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            {req.endDate}
+                            {req.endDate.substring(0,10)}
                           </td>
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                             {req.accepted ? "Yes" : "No"}

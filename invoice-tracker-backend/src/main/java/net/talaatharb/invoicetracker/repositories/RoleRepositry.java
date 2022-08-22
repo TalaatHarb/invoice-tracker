@@ -1,4 +1,4 @@
-package net.talaatharb.invoicetracker.repository;
+package net.talaatharb.invoicetracker.repositories;
 
 import java.util.Optional;
 
@@ -8,5 +8,5 @@ import net.talaatharb.invoicetracker.models.ERole;
 import net.talaatharb.invoicetracker.models.Role;
 
 public interface RoleRepositry extends JpaRepository<Role, Long> {
-    Optional<Role> findByName(ERole name);
+	Optional<Role> findByName(ERole name);
 }

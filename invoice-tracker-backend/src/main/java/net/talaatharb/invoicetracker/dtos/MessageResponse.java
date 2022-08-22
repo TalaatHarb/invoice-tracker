@@ -8,5 +8,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public class MessageResponse {
-    private String message;
+	private String message;
+	private String type;
+
+	public MessageResponse(String message){
+		this.message = message;
+	}
 }

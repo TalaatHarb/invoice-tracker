@@ -1,28 +1,16 @@
-package net.talaatharb.invoicetracker.api;
+package net.talaatharb.invoicetracker.controllers;
 
-import java.io.IOException;
 import java.net.URI;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import net.talaatharb.invoicetracker.models.Role;
 import net.talaatharb.invoicetracker.models.User;
-import net.talaatharb.invoicetracker.service.UserService;
+import net.talaatharb.invoicetracker.services.UserService;
 
 @RestController
 @RequestMapping("/api")

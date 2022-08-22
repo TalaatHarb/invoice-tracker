@@ -1,39 +1,48 @@
 package net.talaatharb.invoicetracker.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.util.Date;
 
 import javax.persistence.*;
 
-@Setter
-@Getter
-@Entity
-@AllArgsConstructor
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Table
+@Entity
 public class Request {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String startDate;
-    private String endDate;
+    private Date startDate;
+    private Date requestDate;
+    private Date endDate;
 
-    private Long Requested_by;
+
+    private Long requestedBy;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="reviewed_by_id", referencedColumnName = "id")
+    private User reviewedBy;
+
 
     private String type;
-    private boolean Is_full_day;
-    private boolean Comments;
-    private boolean accepted;
+    private boolean isFullDay;
+    private String comments;
+    private String status;
 
+    private String attachmentName;
 
-    // add attachmnets & approved by
+    private String attachmentUrl;
 
-    public Request( String startDate, String endDate, boolean is_full_day, boolean comments, boolean accepted) {
+    private int numberOfDays;
+
+    public Request(Date startDate, Date endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
-        this.accepted=accepted;
-        this.Is_full_day = is_full_day;
-        this.Comments = comments;
+
     }
 }

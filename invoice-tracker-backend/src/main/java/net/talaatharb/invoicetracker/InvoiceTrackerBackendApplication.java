@@ -2,22 +2,30 @@ package net.talaatharb.invoicetracker;
 
 import static net.talaatharb.invoicetracker.models.ERole.*;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Date;
 
-import net.talaatharb.invoicetracker.models.Request;
-import net.talaatharb.invoicetracker.models.RequestType;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import net.talaatharb.invoicetracker.models.Request;
+import net.talaatharb.invoicetracker.models.RequestType;
 import net.talaatharb.invoicetracker.models.Role;
 import net.talaatharb.invoicetracker.models.User;
-import net.talaatharb.invoicetracker.service.UserService;
+import net.talaatharb.invoicetracker.services.UserService;
 
 @SpringBootApplication
 public class InvoiceTrackerBackendApplication {
+
+	private static final String EMAIL_ADMIN_USER = "boogado2@yahoo.com";
+	private static final String EMAIL_EMPLOYEE = "boogado@yahoo.com";
+	private static final String EMAIL_HR = "boogado1@yahoo.com";
+	private static final String EMAIL_HR_2 = "boogado3@yahoo.com";
+	public static final String EMAIL_USER = "boogado4@yahoo.com";
+	public static final String PASS_USER = "awad36148";
 
 	public static void main(String[] args) {
 		SpringApplication.run(InvoiceTrackerBackendApplication.class, args);
@@ -31,34 +39,39 @@ public class InvoiceTrackerBackendApplication {
 			userService.saveRole(new Role(null, ROLE_EMPLOYEE));
 			userService.saveRole(new Role(null, ROLE_ADMIN));
 
-//			new empty hashmap
-			ArrayList<Role> roles = new ArrayList<>();
+//			create new object of User Class
+			userService.saveUser(new User(EMAIL_USER, PASS_USER,new Date(),"0122303432","amr12"));
+			userService.saveUser(new User(EMAIL_EMPLOYEE, PASS_USER,"Gado",true));
+			userService.saveUser(new User(EMAIL_HR, PASS_USER,"Ahmed",true));
+			userService.saveUser(new User(EMAIL_ADMIN_USER, PASS_USER,"mostafa",true));
+			userService.saveUser(new User(EMAIL_HR_2, PASS_USER,"hamada",false));
+
+//			userService.saveUser(new User(EMAIL_HR, null, PASS_USER, new HashSet<>(), "Gado1"));
+//			userService.saveUser(new User(EMAIL_ADMIN_USER, null, PASS_USER, new HashSet<>(), "Gado2"));
+//			userService.saveUser(new User(EMAIL_HR_2, null, PASS_USER, new HashSet<>(), "Gado3"));
+//			userService.saveUser(new User(EMAIL_EMPLOYEE, null, PASS_USER, new HashSet<>(), "Gado4"));
+//
+			userService.addRoleToUser(EMAIL_USER, ROLE_USER);
+			userService.addRoleToUser(EMAIL_HR, ROLE_HR);
+			userService.addRoleToUser(EMAIL_ADMIN_USER, ROLE_ADMIN);
+			userService.addRoleToUser(EMAIL_HR_2, ROLE_HR);
+			userService.addRoleToUser(EMAIL_EMPLOYEE, ROLE_EMPLOYEE);
+			userService.addRoleToUser(EMAIL_ADMIN_USER, ROLE_USER);
 
 
-			userService.saveUser(new User("Gado","boogado@yahoo.com", "awad36148",new HashSet<>(),new ArrayList<>(),"+20100324533","20-12-2022"));
-			userService.saveUser(new User("Gado1","boogado1@yahoo.com", "awad36148",new HashSet<>(),new ArrayList<>()));
-			userService.saveUser(new User("Gado2","boogado2@yahoo.com", "awad36148",new HashSet<>(),new ArrayList<>()));
-			userService.saveUser(new User("Gado3","boogado3@yahoo.com", "awad36148",new HashSet<>(),new ArrayList<>()));
-			userService.saveUser(new User("Gado4","boogado4@yahoo.com", "awad36148",new HashSet<>(),new ArrayList<>()));
-
-
-			userService.addRoleToUser("boogado@yahoo.com", ROLE_EMPLOYEE);
-			userService.addRoleToUser("boogado1@yahoo.com", ROLE_HR);
-			userService.addRoleToUser("boogado2@yahoo.com", ROLE_ADMIN);
-			userService.addRoleToUser("boogado3@yahoo.com", ROLE_HR);
-			userService.addRoleToUser("boogado4@yahoo.com", ROLE_EMPLOYEE);
-			userService.addRoleToUser("boogado2@yahoo.com", ROLE_USER);
 
 			userService.saveRequestType(new RequestType("sickness",new ArrayList<>()));
 			userService.saveRequestType(new RequestType("vacation",new ArrayList<>()));
 			userService.saveRequestType(new RequestType("troll",new ArrayList<>()));
 
-			//change first attribute to user ID instead of email
+			String pattern = "yyyy-MM-dd";
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
 			long l=1;
-			userService.saveRequest(l,"sickness",new Request("9-19-2022","9-19-2023",false,false,false));
-			userService.saveRequest(l,"sickness",new Request("9-19-2022","9-19-2023",false,false,false));
-			userService.saveRequest(l,"vacation",new Request("9-19-2022","9-19-2023",false,false,true));
-			userService.saveRequest(l,"troll",new Request("9-19-2022","9-19-2023",false,false,true));
+			userService.saveRequest(l,"sickness",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
+			userService.saveRequest(l,"sickness",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
+			userService.saveRequest(l,"vacation",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
+			userService.saveRequest(l,"troll",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
 		};
 	}
 }
