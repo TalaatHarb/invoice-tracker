@@ -6,19 +6,11 @@ type notificationProps = {
 
 const BellButton = ({ count }: notificationProps): JSX.Element => {
   const [notiNumber, setNotiNumber] = useState(count);
-<<<<<<< HEAD
   const [bellColor, setBellColor] = useState("none");
   const [isOpen, setIsOpen] = useState(false);
   const btnRef = React.useRef<HTMLButtonElement>(null);
   const onBellClickHandler = () => {
     bellColor === "none" ? setBellColor("blue") : setBellColor("none");
-=======
-  const [bellColor, setBellColor] = useState("lightGrey");
-  const [isOpen, setIsOpen] = useState(false);
-  const btnRef = React.useRef<HTMLButtonElement>(null);
-  const onBellClickHandler = () => {
-    bellColor === "lightGrey" ? setBellColor("#2f97da") : setBellColor("lightGrey");
->>>>>>> develop
     setNotiNumber(0);
     setIsOpen(true);
   };
