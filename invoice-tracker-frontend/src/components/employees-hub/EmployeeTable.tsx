@@ -119,10 +119,11 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
     }),
     columnHelper.accessor((row) => row.team, {
       id: "Teams",
-      header: "Teams",
+      header: "Team Name",
       cell: (info) =>
         info.getValue().map((team) => {
-          return <p key={team}>{team}</p>;
+          return  <p key={team}>{team}</p>; 
+          
         }),
     }),
     columnHelper.accessor((row) => row.fulltime, {
