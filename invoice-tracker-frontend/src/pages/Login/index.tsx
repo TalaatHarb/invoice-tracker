@@ -56,6 +56,7 @@ const LoginPage = () => {
           } else if (res.payload === 'User credentials have expired') {
             toast.error('Password is expired. Please contact your administrator')
           }
+
         }
       })
     },
