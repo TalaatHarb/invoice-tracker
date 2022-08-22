@@ -1,7 +1,7 @@
 package net.talaatharb.invoicetracker.services;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+import net.talaatharb.invoicetracker.models.User;
+import net.talaatharb.invoicetracker.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -10,8 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import net.talaatharb.invoicetracker.models.User;
-import net.talaatharb.invoicetracker.repositories.UserRepository;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(MockitoExtension.class)
 
