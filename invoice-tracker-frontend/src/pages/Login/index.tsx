@@ -53,6 +53,8 @@ const LoginPage = () => {
             toast.error('Wrong email or password')
           } else if (res.payload === 'User is disabled') {
             toast.error('User is disabled. Please contact your administrator')
+          } else if (res.payload === 'User credentials have expired') {
+            toast.error('Password is expired. Please contact your administrator')
           }
 
         }

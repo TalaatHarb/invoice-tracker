@@ -1,6 +1,13 @@
 package net.talaatharb.invoicetracker;
 
-import static net.talaatharb.invoicetracker.models.ERole.*;
+import static net.talaatharb.invoicetracker.models.ERole.ROLE_ADMIN;
+import static net.talaatharb.invoicetracker.models.ERole.ROLE_EMPLOYEE;
+import static net.talaatharb.invoicetracker.models.ERole.ROLE_HR;
+import static net.talaatharb.invoicetracker.models.ERole.ROLE_USER;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,7 +30,13 @@ public class InvoiceTrackerBackendApplication {
 	private static final String EMAIL_HR = "boogado1@yahoo.com";
 	private static final String EMAIL_HR_2 = "boogado3@yahoo.com";
 	public static final String EMAIL_USER = "boogado4@yahoo.com";
+
+	private static final String EMAIL_EMPLOYEE_2 = "boogado5@yahoo.com";
+
 	public static final String PASS_USER = "awad36148";
+	
+	private static final Boolean IS_ENABLED = true;
+	private static final Date PASSWORD_EXPIRY_DATE = new GregorianCalendar(2022,Calendar.AUGUST,11).getTime();
 
 	public static void main(String[] args) {
 		SpringApplication.run(InvoiceTrackerBackendApplication.class, args);
@@ -41,9 +54,12 @@ public class InvoiceTrackerBackendApplication {
 
 			userService.saveUser(new User(EMAIL_USER, PASS_USER,new Date(),"0122303432","amr0"));
 			userService.saveUser(new User(EMAIL_EMPLOYEE, PASS_USER,"Gado",true));
-			userService.saveUser(new User(EMAIL_HR, PASS_USER,"Ahmed",true));
+			userService.saveUser(new User(EMAIL_HR, PASS_USER,"Ahmed",false));
 			userService.saveUser(new User(EMAIL_ADMIN_USER, PASS_USER,"mostafa",true));
 			userService.saveUser(new User(EMAIL_HR_2, PASS_USER,"hamada",false));
+			
+			userService.saveUser(new User(EMAIL_EMPLOYEE_2, PASS_USER,"hamada",IS_ENABLED,PASSWORD_EXPIRY_DATE));
+
 
 //			userService.saveUser(new User(EMAIL_HR, null, PASS_USER, new HashSet<>(), "Gado1"));
 //			userService.saveUser(new User(EMAIL_ADMIN_USER, null, PASS_USER, new HashSet<>(), "Gado2"));
