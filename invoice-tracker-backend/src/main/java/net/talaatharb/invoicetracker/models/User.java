@@ -91,6 +91,7 @@ public class User {
 
 	private Date lastTimePasswordChanged;
 
+
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ManyToMany
 	private List<Team> teams;
@@ -98,10 +99,12 @@ public class User {
 
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(
+
 			cascade= CascadeType.ALL,
 			orphanRemoval = true
 	)
 	private List<Request> requests = new ArrayList<>();
+
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -128,6 +131,7 @@ public class User {
 		this.isEnabled = isEnabled;
 	}
 
+
 	public User(String email, String password, Date joiningDate, String mobileNumber, String username) {
 		this.email = email;
 		this.password = password;
@@ -135,4 +139,5 @@ public class User {
 		this.mobileNumber = mobileNumber;
 		this.username = username;
 	}
+
 }

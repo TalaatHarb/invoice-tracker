@@ -7,6 +7,9 @@ on:
     branches: [ develop, master ]
   pull_request:
     branches: [ develop, master ]
+    paths:
+      - 'invoice-tracker-frontend/**'
+      - '.github/workflows/nodejs-build-full.yml'
 
 jobs:
   build:

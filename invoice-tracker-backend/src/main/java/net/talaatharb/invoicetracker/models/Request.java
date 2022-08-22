@@ -1,9 +1,7 @@
 package net.talaatharb.invoicetracker.models;
 
 import java.util.Date;
-
 import javax.persistence.*;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,18 +19,20 @@ public class Request {
     private Date requestDate;
     private Date endDate;
 
-
     private Long requestedBy;
+
+
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="reviewed_by_id", referencedColumnName = "id")
     private User reviewedBy;
 
 
+
     private String type;
     private boolean isFullDay;
     private String comments;
-    private String status;
+    private String status="pending";
 
     private String attachmentName;
 
@@ -40,9 +40,11 @@ public class Request {
 
     private int numberOfDays;
 
+
     public Request(Date startDate, Date endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
 
     }
+
 }

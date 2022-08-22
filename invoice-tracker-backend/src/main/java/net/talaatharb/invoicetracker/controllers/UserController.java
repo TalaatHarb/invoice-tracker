@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import lombok.RequiredArgsConstructor;
 import net.talaatharb.invoicetracker.models.Role;
 import net.talaatharb.invoicetracker.models.User;
@@ -27,7 +26,6 @@ public class UserController {
 
     @GetMapping("/user")
     public ResponseEntity<User> getUser(@RequestParam long ID){
-        System.out.println(ID);
         return ResponseEntity.ok().body(userService.getUser(ID));
     }
 
@@ -44,4 +42,3 @@ public class UserController {
     }
 
 }
-

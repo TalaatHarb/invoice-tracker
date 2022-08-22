@@ -15,6 +15,11 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+
+
+
+
+
 public class RequestType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,8 +34,10 @@ public class RequestType {
     )
     private List<Request> requests= new ArrayList<>();
 
+
     public RequestType(String typeName, List<Request> requests) {
         this.typeName = typeName;
         this.requests = requests;
     }
+
 }

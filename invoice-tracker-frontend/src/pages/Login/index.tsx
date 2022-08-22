@@ -21,34 +21,40 @@ const LoginPage = () => {
     validate: (values) => {
       const errors: any = {}
       if (!values.email) {
-        errors.email = 'Required'
+        errors.email = 'Please Enter a valid Email'
       } else if (
         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
       ) {
         errors.email = 'Invalid email address'
       }
       if (!values.password) {
-        errors.password = 'Required'
-      } else if (values.password.length < 3) {
-        errors.password = 'Password must be at least 3 characters'
+        errors.password = 'Please Enter a valid Password'
+      } else if (values.password.length < 8) {
+        errors.password = 'Password must be at least 8 characters'
       }
       return errors
     },
     onSubmit: (values) => {
       dispatch(loginUser(values)).then((res) => {
         if (res?.payload?.email) {
-          
+
           toast.success('Login successful')
           const { roles } = res.payload
           if (roles.includes('ROLE_ADMIN')) {
             navigate('/admin')
+
+          } else if (roles.includes('ROLE_HR')) {
+            navigate('/hr')
           } else if (roles.includes('ROLE_EMPLOYEE')) {
             navigate('/employee')
-          } else if (roles.includes('ROLE_USER')) {
-            navigate('/user')
           }
         } else {
-          toast.error('Wrong email or password')
+          if (res.payload === 'Bad credentials') {
+            toast.error('Wrong email or password')
+          } else if (res.payload === 'User is disabled') {
+            toast.error('User is disabled. Please contact your administrator')
+          }
+
         }
       })
     },

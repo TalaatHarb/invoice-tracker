@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -20,7 +21,7 @@ const EmployeePage = (props: any) => {
     joiningDate: "",
     allowedBalance: 21,
     requests: [
-      { id: null, type: "", startDate: "", endDate: "", accepted: false },
+      { id: null, type: "", startDate: "", endDate: "", status: "" },
     ],
   });
   const dispatch = useAppDispatch();
@@ -61,17 +62,21 @@ const EmployeePage = (props: any) => {
     
     setRequests(objArray);
     dispatch(getID(res.data.id));
+    console.log(res.data.id)
   };
 
   return (
     <div className="containerr p-11 b bg-lightGrey">
       <Button className="w-48 ml-auto mb-7"
+
+
           onClick={() => {
             dispatch(logoutUser())
           }}
         >
           Log Out
         </Button>
+
       <div className="data flex ">
         
         <UserDisplay  name={employee.username} roles={employee.roles} phoneNumber={employee.mobileNumber} email={employee.email} joiningDate={employee.joiningDate.substring(0,10)}/>
@@ -145,7 +150,7 @@ const EmployeePage = (props: any) => {
                             {req.endDate.substring(0,10)}
                           </td>
                           <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            {req.accepted ? "Yes" : "No"}
+                            {req.status}
                           </td>
                         </tr>
                       ))}
@@ -162,3 +167,4 @@ const EmployeePage = (props: any) => {
 };
 
 export default EmployeePage;
+

@@ -4,13 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import lombok.AllArgsConstructor;
 import net.talaatharb.invoicetracker.models.*;
+import net.talaatharb.invoicetracker.models.ERole;
+import net.talaatharb.invoicetracker.models.Role;
+import net.talaatharb.invoicetracker.models.User;
 import net.talaatharb.invoicetracker.repositories.RequestRepository;
 import net.talaatharb.invoicetracker.repositories.RequestTypeRepository;
 import net.talaatharb.invoicetracker.repositories.RoleRepositry;
@@ -28,11 +29,13 @@ public class UserService {
 	@Autowired
 	private final UserRepository userRepository;
 
+
 	@Autowired
 	private final RequestRepository requestRepository;
 
 	@Autowired
 	private final RequestTypeRepository requestTypeRepository;
+
 
 	public void addRoleToUser(String email, ERole userRole) {
 		Optional<User> user = userRepository.findByEmail(email);
@@ -42,8 +45,11 @@ public class UserService {
 		}
 	}
 
+
 	public User getUser(long id) {
 		return userRepository.findById(id).orElse(null);
+
+
 	}
 
 	public List<User> getUsers() {
@@ -58,6 +64,7 @@ public class UserService {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		return userRepository.save(user);
 	}
+
 
 	public void saveRequest(Long ID, String type, Request request) {
 		requestRepository.save(request);
@@ -74,7 +81,6 @@ public class UserService {
 	public void saveRequestType(RequestType type) {
 		requestTypeRepository.save(type);
 	}
-
 
 
 }

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { CONSTANTS } from '../../../utils/constants'
 import Cookies from 'universal-cookie'
+import axios from 'axios'
 const cookies = new Cookies()
 
 interface AuthenticationState {
@@ -25,21 +26,22 @@ export const loginUser = createAsyncThunk(
   'authentication/loginUser',
   async (credentials: any, { rejectWithValue }) => {
     try {
-      const response = await fetch(`${CONSTANTS.BACKEND_URL}/api/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(credentials),
-      })
-      const data = response.json()
+
+      const response = await axios.post(
+        `${CONSTANTS.BACKEND_URL}/api/auth/login`,
+        credentials,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      )
+
       if (response.status === 200) {
-        return data
-      } else {
-        return rejectWithValue(data)
+        return response.data
       }
-    } catch (err) {
-      return rejectWithValue(err)
+    } catch (err: any) {
+      return rejectWithValue(err?.response?.data?.message)
     }
   }
 )
@@ -79,7 +81,8 @@ const AuthenticationSlice = createSlice({
     builder.addCase(loginUser.rejected, (state, action) => {
       state.isAuthenticated = null
       state.userRole = null
-      state.error = action?.error?.message
+
+      state.error = action?.payload as string
       state.isLoading = false
     })
   },

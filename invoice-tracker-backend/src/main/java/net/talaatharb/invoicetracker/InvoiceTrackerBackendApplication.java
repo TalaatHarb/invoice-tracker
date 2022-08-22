@@ -5,12 +5,10 @@ import static net.talaatharb.invoicetracker.models.ERole.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
 import net.talaatharb.invoicetracker.models.Request;
 import net.talaatharb.invoicetracker.models.RequestType;
 import net.talaatharb.invoicetracker.models.Role;
@@ -40,7 +38,8 @@ public class InvoiceTrackerBackendApplication {
 			userService.saveRole(new Role(null, ROLE_ADMIN));
 
 //			create new object of User Class
-			userService.saveUser(new User(EMAIL_USER, PASS_USER,new Date(),"0122303432","amr12"));
+
+			userService.saveUser(new User(EMAIL_USER, PASS_USER,new Date(),"0122303432","amr0"));
 			userService.saveUser(new User(EMAIL_EMPLOYEE, PASS_USER,"Gado",true));
 			userService.saveUser(new User(EMAIL_HR, PASS_USER,"Ahmed",true));
 			userService.saveUser(new User(EMAIL_ADMIN_USER, PASS_USER,"mostafa",true));
@@ -60,6 +59,7 @@ public class InvoiceTrackerBackendApplication {
 
 
 
+
 			userService.saveRequestType(new RequestType("sickness",new ArrayList<>()));
 			userService.saveRequestType(new RequestType("vacation",new ArrayList<>()));
 			userService.saveRequestType(new RequestType("troll",new ArrayList<>()));
@@ -72,6 +72,7 @@ public class InvoiceTrackerBackendApplication {
 			userService.saveRequest(l,"sickness",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
 			userService.saveRequest(l,"vacation",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
 			userService.saveRequest(l,"troll",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
+
 		};
 	}
 }

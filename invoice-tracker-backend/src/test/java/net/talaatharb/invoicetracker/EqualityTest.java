@@ -26,4 +26,6 @@ public interface EqualityTest<T> {
         // ToString is equal for equal entities
         assertEquals(t1.toString(), t2.toString());
     }
+
 }
+

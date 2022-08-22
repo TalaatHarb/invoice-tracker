@@ -14,7 +14,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
 import net.talaatharb.invoicetracker.dtos.JwtResponse;
 import net.talaatharb.invoicetracker.dtos.LoginRequest;
 import net.talaatharb.invoicetracker.repositories.RoleRepositry;
@@ -60,4 +59,5 @@ public class AuthController {
 		return ResponseEntity.ok(new JwtResponse(userDetails.getEmail(), expiresIn, userDetails.getId(), roles, jwt,
 				userDetails.getUsername()));
 	}
+
 }
