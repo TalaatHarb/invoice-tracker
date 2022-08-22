@@ -1,6 +1,5 @@
 package net.talaatharb.invoicetracker.security;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 import org.slf4j.Logger;
