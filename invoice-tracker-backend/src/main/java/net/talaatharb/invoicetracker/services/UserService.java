@@ -1,18 +1,20 @@
 package net.talaatharb.invoicetracker.services;
 
+import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import lombok.AllArgsConstructor;
 import net.talaatharb.invoicetracker.models.ERole;
 import net.talaatharb.invoicetracker.models.Role;
 import net.talaatharb.invoicetracker.models.User;
 import net.talaatharb.invoicetracker.repositories.RoleRepositry;
 import net.talaatharb.invoicetracker.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor

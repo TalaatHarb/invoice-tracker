@@ -1,12 +1,10 @@
 package net.talaatharb.invoicetracker.controllers;
 
-import net.talaatharb.invoicetracker.dtos.JwtResponse;
-import net.talaatharb.invoicetracker.dtos.LoginRequest;
-import net.talaatharb.invoicetracker.repositories.RoleRepositry;
-import net.talaatharb.invoicetracker.repositories.UserRepository;
-import net.talaatharb.invoicetracker.security.JwtProperties;
-import net.talaatharb.invoicetracker.security.JwtUtils;
-import net.talaatharb.invoicetracker.services.UserDetailsImpl;
+import java.util.Date;
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,9 +15,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.Date;
-import java.util.List;
+import net.talaatharb.invoicetracker.dtos.JwtResponse;
+import net.talaatharb.invoicetracker.dtos.LoginRequest;
+import net.talaatharb.invoicetracker.repositories.RoleRepositry;
+import net.talaatharb.invoicetracker.repositories.UserRepository;
+import net.talaatharb.invoicetracker.security.JwtProperties;
+import net.talaatharb.invoicetracker.security.JwtUtils;
+import net.talaatharb.invoicetracker.services.UserDetailsImpl;
 
 @CrossOrigin(origins = "*" , maxAge = 3600)
 @RestController

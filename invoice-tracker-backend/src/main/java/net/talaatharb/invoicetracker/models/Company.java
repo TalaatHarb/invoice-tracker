@@ -1,12 +1,13 @@
 package net.talaatharb.invoicetracker.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor

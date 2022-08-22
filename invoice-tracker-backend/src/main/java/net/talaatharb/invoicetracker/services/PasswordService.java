@@ -1,5 +1,12 @@
 package net.talaatharb.invoicetracker.services;
 
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import net.bytebuddy.utility.RandomString;
 import net.talaatharb.invoicetracker.exceptions.UserException;
 import net.talaatharb.invoicetracker.models.ResetTokenEntity;
@@ -7,12 +14,6 @@ import net.talaatharb.invoicetracker.models.User;
 import net.talaatharb.invoicetracker.repositories.ResetTokenRepository;
 import net.talaatharb.invoicetracker.repositories.UserRepository;
 import net.talaatharb.invoicetracker.utils.RegexHelper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class PasswordService {
