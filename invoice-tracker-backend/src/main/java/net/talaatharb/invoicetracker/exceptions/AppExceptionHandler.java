@@ -16,11 +16,11 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler{
     @ExceptionHandler(value = {UserException.class})
     public ResponseEntity<MessageResponse> handleUserException(UserException e, WebRequest request){
         String message = e.getLocalizedMessage();
-        return new ResponseEntity<>(new MessageResponse("error", message), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(new MessageResponse(message, "error"), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(value = {Exception.class})
     public ResponseEntity<MessageResponse> handleDatabaseException(HibernateException e, WebRequest request){
-        return new ResponseEntity<>(new MessageResponse("error", "Unexpected error occured"), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(new MessageResponse("Unexpected error occured", "error"), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

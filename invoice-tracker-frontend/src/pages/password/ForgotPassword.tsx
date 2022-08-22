@@ -35,7 +35,7 @@ function ForgotPassword(){
             if(result.type === ERROR){
                 const {message} = result;
                 setIsInvalid(true);
-                setErrMessage((state)=>({...state, message}))                
+                setErrMessage((state)=>({...state, message}))
             }
 
         }catch(e){

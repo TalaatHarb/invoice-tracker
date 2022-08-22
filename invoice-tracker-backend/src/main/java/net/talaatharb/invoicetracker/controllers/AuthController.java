@@ -1,4 +1,4 @@
-package net.talaatharb.invoicetracker.api;
+package net.talaatharb.invoicetracker.controllers;
 
 import java.util.Date;
 import java.util.List;
@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.*;
 
 import net.talaatharb.invoicetracker.dtos.JwtResponse;
 import net.talaatharb.invoicetracker.dtos.LoginRequest;
-import net.talaatharb.invoicetracker.repository.RoleRepositry;
-import net.talaatharb.invoicetracker.repository.UserRepository;
+import net.talaatharb.invoicetracker.repositories.RoleRepositry;
+import net.talaatharb.invoicetracker.repositories.UserRepository;
 import net.talaatharb.invoicetracker.security.JwtProperties;
 import net.talaatharb.invoicetracker.security.JwtUtils;
-import net.talaatharb.invoicetracker.service.UserDetailsImpl;
+import net.talaatharb.invoicetracker.services.UserDetailsImpl;
 
 @CrossOrigin(origins = "*" , maxAge = 3600)
 @RestController

@@ -9,17 +9,17 @@ import org.springframework.stereotype.Service;
 
 import net.bytebuddy.utility.RandomString;
 import net.talaatharb.invoicetracker.exceptions.UserException;
-import net.talaatharb.invoicetracker.helper.RegexHelper;
 import net.talaatharb.invoicetracker.models.ResetTokenEntity;
-import net.talaatharb.invoicetracker.models.UserEntity;
+import net.talaatharb.invoicetracker.models.User;
 import net.talaatharb.invoicetracker.repositories.ResetTokenRepository;
-import net.talaatharb.invoicetracker.repositories.UserRepository1;
+import net.talaatharb.invoicetracker.repositories.UserRepository;
+import net.talaatharb.invoicetracker.utils.RegexHelper;
 
 @Service
 public class PasswordService {
 
     @Autowired
-    private UserRepository1 userRepo;
+    private UserRepository userRepo;
     @Autowired
     private ResetTokenRepository resetTokenRepo;
     @Autowired
@@ -46,13 +46,13 @@ public class PasswordService {
         String mailBody = "<h2>Reset Password Request</h2>" +
                           "<p>Please visit <a href=\"http://" + resetLink + "\"><bold>this link</bold> </a> to reset your password </p>";
 
-        Optional<UserEntity> userReturnedOptional = userRepo.findByEmail(email);
+        Optional<User> userReturnedOptional = userRepo.findByEmail(email);
         if(userReturnedOptional.isEmpty()) {
             return;
 //            throw new UserException("No user found with email " + email);
         }
 
-        UserEntity userReturned = userReturnedOptional.get();
+        User userReturned = userReturnedOptional.get();
         Optional<ResetTokenEntity> resetTokenReturnedOptional = resetTokenRepo.findByUserId(userReturned.getId());
 
         ResetTokenEntity resetToken = new ResetTokenEntity();
@@ -88,7 +88,7 @@ public class PasswordService {
             throw new UserException("Enter Your Email Again");
         }
 
-        UserEntity userReturned = resetTokenReturned.getUser();
+        User userReturned = resetTokenReturned.getUser();
 
         // using Password encoder bean to hash the new password
         String hashedPassword = passwordEncoder.encode(newPassword);

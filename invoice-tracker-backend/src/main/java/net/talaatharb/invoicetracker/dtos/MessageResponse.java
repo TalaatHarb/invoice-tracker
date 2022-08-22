@@ -12,7 +12,7 @@ public class MessageResponse {
 	private String type;
 
 	public MessageResponse(String message){
-		this.message=message;
+		this.message = message;
 	}
 }
 

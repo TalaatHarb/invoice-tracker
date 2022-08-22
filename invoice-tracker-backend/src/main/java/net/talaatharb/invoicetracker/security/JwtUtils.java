@@ -13,7 +13,7 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
-import net.talaatharb.invoicetracker.service.UserDetailsImpl;
+import net.talaatharb.invoicetracker.services.UserDetailsImpl;
 
 @Component
 public class JwtUtils {
