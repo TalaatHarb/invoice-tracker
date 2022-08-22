@@ -1,12 +1,11 @@
 package net.talaatharb.invoicetracker.models;
 
-import java.util.Date;
-
-import javax.persistence.*;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor

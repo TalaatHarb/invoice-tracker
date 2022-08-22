@@ -1,18 +1,16 @@
 package net.talaatharb.invoicetracker.models;
 
-import java.util.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.*;
 
 @Entity
 @Data
@@ -26,57 +24,57 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
+//		@NotBlank
 	private String nationalId;
 
-	@NotBlank
+//		@NotBlank
 	private String englishName;
 
-	@NotBlank
+//		@NotBlank
 	private String arabicName;
 
-	@NotBlank
+		@NotBlank
 	@Size(max = 50)
 	@Email
 	private String email;
 
-	@NotBlank
+		@NotBlank
 	@Size(min = 8, max = 120)
 	private String password;
 
-	@NotBlank
+//		@NotBlank
 	private String englishAddress;
 
-	@NotBlank
+//		@NotBlank
 	private String arabicAddress;
 
-	@NotBlank
+//		@NotBlank
 	private int allowedBalance;
 
-	@NotBlank
+//	@NotBlank
 	private int remainingBalance;
 
-	@NotBlank
+//	@NotBlank
 	private boolean billable;
 
-	@NotBlank
+//	@NotBlank
 	private boolean isDisabled;
 
 	private boolean isResigned;
 
-	@NotBlank
+//	@NotBlank
 	private Date joiningDate;
 
 	private Date endDate;
 
-	@NotBlank
+//	@NotBlank
 	private Date birthDate;
 
 	private String imgUrl;
 
 	private String mobileNumber;
 
-	@NotBlank
+//	@NotBlank
 	private boolean isFullTime;
 
 	private Date insuranceDate;
@@ -120,32 +118,10 @@ public class User {
 		this.password = encode;
 	}
 
-	public User(String nationalId, String englishName, String arabicName,
-				String email, String password) {
-		this.nationalId = nationalId;
-		this.englishName = englishName;
-		this.arabicName = arabicName;
+	public User(String email, String password,String username, boolean isEnabled) {
 		this.email = email;
 		this.password = password;
-		this.englishAddress = englishAddress;
-		this.arabicAddress = arabicAddress;
-		this.allowedBalance = allowedBalance;
-		this.remainingBalance = remainingBalance;
-		this.billable = billable;
-		this.isDisabled = isDisabled;
-		this.isResigned = isResigned;
-		this.joiningDate = joiningDate;
-		this.endDate = endDate;
-		this.birthDate = birthDate;
-		this.imgUrl = imgUrl;
-		this.mobileNumber = mobileNumber;
-		this.isFullTime = isFullTime;
-		this.insuranceDate = insuranceDate;
-		this.yearsOfInsurance = yearsOfInsurance;
-		this.overtime = overtime;
-		this.payRate = payRate;
-		this.isEnabled = isEnabled;
-		this.lastTimePasswordChanged = lastTimePasswordChanged;
 		this.username = username;
+		this.isEnabled = isEnabled;
 	}
 }

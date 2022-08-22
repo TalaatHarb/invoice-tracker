@@ -1,16 +1,16 @@
 spring:
   jpa:
-        database: mysql
-        open-in-view: false
-        hibernate.ddl-auto: create-drop
-        generate-ddl: true
-        show-sql: false
+    database: mysql
+    open-in-view: false
+    hibernate.ddl-auto: create-drop
+    generate-ddl: true
+    show-sql: false
 
   datasource:
-        driverClassName: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/employeedb
-        username: root
-        password: ZakariiA4758!
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/employeedb
+    username: root
+    password: ZakariiA4758!
 
   mail:
     host: ${MAIL_HOST}
@@ -29,8 +29,6 @@ spring:
     lifecycle:
       timeout-per-shutdown-phase: 30s
 
-
-
 server:
   port: 8080
   shutdown: graceful
@@ -43,7 +41,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: "*"
   endpoint:
     health:
       show-details: always
