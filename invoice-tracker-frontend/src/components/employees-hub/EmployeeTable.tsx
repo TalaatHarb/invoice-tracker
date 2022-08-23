@@ -10,6 +10,7 @@ import {
 import { CheckIcon, XIcon } from "@heroicons/react/solid";
 import ColumnSelect from "./ColumnSelector";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 type employeeTableProps = {
   employees: employeeType[];
@@ -86,12 +87,14 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
     columnHelper.accessor((row) => row.joiningDate, {
       id: "Joining date",
       header: "Joining date",
-      cell: (info) => info.getValue()?info.getValue().toLocaleString():"N/A",
+      cell: (info) =>
+        info.getValue() ? info.getValue().toLocaleString() : "N/A",
     }),
     columnHelper.accessor((row) => row.endDate, {
       id: "End date",
       header: "End date",
-      cell: (info) => info.getValue()?info.getValue().toLocaleString():"N/A",
+      cell: (info) =>
+        info.getValue() ? info.getValue().toLocaleString() : "N/A",
     }),
     columnHelper.accessor((row) => row.allowedBalance, {
       id: "Allowed balance",
@@ -113,7 +116,7 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
           <XIcon className="text-center w-7 m-0 text-yeollowLightCegedim" />
         ),
     }),
-    columnHelper.accessor((row) => row.isDisabled, {
+    columnHelper.accessor((row) => row.disabled, {
       id: "Is disabled",
       header: "Is disabled",
       cell: (info) => (info.getValue() ? "Yes" : "No"),
@@ -121,12 +124,22 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
     columnHelper.accessor((row) => row.team, {
       id: "Teams",
       header: "Team Name",
-      cell: (info) =>info.getValue()?
-        info.getValue().map((team) => {
-          return <p key={team}>{team}</p>;
-        }):"N/A",
+      cell: (info) =>
+        info.getValue()
+          ? info.getValue().map((team) => {
+              return (
+                <Link
+                  className="text-black no-underline block hover:underline"
+                  key={team.id + team.name}
+                  to={"/team/" + team.id}
+                >
+                  {team.name}
+                </Link>
+              );
+            })
+          : "N/A",
     }),
-    columnHelper.accessor((row) => row.fulltime, {
+    columnHelper.accessor((row) => row.fullTime, {
       id: "Fulltime",
       header: "Fulltime",
       cell: (info) => (info.getValue() ? "Yes" : "No"),
@@ -161,7 +174,7 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
     const id: number = event.target.value;
   };
   return (
-    <div className="w-9/12 flex flex-col py-10">
+    <div className="w-10/12 flex flex-col py-10">
       <ColumnSelect table={table} />
       <div className="overflow-x-auto shadow-lg rounded-lg">
         <table className=" text-black">
@@ -191,7 +204,7 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
               >
                 {row.getVisibleCells().map((cell) => (
                   <td key={cell.id}>
-                    <div className="mx-2 ">
+                    <div className="mx-2 py-2">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

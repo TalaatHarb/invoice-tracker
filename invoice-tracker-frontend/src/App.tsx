@@ -20,8 +20,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/teamList" element={<EmployeesList />} />
-        <Route path="/empList" element={<EmployeesHub />} />
+        <Route path="/team/:teamId"  element={<EmployeesList />} />
+        <Route path="/empList"  element={<EmployeesHub />} />
         {/* reset password routes */}
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:resetToken" element={<ResetPassword />} />

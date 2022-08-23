@@ -1,35 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import EmployeeTable from "../../components/employees-hub/EmployeeTable";
 import FilterComboBox from "../../components/employees-hub/FilterComboBox";
 import Navbar from "../../components/Navbar";
 import { employeeFilterType } from "./types";
 import axios from "axios";
 import { useAppSelector } from "../../hooks/toolkit-types";
+import { employeeType } from "../../components/employees-hub/types";
 
 const EmployeesHub = () => {
   const isAuthenticated: any = useAppSelector(
     (state) => state.AuthenticationSlice.isAuthenticated
   );
   const allEmployeeDataUrl = "http://localhost:8080/employee/all";
-  const [employeeData, setEmployeeData] = useState<any>({});
+  const [employeeData, setEmployeeData] = useState<employeeType[]>([
+    {
+      id: 1,
+      employeeId: 1,
+      nationalId: "23434454534",
+      englishName: "Mohamed",
+      arabicName: "محمد ",
+      email: "mohamedzakaria@gmail.com",
+      mobileNumber: "0101342345",
+      englishAddress: "caire",
+      arabicAddress: "القاهرة",
+      jobTitle: "developer",
+      joiningDate: new Date(),
+      endDate: new Date(),
+      allowedBalance: 21,
+      remainingBalance: 15,
+      billable: true,
+      disabled: false,
+      team: [
+        { id: 1, name: "back-end" },
+        { id: 1, name: "back-end" },
+      ],
+      fullTime: true,
+      resigned: false,
+    },
+  ]);
   const [currentField, setCurrentField] = useState<string>("id");
   const [employeeFilter, setEmployeeFilter] = useState<employeeFilterType>({
     billable: false,
-    fulltime: false,
-    isDisabled: false,
+    fullTime: false,
+    disabled: false,
   });
 
-  const filterApplyClearhandler = (event: any) => {
-
-    const getData = async (url:string)=>{
-      await axios.get(url, {
-        headers: { "Authorization": `Bearer ${isAuthenticated}` },
-      }).then(response=>{
-        console.log(response.data);
-        return response.data;
-      })
-    }
-    let value:any = "";
+  const filterApplyClearhandler = async (event: any) => {
+    let value: any = "";
     switch (currentField) {
       case "id":
         value = employeeFilter.id;
@@ -62,28 +79,36 @@ const EmployeesHub = () => {
         value = employeeFilter.billable;
         break;
       case "fulltime":
-        value = employeeFilter.fulltime;
+        value = employeeFilter.fullTime;
         break;
       case "disabled":
-        value = employeeFilter.isDisabled;
+        value = employeeFilter.disabled;
         break;
     }
-    console.log(value);
     const id = event.target.id;
     const filterQueryUrl = `http://localhost:8080/employees/filter?type=${currentField}&values=${value}`;
     if (id == "apply") {
-      const filteredData = getData(filterQueryUrl);
-      console.log(filteredData);
-      setEmployeeData(filteredData);
+      await axios
+        .get(filterQueryUrl, {
+          headers: { Authorization: `Bearer ${isAuthenticated}` },
+        })
+        .then((response) => {
+          setEmployeeData(response.data);
+        });
     } else {
       setEmployeeFilter({
         billable: false,
-        fulltime: false,
-        isDisabled: false,
+        fullTime: false,
+        disabled: false,
       });
-      const data = getData(allEmployeeDataUrl)
-      console.log(data);
-      setEmployeeData(data);
+      await axios
+        .get(allEmployeeDataUrl, {
+          headers: { Authorization: `Bearer ${isAuthenticated}` },
+        })
+        .then((response) => {
+          console.log(response.data);
+          setEmployeeData(response.data);
+        });
     }
   };
 
@@ -96,7 +121,6 @@ const EmployeesHub = () => {
     const targetValue = event.target.value;
     let newFilter = { ...employeeFilter };
     let newData = {};
-    console.log(targetValue);
     switch (targetId) {
       case "id":
         newData = { id: targetValue };
@@ -140,176 +164,38 @@ const EmployeesHub = () => {
     }
     newFilter = {
       billable: employeeFilter.billable,
-      isDisabled: employeeFilter.isDisabled,
-      fulltime: employeeFilter.fulltime,
+      disabled: employeeFilter.disabled,
+      fullTime: employeeFilter.fullTime,
       ...newData,
     };
     setEmployeeFilter(newFilter);
   };
 
   useEffect(() => {
-
-    const getData = async ()=>{
+    const getData = async () => {
       await axios
-      .get(allEmployeeDataUrl, {
-        headers: { "Authorization": `Bearer ${isAuthenticated}` },
-      })
-      .then((response) => {
-        setEmployeeData(response.data);
-      });
-    }
-    getData()    
+        .get(allEmployeeDataUrl, {
+          headers: { Authorization: `Bearer ${isAuthenticated}` },
+        })
+        .then((response) => {
+          setEmployeeData(response.data);
+        });
+    };
+    getData();
   }, []);
 
-  const employees = [
-    {
-      id: 1,
-      nationalId: "23434454534",
-      englishName: "Mohamed",
-      arabicName: "محمد ",
-      englishAddress: "caire",
-      arabicAddress: "القاهرة",
-      jobTitle: "developer",
-      joiningDate: new Date(),
-      endDate: new Date(),
-      allowedBalance: 21,
-      remainingBalance: 15,
-      billable: true,
-      isDisabled: false,
-      team: ["back-end", "front-end"],
-      fulltime: true,
-    },
-    {
-      id: 1,
-      nationalId: "23434454534",
-      englishName: "Mohamed",
-      arabicName: "محمد ",
-      englishAddress: "caire",
-      arabicAddress: "القاهرة",
-      jobTitle: "developer",
-      joiningDate: new Date(),
-      endDate: new Date(),
-      allowedBalance: 21,
-      remainingBalance: 15,
-      billable: true,
-      isDisabled: false,
-      team: ["back-end", "front-end"],
-      fulltime: true,
-    },
-    {
-      id: 1,
-      nationalId: "23434454534",
-      englishName: "Mohamed",
-      arabicName: "محمد ",
-      englishAddress: "caire",
-      arabicAddress: "القاهرة",
-      jobTitle: "developer",
-      joiningDate: new Date(),
-      endDate: new Date(),
-      allowedBalance: 21,
-      remainingBalance: 15,
-      billable: true,
-      isDisabled: false,
-      team: ["back-end", "front-end"],
-      fulltime: true,
-    },
-    {
-      id: 1,
-      nationalId: "23434454534",
-      englishName: "Mohamed",
-      arabicName: "محمد ",
-      englishAddress: "caire",
-      arabicAddress: "القاهرة",
-      jobTitle: "developer",
-      joiningDate: new Date(),
-      endDate: new Date(),
-      allowedBalance: 21,
-      remainingBalance: 15,
-      billable: true,
-      isDisabled: false,
-      team: ["back-end", "front-end"],
-      fulltime: true,
-    },
-    {
-      id: 1,
-      nationalId: "23434454534",
-      englishName: "Mohamed",
-      arabicName: "محمد ",
-      englishAddress: "caire",
-      arabicAddress: "القاهرة",
-      jobTitle: "developer",
-      joiningDate: new Date(),
-      endDate: new Date(),
-      allowedBalance: 21,
-      remainingBalance: 15,
-      billable: true,
-      isDisabled: false,
-      team: ["back-end", "front-end"],
-      fulltime: true,
-    },
-    {
-      id: 1,
-      nationalId: "23434454534",
-      englishName: "Mohamed",
-      arabicName: "محمد ",
-      englishAddress: "caire",
-      arabicAddress: "القاهرة",
-      jobTitle: "developer",
-      joiningDate: new Date(),
-      endDate: new Date(),
-      allowedBalance: 21,
-      remainingBalance: 15,
-      billable: true,
-      isDisabled: false,
-      team: ["back-end", "front-end"],
-      fulltime: true,
-    },
-    {
-      id: 1,
-      nationalId: "23434454534",
-      englishName: "Mohamed",
-      arabicName: "محمد ",
-      englishAddress: "caire",
-      arabicAddress: "القاهرة",
-      jobTitle: "developer",
-      joiningDate: new Date(),
-      endDate: new Date(),
-      allowedBalance: 21,
-      remainingBalance: 15,
-      billable: true,
-      isDisabled: false,
-      team: ["back-end", "front-end"],
-      fulltime: true,
-    },
-    {
-      id: 1,
-      nationalId: "23434454534",
-      englishName: "Mohamed",
-      arabicName: "محمد ",
-      englishAddress: "caire",
-      arabicAddress: "القاهرة",
-      jobTitle: "developer",
-      joiningDate: new Date(),
-      endDate: new Date(),
-      allowedBalance: 21,
-      remainingBalance: 15,
-      billable: true,
-      isDisabled: false,
-      team: ["back-end", "front-end"],
-      fulltime: true,
-    },
-  ];
   return (
     <div>
       <Navbar />
 
       <div className="flex flex-col min-h-screen  bg-lightGrey bg-opacity-20 items-center">
-        <div className="flex flex-row justify-start w-full">
-          <h1 className=" drop-shadow-xl mx-8 my-12 text-5xl text-blueCegedim font-bold">
+        <div className="flex flex-row justify-between w-full items-center">
+          <h1 className=" drop-shadow-xl ml-60 my-12 text-5xl text-blueCegedim font-bold">
             Cegedim Members
           </h1>
+          <div>{/* add drop down here */}</div>
         </div>
-        <div className="flex flex-row justify-start w-full">
+        <div className="flex flex-row justify-start w-full  ml-96">
           <div className="mx-12 my-10">
             <h3 className="text-xl text-black font-medium">Filter by</h3>
             <FilterComboBox onOptionClick={currentFieldChangeHandler} />
@@ -350,10 +236,10 @@ const EmployeesHub = () => {
               Fulltime
             </label>
           </div>
-          <div className="flex flex-row justify-end mt-28">
+          <div className=" flex flex-row justify-end mt-28">
             <button
               id="apply"
-              className="ml-60 text-base rounded-md px-2 max-h-7 bg-yeollowLightCegedim text-black"
+              className="text-base rounded-md px-2 max-h-7 bg-yeollowLightCegedim text-black"
               onClick={filterApplyClearhandler}
             >
               Apply

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.talaatharb.invoicetracker.models.User;
+import net.talaatharb.invoicetracker.dtos.UserDetails;
 import net.talaatharb.invoicetracker.services.UserService;
 
 @CrossOrigin(origins = "*" , maxAge = 3600)
@@ -20,7 +20,7 @@ public class EmployeeController {
     private UserService userService;
 
     @GetMapping("/all")
-    public List<User> getAllEmployees(){
+    public List<UserDetails> getAllEmployees(){
         return userService.getUsers();
     }
 }
