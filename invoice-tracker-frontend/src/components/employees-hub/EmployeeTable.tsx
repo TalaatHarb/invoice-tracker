@@ -86,12 +86,12 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
     columnHelper.accessor((row) => row.joiningDate, {
       id: "Joining date",
       header: "Joining date",
-      cell: (info) => info.getValue().toLocaleString(),
+      cell: (info) => info.getValue()?info.getValue().toLocaleString():"N/A",
     }),
     columnHelper.accessor((row) => row.endDate, {
       id: "End date",
       header: "End date",
-      cell: (info) => info.getValue().toLocaleString(),
+      cell: (info) => info.getValue()?info.getValue().toLocaleString():"N/A",
     }),
     columnHelper.accessor((row) => row.allowedBalance, {
       id: "Allowed balance",
@@ -121,10 +121,10 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
     columnHelper.accessor((row) => row.team, {
       id: "Teams",
       header: "Team Name",
-      cell: (info) =>
+      cell: (info) =>info.getValue()?
         info.getValue().map((team) => {
           return <p key={team}>{team}</p>;
-        }),
+        }):"N/A",
     }),
     columnHelper.accessor((row) => row.fulltime, {
       id: "Fulltime",

@@ -3,16 +3,16 @@ import { Combobox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 
 const fields = [
-  { id: 1, name: "Id" },
-  { id: 2, name: "Employee Id" },
-  { id: 3, name: "English Name" },
-  { id: 4, name: "Arabic name" },
-  { id: 5, name: "Job title" },
-  { id: 6, name: "Joining date" },
-  { id: 7, name: "End date" },
-  { id: 8, name: "Allowed Balance" },
-  { id: 9, name: "Remaining Balance" },
-  { id: 10, name: "Teams" },
+  { id: "id", name: "Id" },
+  { id: "employeeId", name: "Employee Id" },
+  { id: "englishName", name: "English Name" },
+  { id: "arabicName", name: "Arabic name" },
+  { id: "jobTitle", name: "Job title" },
+  { id: "joiningDate", name: "Joining date" },
+  { id: "endDate", name: "End date" },
+  { id: "allowedBalance", name: "Allowed Balance" },
+  { id: "remainingBalance", name: "Remaining Balance" },
+  { id: "teams", name: "Teams" },
 ];
 
 type filterComboBoxProps = {
@@ -78,7 +78,7 @@ const FilterComboBox = ({ onOptionClick }: filterComboBoxProps) => {
                     {({ selected, active }) => (
                       <>
                         <span
-                          id={field.id + ""}
+                          id={field.id}
                           onClick={onOptionClick}
                           className={`block truncate ${
                             selected ? "font-medium" : "font-normal"

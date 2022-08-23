@@ -11,6 +11,7 @@ import net.talaatharb.invoicetracker.models.User;
 import net.talaatharb.invoicetracker.services.FilterUserService;
 
 @RestController
+@CrossOrigin(origins = "*" , maxAge = 3600)
 @RequestMapping("/employees")
 public class FilterUserController {
     private FilterUserService filterUserService;
@@ -24,7 +25,7 @@ public class FilterUserController {
     public ResponseEntity<List<User>> filterEmployees(@RequestParam("type") String type, @RequestParam("values") List<String> values) {
 
 
-        if (type.equals("name")) {
+        if (type.equals("englishName")) {
             return ResponseEntity.ok(filterUserService.filterEmployeeByName(values));
         } else if (type.equals("arabicName")) {
             return ResponseEntity.ok(filterUserService.filterEmployeeByArabicName(values));
@@ -36,11 +37,11 @@ public class FilterUserController {
             List<Long> longList = new ArrayList<Long>();
             for (String s : values) longList.add(Long.valueOf(s));
             return ResponseEntity.ok(filterUserService.filterEmployeeById(longList));
-        } else if (type.equals("balance")) {
+        } else if (type.equals("allowedBalance")) {
             List<Integer> intList = new ArrayList<Integer>();
             for (String s : values) intList.add(Integer.parseInt(s));
             return ResponseEntity.ok(filterUserService.filterEmployeeByBalance(intList));
-        } else if (type.equals("remainBalance")) {
+        } else if (type.equals("remainingBalance")) {
             List<Integer> intList = new ArrayList<Integer>();
             for (String s : values) intList.add(Integer.parseInt(s));
             return ResponseEntity.ok(filterUserService.filterEmployeeByRemainBalance(intList));
