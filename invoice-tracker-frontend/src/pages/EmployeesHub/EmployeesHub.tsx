@@ -115,7 +115,7 @@ const EmployeesHub=()=>{
         remainingBalance: 15,
         billable: true,
         isDisabled: false,
-        team: ["back-end"],
+        team: ["back-end","front-end"],
         fulltime: true
       },
       {id:1,
