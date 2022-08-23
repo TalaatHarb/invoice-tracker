@@ -95,6 +95,8 @@ public class User {
 
 
 	@LazyCollection(LazyCollectionOption.FALSE)
+
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@ManyToMany
 	private List<Team> teams;
 
@@ -119,6 +121,16 @@ public class User {
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
 	private ResetTokenEntity resetToken;
+	
+	public boolean isNotPasswordExpired() {
+		long PASSWORD_EXPIRATION_TIME = 30L * 24L * 60L * 60L * 1000L;
+        if (this.lastTimePasswordChanged == null) return true;
+         
+        long currentTime = System.currentTimeMillis();
+        long lastChangedTime = this.lastTimePasswordChanged.getTime();
+         
+        return currentTime < lastChangedTime + PASSWORD_EXPIRATION_TIME;
+    }
 
 	public User(String username, String email, String encode) {
 		this.username = username;
@@ -133,6 +145,19 @@ public class User {
 		this.isEnabled = isEnabled;
 	}
 
+	public User(String email,String password,String username,
+			Boolean isEnabled, Date lastTimePasswordChanged) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.username = username;
+		this.isEnabled = isEnabled;
+		this.lastTimePasswordChanged = lastTimePasswordChanged;
+		this.username = username;
+	}
+	
+	
+
 
 	public User(String email, String password, Date joiningDate, String mobileNumber, String username) {
 		this.email = email;
@@ -141,5 +166,6 @@ public class User {
 		this.mobileNumber = mobileNumber;
 		this.username = username;
 	}
+
 
 }
