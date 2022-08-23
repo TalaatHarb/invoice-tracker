@@ -29,11 +29,11 @@ public class FilterUserServiceImp implements FilterUserService{
         return userList;
     }
 
-    @Override
-    public List<User> filterEmployeeByTeamName(List<String> teamName) {
-        List<User>userList=filterUserRepository.filterEmployeesByTeamName(teamName);
-        return userList;
-    }
+//    @Override
+//    public List<User> filterEmployeeByTeamName(List<String> teamName) {
+//        List<User>userList=filterUserRepository.filterEmployeesByTeamName(teamName);
+//        return userList;
+//    }
 
     @Override
     public List<User> filterEmployeeByJobTitle(List<String> jobTitle) {
@@ -64,12 +64,12 @@ public class FilterUserServiceImp implements FilterUserService{
         return filterUserRepository.save(user);
     }
 
-    @Override
-    public List<User> getAllEmployeesByTeamName(List<String> teamName) {
-        List<User> employees = new ArrayList<User>();
-        employees.addAll(filterUserRepository.filterEmployeesByTeamName(teamName));
-        return employees;
-    }
+//    @Override
+//    public List<User> getAllEmployeesByTeamName(List<String> teamName) {
+//        List<User> employees = new ArrayList<User>();
+//        employees.addAll(filterUserRepository.filterEmployeesByTeamName(teamName));
+//        return employees;
+//    }
 
     @Override
     public List<User> getAllEmployees() {

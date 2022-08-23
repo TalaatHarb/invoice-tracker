@@ -26,59 +26,59 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-//		@NotBlank
+	//		@NotBlank
 	private String nationalId;
 
-//		@NotBlank
+	//		@NotBlank
 	private String englishName;
 
-//		@NotBlank
+	//		@NotBlank
 	private String arabicName;
-
+	//		@NotBlank
 	private String jobTitle;
 
-		@NotBlank
+	@NotBlank
 	@Size(max = 50)
 	@Email
 	private String email;
 
-		@NotBlank
+	@NotBlank
 	@Size(min = 8, max = 120)
 	private String password;
 
-//		@NotBlank
+	//		@NotBlank
 	private String englishAddress;
 
-//		@NotBlank
+	//		@NotBlank
 	private String arabicAddress;
 
-//		@NotBlank
+	//		@NotBlank
 	private int allowedBalance;
 
-//	@NotBlank
+	//	@NotBlank
 	private int remainingBalance;
 
-//	@NotBlank
+	//	@NotBlank
 	private boolean billable;
 
-//	@NotBlank
+	//	@NotBlank
 	private boolean isDisabled;
 
 	private boolean isResigned;
 
-//	@NotBlank
+	//	@NotBlank
 	private Date joiningDate;
 
 	private Date endDate;
 
-//	@NotBlank
+	//	@NotBlank
 	private Date birthDate;
 
 	private String imgUrl;
 
 	private String mobileNumber;
 
-//	@NotBlank
+	//	@NotBlank
 	private boolean isFullTime;
 
 	private Date insuranceDate;
@@ -93,18 +93,22 @@ public class User {
 
 	private Date lastTimePasswordChanged;
 
+
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@ManyToMany
-	private List<Team> teams = new ArrayList<>();
+	private List<Team> teams;
+
 
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(
-			mappedBy = "reviewedBy",
+
 			cascade= CascadeType.ALL,
 			orphanRemoval = true
 	)
 	private List<Request> requests = new ArrayList<>();
 
-	@ManyToMany(fetch = FetchType.LAZY)
+
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 
@@ -128,4 +132,14 @@ public class User {
 		this.username = username;
 		this.isEnabled = isEnabled;
 	}
+
+
+	public User(String email, String password, Date joiningDate, String mobileNumber, String username) {
+		this.email = email;
+		this.password = password;
+		this.joiningDate = joiningDate;
+		this.mobileNumber = mobileNumber;
+		this.username = username;
+	}
+
 }

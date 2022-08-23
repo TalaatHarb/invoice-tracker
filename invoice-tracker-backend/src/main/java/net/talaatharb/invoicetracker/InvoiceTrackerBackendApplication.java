@@ -23,7 +23,7 @@ public class InvoiceTrackerBackendApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(InvoiceTrackerBackendApplication.class, args);
-		System.out.println("Hello som3a");
+		System.out.println("Hello ahmed123");
 	}
 
 	@Bean

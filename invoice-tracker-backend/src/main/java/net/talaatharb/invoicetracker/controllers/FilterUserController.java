@@ -30,8 +30,8 @@ public class FilterUserController {
             return ResponseEntity.ok(filterUserService.filterEmployeeByArabicName(values));
         } else if (type.equals("jobTitle")) {
             return ResponseEntity.ok(filterUserService.filterEmployeeByJobTitle(values));
-        } else if (type.equals("teamName")) {
-            return ResponseEntity.ok(filterUserService.filterEmployeeByTeamName(values));
+//        } else if (type.equals("teamName")) {
+//            return ResponseEntity.ok(filterUserService.filterEmployeeByTeamName(values));
         } else if (type.equals("id")) {
             List<Long> longList = new ArrayList<Long>();
             for (String s : values) longList.add(Long.valueOf(s));
@@ -52,10 +52,10 @@ public class FilterUserController {
         return filterUserService.createEmployee(employee);
     }
 
-    @GetMapping("/team")
-    public List<User> getAllEmployeesByteam(@RequestParam("type") List<String> TeamName){
-        return filterUserService.getAllEmployeesByTeamName(TeamName);
-    }
+//    @GetMapping("/team")
+//    public List<User> getAllEmployeesByteam(@RequestParam("type") List<String> TeamName){
+//        return filterUserService.getAllEmployeesByTeamName(TeamName);
+//    }
     @GetMapping("/all")
     public List<User> getAllEmployees(){
         return filterUserService.getAllEmployees();
