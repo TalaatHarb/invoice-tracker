@@ -25,7 +25,6 @@ public class RequestController {
 
     @PostMapping("/editRequest")
     public void editRequest(@RequestParam boolean isAccepted, Long reqID) {
-
         requestService.editRequest(isAccepted,reqID);
 
     }
