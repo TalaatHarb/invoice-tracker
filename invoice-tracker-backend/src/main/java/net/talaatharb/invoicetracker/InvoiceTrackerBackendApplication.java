@@ -5,17 +5,17 @@ import static net.talaatharb.invoicetracker.models.ERole.ROLE_EMPLOYEE;
 import static net.talaatharb.invoicetracker.models.ERole.ROLE_HR;
 import static net.talaatharb.invoicetracker.models.ERole.ROLE_USER;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
 import net.talaatharb.invoicetracker.models.Request;
 import net.talaatharb.invoicetracker.models.RequestType;
 import net.talaatharb.invoicetracker.models.Role;
