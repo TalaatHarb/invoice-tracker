@@ -1,6 +1,7 @@
 import { Menu, Transition } from '@headlessui/react'
 import React, { Fragment, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useAppSelector } from '../../hooks/toolkit-types'
 import BellButton from '../Button/BellNotification'
 import Logo from '../company-logo'
 
@@ -16,6 +17,10 @@ import Logo from '../company-logo'
 */
 
 const Navbar = () => {
+  const { userRole } = useAppSelector(
+    (state) => state.AuthenticationSlice
+  );
+
   return (
     <nav className='bg-white border-x-4 border-b-4 border-navbar-border px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900'>
       {/* Container of all the items in the navbar */}

@@ -16,7 +16,7 @@ const AbsenceHistoryAccordionList = () => {
       headers: { Authorization: `Bearer ${isAuthenticated}` },
     };
 
-    let res = await axios.get(`http://localhost:8080/api/request?empId=1`, config);
+    let res = await axios.get(`http://localhost:8080/user/absence/request?empId=1`, config);
 
     setAbsences(res.data);
   };

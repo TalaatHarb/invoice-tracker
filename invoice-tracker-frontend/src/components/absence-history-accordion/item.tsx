@@ -13,13 +13,14 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
             return item.id !== props.record.id});
         props.setItems(items);
     }
-
-    console.log("HEY");
+    
+    console.log(props.record);
+    
     return (
         <>
             <div className="border border-slate-600 flex justify-between">
                 <div className='relative flex items-center py-4 px-5 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none'>
-                    <strong>{props.record.type} {props.record.requestDate.substr(10)}, {props.record.dayType ? "full-day" : "part-day"} </strong>
+                    <strong>{props.record.type} {props.record.requestDate ? props.record.requestDate.substr(0, 10) : "-1"}, {props.record.fullDay ? "full-day" : "part-day"} </strong>
                 </div>
                 <div className = "py-4 px-5">
                     <button>
@@ -46,7 +47,7 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                 <div className='border border-slate-600 items-center py-4 px-5 text-base text-left bg-white rounded-none'>
                     <div className=''>
                         <p><strong>Status: </strong> {props.record.status}</p>
-                        <p><strong>Comments: </strong> {props.record.comment}</p>
+                        <p><strong>Comment: </strong> {props.record.comments ? props.record.comments : "No comment."}</p>
                         <p><strong>Attachment: </strong> {props.record.attachmentUrl ? <a href={props.record.attachmentUrl} className="text-blueCegedim" target="_blank" rel='noreferrer'> {props.record.attachmentName}</a> : "No Attachment"}</p>
                         <p><strong>No. of days requested: </strong> {props.record.numberOfDays}</p>
                         <p><strong>Start Date: </strong> {props.record.startDate.substr(0, 10)}</p>

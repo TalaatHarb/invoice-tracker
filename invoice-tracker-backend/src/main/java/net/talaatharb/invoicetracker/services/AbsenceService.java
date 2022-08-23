@@ -1,11 +1,13 @@
 package net.talaatharb.invoicetracker.services;
 
-import net.talaatharb.invoicetracker.models.Request;
-import net.talaatharb.invoicetracker.repositories.RequestRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import net.talaatharb.invoicetracker.models.Request;
+import net.talaatharb.invoicetracker.repositories.RequestRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class AbsenceService {
@@ -14,5 +16,10 @@ public class AbsenceService {
 
     public List<Request> getAllAbsenceByEmployeeId(Long empId) {
         return absenceRepository.findAllByRequestedBy(empId);
+    }
+
+    public List<Request> postRequest(Request request){
+        absenceRepository.save(request);
+        return absenceRepository.findAll();
     }
 }
