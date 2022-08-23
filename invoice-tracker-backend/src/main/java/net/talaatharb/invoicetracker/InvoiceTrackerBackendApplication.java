@@ -5,25 +5,32 @@ import static net.talaatharb.invoicetracker.models.ERole.ROLE_EMPLOYEE;
 import static net.talaatharb.invoicetracker.models.ERole.ROLE_HR;
 import static net.talaatharb.invoicetracker.models.ERole.ROLE_USER;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import net.talaatharb.invoicetracker.models.Request;
-import net.talaatharb.invoicetracker.models.RequestType;
-import net.talaatharb.invoicetracker.models.Role;
-import net.talaatharb.invoicetracker.models.User;
+
+import net.talaatharb.invoicetracker.models.*;
+import net.talaatharb.invoicetracker.services.ExcelHelper;
 import net.talaatharb.invoicetracker.services.UserService;
 
 @SpringBootApplication
 public class InvoiceTrackerBackendApplication {
+
+   // add three teams in db
+	@Autowired
+	private final ExcelHelper excelHelper;
+
+	public InvoiceTrackerBackendApplication(ExcelHelper excelHelper) {
+		this.excelHelper = excelHelper;
+	}
 
 	private static final String EMAIL_ADMIN_USER = "boogado2@yahoo.com";
 	private static final String EMAIL_EMPLOYEE = "boogado@yahoo.com";
@@ -33,7 +40,7 @@ public class InvoiceTrackerBackendApplication {
 
 	private static final String EMAIL_EMPLOYEE_2 = "boogado5@yahoo.com";
 
-	public static final String PASS_USER = "awad36148";
+		public static final String PASS_USER = "awad36148";
 	
 	private static final Boolean IS_ENABLED = true;
 	private static final Date PASSWORD_EXPIRY_DATE = new GregorianCalendar(2022,Calendar.AUGUST,11).getTime();
@@ -88,6 +95,11 @@ public class InvoiceTrackerBackendApplication {
 			userService.saveRequest(l,"sickness",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
 			userService.saveRequest(l,"vacation",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
 			userService.saveRequest(l,"troll",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
+
+
+
+			// add three teams in db
+//			excelHelper.addteams();
 
 		};
 	}

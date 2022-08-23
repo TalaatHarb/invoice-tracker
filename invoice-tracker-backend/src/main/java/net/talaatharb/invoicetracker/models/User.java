@@ -3,8 +3,6 @@ package net.talaatharb.invoicetracker.models;
 import java.util.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.LazyCollection;
@@ -35,12 +33,12 @@ public class User {
 //		@NotBlank
 	private String arabicName;
 
-		@NotBlank
+//		@NotBlank
 	@Size(max = 50)
-	@Email
+//	@Email
 	private String email;
 
-		@NotBlank
+//		@NotBlank
 	@Size(min = 8, max = 120)
 	private String password;
 
@@ -91,6 +89,8 @@ public class User {
 
 	private Date lastTimePasswordChanged;
 
+    private String jopTitle;
+	private Long userId;
 
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@ManyToMany
@@ -110,7 +110,7 @@ public class User {
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 
-	@NotBlank
+//	@NotBlank
 	@Size(max = 20)
 	private String username;
 
@@ -162,6 +162,7 @@ public class User {
 		this.mobileNumber = mobileNumber;
 		this.username = username;
 	}
+
 
 
 }

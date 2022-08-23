@@ -11,6 +11,8 @@ import Navbar from './components/Navbar'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import ForgotPassword from './pages/password/ForgotPassword'
 import ResetPassword from './pages/password/ResetPassword'
+import Employee_Add from './components/add-employee/Employee_Add'
+import PopUpStart from './components/import-excel/PopUpStart'
 
 function App() {
   const { isAuthenticated } = useAppSelector(
@@ -20,8 +22,15 @@ function App() {
     <BrowserRouter>
       <Routes>
 
+      <Route path='/add' element={<Employee_Add />} />
+      <Route path='/import' element={<PopUpStart />} />
+
+
         {!isAuthenticated && <Route path='/login' element={<Login />} />}
         {/* protected user page */}
+        
+      
+
         <Route path='/user' element={<PrivateRoute />}>
           <Route path='/user' element={<UserPage />} />
           </Route>
@@ -47,6 +56,7 @@ function App() {
         {/* protected employee page */}
         <Route path='/employee' element={<PrivateRoute />}>
           <Route path='/employee' element={<EmployeePage />} />
+        
         </Route>
         {isAuthenticated ? (
 

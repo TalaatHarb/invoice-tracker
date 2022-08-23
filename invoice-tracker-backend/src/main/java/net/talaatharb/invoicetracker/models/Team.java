@@ -3,6 +3,7 @@ package net.talaatharb.invoicetracker.models;
 import java.util.List;
 
 import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,4 +28,14 @@ public class Team {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "employee_teams", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "team_id"))
     private List<User> employees;
+
+    public Team(String name) {
+        this.name = name;
+    }
+
+    public Team(String name, Company company, List<User> employees) {
+        this.name = name;
+        this.company = company;
+        this.employees = employees;
+    }
 }

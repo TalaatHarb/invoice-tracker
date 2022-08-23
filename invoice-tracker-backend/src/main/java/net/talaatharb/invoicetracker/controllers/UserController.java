@@ -2,13 +2,19 @@ package net.talaatharb.invoicetracker.controllers;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import lombok.RequiredArgsConstructor;
+import net.talaatharb.invoicetracker.dtos.UserDto;
+import net.talaatharb.invoicetracker.exceptions.ExcelResponseMessage;
 import net.talaatharb.invoicetracker.models.Role;
 import net.talaatharb.invoicetracker.models.User;
+import net.talaatharb.invoicetracker.repositories.UserRepository;
 import net.talaatharb.invoicetracker.services.UserService;
 
 @RestController
@@ -18,6 +24,11 @@ import net.talaatharb.invoicetracker.services.UserService;
 public class UserController {
 
     private final UserService userService;
+
+    private  final UserRepository userRepository;
+
+
+ 
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getUsers() {
@@ -39,6 +50,37 @@ public class UserController {
     public ResponseEntity<Role>saveRole(@RequestBody Role role) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveRole(role));
+    }
+
+
+    // add employee apdo
+    @PostMapping(path = "/employee/add")
+    public ResponseEntity<ExcelResponseMessage> Add_Employee(@RequestBody UserDto employee)
+    {
+        String message = "";
+
+        try {
+            Optional<User> test_user = userRepository.findByUserId(employee.getUserId());
+            if(!test_user.isPresent()) {
+
+                userService.SaveEmployee(employee);
+                message = "User Saved successfully ";
+                return ResponseEntity.status(HttpStatus.OK).body(new ExcelResponseMessage(message));
+            }else{
+                message = "User ID already taken ! ";
+                return ResponseEntity.status(HttpStatus.OK).body(new ExcelResponseMessage(message));
+
+            }
+        } catch (Exception e) {
+            message = "Faild to Save User !";
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ExcelResponseMessage(message));
+        }
+
+    }
+
+    @GetMapping("/show")
+    public String getUser(){
+        return "hello apdo";
     }
 
 }
