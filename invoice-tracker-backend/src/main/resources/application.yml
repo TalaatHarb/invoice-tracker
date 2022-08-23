@@ -8,7 +8,7 @@ spring:
 
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/employeedb
+    url: jdbc:mysql://localhost:3306/othercode
     username: root
     password: my-secret-pw
 

@@ -5,15 +5,15 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import net.talaatharb.invoicetracker.dtos.managerRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import lombok.AllArgsConstructor;
 import net.talaatharb.invoicetracker.models.Request;
 import net.talaatharb.invoicetracker.models.User;
 import net.talaatharb.invoicetracker.repositories.RequestRepository;
 import net.talaatharb.invoicetracker.repositories.UserRepository;
-import net.talaatharb.invoicetracker.response.managerRequest;
+
 
 @Service
 @AllArgsConstructor
