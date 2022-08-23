@@ -3,6 +3,7 @@ package net.talaatharb.invoicetracker.services;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import net.talaatharb.invoicetracker.models.User;
+
+import javax.persistence.Column;
 
 public class UserDetailsImpl implements UserDetails {
 	private static final long serialVersionUID = 1L;
@@ -32,8 +35,9 @@ public class UserDetailsImpl implements UserDetails {
 	private String password;
 
 	private String username;
-	
-	private Boolean isEnabled;
+
+
+	private Boolean isEnabled = true;
     
 	private Boolean isCredentialsNonExpired;
 
@@ -111,6 +115,8 @@ public class UserDetailsImpl implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
+		if(isEnabled==null)
+			return true;
 		return isEnabled;
 	}
 }
