@@ -11,7 +11,7 @@ const EmployeesHub = () => {
   const isAuthenticated: any = useAppSelector(
     (state) => state.AuthenticationSlice.isAuthenticated
   );
-  const allEmployeeDataUrl = "http://localhost:8080/employee/all";
+  const allEmployeeDataUrl = "http://localhost:8080/api/users";
   const [employeeData, setEmployeeData] = useState<employeeType[]>([
     {
       id: 1,
@@ -86,7 +86,7 @@ const EmployeesHub = () => {
         break;
     }
     const id = event.target.id;
-    const filterQueryUrl = `http://localhost:8080/employees/filter?type=${currentField}&values=${value}`;
+    const filterQueryUrl = `http://localhost:8080/api/users/filter?type=${currentField}&values=${value}`;
     if (id == "apply") {
       await axios
         .get(filterQueryUrl, {

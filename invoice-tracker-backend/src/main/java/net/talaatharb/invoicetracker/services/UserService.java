@@ -11,9 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
-import net.talaatharb.invoicetracker.models.*;
 import net.talaatharb.invoicetracker.dtos.TeamDetails;
 import net.talaatharb.invoicetracker.dtos.UserDetails;
+import net.talaatharb.invoicetracker.models.*;
 import net.talaatharb.invoicetracker.models.ERole;
 import net.talaatharb.invoicetracker.models.Role;
 import net.talaatharb.invoicetracker.models.Team;

@@ -95,8 +95,6 @@ public class User {
 
 
 	@LazyCollection(LazyCollectionOption.FALSE)
-
-	@LazyCollection(LazyCollectionOption.FALSE)
 	@ManyToMany
 	private List<Team> teams;
 
