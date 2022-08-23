@@ -5,6 +5,7 @@ import UserPage from './pages/UserPage'
 import HrPage from './pages/HrPage'
 import EmployeePage from './pages/EmployeePage'
 import EmployeePrivateRoute from './components/EmployeePrivateRoute'
+import ManagerPrivateRoute from './components/ManagerPrivateRoute'
 import { useAppSelector } from './hooks/toolkit-types'
 import AbsenceHistoryAccordionList from './components/absence-history-accordion/absence-history-accordion-list'
 import Navbar from './components/Navbar'
@@ -39,7 +40,7 @@ function App() {
           <Route path='/hr' element={<HrPage />} />
         </Route>
         {/* protected admin page */}
-        <Route path='/admin' element={<EmployeePrivateRoute />}>
+        <Route path='/admin' element={<ManagerPrivateRoute />}>
           <Route path='/admin' element={<AdminPage />} />
         </Route>
         {/* protected employee page */}
