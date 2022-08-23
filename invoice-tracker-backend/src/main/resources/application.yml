@@ -1,24 +1,16 @@
 spring:
-  properties:
-    hibernate:
-      dialect: org.hibernate.dialect.PostgreSQLDialect
-
   jpa:
-#    database: mysql
+    database: mysql
     open-in-view: false
     hibernate.ddl-auto: create-drop
     generate-ddl: true
     show-sql: false
 
   datasource:
-      driverClassName: ${DB_DRIVER}
-      url: ${DB_HOST}
-      username: ${DB_USER}
-      password: ${DB_PASSWORD}
-#    driverClassName: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/employeedb
-#    username: root
-#    password: awad36148
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/employeedb
+    username: root
+    password: awad36148
 
   mail:
     host: ${MAIL_HOST}
