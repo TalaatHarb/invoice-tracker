@@ -12,8 +12,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import net.talaatharb.invoicetracker.models.User;
 
-import javax.persistence.Column;
-
 public class UserDetailsImpl implements UserDetails {
 	private static final long serialVersionUID = 1L;
 

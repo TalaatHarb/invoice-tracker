@@ -9,24 +9,25 @@ interface AuthenticationState {
   isAuthenticated: string | null
   userRole: string[] | null
   isLoading: boolean
-  ID:String
+  ID: number | null
 }
 
 const initialState: AuthenticationState = {
   error: undefined,
   isAuthenticated: cookies.get('token') || null,
-  userRole: [],
+  userRole: localStorage.getItem('userRole')
+    ? JSON.parse(localStorage.getItem('userRole') || '')
+    : null,
+  ID: localStorage.getItem('ID')
+    ? JSON.parse(localStorage.getItem('ID') || '')
+    : null,
   isLoading: false,
-  ID:"",
 }
-
-
 
 export const loginUser = createAsyncThunk(
   'authentication/loginUser',
   async (credentials: any, { rejectWithValue }) => {
     try {
-
       const response = await axios.post(
         `${CONSTANTS.BACKEND_URL}/api/auth/login`,
         credentials,
@@ -52,14 +53,16 @@ const AuthenticationSlice = createSlice({
   reducers: {
     logoutUser: (state) => {
       cookies.remove('token')
+      localStorage.removeItem('userRoles')
+      localStorage.removeItem('ID')
       state.isAuthenticated = null
       state.userRole = null
       state.error = undefined
       state.isLoading = false
     },
-    getID:(state, action)=>{
-      state.ID=action.payload
-    }
+    getID: (state, action) => {
+      state.ID = action.payload
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(loginUser.pending, (state, action) => {
@@ -70,6 +73,8 @@ const AuthenticationSlice = createSlice({
     builder.addCase(loginUser.fulfilled, (state, action) => {
       state.isAuthenticated = action.payload.token
       state.userRole = action.payload.roles
+      localStorage.setItem('userRoles', JSON.stringify(action.payload.roles))
+      localStorage.setItem('ID', JSON.stringify(action.payload.id))
       state.error = undefined
       cookies.set('token', action.payload.token, {
         path: '/',
@@ -88,5 +93,5 @@ const AuthenticationSlice = createSlice({
   },
 })
 
-export const { logoutUser ,getID } = AuthenticationSlice.actions
+export const { logoutUser, getID } = AuthenticationSlice.actions
 export default AuthenticationSlice.reducer
