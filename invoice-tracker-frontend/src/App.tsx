@@ -11,7 +11,8 @@ import Navbar from './components/Navbar'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import ForgotPassword from './pages/password/ForgotPassword'
 import ResetPassword from './pages/password/ResetPassword'
-
+import RequestList from './pages/RequestList/RequestList'
+import EditRequest from './pages/EditRequest'
 function App() {
   const { isAuthenticated } = useAppSelector(
     (state) => state.AuthenticationSlice
@@ -20,7 +21,8 @@ function App() {
     <BrowserRouter>
       <Routes>
 
-        {!isAuthenticated && <Route path='/login' element={<Login />} />}
+
+        {!isAuthenticated && <Route path='/login' element={<RequestList />} />}
         {/* protected user page */}
         <Route path='/user' element={<PrivateRoute />}>
           <Route path='/user' element={<UserPage />} />
@@ -29,7 +31,14 @@ function App() {
          {/* reset password routes */}
          <Route path="/forgot-password" element={<ForgotPassword/>} />
         <Route path="/reset-password/:resetToken" element={<ResetPassword />}/>
+  {/* protected requst page */}
 
+        <Route path='/edit' element={<PrivateRoute />}>
+          <Route path='/edit' element={<EditRequest />} />
+        </Route>
+        <Route path='/requestList' element={<PrivateRoute />}>
+          <Route path='/requestList' element={<RequestList />} />
+        </Route>
         {!isAuthenticated && <Route path='/login' element={<Login />} />}
         <Route path='page1' element={<Navbar />} />
         <Route path='page2' element={<AbsenceHistoryAccordionList />} />
