@@ -14,12 +14,12 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
         props.setItems(items);
     }
 
-    
+    console.log("HEY");
     return (
         <>
             <div className="border border-slate-600 flex justify-between">
                 <div className='relative flex items-center py-4 px-5 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none'>
-                    <strong>{props.record.absenceType} {props.record.Date}, {props.record.dayType} </strong>
+                    <strong>{props.record.type} {props.record.requestDate.substr(10)}, {props.record.dayType ? "full-day" : "part-day"} </strong>
                 </div>
                 <div className = "py-4 px-5">
                     <button>
@@ -45,13 +45,14 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
             {isOpen&&
                 <div className='border border-slate-600 items-center py-4 px-5 text-base text-left bg-white rounded-none'>
                     <div className=''>
+                        <p><strong>Status: </strong> {props.record.status}</p>
                         <p><strong>Comments: </strong> {props.record.comment}</p>
-                        <p><strong>Attachment: </strong> {props.record.Attachment !== "" ? <a href={props.record.Attachment} className="text-blueCegedim" target="_blank" rel='noreferrer'> Click Here to Download</a> : "No Attachment"}</p>
-                        <p><strong>No. of days requested: </strong> {props.record.numberOfDaysRequested}</p>
-                        <p><strong>Start Date: </strong> {props.record.startDate}</p>
-                        <p><strong>End Date: </strong> {props.record.endDate}</p>
+                        <p><strong>Attachment: </strong> {props.record.attachmentUrl ? <a href={props.record.attachmentUrl} className="text-blueCegedim" target="_blank" rel='noreferrer'> {props.record.attachmentName}</a> : "No Attachment"}</p>
+                        <p><strong>No. of days requested: </strong> {props.record.numberOfDays}</p>
+                        <p><strong>Start Date: </strong> {props.record.startDate.substr(0, 10)}</p>
+                        <p><strong>End Date: </strong> {props.record.endDate.substr(0, 10)}</p>
                     </div>
-                </div>                
+                </div>
             }
         </>
     )

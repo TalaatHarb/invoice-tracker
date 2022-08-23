@@ -6,11 +6,11 @@ import HrPage from './pages/HrPage'
 import EmployeePage from './pages/EmployeePage'
 import PrivateRoute from './components/PrivateRoute'
 import { useAppSelector } from './hooks/toolkit-types'
-import AbsenceHistoryAccordionList from './components/absence-history-accordion/absence-history-accordion-list'
 import Navbar from './components/Navbar'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import ForgotPassword from './pages/password/ForgotPassword'
 import ResetPassword from './pages/password/ResetPassword'
+import AbsenceHistory from './pages/AbsenceHistory'
 
 function App() {
   const { isAuthenticated } = useAppSelector(
@@ -19,7 +19,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-
+        <Route path='/absencehistory' element={<AbsenceHistory />}/>
+        
         {!isAuthenticated && <Route path='/login' element={<Login />} />}
         {/* protected user page */}
         <Route path='/user' element={<PrivateRoute />}>
@@ -32,7 +33,6 @@ function App() {
 
         {!isAuthenticated && <Route path='/login' element={<Login />} />}
         <Route path='page1' element={<Navbar />} />
-        <Route path='page2' element={<AbsenceHistoryAccordionList />} />
 
         {/* protected user page */}
 

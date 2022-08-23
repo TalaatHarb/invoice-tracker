@@ -1,4 +1,3 @@
-
 import { Menu, Transition } from '@headlessui/react'
 import React, { Fragment, useState } from 'react'
 import { Link } from 'react-router-dom'
@@ -67,18 +66,10 @@ const Navbar = () => {
                 <Menu.Items className='origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'>
                   <Menu.Item>
                     <Link
-                      to='#'
+                      to='/employee'
                       className='block px-4 py-2 text-sm text-gray-700'
                     >
                       Your Profile
-                    </Link>
-                  </Menu.Item>
-                  <Menu.Item>
-                    <Link
-                      to='#'
-                      className='block px-4 py-2 text-sm text-gray-700'
-                    >
-                      Settings
                     </Link>
                   </Menu.Item>
                   <Menu.Item>
