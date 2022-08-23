@@ -30,7 +30,6 @@ function App() {
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/reset-password/:resetToken' element={<ResetPassword />} />
 
-        {!isAuthenticated && <Route path='/login' element={<Login />} />}
         <Route path='page1' element={<Navbar />} />
         <Route path='page2' element={<AbsenceHistoryAccordionList />} />
 
