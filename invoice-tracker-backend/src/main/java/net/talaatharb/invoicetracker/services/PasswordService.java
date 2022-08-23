@@ -1,12 +1,5 @@
 package net.talaatharb.invoicetracker.services;
 
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-
 import net.bytebuddy.utility.RandomString;
 import net.talaatharb.invoicetracker.exceptions.UserException;
 import net.talaatharb.invoicetracker.models.ResetTokenEntity;
@@ -14,6 +7,13 @@ import net.talaatharb.invoicetracker.models.User;
 import net.talaatharb.invoicetracker.repositories.ResetTokenRepository;
 import net.talaatharb.invoicetracker.repositories.UserRepository;
 import net.talaatharb.invoicetracker.utils.RegexHelper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
 public class PasswordService {
@@ -32,9 +32,14 @@ public class PasswordService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    public void deleteUserToken(Long uid){
+        resetTokenRepo.deleteById(uid);
+    }
+
+    @Transactional
     public void sendResetLink(String email) {
         // email validation
-        if(!RegexHelper.testWithPattern(RegexHelper.emailPattern, email)){
+        if(email == null || !RegexHelper.testWithPattern(RegexHelper.emailPattern, email)){
             return;
 //            throw new UserException("Something went wrong");
         }
@@ -53,28 +58,27 @@ public class PasswordService {
         }
 
         User userReturned = userReturnedOptional.get();
-        Optional<ResetTokenEntity> resetTokenReturnedOptional = resetTokenRepo.findByUserId(userReturned.getId());
-
         ResetTokenEntity resetToken = new ResetTokenEntity();
         resetToken.setResetToken(token);
         resetToken.setExpTimeStamp(System.currentTimeMillis() + FIVE_MINUTES);
         resetToken.setUser(userReturned);
 
-        if(resetTokenReturnedOptional.isPresent()){
-            userReturned.setResetToken(null);
-            resetTokenRepo.deleteById(userReturned.getId());
+        if(userReturned.getResetToken() == null){
+            userReturned.setResetToken(resetToken);
+        }else{
+            userReturned.getResetToken().setExpTimeStamp(System.currentTimeMillis() + FIVE_MINUTES);
+            userReturned.getResetToken().setResetToken(token);
         }
-
-        resetTokenRepo.save(resetToken);
         mailService.sendMail(email, mailSubject, mailBody);
     }
 
+    @Transactional
     public void resetPassword(String resetToken, String newPassword) {
 
         UserException somethingWentWrong = new UserException("something went wrong");
 
         // token and password validation
-        if(resetToken == null || !RegexHelper.testWithPattern(RegexHelper.noSpecialCharsRegex,resetToken) || newPassword != null || !RegexHelper.testWithPattern(RegexHelper.passwordPattern, newPassword)){
+        if(resetToken == null || !RegexHelper.testWithPattern(RegexHelper.noSpecialCharsRegex,resetToken) || newPassword == null || !RegexHelper.testWithPattern(RegexHelper.passwordPattern, newPassword)){
             throw somethingWentWrong;
         }
 
@@ -96,9 +100,7 @@ public class PasswordService {
         String hashedPassword = passwordEncoder.encode(newPassword);
 
         userReturned.setPassword(hashedPassword);
-        userRepo.save(userReturned);
-
         userReturned.setResetToken(null);
-        resetTokenRepo.deleteById(resetTokenReturned.getId());
+        userRepo.save(userReturned);
     }
 }

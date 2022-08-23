@@ -72,7 +72,7 @@ function ResetToken(){
                 <div className="mb-4">
                     <input type="password" className={"shadow appearance-none border rounded w-full h-12 py-2 px-3 text-gray-700 leading-tight focus:border focus:outline-none focus:border-blueCegedim focus:shadow-outline" + (passwordInvalid ? " border-1 border-red" : "")} placeholder="Enter New Password" autoFocus
                     value = {password} onChange = {handlePasswordChange}/>
-                    <p className={"text-red text-xs" + (!passwordInvalid ? " hidden" : "")}> &gt; 12 characters, 1 uppercase, 1 number or special character</p>
+                    <p className={"text-red text-xs" + (!passwordInvalid ? " hidden" : "")}> &gt; 8 , 1 uppercase, 1 number and 1 special character</p>
                 </div>
                 <div className="mb-4">
                     <input type="password" className={"shadow appearance-none border rounded w-full h-12 py-2 px-3 text-gray-700 leading-tight focus:border focus:outline-none focus:border-blueCegedim focus:shadow-outline" + (rPasswordInvalid ? " border-1 border-red" : "")} placeholder="Confirm Password" 

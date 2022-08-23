@@ -1,4 +1,4 @@
-//package net.talaatharb.invoicetracker.models;
+package net.talaatharb.invoicetracker.models;//package net.talaatharb.invoicetracker.models;
 //
 //import java.util.HashSet;
 //

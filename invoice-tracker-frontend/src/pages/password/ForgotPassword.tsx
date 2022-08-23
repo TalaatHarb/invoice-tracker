@@ -5,31 +5,31 @@ import { emailRegex, ERROR, SERVER } from "../../utils/config";
 import { FetchFacad } from "../../utils/FetchFacad";
 import { IForgotPasswordBody, IMessageBar, MessageBar } from "../../utils/types";
 
+function ForgotPassword() {
+  const [email, setEmail] = useState('')
 
-function ForgotPassword(){
-    const [email, setEmail] = useState("");
+  const [isInvalid, setIsInvalid] = useState(false)
 
-    const [isInvalid, setIsInvalid] = useState(false);
+  const [errMessage, setErrMessage] = useState(
+    new MessageBar(ERROR, 'Please Enter a Valid Email')
+  )
 
-    const [errMessage, setErrMessage] = useState(new MessageBar(ERROR, "Please Enter a Valid Email"));
+  const handleEmailChange = (ev: any) => {
+    setEmail(ev.target.value)
+  }
 
-
-    const handleEmailChange = (ev:any)=> {
-        setEmail(ev.target.value);
+  // email validation: contains "@" , "." and multible characters within them.
+  const handleSubmitClick = async (e: any) => {
+    e.preventDefault()
+    if (!emailRegex.test(email)) {
+      setErrMessage(new MessageBar(ERROR, 'Please Enter a Valid Email'))
+      !isInvalid && setIsInvalid(true)
+      return
     }
 
-    // email validation: contains "@" , "." and multible characters within them.
-    const handleSubmitClick = async (e:any)=>{
-        e.preventDefault();
-        if(!emailRegex.test(email)){
-            setErrMessage(new MessageBar(ERROR, "Please Enter a Valid Email"))
-            !isInvalid && setIsInvalid(true);
-            return;
-        }
+    isInvalid && setIsInvalid(false)
 
-        isInvalid && setIsInvalid(false);
-
-        const fetchFacad = FetchFacad.getFetchFacad();
+    const fetchFacad = FetchFacad.getFetchFacad()
         
         try{
             const result = await fetchFacad.postData<IForgotPasswordBody, IMessageBar>(`${SERVER}/password/forgot`, {email: email});
@@ -71,11 +71,11 @@ function ForgotPassword(){
                     <input type="submit" className="transition-colors bg-blueCegedim w-full h-12 hover:bg-darkBlue text-white font-bold text-lg py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer" value="Send Me Email" />
                 </div>
                 <br/>
-                <Link to="/login" className="text-darkBlue hover:text-blueCegedim transition-colors font-semibold text-right">Go Back</Link>
-            </form>
-        </div>
-
-    )
+                <Link to="/login" className="text-darkBlue hover:text-blueCegedim transition-colors font-semibold text-right">Back To Login</Link>
+        {/* <a href="/home">Go Back</a> */}
+      </form>
+    </div>
+  )
 }
 
-export default ForgotPassword;
+export default ForgotPassword
