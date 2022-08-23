@@ -1,16 +1,18 @@
 package net.talaatharb.invoicetracker.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import java.util.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.*;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
@@ -89,19 +91,22 @@ public class User {
 
 	private Date lastTimePasswordChanged;
 
+
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@ManyToMany
 	private List<Team> teams;
 
 
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(
-			mappedBy = "reviewedBy",
+
 			cascade= CascadeType.ALL,
 			orphanRemoval = true
 	)
 	private List<Request> requests = new ArrayList<>();
 
-	@ManyToMany(fetch = FetchType.LAZY)
+
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 
@@ -112,6 +117,16 @@ public class User {
 	@OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
 	@PrimaryKeyJoinColumn
 	private ResetTokenEntity resetToken;
+	
+	public boolean isNotPasswordExpired() {
+		long PASSWORD_EXPIRATION_TIME = 30L * 24L * 60L * 60L * 1000L;
+        if (this.lastTimePasswordChanged == null) return true;
+         
+        long currentTime = System.currentTimeMillis();
+        long lastChangedTime = this.lastTimePasswordChanged.getTime();
+         
+        return currentTime < lastChangedTime + PASSWORD_EXPIRATION_TIME;
+    }
 
 	public User(String username, String email, String encode) {
 		this.username = username;
@@ -125,4 +140,28 @@ public class User {
 		this.username = username;
 		this.isEnabled = isEnabled;
 	}
+
+	public User(String email,String password,String username,
+			Boolean isEnabled, Date lastTimePasswordChanged) {
+		super();
+		this.email = email;
+		this.password = password;
+		this.username = username;
+		this.isEnabled = isEnabled;
+		this.lastTimePasswordChanged = lastTimePasswordChanged;
+		this.username = username;
+	}
+	
+	
+
+
+	public User(String email, String password, Date joiningDate, String mobileNumber, String username) {
+		this.email = email;
+		this.password = password;
+		this.joiningDate = joiningDate;
+		this.mobileNumber = mobileNumber;
+		this.username = username;
+	}
+
+
 }
