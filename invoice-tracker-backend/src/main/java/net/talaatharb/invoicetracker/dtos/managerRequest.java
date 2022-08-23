@@ -1,4 +1,4 @@
-package net.talaatharb.invoicetracker.response;
+package net.talaatharb.invoicetracker.dtos;
 
 import net.talaatharb.invoicetracker.models.Request;
 
