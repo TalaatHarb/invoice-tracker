@@ -53,7 +53,7 @@ public class FilterUserController {
     }
 
     @GetMapping("/team")
-    public List<User> getAllEmployeesByteam(@RequestParam("type") List<String> TeamName){
+    public List<User> getAllEmployeesByTeam(@RequestParam("type") List<String> TeamName){
         return filterUserService.getAllEmployeesByTeamName(TeamName);
     }
     @GetMapping("/all")
