@@ -34,7 +34,7 @@ public class Request {
     private String type;
     private boolean isFullDay;
     private String comments;
-    private String status="pending";
+    private String status="Pending";
 
     private String attachmentName;
 

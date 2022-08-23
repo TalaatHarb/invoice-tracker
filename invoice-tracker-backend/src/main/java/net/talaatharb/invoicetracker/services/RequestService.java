@@ -32,9 +32,12 @@ public class RequestService {
        List <Request> requests= requestRepository.findAll();
         List<managerRequest> result  =new ArrayList<>();
        for(int i=0;i<requests.size();i++){
-           Long ID=requests.get(i).getRequestedBy();
-           User user =userRepository.findById(ID).get();
-           result.add(new managerRequest(user.getUsername(),requests.get(i)));
+           Request request=requests.get(i);
+           if(request.getStatus().equals("Pending")) {
+               Long ID = request.getRequestedBy();
+               User user = userRepository.findById(ID).get();
+               result.add(new managerRequest(user.getUsername(), request));
+           }
 
 
        }
