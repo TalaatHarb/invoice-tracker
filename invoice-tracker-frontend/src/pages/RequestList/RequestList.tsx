@@ -4,9 +4,16 @@ import EmployeeTable from "../../components/requestTable/EmployeeTable";
 import FilterComboBox from "../../components/employees-hub/FilterComboBox";
 import Navbar from  "../../components/Navbar/admin-nav-bar";
 import { FetchFacad } from "../../utils/FetchFacad";
+import { useAppSelector } from "../../hooks/toolkit-types";
+import axios from "axios";
+
+
+   
 
 const RequestList=()=>{
-
+    const isAuthenticated: any = useAppSelector(
+        (state) => state.AuthenticationSlice.isAuthenticated
+      );
     const employees = [
         {id:1,
         englishName: "Mohamed",
@@ -43,10 +50,20 @@ const RequestList=()=>{
 
     const allEmployeeDataUrl = "http://localhost:8080/Requests/LeaveRequests";
     const fetchFacad = new FetchFacad();
+   
         useEffect(() => {
-          const response = fetchFacad.getData(allEmployeeDataUrl);
-          setRequestData(response);
-        }, []);
+            const getData = async () => {
+              await axios
+                .get(allEmployeeDataUrl, {
+                  headers: { Authorization: `Bearer ${isAuthenticated}` },
+                })
+                .then((response) => {
+                    setRequestData(response.data);
+                });
+            };
+            getData();
+          }, []);
+        
     return   <>
      <Navbar/>
     <div className="flex flex-col min-h-screen bg-lightGrey bg-opacity-20 items-center">
