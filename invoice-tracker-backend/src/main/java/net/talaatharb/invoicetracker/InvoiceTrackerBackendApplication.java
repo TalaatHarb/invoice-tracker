@@ -84,10 +84,10 @@ public class InvoiceTrackerBackendApplication {
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
 			long l=1;
-			userService.saveRequest(l,"sickness",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
-			userService.saveRequest(l,"sickness",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
-			userService.saveRequest(l,"vacation",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
-			userService.saveRequest(l,"troll",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
+			userService.saveRequest(l,"sickness",new Request(("2018-09-09"),("2018-09-09")));
+			userService.saveRequest(l,"sickness",new Request(("2018-09-09"),("2018-09-09")));
+			userService.saveRequest(l,"vacation",new Request(("2018-09-09"),("2018-09-09")));
+			userService.saveRequest(l,"troll",new Request(("2018-09-09"),("2018-09-09")));
 
 		};
 	}

@@ -1,7 +1,5 @@
 package net.talaatharb.invoicetracker.models;
 
-import java.util.Date;
-
 import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -19,13 +17,13 @@ public class Request {
     private Long id;
 
 //    @NotBlank
-    private Date startDate;
+    private String startDate;
 
 //    @NotBlank
-    private Date requestDate;
+    private String requestDate;
 
 //    @NotBlank
-    private Date endDate;
+    private String endDate;
 
 //    @NotBlank
     private Long requestedBy;
@@ -40,7 +38,7 @@ public class Request {
 //    @NotBlank
     private boolean isFullDay;
 
-    private String comments;
+    private String comment;
 
 //    @NotBlank
     private String status="pending";
@@ -53,7 +51,7 @@ public class Request {
     private int numberOfDays;
 
 
-    public Request(Date startDate, Date endDate) {
+    public Request(String startDate, String endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
 

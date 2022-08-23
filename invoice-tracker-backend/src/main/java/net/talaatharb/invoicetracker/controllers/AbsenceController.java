@@ -14,13 +14,13 @@ import net.talaatharb.invoicetracker.services.AbsenceService;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("user/absence")
+@RequestMapping("api/user/absence")
 @CrossOrigin(origins = "*")
 public class AbsenceController {
     @Autowired
     private AbsenceService absenceService;
 
-    // http://localhost:8080/user/absence
+    // http://localhost:8080/api/user/absence
     @PostMapping(consumes = {
             MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE },
