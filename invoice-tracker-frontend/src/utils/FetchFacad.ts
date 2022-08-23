@@ -1,7 +1,10 @@
 // handling get and post requests
 
-
-export class FetchFacad{
+// async function som3aFunc(){
+//   const x=  await FetchFacad.getFetchFacad().getData<any>("httlsdjflkjsdf.com")
+    
+// }
+    export class FetchFacad{
     private static fetchFacad:FetchFacad|null;
 
     public static getFetchFacad(){
