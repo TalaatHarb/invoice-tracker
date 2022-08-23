@@ -15,8 +15,8 @@ interface AuthenticationState {
 const initialState: AuthenticationState = {
   error: undefined,
   isAuthenticated: cookies.get('token') || null,
-  userRole: localStorage.getItem('userRole')
-    ? JSON.parse(localStorage.getItem('userRole') || '')
+  userRole: localStorage.getItem('userRoles')
+    ? JSON.parse(localStorage.getItem('userRoles') || '')
     : null,
   ID: localStorage.getItem('ID')
     ? JSON.parse(localStorage.getItem('ID') || '')
