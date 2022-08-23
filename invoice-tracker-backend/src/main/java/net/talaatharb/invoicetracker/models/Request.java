@@ -3,7 +3,6 @@ package net.talaatharb.invoicetracker.models;
 import java.util.Date;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,38 +18,38 @@ public class Request {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+//    @NotBlank
     private Date startDate;
 
-    @NotBlank
+//    @NotBlank
     private Date requestDate;
 
-    @NotBlank
+//    @NotBlank
     private Date endDate;
 
-    @NotBlank
+//    @NotBlank
     private Long requestedBy;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="reviewed_by_id", referencedColumnName = "id")
     private User reviewedBy;
 
-    @NotBlank
+//    @NotBlank
     private String type;
 
-    @NotBlank
+//    @NotBlank
     private boolean isFullDay;
 
     private String comments;
 
-    @NotBlank
+//    @NotBlank
     private String status="pending";
 
     private String attachmentName;
 
     private String attachmentUrl;
 
-    @NotBlank
+//    @NotBlank
     private int numberOfDays;
 
 
