@@ -5,17 +5,17 @@ import static net.talaatharb.invoicetracker.models.ERole.ROLE_EMPLOYEE;
 import static net.talaatharb.invoicetracker.models.ERole.ROLE_HR;
 import static net.talaatharb.invoicetracker.models.ERole.ROLE_USER;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
 import net.talaatharb.invoicetracker.models.Request;
 import net.talaatharb.invoicetracker.models.RequestType;
 import net.talaatharb.invoicetracker.models.Role;
@@ -57,7 +57,7 @@ public class InvoiceTrackerBackendApplication {
 			userService.saveUser(new User(EMAIL_HR, PASS_USER,"Ahmed",false));
 			userService.saveUser(new User(EMAIL_ADMIN_USER, PASS_USER,"mostafa",true));
 			userService.saveUser(new User(EMAIL_HR_2, PASS_USER,"hamada",false));
-			
+
 			userService.saveUser(new User(EMAIL_EMPLOYEE_2, PASS_USER,"hamada",IS_ENABLED,PASSWORD_EXPIRY_DATE));
 
 
