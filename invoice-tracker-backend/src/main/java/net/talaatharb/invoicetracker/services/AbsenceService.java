@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AbsenceRequestService {
+public class AbsenceService {
     private final RequestRepository requestRepository;
     public List<Request> postRequest(Request request){
         requestRepository.save(request);
