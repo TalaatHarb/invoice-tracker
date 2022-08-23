@@ -5,7 +5,21 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+
+
+
+
+
 public class RequestType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,5 +33,11 @@ public class RequestType {
             fetch = FetchType.EAGER
     )
     private List<Request> requests= new ArrayList<>();
+
+
+    public RequestType(String typeName, List<Request> requests) {
+        this.typeName = typeName;
+        this.requests = requests;
+    }
 
 }
