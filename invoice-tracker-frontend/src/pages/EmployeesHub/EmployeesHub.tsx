@@ -2,14 +2,17 @@ import React, { useEffect, useState } from "react";
 import EmployeeTable from "../../components/employees-hub/EmployeeTable";
 import FilterComboBox from "../../components/employees-hub/FilterComboBox";
 import Navbar from "../../components/Navbar";
-import { FetchFacad } from "../../utils/FetchFacad";
 import { employeeFilterType } from "./types";
+import axios from "axios";
+import { useAppSelector } from "../../hooks/toolkit-types";
 
 const EmployeesHub = () => {
+  const isAuthenticated: any = useAppSelector(
+    (state) => state.AuthenticationSlice.isAuthenticated
+  );
   const allEmployeeDataUrl = "http://localhost:8080/employee/all";
-  const fetchFacad = new FetchFacad();
-  const [employeeData, setEmployeeData] = useState({});
-  const [currentField, setCurrentField] = useState<string>("0");
+  const [employeeData, setEmployeeData] = useState<any>({});
+  const [currentField, setCurrentField] = useState<string>("id");
   const [employeeFilter, setEmployeeFilter] = useState<employeeFilterType>({
     billable: false,
     fulltime: false,
@@ -17,10 +20,60 @@ const EmployeesHub = () => {
   });
 
   const filterApplyClearhandler = (event: any) => {
+
+    const getData = async (url:string)=>{
+      await axios.get(url, {
+        headers: { "Authorization": `Bearer ${isAuthenticated}` },
+      }).then(response=>{
+        console.log(response.data);
+        return response.data;
+      })
+    }
+    let value:any = "";
+    switch (currentField) {
+      case "id":
+        value = employeeFilter.id;
+        break;
+      case "englishName":
+        value = employeeFilter.englishName;
+        break;
+      case "arabicName":
+        value = employeeFilter.arabicName;
+        break;
+      case "jobTitle":
+        value = employeeFilter.jobTitle;
+        break;
+      case "joiningDate":
+        value = employeeFilter.joiningDate;
+        break;
+      case "endDate":
+        value = employeeFilter.endDate;
+        break;
+      case "allowedBalance":
+        value = employeeFilter.allowedBalance;
+        break;
+      case "remainingBalance":
+        value = employeeFilter.remainingBalance;
+        break;
+      case "teams":
+        value = employeeFilter.team;
+        break;
+      case "billable":
+        value = employeeFilter.billable;
+        break;
+      case "fulltime":
+        value = employeeFilter.fulltime;
+        break;
+      case "disabled":
+        value = employeeFilter.isDisabled;
+        break;
+    }
+    console.log(value);
     const id = event.target.id;
-    const filterQueryUrl = "http://localhost:8080/employee/filter";
+    const filterQueryUrl = `http://localhost:8080/employees/filter?type=${currentField}&values=${value}`;
     if (id == "apply") {
-      const filteredData = fetchFacad.getData(filterQueryUrl);
+      const filteredData = getData(filterQueryUrl);
+      console.log(filteredData);
       setEmployeeData(filteredData);
     } else {
       setEmployeeFilter({
@@ -28,13 +81,13 @@ const EmployeesHub = () => {
         fulltime: false,
         isDisabled: false,
       });
-      const data = fetchFacad.getData(allEmployeeDataUrl);
+      const data = getData(allEmployeeDataUrl)
+      console.log(data);
       setEmployeeData(data);
     }
   };
 
   const currentFieldChangeHandler = (event: any) => {
-    console.log("setting current field to:" + event.target.id);
     setCurrentField(event.target.id);
   };
 
@@ -45,34 +98,34 @@ const EmployeesHub = () => {
     let newData = {};
     console.log(targetValue);
     switch (targetId) {
-      case "1":
+      case "id":
         newData = { id: targetValue };
         break;
-      case "2":
+      case "employeeId":
         newData = { employeeId: targetValue };
         break;
-      case "3":
+      case "englishName":
         newData = { englishName: targetValue };
         break;
-      case "4":
+      case "arabicName":
         newData = { arabicName: targetValue };
         break;
-      case "5":
+      case "jobTitle":
         newData = { jobTitle: targetValue };
         break;
-      case "6":
+      case "joiningDate":
         newData = { joiningDate: targetValue };
         break;
-      case "7":
+      case "endDate":
         newData = { endDate: targetValue };
         break;
-      case "8":
+      case "allowedBalance":
         newData = { allowedBalance: targetValue };
         break;
-      case "9":
+      case "remainingBalance":
         newData = { remainingBalance: targetValue };
         break;
-      case "10":
+      case "teams":
         newData = { team: targetValue };
         break;
       case "billable":
@@ -91,13 +144,21 @@ const EmployeesHub = () => {
       fulltime: employeeFilter.fulltime,
       ...newData,
     };
-    console.log(newFilter);
     setEmployeeFilter(newFilter);
   };
 
   useEffect(() => {
-    const response = fetchFacad.getData(allEmployeeDataUrl);
-    setEmployeeData(response);
+
+    const getData = async ()=>{
+      await axios
+      .get(allEmployeeDataUrl, {
+        headers: { "Authorization": `Bearer ${isAuthenticated}` },
+      })
+      .then((response) => {
+        setEmployeeData(response.data);
+      });
+    }
+    getData()    
   }, []);
 
   const employees = [
@@ -217,7 +278,7 @@ const EmployeesHub = () => {
       remainingBalance: 15,
       billable: true,
       isDisabled: false,
-      team: ["back-end","front-end"],
+      team: ["back-end", "front-end"],
       fulltime: true,
     },
     {
@@ -307,7 +368,7 @@ const EmployeesHub = () => {
           </div>
         </div>
 
-        <EmployeeTable employees={employees} />
+        <EmployeeTable employees={employeeData} />
       </div>
     </div>
   );
