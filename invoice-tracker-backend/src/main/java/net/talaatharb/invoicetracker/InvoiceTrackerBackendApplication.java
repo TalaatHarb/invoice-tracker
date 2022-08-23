@@ -60,7 +60,6 @@ public class InvoiceTrackerBackendApplication {
 			userService.saveUser(new User(EMAIL_ADMIN_USER, PASS_USER,"mostafa",true));
 			userService.saveUser(new User(EMAIL_HR_2, PASS_USER,"hamada",false));
 			userService.saveUser(new User(REAL_EMAIL, PASS_USER,"mostafa",true));
-			
 			userService.saveUser(new User(EMAIL_EMPLOYEE_2, PASS_USER,"hamada",IS_ENABLED,PASSWORD_EXPIRY_DATE));
 
 
