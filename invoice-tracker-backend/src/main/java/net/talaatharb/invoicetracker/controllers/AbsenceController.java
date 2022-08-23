@@ -1,15 +1,16 @@
 package net.talaatharb.invoicetracker.controllers;
 
-import lombok.RequiredArgsConstructor;
-import net.talaatharb.invoicetracker.models.Request;
-import net.talaatharb.invoicetracker.services.AbsenceService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import lombok.RequiredArgsConstructor;
+import net.talaatharb.invoicetracker.models.Request;
+import net.talaatharb.invoicetracker.services.AbsenceService;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,7 +20,7 @@ public class AbsenceController {
     @Autowired
     private AbsenceService absenceService;
 
-    // http://localhost:8080/users/request/absenece
+    // http://localhost:8080/user/absence
     @PostMapping(consumes = {
             MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE },
