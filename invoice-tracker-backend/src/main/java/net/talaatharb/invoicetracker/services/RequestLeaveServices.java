@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import net.talaatharb.invoicetracker.dtos.RequestLeaveBody;
@@ -50,6 +51,7 @@ public class RequestLeaveServices {
 
 		return requestsBody;
 	}
+    @Transactional
 
 	public Request update_a_leave_request(int requestId, Request request) {
 		Request requestFromDB = requestRepo.findById(requestId).get();
