@@ -1,11 +1,11 @@
 package net.talaatharb.invoicetracker.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
-import net.talaatharb.invoicetracker.models.Request;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import net.talaatharb.invoicetracker.models.Request;
 
 @Repository
 public interface RequestRepository extends JpaRepository<Request, Long> {

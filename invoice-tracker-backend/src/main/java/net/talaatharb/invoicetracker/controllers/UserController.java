@@ -19,7 +19,7 @@ import net.talaatharb.invoicetracker.services.UserService;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*" , allowedHeaders = "*", maxAge = 3600)
 public class UserController {
 
     @Autowired
@@ -48,6 +48,7 @@ public class UserController {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveRole(role));
     }
+
 
     @GetMapping("/users/filter")
     public ResponseEntity<List<User>> filterEmployees(@RequestParam("type") String type, @RequestParam("values") List<String> values) {
