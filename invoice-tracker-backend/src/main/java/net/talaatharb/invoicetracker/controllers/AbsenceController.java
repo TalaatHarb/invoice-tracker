@@ -7,10 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import lombok.RequiredArgsConstructor;
 import net.talaatharb.invoicetracker.models.Request;
 import net.talaatharb.invoicetracker.services.AbsenceService;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -30,6 +30,11 @@ public class AbsenceController {
     public ResponseEntity<List<Request>> postRequest(@RequestBody Request request){
 
         return new ResponseEntity<>(absenceService.postRequest(request), HttpStatus.OK);
+    }
+
+    @GetMapping("/request")
+    public ResponseEntity<List<Request>> getAbsenceHistoryByEmployeeId(@RequestParam Long empId) {
+        return ResponseEntity.ok().body(absenceService.getAllAbsenceByEmployeeId(empId));
     }
 
 }

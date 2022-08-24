@@ -14,6 +14,20 @@ import lombok.NoArgsConstructor;
 @Table
 @Entity
 public class Request {
+    public Request(Date startDate, Date requestDate, Date endDate, Long requestedBy, String type, boolean isFullDay, String comments, String status, String attachmentName, String attachmentUrl, int numberOfDays) {
+        this.startDate = startDate;
+        this.requestDate = requestDate;
+        this.endDate = endDate;
+        this.requestedBy = requestedBy;
+        this.type = type;
+        this.isFullDay = isFullDay;
+        this.comments = comments;
+        this.status = status;
+        this.attachmentName = attachmentName;
+        this.attachmentUrl = attachmentUrl;
+        this.numberOfDays = numberOfDays;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,7 +41,7 @@ public class Request {
 //    @NotBlank
     private Date endDate;
 
-//    @NotBlank
+    //    @NotBlank
     private Long requestedBy;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -43,7 +57,7 @@ public class Request {
     private String comments;
 
 //    @NotBlank
-    private String status="pending";
+    private String status = "pending";
 
     private String attachmentName;
 
@@ -52,11 +66,8 @@ public class Request {
 //    @NotBlank
     private int numberOfDays;
 
-
     public Request(Date startDate, Date endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
-
     }
-
 }
