@@ -73,6 +73,24 @@ public class FilterUserServiceImp implements FilterUserService{
         return userList;
     }
 
+    @Override
+    public List<User> filterEmployeeByBillable(boolean billable) {
+        List<User>userList=filterUserRepository.filterEmployeesByBillable(billable);
+        return userList;
+    }
+
+    @Override
+    public List<User> filterEmployeeByISDisabled(boolean isDisabled) {
+        List<User>userList=filterUserRepository.filterEmployeesByIsDisabled(isDisabled);
+        return userList;
+    }
+
+    @Override
+    public List<User> filterEmployeeByISFullTime(boolean isFullTime) {
+        List<User>userList=filterUserRepository.filterEmployeesByIsDisabled(isFullTime);
+        return userList;
+    }
+
 //    @Override
 //    public User createEmployee(User user) {
 //        return filterUserRepository.save(user);

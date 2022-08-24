@@ -62,5 +62,24 @@ public interface FilterUserRepository extends JpaRepository<User,Long> {
     )
 
     List<User> filterEmployeesByEndDate(Date endDate);
+    @Query(
+            "SELECT e FROM User e WHERE e.billable = :billable"
+
+    )
+
+    List<User> filterEmployeesByBillable(boolean billable);
+
+    @Query(
+            "SELECT e FROM User e WHERE e.isDisabled = :isDisabled"
+
+    )
+
+    List<User> filterEmployeesByIsDisabled(boolean isDisabled);
+    @Query(
+            "SELECT e FROM User e WHERE e.isFullTime= :isFullTime"
+
+    )
+
+    List<User> filterEmployeesByIsFullTime(boolean isFullTime);
 
 }

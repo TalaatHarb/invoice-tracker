@@ -82,6 +82,28 @@ public class UserController {
             return ResponseEntity.ok(filterUserService.filterEmployeeByJoinDate(date));
 
         }
+
+        else if (type.equals("billable")) {
+
+            String boolInString = values.get(0);
+            boolean billable=Boolean.parseBoolean(boolInString);
+            return ResponseEntity.ok(filterUserService.filterEmployeeByBillable(billable));
+
+        }
+        else if (type.equals("isDisabled")) {
+
+            String boolInString = values.get(0);
+            boolean isDisabled=Boolean.parseBoolean(boolInString);
+            return ResponseEntity.ok(filterUserService.filterEmployeeByISDisabled(isDisabled));
+
+        }
+        else if (type.equals("isFullTime")) {
+
+            String boolInString = values.get(0);
+            boolean isFullTime=Boolean.parseBoolean(boolInString);
+            return ResponseEntity.ok(filterUserService.filterEmployeeByISFullTime(isFullTime));
+
+        }
 //        else if (type.equals("teamName")) {
 //            return ResponseEntity.ok(filterUserService.filterEmployeeByTeamName(values));
 
