@@ -1,6 +1,8 @@
 // globaly used variables
 
-export const SERVER = "http://localhost:8080";
+import { CONSTANTS } from "./constants";
+
+export const SERVER = `${CONSTANTS.BACKEND_URL}`;
 
 export const ERROR = "error";
 
