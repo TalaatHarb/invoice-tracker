@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { employeeType } from "./types";
 import {
   createColumnHelper,
@@ -19,6 +19,9 @@ type employeeTableProps = {
 const EmployeeTab = ({ employees }: employeeTableProps) => {
   const navigate = useNavigate();
   const data = employees;
+  const [rowSelection, setRowSelection] = React.useState({});
+  const [columnVisibility, setColumnVisibility] = React.useState({});
+
   const columnHelper = createColumnHelper<employeeType>();
 
   const columns = [
@@ -165,11 +168,22 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
     data,
     columns,
     enableRowSelection: true,
+    state: {
+      columnVisibility,
+      rowSelection,
+    },
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
     debugTable: true,
     debugHeaders: true,
     debugColumns: true,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+  });
+
+  useEffect(() => {
+    console.log(rowSelection);
+    console.log(columnVisibility);
   });
 
   const viewEmployeeHandler = (event: any) => {

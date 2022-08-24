@@ -121,7 +121,7 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
   };
 
   return (
-    <div className="min-h-screen flex flex-row justify-between bg-lightGrey bg-opacity-20 pt-20 text-center">
+    <div className="ml-20 flex flex-row justify-between py-20 text-center">
       {/* div containing employee details */}
       <div className="flex flex-col ml-20 text-lg w-3/6 ">
         {/* div for image, title and name */}
@@ -257,7 +257,7 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
         <div className="flex flex-row ml-1 mt-6 items-center">
           <button
             id={edit ? "save" : "edit"}
-            className="mt-6 rounded bg-blueCegedim text-white py-2 px-5 w-fit"
+            className="mt-6 rounded bg-blueCegedim hover:opacity-75 text-white py-2 px-5 w-fit"
             onClick={editClickHandler}
           >
             {edit ? "Save" : "Edit"}
@@ -266,7 +266,7 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
             <button
               id="cancel"
               onClick={editClickHandler}
-              className="ml-6 mt-6 rounded bg-blueCegedim text-white py-2 px-5 w-fit"
+              className="ml-6 mt-6 rounded bg-blueCegedim hover:opacity-75 text-white py-2 px-5 w-fit"
             >
               Cancel
             </button>
@@ -291,7 +291,7 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
         </div>
       </div>
       <div className="flex flex-col items-center w-3/6">
-        <h3 className="text-2xl bg-blueCegedim text-white shadow-lg px-5 py-2">
+        <h3 className="text-2xl bg-blueCegedim text-white shadow-lg px-5 py-2 rounded-xl">
           All absences
         </h3>
         <div className="flex flex-row mt-6 text-lg">
