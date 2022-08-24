@@ -60,7 +60,7 @@ const EmployeesHub = () => {
       case "jobTitle":
         value = employeeFilter.jobTitle;
         break;
-      case "joiningDate":
+      case "joinDate":
         value = employeeFilter.joiningDate;
         break;
       case "endDate":
@@ -137,7 +137,7 @@ const EmployeesHub = () => {
       case "jobTitle":
         newData = { jobTitle: targetValue };
         break;
-      case "joiningDate":
+      case "joinDate":
         newData = { joiningDate: targetValue };
         break;
       case "endDate":

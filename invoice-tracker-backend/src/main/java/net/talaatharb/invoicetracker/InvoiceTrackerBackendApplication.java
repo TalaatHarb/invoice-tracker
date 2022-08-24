@@ -48,7 +48,7 @@ public class InvoiceTrackerBackendApplication {
 
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
 
-			String dateInString = "7-Jun-2013";
+			String dateInString = "1-jan-2013";
 			Date date = formatter.parse(dateInString);
 
 			userService.saveUser(new User(EMAIL_USER, PASS_USER,date,"0122303432","amr0"));
