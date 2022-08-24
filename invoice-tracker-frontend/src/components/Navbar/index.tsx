@@ -1,9 +1,10 @@
-
 import { Menu, Transition } from '@headlessui/react'
-import React, { Fragment, useState } from 'react'
+import React, { Fragment } from 'react'
 import { Link } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../../hooks/toolkit-types'
+import { logoutUser } from '../../services/redux/slices/AuthenticationSlice'
 import BellButton from '../Button/BellNotification'
-import Logo from '../company-logo'
+import logo from '../../assets/Logo.jpg'
 
 /*
   TODOs:
@@ -17,22 +18,50 @@ import Logo from '../company-logo'
 */
 
 const Navbar = () => {
+  const { userRole } = useAppSelector((state) => state.AuthenticationSlice)
+
+  const isManager = userRole?.includes('ROLE_ADMIN')
+  const isHR = userRole?.includes('ROLE_HR')
+  const isEmployee = userRole?.includes('ROLE_EMPLOYEE')
+  const dispatch = useAppDispatch()
+
   return (
-    <nav className='bg-white border-x-4 border-b-4 border-navbar-border px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900'>
+    <nav className='bg-white shadow-lg sm:rounded-lg mx-4 px-2 sm:px-4 py-2.5 '>
       {/* Container of all the items in the navbar */}
       <div className='container flex flex-wrap justify-between md:w-auto mx-auto'>
         {/* The logo and company title */}
-        <Logo />
+        <Link to='/' className='flex'>
+          <img src={logo} className='mr-3 h-6 sm:h-9' alt='Flowbite Logo' />
+          <span className='self-center text-xl font-semibold whitespace-nowrap text-blueCegedim'>
+            Cegedim
+          </span>
+        </Link>
         {/* Container to start from the left {Cegedim Members - Bell Icon - User Icon) */}
         <div className='flex items-center md:order-2'>
           <div className='flex item-center space-x-2'>
             {/* Cegedim Members */}
-            <Link
-              to='www.google.com'
-              className='block py-2 pr-4 pl-3 active:text-blueCegedim text-darkGrey rounded hover:bg-lightGrey md:hover:bg-transparent md:p-0'
-            >
-              Cegedim Members
-            </Link>
+            {isManager ? (
+              <Link
+                to='/admin'
+                className='block py-2 pr-4 pl-3 active:text-blueCegedim text-darkGrey rounded hover:bg-lightGrey md:hover:bg-transparent md:p-0'
+              >
+                Cegedim Admins
+              </Link>
+            ) : isHR ? (
+              <Link
+                to='/hr'
+                className='block py-2 pr-4 pl-3 active:text-blueCegedim text-darkGrey rounded hover:bg-lightGrey md:hover:bg-transparent md:p-0'
+              >
+                Cegedim HR
+              </Link>
+            ) : (
+              <Link
+                to='/'
+                className='block py-2 pr-4 pl-3 active:text-blueCegedim text-darkGrey rounded hover:bg-lightGrey md:hover:bg-transparent md:p-0'
+              >
+                Cegedim Members
+              </Link>
+            )}
 
             {/* Bill Icon */}
             <BellButton count={1} />
@@ -67,27 +96,19 @@ const Navbar = () => {
                 <Menu.Items className='origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none'>
                   <Menu.Item>
                     <Link
-                      to='#'
+                      to='/employee'
                       className='block px-4 py-2 text-sm text-gray-700'
                     >
                       Your Profile
                     </Link>
                   </Menu.Item>
                   <Menu.Item>
-                    <Link
-                      to='#'
-                      className='block px-4 py-2 text-sm text-gray-700'
-                    >
-                      Settings
-                    </Link>
-                  </Menu.Item>
-                  <Menu.Item>
-                    <Link
-                      to='#'
-                      className='block px-4 py-2 text-sm text-gray-700'
+                    <button
+                      className='block px-4 py-2 text-sm text-gray-700 pointer-events-auto'
+                      onClick={() => dispatch(logoutUser())}
                     >
                       Sign out
-                    </Link>
+                    </button>
                   </Menu.Item>
                 </Menu.Items>
               </Transition>

@@ -57,9 +57,6 @@ const AuthenticationSlice = createSlice({
       state.error = undefined
       state.isLoading = false
     },
-    getID: (state, action) => {
-      state.ID = action.payload
-    },
   },
   extraReducers: (builder) => {
     builder.addCase(loginUser.pending, (state, action) => {
@@ -91,5 +88,5 @@ const AuthenticationSlice = createSlice({
   },
 })
 
-export const { logoutUser, getID } = AuthenticationSlice.actions
+export const { logoutUser } = AuthenticationSlice.actions
 export default AuthenticationSlice.reducer

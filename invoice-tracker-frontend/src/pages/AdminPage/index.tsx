@@ -4,7 +4,8 @@ import axios from 'axios'
 import { CONSTANTS } from '../../utils/constants'
 import { useAppSelector } from '../../hooks/toolkit-types'
 import { ManagerDetails } from '../../models/managerDetails'
-import Navbar from '../../components/Navbar/admin-nav-bar'
+import Navbar from '../../components/Navbar'
+
 const AdminPage = () => {
   const [managerDetails, setManagerDetails] = useState<ManagerDetails>(
     {} as ManagerDetails
