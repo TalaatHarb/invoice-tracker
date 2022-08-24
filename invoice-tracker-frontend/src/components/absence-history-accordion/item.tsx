@@ -112,7 +112,9 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
             </p>
             <p>
               <strong>Request Date: </strong>{" "}
-              {props.record.requestDate.substr(0, 10)}
+              {props.record.requestDate
+                ? props.record.requestDate.substr(0, 10)
+                : "Unkown"}
             </p>
             <p>
               <strong>End Date: </strong> {props.record.endDate.substr(0, 10)}

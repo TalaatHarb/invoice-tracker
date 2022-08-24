@@ -1,22 +1,26 @@
-import React, { useEffect, useState } from 'react'
-import { AbsenseItem } from '../../models/absence-item'
-import AbsenceHistoryItem from './item'
-import { useAppSelector } from '../../hooks/toolkit-types'
-import axios from 'axios'
+import React, { useEffect, useState } from "react";
+import { AbsenseItem } from "../../models/absence-item";
+import AbsenceHistoryItem from "./item";
+import { useAppSelector } from "../../hooks/toolkit-types";
+import axios from "axios";
 
 const AbsenceHistoryAccordionList = () => {
   const { isAuthenticated } = useAppSelector(
     (state) => state.AuthenticationSlice
   );
 
-  const [absences, setAbsences] = useState([])
-  
+  const [absences, setAbsences] = useState([]);
+
   const fetchAbsences = async () => {
     const config = {
       headers: { Authorization: `Bearer ${isAuthenticated}` },
     };
 
-    let res = await axios.get(`http://localhost:8080/user/absence/request?empId=1`, config);
+    // TODO: Change the empId to be generic
+    let res = await axios.get(
+      `http://localhost:8080/user/absence/request?empId=1`,
+      config
+    );
 
     setAbsences(res.data);
   };
@@ -38,10 +42,10 @@ const AbsenceHistoryAccordionList = () => {
             items={absences}
             setItems={setAbsences}
           />
-        )
+        );
       })}
     </>
-  )
-}
+  );
+};
 
-export default AbsenceHistoryAccordionList
+export default AbsenceHistoryAccordionList;

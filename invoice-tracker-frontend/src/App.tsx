@@ -10,6 +10,8 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ForgotPassword from "./pages/password/ForgotPassword";
 import ResetPassword from "./pages/password/ResetPassword";
+import EmployeesList from "./pages/EmployeesList/EMployeesList";
+import EmployeesHub from "./pages/EmployeesHub/EmployeesHub";
 import AbsenceHistory from "./pages/AbsenceHistory";
 
 function App() {
@@ -20,6 +22,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/absencehistory" element={<AbsenceHistory />} />
+        <Route path="/absencehistory1" element={<EmployeesHub />} />
 
         {!isAuthenticated && <Route path="/login" element={<Login />} />}
         {/* protected user page */}
