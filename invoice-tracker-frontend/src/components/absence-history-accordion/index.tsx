@@ -53,10 +53,10 @@ const AbsenceHistoryAccordionList = ({ id }: accordionProps) => {
       </div>
 
       <br />
-      <div className="flex flex-row-reverse pb-20">
+      <div className="flex flex-row-reverse">
         <button
           onClick={fetchAbsences}
-          className="inline-flex items-center px-3 py-1.5 bg-blueCegedim hover:opacity-75 text-white text-sm font-medium rounded-md mx-2"
+          className="inline-flex items-center px-3 py-1.5 bg-lightGrey hover:bg-darkGrey text-sm font-medium rounded-md mx-2"
         >
           Cancel
         </button>

@@ -20,6 +20,7 @@ import net.talaatharb.invoicetracker.models.Request;
 import net.talaatharb.invoicetracker.models.RequestType;
 import net.talaatharb.invoicetracker.models.Role;
 import net.talaatharb.invoicetracker.models.User;
+import net.talaatharb.invoicetracker.services.AbsenceService;
 import net.talaatharb.invoicetracker.services.UserService;
 
 @SpringBootApplication
@@ -43,7 +44,7 @@ public class InvoiceTrackerBackendApplication {
 	}
 
 	@Bean
-	CommandLineRunner run(UserService userService) {
+	CommandLineRunner run(UserService userService, AbsenceService absenceService) {
 		return args -> {
 			userService.saveRole(new Role(null, ROLE_USER));
 			userService.saveRole(new Role(null, ROLE_HR));
@@ -52,10 +53,11 @@ public class InvoiceTrackerBackendApplication {
 
 //			create new object of User Class
 
-			userService.saveUser(new User(EMAIL_USER, PASS_USER,new Date(),"0122303432","amr0"));
-			userService.saveUser(new User(EMAIL_EMPLOYEE, PASS_USER,"Gado",true));
+			userService.saveUser(new User(EMAIL_USER, PASS_USER,21,21,new Date(),"0122303432","amr0"));
+			userService.saveUser(new User(EMAIL_EMPLOYEE, PASS_USER,21,21,new Date(),"0122303432","Gado"));
 			userService.saveUser(new User(EMAIL_HR, PASS_USER,"Ahmed",true));
-			userService.saveUser(new User(EMAIL_ADMIN_USER, PASS_USER,"mostafa",true));
+			userService.saveUser(new User("124329374621","Amr Essam","عمرو عصام",EMAIL_ADMIN_USER,PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,21,true,new Date(),new Date(),new Date(),"01002345324",2,0,150.0,"amr23"));
+
 			userService.saveUser(new User(EMAIL_HR_2, PASS_USER,"hamada",false));
 
 			userService.saveUser(new User(EMAIL_EMPLOYEE_2, PASS_USER,"hamada",IS_ENABLED,PASSWORD_EXPIRY_DATE));
@@ -79,15 +81,17 @@ public class InvoiceTrackerBackendApplication {
 			userService.saveRequestType(new RequestType("sickness",new ArrayList<>()));
 			userService.saveRequestType(new RequestType("vacation",new ArrayList<>()));
 			userService.saveRequestType(new RequestType("troll",new ArrayList<>()));
+			userService.saveRequestType(new RequestType("Annual leave",new ArrayList<>()));
 
 			String pattern = "yyyy-MM-dd";
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
-			long l=1;
-			userService.saveRequest(l,"sickness",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
-			userService.saveRequest(l,"sickness",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
-			userService.saveRequest(l,"vacation",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
-			userService.saveRequest(l,"troll",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
+			long l=2;
+			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"Annual leave",2));
+			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"sickness",4));
+			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"sickness",2));
+			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"vacation",2));
+			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"troll",2));
 		};
 	}
 }

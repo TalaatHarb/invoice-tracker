@@ -4,7 +4,6 @@ import AdminPage from "./pages/AdminPage";
 import UserPage from "./pages/UserPage";
 import HrPage from "./pages/HrPage";
 import EmployeePage from "./pages/EmployeePage";
-import PrivateRoute from "./components/PrivateRoute";
 import { useAppSelector } from "./hooks/toolkit-types";
 import Navbar from "./components/Navbar";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
@@ -17,6 +16,10 @@ import EmployeesHub from "./pages/EmployeesHub/EmployeesHub";
 import AbsenceHistory from "./pages/EmployeeProfileHrView";
 import HrPrivateRoute from "./components/HrPrivateRoute/HrPrivateRoute";
 import EmployeeProfileHrView from "./pages/EmployeeProfileHrView";
+import EmployeePrivateRoute from "./components/EmployeePrivateRoute";
+import ManagerPrivateRoute from "./components/ManagerPrivateRoute";
+import EditRequest from "./pages/EditRequest";
+import RequestList from "./pages/RequestList/RequestList";
 
 function App() {
   const { isAuthenticated } = useAppSelector(
@@ -27,7 +30,7 @@ function App() {
       <Routes>
         {!isAuthenticated && <Route path="/login" element={<Login />} />}
         {/* protected user page */}
-        <Route path="/user" element={<PrivateRoute />}>
+        <Route path="/user" element={<EmployeePrivateRoute />}>
           <Route path="/user" element={<UserPage />} />
         </Route>
 
@@ -49,22 +52,36 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
 
+        {/* reset password routes */}
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
+
+        <Route path="/team/:teamId" element={<EmployeesList />} />
+        <Route path="/empList" element={<EmployeesHub />} />
+
+        <Route path="/edit" element={<EmployeePrivateRoute />}>
+          <Route path="/edit" element={<EditRequest />} />
+        </Route>
+        <Route path="/requestList" element={<EmployeePrivateRoute />}>
+          <Route path="/requestList" element={<RequestList />} />
+        </Route>
+
         {/* protected user page */}
 
-        <Route path="/hr" element={<PrivateRoute />}>
+        <Route path="/hr" element={<EmployeePrivateRoute />}>
           <Route path="/hr" element={<HrPage />} />
         </Route>
         {/* protected admin page */}
-        <Route path="/admin" element={<PrivateRoute />}>
+        <Route path="/admin" element={<ManagerPrivateRoute />}>
           <Route path="/admin" element={<AdminPage />} />
         </Route>
         {/* protected employee page */}
-        <Route path="/employee" element={<PrivateRoute />}>
+        <Route path="/employee" element={<EmployeePrivateRoute />}>
           <Route path="/employee" element={<EmployeePage />} />
         </Route>
 
         {/* request absence */}
-        <Route path="/request" element={<PrivateRoute />}>
+        <Route path="/request" element={<EmployeePrivateRoute />}>
           <Route path="/request" element={<RequestForm />} />
         </Route>
         {isAuthenticated ? (

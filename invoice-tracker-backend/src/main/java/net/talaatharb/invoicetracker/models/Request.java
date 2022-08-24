@@ -44,20 +44,24 @@ public class Request {
     //    @NotBlank
     private Long requestedBy;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="reviewed_by_id", referencedColumnName = "id")
-    private User reviewedBy;
 
-//    @NotBlank
+
+    private Long reviewedBy;
+
+
     private String type;
 
 //    @NotBlank
     private boolean isFullDay;
 
+//        @NotBlank
+
+    private String status="Pending";
+
     private String comment;
 
 //    @NotBlank
-    private String status = "pending";
+
 
     private String attachmentName;
 
@@ -66,8 +70,17 @@ public class Request {
 //    @NotBlank
     private int numberOfDays;
 
+
     public Request(Date startDate, Date endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public Request(Date startDate, Date endDate, Long requestedBy, String type, int numberOfDays) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.requestedBy = requestedBy;
+        this.type = type;
+        this.numberOfDays = numberOfDays;
     }
 }

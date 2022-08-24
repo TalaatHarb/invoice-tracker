@@ -9,15 +9,17 @@ interface AuthenticationState {
   isAuthenticated: string | null;
   userRole: string[] | null;
   isLoading: boolean;
-  ID: String;
+  ID: number | string;
 }
 
 const initialState: AuthenticationState = {
   error: undefined,
   isAuthenticated: cookies.get("token") || null,
-  userRole: [],
+  userRole: localStorage.getItem("userRoles")
+    ? JSON.parse(localStorage.getItem("userRoles") || "")
+    : null,
+  ID: cookies.get("ID"),
   isLoading: false,
-  ID: "",
 };
 
 export const loginUser = createAsyncThunk(
@@ -33,7 +35,6 @@ export const loginUser = createAsyncThunk(
           },
         }
       );
-
       if (response.status === 200) {
         return response.data;
       }
@@ -49,13 +50,12 @@ const AuthenticationSlice = createSlice({
   reducers: {
     logoutUser: (state) => {
       cookies.remove("token");
+      cookies.remove("ID");
+      localStorage.removeItem("userRoles");
       state.isAuthenticated = null;
       state.userRole = null;
       state.error = undefined;
       state.isLoading = false;
-    },
-    getID: (state, action) => {
-      state.ID = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -65,8 +65,11 @@ const AuthenticationSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(loginUser.fulfilled, (state, action) => {
-      state.isAuthenticated = action.payload.token;
-      state.userRole = action.payload.roles;
+      state.isAuthenticated = action?.payload?.token;
+      state.userRole = action?.payload?.roles;
+      state.ID = action?.payload?.id;
+      localStorage.setItem("userRoles", JSON.stringify(action?.payload?.roles));
+      cookies.set("ID", action?.payload?.id, { path: "/" });
       state.error = undefined;
       cookies.set("token", action.payload.token, {
         path: "/",
@@ -85,5 +88,5 @@ const AuthenticationSlice = createSlice({
   },
 });
 
-export const { logoutUser, getID } = AuthenticationSlice.actions;
+export const { logoutUser } = AuthenticationSlice.actions;
 export default AuthenticationSlice.reducer;
