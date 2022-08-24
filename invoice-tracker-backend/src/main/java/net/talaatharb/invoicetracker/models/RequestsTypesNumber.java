@@ -1,9 +1,10 @@
 package net.talaatharb.invoicetracker.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
-
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.*;
 
 @Data
 @Entity

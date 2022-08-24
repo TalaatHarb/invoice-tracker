@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { MailIcon, PhoneIcon } from '@heroicons/react/solid'
 import { ManagerDetails } from '../../../../models/managerDetails'
 import moment from 'moment'
@@ -72,7 +72,7 @@ function AdminProfilePage({ managerDetails }: Props) {
       'Allowed Balanace': managerDetails.allowedBalance || 'N/A',
       'Arabic Address': managerDetails.arabicAddress || 'N/A',
       'English Address': managerDetails.englishAddress || 'N/A',
-      Billable: managerDetails?.billable || 'N/A',
+      'English Name': managerDetails?.englishName || 'N/A',
       'Birth Date':
         moment(managerDetails?.birthDate).format('DD/MM/YYYY') || 'N/A',
       'End Date': moment(managerDetails?.endDate).format('DD/MM/YYYY') || 'N/A',

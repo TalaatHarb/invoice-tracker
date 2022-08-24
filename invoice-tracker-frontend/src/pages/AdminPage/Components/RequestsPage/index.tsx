@@ -48,6 +48,13 @@ const AdminRequests = () => {
             fetchRequests={fetchRequests}
           />
         ))}
+        {requests.length === 0 && (
+          <div className='flex justify-center items-center'>
+            <h1 className='text-2xl font-semibold text-gray-900'>
+              No Requests
+            </h1>
+          </div>
+        )}
       </div>
     </div>
   )
