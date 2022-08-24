@@ -12,7 +12,7 @@ import lombok.Data;
 import net.talaatharb.invoicetracker.dtos.RequestLeaveBody;
 import net.talaatharb.invoicetracker.models.Request;
 import net.talaatharb.invoicetracker.models.User;
-import net.talaatharb.invoicetracker.repositories.RequestRepo;
+import net.talaatharb.invoicetracker.repositories.RequestRepository;
 import net.talaatharb.invoicetracker.repositories.UserRepository;
 
 @Service
@@ -21,7 +21,7 @@ import net.talaatharb.invoicetracker.repositories.UserRepository;
 @Data
 public class RequestLeaveServices {
 	@Autowired
-	RequestRepo requestRepo;
+	RequestRepository requestRepo;
 	@Autowired
 	UserRepository userRepository;
 
