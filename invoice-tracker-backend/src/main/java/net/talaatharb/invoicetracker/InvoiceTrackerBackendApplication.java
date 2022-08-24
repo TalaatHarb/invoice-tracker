@@ -51,7 +51,7 @@ public class InvoiceTrackerBackendApplication {
 			String dateInString = "1-jan-2013";
 			Date date = formatter.parse(dateInString);
 
-			userService.saveUser(new User(EMAIL_USER, PASS_USER,date,"0122303432","amr0"));
+			userService.saveUser(new User(EMAIL_USER, PASS_USER,date,"0122303432","amr0",true));
 			userService.saveUser(new User(EMAIL_EMPLOYEE, PASS_USER,"Gado",true));
 			userService.saveUser(new User(EMAIL_HR, PASS_USER,"Ahmed",true));
 			userService.saveUser(new User(EMAIL_ADMIN_USER, PASS_USER,"mostafa",true));

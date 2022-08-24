@@ -2,12 +2,11 @@ package net.talaatharb.invoicetracker.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import net.talaatharb.invoicetracker.models.Request;
 import net.talaatharb.invoicetracker.repositories.RequestRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class AbsenceService {

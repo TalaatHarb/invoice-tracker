@@ -40,11 +40,7 @@ const EmployeesHub = () => {
     },
   ]);
   const [currentField, setCurrentField] = useState<string>("id");
-  const [employeeFilter, setEmployeeFilter] = useState<employeeFilterType>({
-    billable: false,
-    fullTime: false,
-    disabled: false,
-  });
+  const [employeeFilter, setEmployeeFilter] = useState<employeeFilterType>({});
 
   const filterApplyClearhandler = async (event: any) => {
     let value: any = "";
@@ -97,11 +93,7 @@ const EmployeesHub = () => {
           setEmployeeData(response.data);
         });
     } else {
-      setEmployeeFilter({
-        billable: false,
-        fullTime: false,
-        disabled: false,
-      });
+      setEmployeeFilter({});
       await axios
         .get(allEmployeeDataUrl, {
           headers: { Authorization: `Bearer ${isAuthenticated}` },
@@ -120,7 +112,7 @@ const EmployeesHub = () => {
   const employeeFilterHandler = (event: any) => {
     const targetId = event.target.id;
     const targetValue = event.target.value;
-    let newFilter = { ...employeeFilter };
+    setCurrentField(targetId);
     let newData = {};
     switch (targetId) {
       case "id":
@@ -157,19 +149,14 @@ const EmployeesHub = () => {
         newData = { billable: event.target.checked };
         break;
       case "fulltime":
-        newData = { fulltime: event.target.checked };
+        newData = { fullTime: event.target.checked };
         break;
       case "disabled":
-        newData = { isDisabled: event.target.checked };
+        newData = { disabled: event.target.checked };
         break;
     }
-    newFilter = {
-      billable: employeeFilter.billable,
-      disabled: employeeFilter.disabled,
-      fullTime: employeeFilter.fullTime,
-      ...newData,
-    };
-    setEmployeeFilter(newFilter);
+    console.log(newData);
+    setEmployeeFilter(newData);
   };
 
   useEffect(() => {

@@ -21,7 +21,7 @@ public class Request {
         this.requestedBy = requestedBy;
         this.type = type;
         this.isFullDay = isFullDay;
-        this.comments = comments;
+        this.comment = comments;
         this.status = status;
         this.attachmentName = attachmentName;
         this.attachmentUrl = attachmentUrl;

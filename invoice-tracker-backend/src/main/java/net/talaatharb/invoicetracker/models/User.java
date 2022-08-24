@@ -165,5 +165,14 @@ public class User {
 		this.username = username;
 	}
 
+	public User(String email, String password, Date joiningDate, String mobileNumber, String username,boolean billable) {
+		this.email = email;
+		this.password = password;
+		this.joiningDate = joiningDate;
+		this.mobileNumber = mobileNumber;
+		this.username = username;
+		this.billable=billable;
+	}
+
 
 }

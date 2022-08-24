@@ -10,6 +10,7 @@ import net.talaatharb.invoicetracker.models.User;
 
 public interface FilterUserRepository extends JpaRepository<User,Long> {
 
+
     @Query(
             "SELECT e FROM User e WHERE " +
                     "e.englishName IN :names"
