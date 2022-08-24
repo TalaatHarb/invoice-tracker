@@ -17,7 +17,7 @@ import net.talaatharb.invoicetracker.models.Request;
 import net.talaatharb.invoicetracker.services.RequestLeaveServices;
 
 @RestController
-@RequestMapping("/Requests")
+@RequestMapping("/api/Requests")
 
 public class RequestController {
 	@Autowired
