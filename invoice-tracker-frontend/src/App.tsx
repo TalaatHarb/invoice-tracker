@@ -15,7 +15,8 @@ import RequestForm from "./components/Absence Request";
 import EmployeesList from "./pages/EmployeesList/EMployeesList";
 import EmployeesHub from "./pages/EmployeesHub/EmployeesHub";
 import AbsenceHistory from "./pages/AbsenceHistory";
-
+import RequestList from './pages/RequestList/RequestList'
+import EditRequest from './pages/EditRequest'
 function App() {
   const { isAuthenticated } = useAppSelector(
     (state) => state.AuthenticationSlice
@@ -43,6 +44,12 @@ function App() {
         <Route path="page1" element={<Navbar />} />
         <Route path="page2" element={<AbsenceHistoryAccordionList />} />
 
+        <Route path='/edit' element={<PrivateRoute />}>
+          <Route path='/edit' element={<EditRequest />} />
+        </Route>
+        <Route path='/requestList' element={<PrivateRoute />}>
+          <Route path='/requestList' element={<RequestList />} />
+        </Route>
         {!isAuthenticated && <Route path="/login" element={<Login />} />}
         <Route path="page1" element={<Navbar />} />
 
