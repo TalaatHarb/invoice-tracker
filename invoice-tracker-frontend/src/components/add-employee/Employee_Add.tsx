@@ -1,11 +1,13 @@
-
-
 import  './Addemployee.scss' 
 
 
 
 import React, { useState } from 'react';
+import Navbar from '../Navbar';
 
+
+import axios from 'axios';
+import { useAppSelector } from '../../hooks/toolkit-types';
 
 
 
@@ -16,6 +18,9 @@ const Field = ({ label, id, error, ...rest } : any) => (
     {error && <p>{error}</p>}
   </div>
 );
+
+
+
 
 
 
@@ -41,7 +46,7 @@ function Employee_Add() {
 
   const [email, setEmail] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
-  const [allowedBalance, setAnnualBalance] = useState("1");
+  const [allowedBalance, setAnnualBalance] = useState("0");
 
   const [isFullTime, setIsFullTime] = useState(false);
   const [MultiplieTeams, setMultiplieTeam] = useState(false);
@@ -106,42 +111,66 @@ function Employee_Add() {
   };
 
 
+  const { isAuthenticated } = useAppSelector(
+    (state) => state.AuthenticationSlice
+  );
+  
+  const config = {
+    headers: { Authorization: `Bearer ${isAuthenticated}` },
+  };
 
-  function fetch_employee(prop : any)
-  {
-     console.log(prop);
-
-     fetch('http://localhost:8080/api/employee/add', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(prop),
-    })
-    .then((response) => response.json())
-    //Then with the data from the response in JSON...
-    .then((prop) => {
-    
-      alert('user has been added successfully')
-      
-    })
-    //Then with the error genereted...
-    .catch((error) => {
-      alert('Faild to add user !')
-
-    
-    });
-  }
+ 
 
 
   /* */
-  
+  const fetch_employee = async (prop : any) => {
+    console.log({prop});
+    const config = {
+      headers: { Authorization: `Bearer ${isAuthenticated}` },
+    };
+
+    let res = await axios.post('http://localhost:8080/api/employee/add',prop, config);
+
+    alert(res.data.message);
+
+    setAnnualBalance("");
+    setArabic_Name("");
+    setBilliable(false);
+    setBirth_date("");
+    setEmail("");
+    setEmployeeAddressArabic("");
+    setEmployeeAddressEnglish("");
+    setEmployeeId("");
+    setEnglishName("");
+    setIsDisabiled(false);
+    setIsFullTime(false);
+    setJoiningDate("");
+    setJopTitle("");
+    setMobileNumber("");
+    setNationalId("");
+    setconfirm_password("");
+    setpassword("");
+    setSelectedOption("");
+  };
  
+
+
+   function claculate_allowedballance(input : any)
+   {
+    setJoiningDate(input);
+    var date = new Date(input); 
+    var elapsed = date.getMonth()+1;
+    console.log(elapsed);
+    
+
+   }
 
   return (
   
-      
-    <div className="lg:w-100 bg-white shadow rounded">
+    <div>
+      <Navbar />
+       <br></br>
+       <div className="lg:w-100 bg-white shadow rounded">
      
     <form className="contact-form row" onSubmit={handleSubmit}>
       <div>
@@ -268,7 +297,7 @@ function Employee_Add() {
           className="input-text js-input"         
           value={joiningDate}
           
-          onChange={(e) => setJoiningDate(e.target.value)}
+          onChange={(e) => claculate_allowedballance(e.target.value)}
         />
 
        </div>
@@ -308,7 +337,7 @@ function Employee_Add() {
        <div className="form-field col x-50">
           <input 
           className="input-text js-input"
-          type="text" 
+          type="number" 
           value={mobileNumber}
           onChange={(e) => setMobileNumber(e.target.value)}
         />
@@ -391,6 +420,7 @@ function Employee_Add() {
     </form>
     </div>
        
+    </div>
 
   );
 }

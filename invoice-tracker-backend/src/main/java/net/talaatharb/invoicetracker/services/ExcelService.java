@@ -32,7 +32,7 @@ public class ExcelService {
     }
 
 
-    public static List<User> excelToTutorials(List<User> income_list) {
+    public  List<User> excelToTutorials(List<User> income_list) {
 
         try {
             List<User> employeeList = new ArrayList<>();

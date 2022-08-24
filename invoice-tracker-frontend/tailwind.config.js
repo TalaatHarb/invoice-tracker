@@ -18,6 +18,7 @@ module.exports = {
       white: '#fff',
       darkBlue: '#4338ca',
       red: '#dc2626',
+      green: '#a3e635',
       'logo-text-color': '#2f97da',
       'active-link': '#2f97da',
       'not-active-link': '#7b7979',

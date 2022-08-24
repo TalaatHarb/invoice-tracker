@@ -89,16 +89,7 @@ public class ExcelHelper {
         return  teams;
     }
 
-    public   void addteams(){
-//        Company company = new Company("cegedim","cegedim@gmail.com","egypt");
-//        Team team1 = new Team("team1",null,null);
-//        Team team2 = new Team("team2",null,null);
-//        Team team3 = new Team("team3",null,null);
-//        teamRepository.save(team1);
-//        teamRepository.save(team2);
-//        teamRepository.save(team3);
 
-    }
 
 }
 

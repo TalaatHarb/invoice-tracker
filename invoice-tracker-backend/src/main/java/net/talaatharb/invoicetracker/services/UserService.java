@@ -30,6 +30,9 @@ public class UserService {
 	@Autowired
 	private final ExcelHelper excelHelper;
 	@Autowired
+	private final ExcelService excelService;
+
+	@Autowired
 	private final RoleRepositry roleRepositry;
 
 	@Autowired
@@ -99,6 +102,16 @@ public class UserService {
 
 		} catch (Exception e) {
 			throw new RuntimeException("fail to save New User : " + e.getMessage());
+		}
+	}
+
+
+	public void saveemployee_excel(List<User> Income_list) {
+		try {
+			List<User> Employees = excelService.excelToTutorials(Income_list);
+			userRepository.saveAll(Employees);
+		} catch (Exception e) {
+			throw new RuntimeException("fail to store excel data: " + e.getMessage());
 		}
 	}
 

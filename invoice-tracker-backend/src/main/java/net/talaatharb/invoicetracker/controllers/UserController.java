@@ -78,9 +78,26 @@ public class UserController {
 
     }
 
-    @GetMapping("/show")
-    public String getUser(){
-        return "hello apdo";
+    // add users from excel sheet
+    @PostMapping(path = "/employee/uploadexcel")
+    public ResponseEntity<ExcelResponseMessage> uploadFile(@RequestBody List<User> Employees_list) {
+
+        String message = "";
+
+
+
+        try {
+            userService.saveemployee_excel(Employees_list);
+            message = "Uploaded the file successfully ";
+            return ResponseEntity.status(HttpStatus.OK).body(new ExcelResponseMessage(message));
+        } catch (Exception e) {
+            message = "Could not upload the file: !";
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ExcelResponseMessage(message));
+        }
+
+
     }
+
+
 
 }
