@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { MdMargin } from "react-icons/md";
 import EmployeeTable from "../../components/requestTable/EmployeeTable";
-import FilterComboBox from "../../components/employees-hub/FilterComboBox";
+import FilterComboBox from "../../components/requestTable/FilterComboBox";
 import Navbar from "../../components/Navbar";
 import { FetchFacad } from "../../utils/FetchFacad";
 import { useAppSelector } from "../../hooks/toolkit-types";
@@ -76,6 +75,7 @@ const RequestList = () => {
         <div className="flex flex-row justify-start w-full">
           <div className="mx-12 my-9">
             <h3 className="text-xl text-black font-medium">Filter by</h3>
+            <FilterComboBox />
           </div>
           <input
             type="text"
