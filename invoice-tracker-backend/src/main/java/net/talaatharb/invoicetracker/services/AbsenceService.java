@@ -2,12 +2,11 @@ package net.talaatharb.invoicetracker.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import net.talaatharb.invoicetracker.models.Request;
 import net.talaatharb.invoicetracker.repositories.RequestRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class AbsenceService {
@@ -18,8 +17,8 @@ public class AbsenceService {
         return absenceRepository.findAllByRequestedBy(empId);
     }
 
-    public List<Request> postRequest(Request request){
-        absenceRepository.save(request);
-        return absenceRepository.findAll();
+    public Long postRequest(Request request){
+        Request res = absenceRepository.save(request);
+        return res.getId();
     }
 }

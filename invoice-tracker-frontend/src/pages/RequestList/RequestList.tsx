@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MdMargin } from "react-icons/md";
 import EmployeeTable from "../../components/requestTable/EmployeeTable";
 import FilterComboBox from "../../components/employees-hub/FilterComboBox";
-import Navbar from "../../components/Navbar/index";
+import Navbar from "../../components/navbar/index";
 import { FetchFacad } from "../../utils/FetchFacad";
 import { useAppSelector } from "../../hooks/toolkit-types";
 import axios from "axios";

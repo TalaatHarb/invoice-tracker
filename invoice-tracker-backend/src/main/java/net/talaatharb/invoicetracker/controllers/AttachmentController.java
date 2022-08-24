@@ -1,6 +1,7 @@
 package net.talaatharb.invoicetracker.controllers;
 
-import net.talaatharb.invoicetracker.services.AttachmentService;
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -9,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletContext;
+import net.talaatharb.invoicetracker.services.AttachmentService;
 
 @RestController
 @RequestMapping("/api/attachments")
@@ -22,12 +23,11 @@ public class AttachmentController {
     private AttachmentService attachmentService;
 
     @PostMapping("/upload")
-    public ResponseEntity<Object> uploadAttachments(@RequestParam("attachments") MultipartFile[] files){
+    public ResponseEntity<Object> uploadAttachments(@RequestParam("attachments") MultipartFile[] files, @RequestParam("reqId") Long reqId){
         if(files.length < 1){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-
-        attachmentService.storeAttachments(files);
+        attachmentService.storeAttachments(files, reqId);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

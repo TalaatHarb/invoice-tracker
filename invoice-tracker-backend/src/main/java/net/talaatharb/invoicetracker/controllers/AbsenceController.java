@@ -7,10 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import lombok.RequiredArgsConstructor;
 import net.talaatharb.invoicetracker.models.Request;
 import net.talaatharb.invoicetracker.services.AbsenceService;
-
 
 @RestController
 @RequiredArgsConstructor
@@ -27,7 +27,7 @@ public class AbsenceController {
             produces = {
                     MediaType.APPLICATION_JSON_VALUE,
                     MediaType.APPLICATION_XML_VALUE })
-    public ResponseEntity<List<Request>> postRequest(@RequestBody Request request){
+    public ResponseEntity<Long> postRequest(@RequestBody Request request){
 
         return new ResponseEntity<>(absenceService.postRequest(request), HttpStatus.OK);
     }

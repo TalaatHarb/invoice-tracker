@@ -1,30 +1,43 @@
 package net.talaatharb.invoicetracker.services;
 
-import net.talaatharb.invoicetracker.exceptions.UserException;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import net.talaatharb.invoicetracker.exceptions.UserException;
+import net.talaatharb.invoicetracker.models.AbsenceAttachments;
+import net.talaatharb.invoicetracker.models.Request;
+import net.talaatharb.invoicetracker.repositories.RequestRepository;
 
 @Service
 public class AttachmentService {
     @Value("${ATTACHMENTS_LOCATION}")
     private String attachmentLocation;
+
+    @Autowired
+    private RequestRepository requestRepository;
+
     private boolean isValidFile(String type){
         System.out.println(type);
         return (type.equals("image/png") || type.equals("image/jpeg") || type.equals("application/pdf") || type.equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document"));
     }
-    public void storeAttachments(MultipartFile[] attachments){
+
+    public void storeAttachments(MultipartFile[] attachments, Long reqId){
         try{
+
+            List<AbsenceAttachments> absenceAttachments = new ArrayList<>();
             for(MultipartFile file : attachments){
                 if(!isValidFile(file.getContentType())){
                     return;
@@ -32,12 +45,21 @@ public class AttachmentService {
                 System.out.println("file name is " + file.getOriginalFilename());
                 Files.write(Paths.get(Paths.get("").toAbsolutePath() + "\\"+ attachmentLocation + "\\" + file.getOriginalFilename()), file.getBytes());
 
-                // to-do: change the password route with the attachment api route
                 String attachmentUrl = ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/attachments/").path(file.getOriginalFilename()).toUriString();
 
-                // to-do : store the url in the database
                 System.out.println("attachment url is " + attachmentUrl);
+                AbsenceAttachments attachment = new AbsenceAttachments(file.getOriginalFilename(),attachmentUrl);
+                absenceAttachments.add(attachment);
             }
+
+            Optional<Request> requestOptional = requestRepository.findById(reqId);
+            if(requestOptional.isEmpty()){
+                return;
+            }
+            Request request = requestOptional.get();
+            request.setAbsenceAttachments(absenceAttachments);
+            requestRepository.saveAndFlush(request);
+
         }catch(Exception e){
             e.printStackTrace();
         }
