@@ -10,7 +10,7 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/employeedb
     username: root
-    password: 123123123
+    password: 1234
 
   mail:
     host: ${MAIL_HOST}
@@ -29,10 +29,8 @@ spring:
     lifecycle:
       timeout-per-shutdown-phase: 30s
 
-
-
 server:
-  port: 8080
+  port: ${PORT:8080}
   shutdown: graceful
 
 logging:
@@ -43,7 +41,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: "*"
   endpoint:
     health:
       show-details: always

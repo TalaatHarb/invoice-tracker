@@ -34,7 +34,7 @@ public class InvoiceTrackerBackendApplication {
 	private static final String EMAIL_EMPLOYEE_2 = "boogado5@yahoo.com";
 
 	public static final String PASS_USER = "awad36148";
-	
+
 	private static final Boolean IS_ENABLED = true;
 	private static final Date PASSWORD_EXPIRY_DATE = new GregorianCalendar(2022,Calendar.AUGUST,11).getTime();
 
@@ -54,7 +54,7 @@ public class InvoiceTrackerBackendApplication {
 
 			userService.saveUser(new User(EMAIL_USER, PASS_USER,new Date(),"0122303432","amr0"));
 			userService.saveUser(new User(EMAIL_EMPLOYEE, PASS_USER,"Gado",true));
-			userService.saveUser(new User(EMAIL_HR, PASS_USER,"Ahmed",false));
+			userService.saveUser(new User(EMAIL_HR, PASS_USER,"Ahmed",true));
 			userService.saveUser(new User(EMAIL_ADMIN_USER, PASS_USER,"mostafa",true));
 			userService.saveUser(new User(EMAIL_HR_2, PASS_USER,"hamada",false));
 
@@ -88,7 +88,6 @@ public class InvoiceTrackerBackendApplication {
 			userService.saveRequest(l,"sickness",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
 			userService.saveRequest(l,"vacation",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
 			userService.saveRequest(l,"troll",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
-
 		};
 	}
 }
