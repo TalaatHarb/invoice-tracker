@@ -11,7 +11,7 @@ type selectorProps = {
 
 const ColumnSelector = ({ table }: selectorProps) => {
   return (
-    <div className="self-end max-w-sm text-black bg-white">
+    <div className="self-end max-w-sm text-black">
       <Popover className="relative">
         {({ open }) => (
           <>
