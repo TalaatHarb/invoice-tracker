@@ -16,13 +16,14 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import lombok.extern.slf4j.Slf4j;
-import net.talaatharb.invoicetracker.service.UserDetailsServiceImpl;
+import net.talaatharb.invoicetracker.services.UserDetailsServiceImpl;
 
 @Slf4j
 public class AuthTokenFilter extends OncePerRequestFilter {
 
 	@Autowired
 	private JwtUtils jwtUtils;
+
 
 	@Autowired
 	private UserDetailsServiceImpl userDetailsService;

@@ -1,4 +1,4 @@
-package net.talaatharb.invoicetracker.service;
+package net.talaatharb.invoicetracker.services;
 
 import java.util.Collection;
 import java.util.List;
@@ -19,7 +19,8 @@ public class UserDetailsImpl implements UserDetails {
 		List<? extends GrantedAuthority> authorities = user.getRoles().stream()
 				.map(role -> new SimpleGrantedAuthority(role.getName().name())).toList();
 
-		return new UserDetailsImpl(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(), authorities);
+		return new UserDetailsImpl(user.getId(), user.getUsername(), user.getEmail(), user.getPassword(), authorities,
+				user.getIsEnabled(),user.isNotPasswordExpired());
 	}
 
 	private Collection<? extends GrantedAuthority> authorities;
@@ -32,6 +33,10 @@ public class UserDetailsImpl implements UserDetails {
 	private String password;
 
 	private String username;
+	
+	private Boolean isEnabled;
+    
+	private Boolean isCredentialsNonExpired;
 
 	public UserDetailsImpl(Long id, String username, String email, String password,
 			Collection<? extends GrantedAuthority> authorities) {
@@ -40,6 +45,17 @@ public class UserDetailsImpl implements UserDetails {
 		this.email = email;
 		this.password = password;
 		this.authorities = authorities;
+	}
+	
+	public UserDetailsImpl(Long id, String username, String email, String password,
+			Collection<? extends GrantedAuthority> authorities,Boolean isEnabled, Boolean isCredentialsNonExpired) {
+		this.id = id;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.authorities = authorities;
+		this.isEnabled = isEnabled;
+		this.isCredentialsNonExpired = isCredentialsNonExpired;
 	}
 
 	@Override
@@ -92,11 +108,10 @@ public class UserDetailsImpl implements UserDetails {
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return true;
-	}
+		return isCredentialsNonExpired;	}
 
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return isEnabled;
 	}
 }

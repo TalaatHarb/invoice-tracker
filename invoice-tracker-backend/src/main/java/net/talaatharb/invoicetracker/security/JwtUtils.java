@@ -7,25 +7,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.SignatureException;
-import io.jsonwebtoken.UnsupportedJwtException;
-import net.talaatharb.invoicetracker.service.UserDetailsImpl;
+import io.jsonwebtoken.*;
+import net.talaatharb.invoicetracker.services.UserDetailsImpl;
 
 @Component
 public class JwtUtils {
 	private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
+
 
 	public String generateJwtToken(Authentication authentication) {
 
 		UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 
 		return Jwts.builder().setSubject((userPrincipal.getEmail())).setIssuedAt(new Date())
-				.setExpiration(new Date((new Date()).getTime() + JwtProperties.EXPIRATION_TIME))
-				.signWith(SignatureAlgorithm.HS512, JwtProperties.SECRET).compact();
+				.setExpiration(new Date((new Date()).getTime() + JwtProperties.EXPIRATION_TIME)).setIssuer("invoicetracker")
+				.signWith(SignatureAlgorithm.HS512,
+						JwtProperties.SECRET).compact();
 	}
 
 	public String getUserNameFromJwtToken(String token) {

@@ -1,8 +1,11 @@
 export interface AbsenseItem {
-    absenceType: string,
-    Date: string,
-    comment: string,
-    numberOfDaysRequested: number,
-    dayType:string,
-    Attachment: string
+  id: number
+  absenceType: string
+  Date: string
+  comment: string
+  numberOfDaysRequested: number
+  dayType: string
+  Attachment: string
+  startDate: string
+  endDate: string
 }
