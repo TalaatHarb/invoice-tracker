@@ -48,7 +48,7 @@ const RequestList=()=>{
     ]
     const [requestData, setRequestData] = useState<any>([]);
 
-    const allEmployeeDataUrl = "http://localhost:8080/Requests/LeaveRequests";
+    const allEmployeeDataUrl ="http:localhost:8080/user/absence/LeaveRequests";
     const fetchFacad = new FetchFacad();
    
         useEffect(() => {
