@@ -15,7 +15,7 @@ import net.talaatharb.invoicetracker.services.UserService;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*" , allowedHeaders = "*", maxAge = 3600)
 public class UserController {
 
     private final UserService userService;

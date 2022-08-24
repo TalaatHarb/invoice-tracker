@@ -9,17 +9,17 @@ interface TabsProps {
 function Tabs({ tabs, elements }: TabsProps) {
   return (
     <Tab.Group>
-      <Tab.List className='flex space-x-1 rounded-xl bg-blue-900/20 p-1 border border-spacing-4 mb-8'>
+      <Tab.List className='flex space-x-1 rounded-xl bg-lightGrey p-1  my-2'>
         {tabs.map((tab, index) => (
           <Tab
             key={index}
             className={({ selected }) =>
               classNames(
-                'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700',
-                'ring-black ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
+                'w-full rounded-lg py-2.5 text-lg font-bold leading-5 text-black',
+                'ring-blueCegedim ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
                 selected
-                  ? 'bg-primary-default shadow text-white'
-                  : 'text-blue-200 hover:bg-dark hover:text-default'
+                  ? 'bg-blueCegedim shadow text-lightGrey'
+                  : 'text-blue-200 hover:bg-darkGrey hover:text-default'
               )
             }
           >
