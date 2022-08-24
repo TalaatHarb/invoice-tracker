@@ -28,7 +28,6 @@ public class AttachmentController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         attachmentService.storeAttachments(files, reqId);
-
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

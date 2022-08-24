@@ -8,11 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import net.talaatharb.invoicetracker.repositories.AttachmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -29,15 +31,27 @@ public class AttachmentService {
     @Autowired
     private RequestRepository requestRepository;
 
+    @Autowired
+    private AttachmentRepository attachmentRepository;
+
     private boolean isValidFile(String type){
         System.out.println(type);
         return (type.equals("image/png") || type.equals("image/jpeg") || type.equals("application/pdf") || type.equals("application/vnd.openxmlformats-officedocument.wordprocessingml.document"));
     }
 
+    @Transactional
     public void storeAttachments(MultipartFile[] attachments, Long reqId){
         try{
 
             List<AbsenceAttachments> absenceAttachments = new ArrayList<>();
+
+            Optional<Request> requestOptional = requestRepository.findById(reqId);
+            if(requestOptional.isEmpty()){
+                return;
+            }
+
+            Request request = requestOptional.get();
+
             for(MultipartFile file : attachments){
                 if(!isValidFile(file.getContentType())){
                     return;
@@ -49,16 +63,12 @@ public class AttachmentService {
 
                 System.out.println("attachment url is " + attachmentUrl);
                 AbsenceAttachments attachment = new AbsenceAttachments(file.getOriginalFilename(),attachmentUrl);
+                attachment.setRequest(request);
                 absenceAttachments.add(attachment);
             }
 
-            Optional<Request> requestOptional = requestRepository.findById(reqId);
-            if(requestOptional.isEmpty()){
-                return;
-            }
-            Request request = requestOptional.get();
-            request.setAbsenceAttachments(absenceAttachments);
-            requestRepository.saveAndFlush(request);
+            request.setAbsenceAttachments(attachmentRepository.saveAll(absenceAttachments));
+
 
         }catch(Exception e){
             e.printStackTrace();

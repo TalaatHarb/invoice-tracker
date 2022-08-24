@@ -24,7 +24,7 @@ public class AbsenceAttachments {
 
     private String attachmentUrl;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="request_id", referencedColumnName = "id")
     private Request request;
 }

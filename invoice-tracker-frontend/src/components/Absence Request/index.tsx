@@ -37,7 +37,8 @@ const RequestForm = () => {
     numberOfDays: 1,
   });
   const [attachments, setAttachments] = useState([] as File[]);
-  const [requestId, setRequestId] = useState<number>();
+  // const [requestId, setRequestId] = useState<number>();
+  let requestId:number;
   const [formData, setFormData] = useState<FormData>(new FormData());
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -95,7 +96,7 @@ const RequestForm = () => {
       })
       .then((response) => {
         console.log(response.data);
-        setRequestId(response.data);
+        requestId = response.data;
         alert("Your request is sent and being processed.");
         alert(
           `You made a request on ${request.requestDate} to have ${
