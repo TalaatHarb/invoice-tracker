@@ -2,8 +2,6 @@ import { Menu, Transition } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/toolkit-types";
-import { logoutUser } from "../../services/redux/slices/AuthenticationSlice";
-import Button from "../Button";
 import BellButton from "../Button/BellNotification";
 import Logo from "../company-logo";
 
@@ -86,7 +84,7 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
 export default Navbar;
