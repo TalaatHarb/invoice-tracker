@@ -5,15 +5,12 @@ import UserPage from "./pages/UserPage";
 import HrPage from "./pages/HrPage";
 import EmployeePage from "./pages/EmployeePage";
 import { useAppSelector } from "./hooks/toolkit-types";
-import Navbar from "./components/Navbar";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ForgotPassword from "./pages/password/ForgotPassword";
 import ResetPassword from "./pages/password/ResetPassword";
 import RequestForm from "./components/Absence Request";
-
 import EmployeesList from "./pages/EmployeesList/EMployeesList";
 import EmployeesHub from "./pages/EmployeesHub/EmployeesHub";
-import AbsenceHistory from "./pages/EmployeeProfileHrView";
 import HrPrivateRoute from "./components/HrPrivateRoute/HrPrivateRoute";
 import EmployeeProfileHrView from "./pages/EmployeeProfileHrView";
 import EmployeePrivateRoute from "./components/EmployeePrivateRoute";
@@ -34,19 +31,23 @@ function App() {
           <Route path="/user" element={<UserPage />} />
         </Route>
 
-        {/* <Route path="/hr/employee/:employeeId" element={<HrPrivateRoute />}> */}
-        <Route
-          path="/hr/employee/:employeeId"
-          element={<EmployeeProfileHrView />}
-        />
-        {/* </Route> */}
+        {/* route for the HR view of the employee page */}
+        <Route path="/hr/employee/:employeeId" element={<HrPrivateRoute />}>
+          <Route
+            path="/hr/employee/:employeeId"
+            element={<EmployeeProfileHrView />}
+          />
+        </Route>
 
-        {/* <Route path="/team/:teamId" element={<HrPrivateRoute />}> */}
-        <Route path="/team/:teamId" element={<EmployeesList />} />
-        {/* </Route> */}
-        {/* <Route path="/hr/allEmployees" element={<HrPrivateRoute />}> */}
-        <Route path="/hr/allEmployees" element={<EmployeesHub />} />
-        {/* </Route> */}
+        {/* route for team page */}
+        <Route path="/team/:teamId" element={<HrPrivateRoute />}>
+          <Route path="/team/:teamId" element={<EmployeesList />} />
+        </Route>
+
+        {/* route for employee list HR view */}
+        <Route path="/hr/allEmployees" element={<HrPrivateRoute />}>
+          <Route path="/hr/allEmployees" element={<EmployeesHub />} />
+        </Route>
 
         {/* reset password routes */}
         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -55,13 +56,12 @@ function App() {
         {/* reset password routes */}
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
-
-        <Route path="/team/:teamId" element={<EmployeesList />} />
-        <Route path="/empList" element={<EmployeesHub />} />
 
         <Route path="/edit" element={<EmployeePrivateRoute />}>
           <Route path="/edit" element={<EditRequest />} />
         </Route>
+
+        {/* route for request list hr */}
         <Route path="/requestList" element={<EmployeePrivateRoute />}>
           <Route path="/requestList" element={<RequestList />} />
         </Route>

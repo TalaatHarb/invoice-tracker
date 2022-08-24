@@ -3,8 +3,7 @@ import { UserIcon } from "@heroicons/react/solid";
 import axios from "axios";
 import { employeeType } from "./types";
 import { useAppSelector } from "../../hooks/toolkit-types";
-import { useParams } from "react-router";
-
+import formatDate from "../../utils/FormatDate";
 type employeeDetailsProps = {
   id: number;
 };
@@ -45,9 +44,11 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
         })
         .then((response) => {
           setEmployee(response.data);
-        })
-        .catch(() => {});
+        });
     };
+    getData();
+    console.log(employee);
+    console.log(formatDate(employee.joiningDate));
   }, []);
 
   const resignedCheckBoxHandler = () => {
@@ -76,7 +77,7 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
         newData = { joiningDate: new Date(targetValue) };
         break;
       case "resigned":
-        newData = { mobileNumber: targetValue };
+        newData = { endDate: targetValue };
         break;
     }
     tempEmployee = { ...tempEmployee, ...newData };
@@ -101,6 +102,7 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
           if (response.status == 200) {
             setEmployee(editEmployee);
           } else {
+            setEditEmployee(employee);
             setUpdateError(true);
             setTimeout(() => {
               setUpdateError(false);
@@ -108,12 +110,13 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
           }
           setEdit(false);
         })
-        .catch((response) => {
+        .catch(() => {
           setUpdateError(true);
           setTimeout(() => {
             setUpdateError(false);
           }, 10000);
           setEdit(false);
+          setEditEmployee(employee);
         });
     } else {
       setEdit(true);
@@ -202,15 +205,12 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
               className=" focus:border-blueCegedim focus:border-2 outline-none text-lg shadow-lg  ml-20 px-5 py-2 text-center w-full"
               id="joiningDate"
               onChange={employeeChangeHandler}
-              value={editEmployee.joiningDate?.toLocaleString(
-                "en-US",
-                dateFormat
-              )}
+              value={formatDate(editEmployee.joiningDate)}
               placeholder="Please enter data in the dd/mm/yyyy format"
             />
           ) : (
             <p className="bg-white shadow-lg ml-20 px-5 py-2 w-full">
-              {employee.joiningDate?.toLocaleString("en-US", dateFormat)}
+              {formatDate(employee.joiningDate)}
             </p>
           )}
         </div>
@@ -233,6 +233,7 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
                 placeholder="Please enter data in the dd/mm/yyyy format"
                 disabled={!resignedActive}
                 onChange={employeeChangeHandler}
+                value={formatDate(editEmployee.endDate)}
               />
             </>
           ) : (
@@ -247,7 +248,7 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
               </label>
               <p className="bg-white shadow-lg ml-20 px-5 py-2 w-full ">
                 {employee.resigned
-                  ? employee.endDate?.toLocaleString("en-US", dateFormat)
+                  ? formatDate(employee.endDate)
                   : "not resigned"}
               </p>
             </>
@@ -296,26 +297,32 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
         </h3>
         <div className="flex flex-row mt-6 text-lg">
           <div className="flex flex-col items-center mr-8">
-            <p className="bg-darkGrey px-5 py-2  text-white mb-3">Sick</p>
+            <p className="bg-darkGrey px-5 py-2  text-white mb-3 rounded-md">
+              Sick
+            </p>
             <p className="bg-yellowDarkCegedim text-white rounded-full px-3 py-1 w-fit">
               0
             </p>
           </div>
           <div className="flex flex-col items-center mr-8">
-            <p className="bg-darkGrey px-5 py-2  text-white mb-3">Emergency</p>
+            <p className="bg-darkGrey px-5 py-2  text-white mb-3 rounded-md">
+              Emergency
+            </p>
             <p className="bg-yellowDarkCegedim text-white rounded-full px-3 py-1 w-fit">
               0
             </p>
           </div>
           <div className="flex flex-col items-center">
-            <p className="bg-darkGrey px-5 py-2  text-white mb-3">Maternity</p>
+            <p className="bg-darkGrey px-5 py-2  text-white mb-3 rounded-md">
+              Maternity
+            </p>
             <p className="bg-yellowDarkCegedim text-white rounded-full px-3 py-1 w-fit">
               0
             </p>
           </div>
         </div>
         <div className="flex flex-col items-center mt-20">
-          <p className="text-2xl bg-darkGrey px-5 py-2  text-white mb-3">
+          <p className="text-2xl bg-darkGrey px-5 py-2  text-white mb-3 rounded-md">
             Annual Leaves
           </p>
           <p className="text-lg bg-yellowDarkCegedim text-white rounded-full px-3 py-1 w-fit">

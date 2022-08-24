@@ -7,7 +7,7 @@ import Navbar from "../../components/Navbar";
 const EmployeeAdminHrView = () => {
   const { employeeId } = useParams();
   return (
-    <div className="bg-lightGrey bg-opacity-20">
+    <div className="min-h-screen bg-lightGrey bg-opacity-20">
       <Navbar />
       <EmployeeDetails id={Number(employeeId)} />
       <div className="px-56 leading-tight text-2xl mt-0 mb-2">
