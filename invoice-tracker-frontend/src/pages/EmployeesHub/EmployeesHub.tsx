@@ -6,12 +6,13 @@ import { employeeFilterType } from "./types";
 import axios from "axios";
 import { useAppSelector } from "../../hooks/toolkit-types";
 import { employeeType } from "../../components/employees-hub/types";
+import { CONSTANTS } from "../../utils/constants";
 
 const EmployeesHub = () => {
   const isAuthenticated: any = useAppSelector(
     (state) => state.AuthenticationSlice.isAuthenticated
   );
-  const allEmployeeDataUrl = "http://localhost:8080/api/users";
+  const allEmployeeDataUrl = `${CONSTANTS.BACKEND_URL}/api/users`;
   const [employeeData, setEmployeeData] = useState<employeeType[]>([
     {
       id: 1,
@@ -86,7 +87,7 @@ const EmployeesHub = () => {
         break;
     }
     const id = event.target.id;
-    const filterQueryUrl = `http://localhost:8080/api/users/filter?type=${currentField}&values=${value}`;
+    const filterQueryUrl = `${CONSTANTS.BACKEND_URL}/api/users/filter?type=${currentField}&values=${value}`;
     if (id == "apply") {
       await axios
         .get(filterQueryUrl, {

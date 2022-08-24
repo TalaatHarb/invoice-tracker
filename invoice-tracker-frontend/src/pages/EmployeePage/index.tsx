@@ -8,6 +8,7 @@ import Button from "../../components/Button";
 import UserDisplay from "../../components/UserDisplay";
 import RequesCard from "../../components/RequestCard";
 import { logoutUser } from '../../services/redux/slices/AuthenticationSlice'
+import { CONSTANTS } from "../../utils/constants";
 
 const EmployeePage = (props: any) => {
   const { isAuthenticated } = useAppSelector(
@@ -38,7 +39,7 @@ const EmployeePage = (props: any) => {
       headers: { Authorization: `Bearer ${isAuthenticated}` },
     };
 
-    let res = await axios.get(`http://localhost:8080/api/user?ID=1`, config);
+    let res = await axios.get(`${CONSTANTS.BACKEND_URL}/api/user?ID=1`, config);
 
     setEmployee(res.data);
     const count: any = {};
