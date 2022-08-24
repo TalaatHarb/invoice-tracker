@@ -184,17 +184,19 @@ public class User {
 
 	public void setRequestsTypes(String typeName,int numberOfDays) {
 		boolean exists=false;
-		for (int i=0;i<this.requestsTypesNumber.size();i++){
+		if(!typeName.equals("Annual leave")) {
+			for (int i = 0; i < this.requestsTypesNumber.size(); i++) {
 
-			if(this.requestsTypesNumber.get(i).getName().equals(typeName)){
-				this.requestsTypesNumber.get(i).setNumberOfDays(this.requestsTypesNumber.get(i).getNumberOfDays()+numberOfDays);
-				exists =true;
-				break;
+				if (this.requestsTypesNumber.get(i).getName().equals(typeName)) {
+					this.requestsTypesNumber.get(i).setNumberOfDays(this.requestsTypesNumber.get(i).getNumberOfDays() + numberOfDays);
+					exists = true;
+					break;
+				}
+
 			}
-
+			if (!exists)
+				this.requestsTypesNumber.add(new RequestsTypesNumber(typeName, numberOfDays));
 		}
-		if(!exists)
-			this.requestsTypesNumber.add(new RequestsTypesNumber(typeName,numberOfDays));
 	}
 
 	public User(String email, String password, int allowedBalance, int remainingBalance, Date joiningDate, String mobileNumber,String username) {
