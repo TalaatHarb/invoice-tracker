@@ -1,27 +1,13 @@
 import { Menu, Transition } from '@headlessui/react'
 import React, { Fragment, useState } from 'react'
-import { Z_FIXED } from 'zlib'
 import BellButton from '../Button/BellNotification'
 import Logo from '../company-logo/Logo'
-
-const styles = {
-  inset: '0px auto auto 0px',
-  margin: 0,
-  transform: 'translate(644px, 82px)',
-}
-
-/*
-  TODOs:
-  - Handling the onClickOutside for the notification icon
-  - Make a smaller components later (dropdown list - list item)
-*/
-
-/*
-  BLOCKED:
-  - Waiting to recieve the user image link as a global state
-*/
+import { logoutUser } from '../../services/redux/slices/AuthenticationSlice'
+import { useAppDispatch } from '../../hooks/toolkit-types'
+import Button from '../Button'
 
 const Navbar = () => {
+  const dispatch = useAppDispatch()
   return (
     <nav className='bg-white border-x-4 border-b-4 border-navbar-border px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900'>
       {/* Container of all the items in the navbar */}
@@ -34,7 +20,7 @@ const Navbar = () => {
             {/* Cegedim Members */}
             <a
               href='#'
-              className='block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
+              className='block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-blueCegedim dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
             >
               Cegedim Members
             </a>
@@ -96,12 +82,12 @@ const Navbar = () => {
                     </a>
                   </Menu.Item>
                   <Menu.Item>
-                    <a
-                      href='#'
-                      className='block px-4 py-2 text-sm text-gray-700'
+                    <button
+                      className='block px-4 py-2 text-sm text-gray-700 pointer-events-auto'
+                      onClick={() => dispatch(logoutUser())}
                     >
                       Sign out
-                    </a>
+                    </button>
                   </Menu.Item>
                 </Menu.Items>
               </Transition>
