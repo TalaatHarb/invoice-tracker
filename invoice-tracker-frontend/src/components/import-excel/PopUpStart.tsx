@@ -3,12 +3,8 @@ import { useState } from "react";
 import PopUpExcel from './PopUpExcel';
 import  './popup-startcss.scss'
 
-import {BsFillArrowUpSquareFill} from "react-icons/bs";
-import { BsFillPlusSquareFill } from "react-icons/bs";
 
-import { BsFillArrowDownSquareFill } from "react-icons/bs";
 import { Menu, Transition } from '@headlessui/react';
-import Employee_Add from '../add-employee/Employee_Add';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 
@@ -46,7 +42,7 @@ function PopUpStart() {
 
         </main> */}
 
-<Menu as='div' className='ml-3 relative'>
+<Menu as='div' className='ml-3 relative' 	  >
 <PopUpExcel  popup={buttonpopup} setpopup={setButtonpopup}></PopUpExcel>
 
               <div>
@@ -75,14 +71,25 @@ function PopUpStart() {
                 leaveFrom='transform opacity-100 scale-100'
                 leaveTo='transform opacity-0 scale-95'
               >
-                <Menu.Items >
+                <Menu.Items  style={{
+        backgroundColor: 'white',
+        width: '250px',
+        
+      }}>
                   <Menu.Item>
                     <a
                       href='#'
                       className='block px-4 py-2 text-sm text-gray-700'
                     >
-                      <BsFillArrowUpSquareFill  className='PopUppic1'/>
-                     <p className='PopUphover' >Export Employees</p>
+                      
+                      <div className="float-left">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6" >
+  <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+</svg>
+</div>
+                     
+                     <p className='font-bold hover:text-blueCegedim ' >Export Employees</p>
+                    
                     </a>
                   </Menu.Item>
                   <Menu.Item>
@@ -90,17 +97,23 @@ function PopUpStart() {
                       href='#'
                       className='block px-4 py-2 text-sm text-gray-700'
                     >
-                       <BsFillArrowDownSquareFill className='PopUppic1' />
-                      <p className='PopUphover' onClick={() => setButtonpopup(true)}>Post From Clibord </p>
+                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 float-left">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                  </svg>
+
+                      <p className='font-bold  hover:text-blueCegedim ' onClick={() => setButtonpopup(true)}>Post From Clibord </p>
                     </a>
                   </Menu.Item>
                   <Menu.Item>
                     <Link
-                      to='/add'
+                      to='/empadd'
                       className='block px-4 py-2 text-sm text-gray-700'
                     >
-                      <BsFillPlusSquareFill className='PopUppic1' />
-                      Add New Employee 
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6 float-left">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v18m9-9H3" />
+                    </svg>
+
+                      <p className='font-bold hover:text-blueCegedim '> Add New Employee </p>
                     </Link>
                   </Menu.Item>
                 </Menu.Items>

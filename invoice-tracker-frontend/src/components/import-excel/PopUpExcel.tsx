@@ -83,7 +83,7 @@ const fetch_employees = async (prop : any) => {
 
   let res = await axios.post('http://localhost:8080/api/employee/uploadexcel',prop, config);
   console.log(res.data);
-  setExcelFileError(res.data.message);
+  setExcelFileError(res.data.message) ;
 };
 
 

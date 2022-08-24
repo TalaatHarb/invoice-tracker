@@ -8,6 +8,7 @@ import Navbar from '../Navbar';
 
 import axios from 'axios';
 import { useAppSelector } from '../../hooks/toolkit-types';
+import Select from 'react-select/dist/declarations/src/Select';
 
 
 
@@ -29,6 +30,8 @@ const Options = [
   { value: 'team2', label: 'Team2' },
   { value: 'team3', label: 'Team3' }
 ]
+
+
 
 
 function Employee_Add() {
@@ -111,6 +114,8 @@ function Employee_Add() {
   };
 
 
+
+
   const { isAuthenticated } = useAppSelector(
     (state) => state.AuthenticationSlice
   );
@@ -158,11 +163,21 @@ function Employee_Add() {
    function claculate_allowedballance(input : any)
    {
     setJoiningDate(input);
-    var date = new Date(input); 
-    var elapsed = date.getMonth()+1;
-    console.log(elapsed);
+    var date1 = new Date(input); 
     
+    var year  = date1.getFullYear()+1;
+    var final_date = "1/1/"+year;
 
+    var date2 = new Date(final_date);
+    var number = 21/365;
+
+    let difference = date2.getTime() - date1.getTime();
+    let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
+
+    let multible = TotalDays * number;
+    let balance =  multible.toFixed(2);
+    setAnnualBalance(balance);
+    //hellow test 
    }
 
   return (
@@ -357,8 +372,10 @@ function Employee_Add() {
         <option value="team1">Team1</option>
         <option value="team2">Team2</option>
         <option value="team3">Team3</option>
-        
+    
       </select>
+
+          
       <label className="employee_label">Team Name</label>
        </div>
        <div className="form-field col x-50">

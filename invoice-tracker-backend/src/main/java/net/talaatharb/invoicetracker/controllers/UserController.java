@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,17 +24,15 @@ import net.talaatharb.invoicetracker.services.UserService;
 @CrossOrigin(origins = "*")
 public class UserController {
 
+    @Autowired
     private final UserService userService;
-
     private  final UserRepository userRepository;
 
-
- 
-
-    @GetMapping("/users")
-    public ResponseEntity<List<User>> getUsers() {
-        return ResponseEntity.ok().body(userService.getUsers());
-    }
+//
+//    @GetMapping("/users")
+//    public ResponseEntity<List<UserDetails>> getUsers() {
+//        return ResponseEntity.ok().body(userService.getUsers());
+//    }
 
     @GetMapping("/user")
     public ResponseEntity<User> getUser(@RequestParam long ID){
@@ -97,7 +96,5 @@ public class UserController {
 
 
     }
-
-
 
 }
