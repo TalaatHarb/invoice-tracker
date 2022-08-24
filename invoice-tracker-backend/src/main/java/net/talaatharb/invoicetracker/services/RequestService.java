@@ -43,15 +43,14 @@ public class RequestService {
        }
        return (result);
     }
-
-    public void editRequest(boolean isAccepted, Long reqID,Long managerID) {
+public void editRequest(boolean isAccepted, Long reqID,Long managerID) {
       Request request=requestRepository.findById(reqID).get();
 
       if(isAccepted) {
 
           int numberOfdays = request.getNumberOfDays();
           User user = userRepository.findById(request.getRequestedBy()).get();
-          if (request.getStatus().equals("Annual leave")) {
+          if (request.getType().equals("Annual leave")) {
               int remaining = user.getAllowedBalance() - numberOfdays;
               if (remaining < 0)
                   remaining = 0;
