@@ -8,8 +8,13 @@ const initialState: ModalState = {
   isOpen: false,
 }
 
+// disable html style overflow when modal is open
+
 const closeModal = (state: ModalState) => {
   state.isOpen = false
+  setTimeout(() => {
+    document.documentElement.style.overflow = 'auto'
+  }, 50)
 }
 
 const openModal = (state: ModalState) => {

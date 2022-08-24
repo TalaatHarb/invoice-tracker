@@ -30,6 +30,7 @@ function RequestCard({ request, fetchRequests }: RequestCardProps) {
   const handleReuqestApproval = async () => {
     const reponse = await axios.post(
       `${CONSTANTS.BACKEND_URL}/api/editRequest?isAccepted=true&reqID=${request.request.id}`,
+      {},
       config
     )
     if (reponse.status === 200) {
@@ -42,6 +43,7 @@ function RequestCard({ request, fetchRequests }: RequestCardProps) {
   const handleRequestRejection = async () => {
     const reponse = await axios.post(
       `${CONSTANTS.BACKEND_URL}/api/editRequest?isAccepted=false&reqID=${request.request.id}`,
+      {},
       config
     )
 

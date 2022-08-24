@@ -13,10 +13,10 @@ export default function MyModal({ notes }: Props) {
   const { isOpen } = useAppSelector((state) => state.ModalSlice)
 
   return (
-    <Transition appear show={isOpen} as={Fragment}>
+    <Transition.Root appear show={isOpen} as={Fragment}>
       <Dialog
         as='div'
-        className='relative z-50'
+        className='relative z-10'
         onClose={() => {
           dispatch(ModalScreenActions.closeModal())
         }}
@@ -70,6 +70,6 @@ export default function MyModal({ notes }: Props) {
           </div>
         </div>
       </Dialog>
-    </Transition>
+    </Transition.Root>
   )
 }
