@@ -10,6 +10,7 @@ const AbsenceHistoryAccordionList = () => {
   );
 
   const [absences, setAbsences] = useState([]);
+  let tempData: [];
 
   const fetchAbsences = async () => {
     const config = {
@@ -23,6 +24,7 @@ const AbsenceHistoryAccordionList = () => {
     );
 
     setAbsences(res.data);
+    tempData = res.data;
   };
 
   useEffect(() => {
@@ -44,6 +46,18 @@ const AbsenceHistoryAccordionList = () => {
           />
         );
       })}
+      <br />
+      <div className="flex flex-row-reverse">
+        <button
+          onClick={fetchAbsences}
+          className="inline-flex items-center px-3 py-1.5 bg-lightGrey hover:bg-darkGrey text-sm font-medium rounded-md mx-2"
+        >
+          Cancel
+        </button>
+        <button className="inline-flex items-center px-3 py-1.5 bg-lightGrey hover:bg-darkGrey text-sm font-medium rounded-md mx-2">
+          Save
+        </button>
+      </div>
     </>
   );
 };

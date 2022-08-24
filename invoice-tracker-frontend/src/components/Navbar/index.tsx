@@ -79,17 +79,6 @@ const Navbar = () => {
                       Your Profile
                     </Link>
                   </Menu.Item>
-                  <Menu.Item>
-                    <Link
-                      to="/login"
-                      onClick={() => {
-                        dispatch(logoutUser());
-                      }}
-                      className="block px-4 py-2 text-sm text-gray-700"
-                    >
-                      Sign out
-                    </Link>
-                  </Menu.Item>
                 </Menu.Items>
               </Transition>
             </Menu>
