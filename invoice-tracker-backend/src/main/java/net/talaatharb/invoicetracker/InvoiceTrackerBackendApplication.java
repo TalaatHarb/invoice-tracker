@@ -34,7 +34,7 @@ public class InvoiceTrackerBackendApplication {
 	private static final String EMAIL_EMPLOYEE_2 = "boogado5@yahoo.com";
 
 	public static final String PASS_USER = "awad36148";
-	
+
 	private static final Boolean IS_ENABLED = true;
 	private static final Date PASSWORD_EXPIRY_DATE = new GregorianCalendar(2022,Calendar.AUGUST,11).getTime();
 
@@ -84,10 +84,10 @@ public class InvoiceTrackerBackendApplication {
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
 			long l=1;
-			userService.saveRequest(l,"sickness",new Request(("2018-09-09"),("2018-09-09")));
-			userService.saveRequest(l,"sickness",new Request(("2018-09-09"),("2018-09-09")));
-			userService.saveRequest(l,"vacation",new Request(("2018-09-09"),("2018-09-09")));
-			userService.saveRequest(l,"troll",new Request(("2018-09-09"),("2018-09-09")));
+			userService.saveRequest(l,"sickness",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
+			userService.saveRequest(l,"sickness",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
+			userService.saveRequest(l,"vacation",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
+			userService.saveRequest(l,"troll",new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09")));
 
 		};
 	}
