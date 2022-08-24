@@ -37,6 +37,10 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getUser(ID));
     }
 
+    @PutMapping("/user/update/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable  long id, @RequestBody UserDetails userDetails){
+        return userService.updateUser(id,userDetails);
+    }
     @PostMapping("/user/save")
     public ResponseEntity<User>saveUser(@RequestBody User user) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());

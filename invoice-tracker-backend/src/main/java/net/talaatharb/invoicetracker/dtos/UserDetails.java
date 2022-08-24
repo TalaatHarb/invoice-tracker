@@ -52,4 +52,28 @@ public class UserDetails {
 
     private boolean resigned;
 
+    @Override
+    public String toString() {
+        return "UserDetails{" +
+                "id=" + id +
+                ", employeeId=" + employeeId +
+                ", nationalId='" + nationalId + '\'' +
+                ", englishName='" + englishName + '\'' +
+                ", arabicName='" + arabicName + '\'' +
+                ", email='" + email + '\'' +
+                ", mobileNumber='" + mobileNumber + '\'' +
+                ", englishAddress='" + englishAddress + '\'' +
+                ", arabicAddress='" + arabicAddress + '\'' +
+                ", jobTitle='" + jobTitle + '\'' +
+                ", joiningDate=" + joiningDate +
+                ", endDate=" + endDate +
+                ", allowedBalance=" + allowedBalance +
+                ", remainingBalance=" + remainingBalance +
+                ", team=" + team +
+                ", billable=" + billable +
+                ", disabled=" + disabled +
+                ", fullTime=" + fullTime +
+                ", resigned=" + resigned +
+                '}';
+    }
 }
