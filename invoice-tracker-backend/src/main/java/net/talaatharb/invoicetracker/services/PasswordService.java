@@ -25,7 +25,7 @@ public class PasswordService {
     @Autowired
     private MailService mailService;
 
-    @Value("${APPLICATION_URL}")
+    @Value("${APPLICATION_URL:'http://localhost:300'}")
     private String appUrl;
     private final int FIVE_MINUTES = 5 * 60 * 1000;
 
