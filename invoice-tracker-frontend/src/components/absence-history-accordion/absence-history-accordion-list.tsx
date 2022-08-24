@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsenseItem } from "../../models/absence-item";
 import AbsenceHistoryItem from "./absence-history-accordion-item";
-import Navbar from "../Navbar/admin-nav-bar";
+import Navbar from "../Navbar";
 
 let dummyData: AbsenseItem = {
   id: 1,
