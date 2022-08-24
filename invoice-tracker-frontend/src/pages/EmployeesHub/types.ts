@@ -1,11 +1,11 @@
 export type employeeFilterType = {
   id?: number;
   nationalId?: string;
-  employeeId?:string
+  employeeId?: string;
   englishName?: string;
   arabicName?: string;
-  email?:string;
-  mobileNumber?:string;
+  email?: string;
+  mobileNumber?: string;
   englishAddress?: string;
   arabicAddress?: string;
   jobTitle?: string;
@@ -13,10 +13,9 @@ export type employeeFilterType = {
   endDate?: Date;
   allowedBalance?: number;
   remainingBalance?: number;
-  billable?: boolean;
-  disabled?: boolean;
-  team?: {id:number;
-  name:string}[];
-  fullTime?: boolean;
-  resigned?:boolean;
+  billable?: string;
+  disabled?: string;
+  team?: { id: number; name: string }[];
+  fullTime?: string;
+  resigned?: boolean;
 };

@@ -8,7 +8,7 @@ const fields = [
   { id: "englishName", name: "English Name" },
   { id: "arabicName", name: "Arabic name" },
   { id: "jobTitle", name: "Job title" },
-  { id: "joiningDate", name: "Joining date" },
+  { id: "joinDate", name: "Joining date" },
   { id: "endDate", name: "End date" },
   { id: "allowedBalance", name: "Allowed Balance" },
   { id: "remainingBalance", name: "Remaining Balance" },
