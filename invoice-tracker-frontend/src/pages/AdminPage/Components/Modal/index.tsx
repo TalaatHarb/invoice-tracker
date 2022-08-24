@@ -1,7 +1,6 @@
 import { Dialog, Transition } from '@headlessui/react'
-import React, { Fragment, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import Button from '../../../../components/Button'
+import React, { Fragment } from 'react'
+import { useDispatch } from 'react-redux'
 import { useAppSelector } from '../../../../hooks/toolkit-types'
 import { ModalScreenActions } from '../../../../services/redux/slices/DetailsModal'
 

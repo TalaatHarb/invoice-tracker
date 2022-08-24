@@ -61,28 +61,28 @@ interface Props {
 }
 function AdminProfilePage({ managerDetails }: Props) {
   const profile = {
-    name: managerDetails.username,
+    name: managerDetails?.username,
     imageUrl:
       'https://images.unsplash.com/photo-1516585427167-9f4af9627e6c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80',
     coverImageUrl:
       'https://images.unsplash.com/photo-1444628838545-ac4016a5418a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
     fields: {
-      Phone: managerDetails.mobileNumber || 'N/A',
-      Email: managerDetails.email || 'N/A',
+      Phone: managerDetails?.mobileNumber || 'N/A',
+      Email: managerDetails?.email || 'N/A',
       'Allowed Balanace': managerDetails.allowedBalance || 'N/A',
       'Arabic Address': managerDetails.arabicAddress || 'N/A',
       'English Address': managerDetails.englishAddress || 'N/A',
-      Billable: managerDetails.billable || 'N/A',
+      Billable: managerDetails?.billable || 'N/A',
       'Birth Date':
-        moment(managerDetails.birthDate).format('DD/MM/YYYY') || 'N/A',
-      'End Date': moment(managerDetails.endDate).format('DD/MM/YYYY') || 'N/A',
+        moment(managerDetails?.birthDate).format('DD/MM/YYYY') || 'N/A',
+      'End Date': moment(managerDetails?.endDate).format('DD/MM/YYYY') || 'N/A',
       'Join Date':
-        moment(managerDetails.joiningDate).format('DD/MM/YYYY') || 'N/A',
-      'National ID': managerDetails.nationalId || 'N/A',
-      'Over Time': managerDetails.overtime || 'N/A',
-      'Pay Rate': managerDetails.payRate || 'N/A',
-      'Remaining Balance': managerDetails.remainingBalance || 'N/A',
-      'Years of insurance': managerDetails.yearsOfInsurance || 'N/A',
+        moment(managerDetails?.joiningDate).format('DD/MM/YYYY') || 'N/A',
+      'National ID': managerDetails?.nationalId || 'N/A',
+      'Over Time': managerDetails?.overtime || 'N/A',
+      'Pay Rate': managerDetails?.payRate || 'N/A',
+      'Remaining Balance': managerDetails?.remainingBalance || 'N/A',
+      'Years of insurance': managerDetails?.yearsOfInsurance || 'N/A',
       Role: 'Manager',
     },
   }
@@ -98,7 +98,7 @@ function AdminProfilePage({ managerDetails }: Props) {
                 <div>
                   <img
                     className='h-32 w-full object-cover lg:h-48'
-                    src={profile.coverImageUrl}
+                    src={profile?.coverImageUrl}
                     alt=''
                   />
                 </div>

@@ -9,7 +9,7 @@ interface AuthenticationState {
   isAuthenticated: string | null
   userRole: string[] | null
   isLoading: boolean
-  ID: number | null
+  ID: number | string
 }
 
 const initialState: AuthenticationState = {
@@ -18,9 +18,7 @@ const initialState: AuthenticationState = {
   userRole: localStorage.getItem('userRoles')
     ? JSON.parse(localStorage.getItem('userRoles') || '')
     : null,
-  ID: localStorage.getItem('ID')
-    ? JSON.parse(localStorage.getItem('ID') || '')
-    : null,
+  ID: cookies.get('ID'),
   isLoading: false,
 }
 
@@ -37,7 +35,6 @@ export const loginUser = createAsyncThunk(
           },
         }
       )
-
       if (response.status === 200) {
         return response.data
       }
@@ -53,8 +50,8 @@ const AuthenticationSlice = createSlice({
   reducers: {
     logoutUser: (state) => {
       cookies.remove('token')
+      cookies.remove('ID')
       localStorage.removeItem('userRoles')
-      localStorage.removeItem('ID')
       state.isAuthenticated = null
       state.userRole = null
       state.error = undefined
@@ -71,10 +68,11 @@ const AuthenticationSlice = createSlice({
       state.isLoading = true
     })
     builder.addCase(loginUser.fulfilled, (state, action) => {
-      state.isAuthenticated = action.payload.token
-      state.userRole = action.payload.roles
-      localStorage.setItem('userRoles', JSON.stringify(action.payload.roles))
-      localStorage.setItem('ID', JSON.stringify(action.payload.id))
+      state.isAuthenticated = action?.payload?.token
+      state.userRole = action?.payload?.roles
+      state.ID = action?.payload?.id
+      localStorage.setItem('userRoles', JSON.stringify(action?.payload?.roles))
+      cookies.set('ID', action?.payload?.id, { path: '/' })
       state.error = undefined
       cookies.set('token', action.payload.token, {
         path: '/',

@@ -4,7 +4,7 @@ import axios from 'axios'
 import { CONSTANTS } from '../../utils/constants'
 import { useAppSelector } from '../../hooks/toolkit-types'
 import { ManagerDetails } from '../../models/managerDetails'
-
+import Navbar from '../../components/Navbar'
 const AdminPage = () => {
   const [managerDetails, setManagerDetails] = useState<ManagerDetails>(
     {} as ManagerDetails
@@ -21,8 +21,8 @@ const AdminPage = () => {
       `${CONSTANTS.BACKEND_URL}/api/user?ID=${ID}`,
       config
     )
-    if (reponse.status === 200) {
-      setManagerDetails(reponse.data)
+    if (reponse?.status === 200) {
+      setManagerDetails(reponse?.data)
     }
   }
 
@@ -30,7 +30,12 @@ const AdminPage = () => {
     getManagerDetails()
   }, [])
 
-  return <AdminTabs managerDetails={managerDetails} />
+  return (
+    <>
+      <Navbar />
+      <AdminTabs managerDetails={managerDetails} />
+    </>
+  )
 }
 
 export default AdminPage

@@ -47,7 +47,7 @@ function RequestCard({ request, fetchRequests }: RequestCardProps) {
       config
     )
 
-    if (reponse.status === 200) {
+    if (reponse?.status === 200) {
       toast.success('Request Rejected')
       fetchRequests()
     } else {
@@ -62,19 +62,19 @@ function RequestCard({ request, fetchRequests }: RequestCardProps) {
             <div className='text-lg font-extrabold text-gray-900'>
               <h3>Employee Name </h3>
               <span className='text-sm font-medium text-gray-500 capitalize'>
-                {request.requestedBy}
+                {request?.requestedBy}
               </span>
             </div>
             <div className='text-lg font-extrabold text-gray-900'>
               <h3>Absence Type </h3>
               <span className='text-sm font-medium text-gray-500 capitalize'>
-                {request.request.type}
+                {request?.request.type}
               </span>
             </div>
             <div className='text-lg font-extrabold text-gray-900'>
               <h3>Number Of Days </h3>
               <span className='text-sm font-medium text-gray-500 capitalize'>
-                {request.request.numberOfDays} days
+                {request?.request?.numberOfDays} days
               </span>
             </div>
           </div>
@@ -82,21 +82,21 @@ function RequestCard({ request, fetchRequests }: RequestCardProps) {
             <div className='text-lg font-extrabold text-gray-900'>
               <h3>Start Date </h3>
               <span className='text-sm font-medium text-gray-500'>
-                {moment(request.request.startDate).format('DD/MM/YYYY') ||
+                {moment(request?.request?.startDate).format('DD/MM/YYYY') ||
                   moment(new Date()).format('DD/MM/YYYY')}
               </span>
             </div>
             <div className='text-lg font-extrabold text-gray-900'>
               <h3>End Date </h3>
               <span className='text-sm font-medium text-gray-500'>
-                {moment(request.request.endDate).format('DD/MM/YYYY') ||
+                {moment(request?.request?.endDate).format('DD/MM/YYYY') ||
                   moment(new Date()).format('DD/MM/YYYY')}
               </span>
             </div>
             <div className='text-lg font-extrabold text-gray-900'>
               <h3>Is Full Day </h3>
               <span className='text-sm font-medium text-gray-500'>
-                {request.request.fullDay ? (
+                {request?.request?.fullDay ? (
                   <BsCheck2Circle className='text-green' size={20} />
                 ) : (
                   <BsXCircle className='text-red' size={20} />
@@ -123,7 +123,7 @@ function RequestCard({ request, fetchRequests }: RequestCardProps) {
               dispatch(ModalScreenActions.openModal())
             }}
           />
-          {isOpen && <RequestsModal notes={request.request.comments} />}
+          {isOpen && <RequestsModal notes={request?.request?.comments} />}
         </div>
       </div>
     </div>

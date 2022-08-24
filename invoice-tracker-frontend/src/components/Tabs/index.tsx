@@ -9,7 +9,7 @@ interface TabsProps {
 function Tabs({ tabs, elements }: TabsProps) {
   return (
     <Tab.Group>
-      <Tab.List className='flex space-x-1 rounded-xl bg-lightGrey p-1  my-2'>
+      <Tab.List className='flex space-x-1 rounded-xl bg-lightGrey p-1 mt-20 mb-2 w-96 ml-4'>
         {tabs.map((tab, index) => (
           <Tab
             key={index}
