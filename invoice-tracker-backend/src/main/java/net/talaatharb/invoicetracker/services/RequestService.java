@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import net.talaatharb.invoicetracker.dtos.managerRequest;
+import net.talaatharb.invoicetracker.dtos.ManagerRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
@@ -28,15 +28,15 @@ public class RequestService {
     private final RequestRepository requestRepository;
 
 
-    public List<managerRequest> getRequests() {
+    public List<ManagerRequest> getRequests() {
        List <Request> requests= requestRepository.findAll();
-        List<managerRequest> result  =new ArrayList<>();
+        List<ManagerRequest> result  =new ArrayList<>();
        for(int i=0;i<requests.size();i++){
            Request request=requests.get(i);
            if(request.getStatus().equals("Pending")) {
                Long ID = request.getRequestedBy();
                User user = userRepository.findById(ID).get();
-               result.add(new managerRequest(user.getUsername(), request));
+               result.add(new ManagerRequest(user.getUsername(), request));
            }
 
 
@@ -44,14 +44,26 @@ public class RequestService {
        return (result);
     }
 
-    public void editRequest(boolean isAccepted, Long reqID) {
-      Request request=  requestRepository.findById(reqID).get();
+    public void editRequest(boolean isAccepted, Long reqID,Long managerID) {
+      Request request=requestRepository.findById(reqID).get();
 
-      if(isAccepted)
+      if(isAccepted) {
+
+          int numberOfdays = request.getNumberOfDays();
+          User user = userRepository.findById(request.getRequestedBy()).get();
+          if (request.getStatus().equals("Annual leave")) {
+              int remaining = user.getAllowedBalance() - numberOfdays;
+              if (remaining < 0)
+                  remaining = 0;
+
+              user.setRemainingBalance(remaining);
+          }
+
           request.setStatus("Accepted");
-      else{
+      }else{
           request.setStatus("Rejected");
       }
+      request.setReviewedBy(managerID);
       requestRepository.save(request);
 
 

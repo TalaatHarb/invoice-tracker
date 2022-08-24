@@ -24,12 +24,7 @@ public class Request {
     private Long requestedBy;
 
 
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="reviewed_by_id", referencedColumnName = "id")
-    private User reviewedBy;
-
-
+    private Long reviewedBy;
 
     private String type;
     private boolean isFullDay;

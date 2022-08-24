@@ -4,13 +4,13 @@ import lombok.Data;
 import net.talaatharb.invoicetracker.models.Request;
 
 @Data
-public class managerRequest {
+public class ManagerRequest {
     
     private String requestedBy;
    
      private Request request;
 
-    public managerRequest(String requestedBy, Request request) {
+    public ManagerRequest(String requestedBy, Request request) {
         this.requestedBy=requestedBy;
         this.request=request;
     }

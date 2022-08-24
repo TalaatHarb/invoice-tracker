@@ -117,7 +117,9 @@ public class User {
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
 	private ResetTokenEntity resetToken;
-	
+
+
+
 	public boolean isNotPasswordExpired() {
 		long PASSWORD_EXPIRATION_TIME = 30L * 24L * 60L * 60L * 1000L;
         if (this.lastTimePasswordChanged == null) return true;
