@@ -29,10 +29,8 @@ spring:
     lifecycle:
       timeout-per-shutdown-phase: 30s
 
-
-
 server:
-  port: 8080
+  port: ${PORT:8080}
   shutdown: graceful
 
 logging:
@@ -43,7 +41,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: "*"
   endpoint:
     health:
       show-details: always

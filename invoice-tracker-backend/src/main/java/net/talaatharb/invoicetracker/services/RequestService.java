@@ -5,15 +5,16 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import net.talaatharb.invoicetracker.dtos.ManagerRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import lombok.AllArgsConstructor;
+import net.talaatharb.invoicetracker.dtos.ManagerRequest;
 import net.talaatharb.invoicetracker.models.Request;
 import net.talaatharb.invoicetracker.models.User;
 import net.talaatharb.invoicetracker.repositories.RequestRepository;
 import net.talaatharb.invoicetracker.repositories.UserRepository;
-
 
 @Service
 @AllArgsConstructor
@@ -60,11 +61,14 @@ public class RequestService {
           }
 
           request.setStatus("Accepted");
+          user.setRequestsTypes(request.getType(),request.getNumberOfDays());
+          userRepository.save(user);
       }else{
           request.setStatus("Rejected");
       }
       request.setReviewedBy(managerID);
       requestRepository.save(request);
+
 
 
 
