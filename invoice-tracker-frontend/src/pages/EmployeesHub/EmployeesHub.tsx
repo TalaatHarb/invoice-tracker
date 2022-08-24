@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import EmployeeTable from "../../components/employees-hub/EmployeeTable";
 import FilterComboBox from "../../components/employees-hub/FilterComboBox";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/navbar";
 import { employeeFilterType } from "./types";
 import axios from "axios";
 import { useAppSelector } from "../../hooks/toolkit-types";

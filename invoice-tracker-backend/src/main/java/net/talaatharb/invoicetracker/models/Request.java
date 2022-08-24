@@ -54,7 +54,7 @@ public class Request {
 //    @NotBlank
     private boolean isFullDay;
 
-    private String comment;
+    private String comments;
 
 //    @NotBlank
     private String status = "pending";

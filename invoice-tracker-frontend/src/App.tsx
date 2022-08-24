@@ -6,7 +6,7 @@ import HrPage from "./pages/HrPage";
 import EmployeePage from "./pages/EmployeePage";
 import PrivateRoute from "./components/PrivateRoute";
 import { useAppSelector } from "./hooks/toolkit-types";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navbar";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ForgotPassword from "./pages/password/ForgotPassword";
 import ResetPassword from "./pages/password/ResetPassword";
@@ -15,6 +15,7 @@ import RequestForm from "./components/Absence Request";
 import EmployeesList from "./pages/EmployeesList/EMployeesList";
 import EmployeesHub from "./pages/EmployeesHub/EmployeesHub";
 import AbsenceHistory from "./pages/AbsenceHistory";
+import AbsenceHistoryAccordionList from "./components/absence-history-accordion";
 
 function App() {
   const { isAuthenticated } = useAppSelector(
