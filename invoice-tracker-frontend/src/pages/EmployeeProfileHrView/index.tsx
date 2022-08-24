@@ -1,12 +1,16 @@
 import React from "react";
+import { useParams } from "react-router";
 import AbsenceHistoryAccordionList from "../../components/absence-history-accordion";
+import EmployeeDetails from "../../components/employeePage-HR/EmployeeDetails";
 import Navbar from "../../components/Navbar";
 
-function AbsenceHistory() {
+const EmployeeAdminHrView = () => {
+  const { employeeId } = useParams();
   return (
     <>
       <Navbar />
-      <div className="mx-56 leading-tight text-2xl mt-0 mb-2">
+      <EmployeeDetails id={Number(employeeId)} />
+      <div className="px-56 leading-tight text-2xl mt-0 mb-2 bg-lightGrey bg-opacity-20">
         <AbsenceHistoryAccordionList />
         <br />
         <div className="flex flex-row-reverse">
@@ -20,6 +24,6 @@ function AbsenceHistory() {
       </div>
     </>
   );
-}
+};
 
-export default AbsenceHistory;
+export default EmployeeAdminHrView;

@@ -1,32 +1,54 @@
 import React, { useEffect, useState } from "react";
 import { UserIcon } from "@heroicons/react/solid";
+import axios from "axios";
 import { employeeType } from "./types";
-import { FetchFacad } from "../../utils/FetchFacad";
+import { useAppSelector } from "../../hooks/toolkit-types";
+import { useParams } from "react-router";
 
-const EmployeeDetails = () => {
-  const fetchFacade = new FetchFacad();
+type employeeDetailsProps = {
+  id: number;
+};
+
+const EmployeeDetails = ({ id }: employeeDetailsProps) => {
+  const isAuthenticated: any = useAppSelector(
+    (state) => state.AuthenticationSlice.isAuthenticated
+  );
+
+  const updateEmployeeUrl = `http://localhost:8080/api/user/update/${id}`;
   const dateFormat: Intl.DateTimeFormatOptions = {
     month: "short",
     day: "2-digit",
     year: "numeric",
   };
-  const [employee, setEmployee] = useState({
+
+  const [employee, setEmployee] = useState<employeeType>({
     englishName: "Mohamed Zaka",
     jobTitle: "DEV",
     mobileNumber: "01011750020",
     email: "mzakariia@cegedim.com",
     joiningDate: new Date(),
     endDate: new Date(),
-    isResigned: false,
+    resigned: false,
     allowedBalance: 21,
     remainingBalance: 15,
   });
+  const [editEmployee, setEditEmployee] = useState<employeeType>(employee);
+  const [edit, setEdit] = useState<boolean>(false);
+  const [resignedActive, setResignedActive] = useState<boolean>(false);
+  const [updateError, setUpdateError] = useState<boolean>(false);
 
-  useEffect(() => {}, []);
-
-  const [editEmployee, setEditEmployee] = useState(employee);
-  const [edit, setEdit] = useState(false);
-  const [resignedActive, setResignedActive] = useState(false);
+  useEffect(() => {
+    const getData = async () => {
+      await axios
+        .get(`http://localhost:8080/api/user?ID=${id}`, {
+          headers: { Authorization: `Bearer ${isAuthenticated}` },
+        })
+        .then((response) => {
+          setEmployee(response.data);
+        })
+        .catch(() => {});
+    };
+  }, []);
 
   const resignedCheckBoxHandler = () => {
     setResignedActive(!resignedActive);
@@ -61,10 +83,38 @@ const EmployeeDetails = () => {
     setEditEmployee(tempEmployee);
   };
 
-  const editClickHandler = () => {
-    if (edit) {
-      setEmployee(editEmployee);
+  const editClickHandler = async (event: any) => {
+    const id = event.target.id;
+    if (id == "cancel") {
+      setEditEmployee(employee);
       setEdit(false);
+    } else if (id == "save") {
+      await axios
+        .put(
+          updateEmployeeUrl,
+          {},
+          {
+            headers: { Authorization: `Bearer ${isAuthenticated}` },
+          }
+        )
+        .then((response) => {
+          if (response.status == 200) {
+            setEmployee(editEmployee);
+          } else {
+            setUpdateError(true);
+            setTimeout(() => {
+              setUpdateError(false);
+            }, 10000);
+          }
+          setEdit(false);
+        })
+        .catch((response) => {
+          setUpdateError(true);
+          setTimeout(() => {
+            setUpdateError(false);
+          }, 10000);
+          setEdit(false);
+        });
     } else {
       setEdit(true);
     }
@@ -191,30 +241,49 @@ const EmployeeDetails = () => {
                 <input
                   className="mr-1"
                   type="checkbox"
-                  checked={employee.isResigned}
+                  checked={employee.resigned}
                 />
                 Is resigned
               </label>
               <p className="bg-white shadow-lg ml-20 px-5 py-2 w-full ">
-                {employee.isResigned
+                {employee.resigned
                   ? employee.endDate?.toLocaleString("en-US", dateFormat)
                   : "not resigned"}
               </p>
             </>
           )}
         </div>
-        {}
+        {/*div for employee details control button*/}
         <div className="flex flex-row ml-1 mt-6 items-center">
           <button
+            id={edit ? "save" : "edit"}
             className="mt-6 rounded bg-blueCegedim text-white py-2 px-5 w-fit"
             onClick={editClickHandler}
           >
             {edit ? "Save" : "Edit"}
           </button>
           {edit ? (
+            <button
+              id="cancel"
+              onClick={editClickHandler}
+              className="ml-6 mt-6 rounded bg-blueCegedim text-white py-2 px-5 w-fit"
+            >
+              Cancel
+            </button>
+          ) : (
+            <></>
+          )}
+          {edit ? (
             <p className="ml-40 text-yellowDarkCegedim text-lg drop-shadow-md">
               You are now on the edit view. Click on the boxes to change the
               values.
+            </p>
+          ) : (
+            <></>
+          )}
+          {updateError ? (
+            <p className="ml-40 text-red text-lg drop-shadow-md">
+              Error saving employee data, please try again
             </p>
           ) : (
             <></>
@@ -259,3 +328,6 @@ const EmployeeDetails = () => {
 };
 
 export default EmployeeDetails;
+function response(response: any) {
+  throw new Error("Function not implemented.");
+}

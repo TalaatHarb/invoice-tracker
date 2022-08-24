@@ -6,14 +6,14 @@ import HrPage from "./pages/HrPage";
 import EmployeePage from "./pages/EmployeePage";
 import PrivateRoute from "./components/PrivateRoute";
 import { useAppSelector } from "./hooks/toolkit-types";
-import AbsenceHistoryAccordionList from "./components/absence-history-accordion/absence-history-accordion-list";
-import Navbar from "./components/Navbar";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ForgotPassword from "./pages/password/ForgotPassword";
 import ResetPassword from "./pages/password/ResetPassword";
 import EmployeesList from "./pages/EmployeesList/EMployeesList";
 import EmployeesHub from "./pages/EmployeesHub/EmployeesHub";
-import AbsenceHistory from "./pages/AbsenceHistory";
+import AbsenceHistory from "./pages/EmployeeProfileHrView";
+import HrPrivateRoute from "./components/HrPrivateRoute/HrPrivateRoute";
+import EmployeeProfileHrView from "./pages/EmployeeProfileHrView";
 
 function App() {
   const { isAuthenticated } = useAppSelector(
@@ -28,8 +28,20 @@ function App() {
           <Route path="/user" element={<UserPage />} />
         </Route>
 
+        {/* <Route path="/hr/employee/:employeeId" element={<HrPrivateRoute />}> */}
+        <Route
+          path="/hr/employee/:employeeId"
+          element={<EmployeeProfileHrView />}
+        />
+        {/* </Route> */}
+
+        {/* <Route path="/team/:teamId" element={<HrPrivateRoute />}> */}
         <Route path="/team/:teamId" element={<EmployeesList />} />
-        <Route path="/empList" element={<EmployeesHub />} />
+        {/* </Route> */}
+        {/* <Route path="/hr/allEmployees" element={<HrPrivateRoute />}> */}
+        <Route path="/hr/allEmployees" element={<EmployeesHub />} />
+        {/* </Route> */}
+
         {/* reset password routes */}
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:resetToken" element={<ResetPassword />} />

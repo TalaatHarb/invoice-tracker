@@ -7,6 +7,8 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -122,4 +124,32 @@ public class UserService {
 	}
 
 
+	@Transactional
+    public ResponseEntity updateUser(long id, UserDetails userDetails) {
+		System.out.println(userDetails.toString());
+		System.out.println("entered service");
+		User user = userRepository.findById(id).get();
+		if(userDetails.getEnglishName()!=null){
+			user.setEnglishName(userDetails.getEnglishName());
+		}
+		if(userDetails.getJobTitle()!=null){
+			user.setJobTitle(userDetails.getJobTitle());
+		}
+		if(userDetails.getEmail()!=null){
+			user.setEmail(userDetails.getEmail());
+		}
+		if(userDetails.getMobileNumber()!=null){
+			user.setMobileNumber(userDetails.getMobileNumber());
+		}
+		if(userDetails.getJoiningDate()!=null){
+			user.setJoiningDate(userDetails.getJoiningDate());
+		}
+		if(userDetails.getEndDate()!=null){
+			if(userDetails.isResigned()){
+				user.setEndDate(userDetails.getEndDate());
+				user.setResigned(userDetails.isResigned());
+			}
+		}
+		return new ResponseEntity<String>("Updating employee data success", HttpStatus.OK);
+	}
 }

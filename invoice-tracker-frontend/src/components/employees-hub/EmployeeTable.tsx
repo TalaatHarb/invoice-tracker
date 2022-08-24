@@ -148,13 +148,15 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
       id: "View employees",
       cell: ({ row }) => {
         return (
-          <button
-            className="rounded-full text-white text-sm bg-blueCegedim px-4 py-1 "
-            value={row.getValue("Id")}
-            onClick={viewEmployeeHandler}
-          >
-            View
-          </button>
+          <Link to={"/hr/employee/" + row.getValue("Id")}>
+            <button
+              className="rounded-full text-white text-sm bg-blueCegedim px-4 py-1 "
+              value={row.getValue("Id")}
+              onClick={viewEmployeeHandler}
+            >
+              View
+            </button>
+          </Link>
         );
       },
     }),
