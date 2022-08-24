@@ -14,7 +14,6 @@ import RequestForm from "./components/Absence Request";
 
 import EmployeesList from "./pages/EmployeesList/EMployeesList";
 import EmployeesHub from "./pages/EmployeesHub/EmployeesHub";
-import AbsenceHistory from "./pages/AbsenceHistory";
 import RequestList from "./pages/RequestList/RequestList";
 import EditRequest from "./pages/EditRequest";
 function App() {
