@@ -4,7 +4,7 @@ WORKDIR /app
 COPY package.json .
 RUN npm i
 COPY . .
-RUN npm build
+RUN npm run build
 
 # => Run container
 FROM nginx:1.15.2-alpine
