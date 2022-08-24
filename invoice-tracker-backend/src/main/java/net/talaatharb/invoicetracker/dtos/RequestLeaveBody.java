@@ -2,11 +2,15 @@ package net.talaatharb.invoicetracker.dtos;
 
 import java.util.Date;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import lombok.Data;
 import net.talaatharb.invoicetracker.models.RequestType;
 import net.talaatharb.invoicetracker.models.Team;
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class RequestLeaveBody {
 
      
