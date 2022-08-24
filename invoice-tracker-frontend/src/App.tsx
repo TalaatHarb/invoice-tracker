@@ -10,6 +10,8 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ForgotPassword from "./pages/password/ForgotPassword";
 import ResetPassword from "./pages/password/ResetPassword";
+import RequestForm from "./components/Absence Request";
+
 import EmployeesList from "./pages/EmployeesList/EMployeesList";
 import EmployeesHub from "./pages/EmployeesHub/EmployeesHub";
 import AbsenceHistory from "./pages/AbsenceHistory";
@@ -34,6 +36,13 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
 
+        <Route path="/team/:teamId" element={<EmployeesList />} />
+        <Route path="/empList" element={<EmployeesHub />} />
+
+        {!isAuthenticated && <Route path="/login" element={<Login />} />}
+        <Route path="page1" element={<Navbar />} />
+        <Route path="page2" element={<AbsenceHistoryAccordionList />} />
+
         {!isAuthenticated && <Route path="/login" element={<Login />} />}
         <Route path="page1" element={<Navbar />} />
 
@@ -49,6 +58,11 @@ function App() {
         {/* protected employee page */}
         <Route path="/employee" element={<PrivateRoute />}>
           <Route path="/employee" element={<EmployeePage />} />
+        </Route>
+
+        {/* request absence */}
+        <Route path="/request" element={<PrivateRoute />}>
+          <Route path="/request" element={<RequestForm />} />
         </Route>
         {isAuthenticated ? (
           <Route path="*" element={<Navigate to="/employee" replace />} />
