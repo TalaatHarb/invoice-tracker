@@ -15,13 +15,15 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
     props.setItems(items)
   }
 
+  console.log(props.record)
+
   return (
     <>
       <div className='border border-slate-600 flex justify-between'>
         <div className='relative flex items-center py-4 px-5 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none'>
           <strong>
-            {props.record.absenceType} {props.record.Date},{' '}
-            {props.record.dayType}{' '}
+            {props.record.type} {props.record.startDate.substr(0, 10)},{' '}
+            {props.record.fullDay ? 'full-day' : 'part-day'}{' '}
           </strong>
         </div>
         <div className='py-4 px-5'>
@@ -82,19 +84,23 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
         <div className='border border-slate-600 items-center py-4 px-5 text-base text-left bg-white rounded-none'>
           <div className=''>
             <p>
-              <strong>Comments: </strong> {props.record.comment}
+              <strong>Status: </strong> {props.record.status}
+            </p>
+            <p>
+              <strong>Comment: </strong>{' '}
+              {props.record.comments ? props.record.comments : 'No comment.'}
             </p>
             <p>
               <strong>Attachment: </strong>{' '}
-              {props.record.Attachment !== '' ? (
+              {props.record.attachmentUrl ? (
                 <a
-                  href={props.record.Attachment}
+                  href={props.record.attachmentUrl}
                   className='text-blueCegedim'
                   target='_blank'
                   rel='noreferrer'
                 >
                   {' '}
-                  Click Here to Download
+                  {props.record.attachmentName}
                 </a>
               ) : (
                 'No Attachment'
@@ -102,13 +108,16 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
             </p>
             <p>
               <strong>No. of days requested: </strong>{' '}
-              {props.record.numberOfDaysRequested}
+              {props.record.numberOfDays}
             </p>
             <p>
-              <strong>Start Date: </strong> {props.record.startDate}
+              <strong>Request Date: </strong>{' '}
+              {props.record.requestDate
+                ? props.record.requestDate.substr(0, 10)
+                : 'Unkown'}
             </p>
             <p>
-              <strong>End Date: </strong> {props.record.endDate}
+              <strong>End Date: </strong> {props.record.endDate.substr(0, 10)}
             </p>
           </div>
         </div>

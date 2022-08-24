@@ -35,7 +35,7 @@ public class InvoiceTrackerBackendApplication {
 	private static final String EMAIL_EMPLOYEE_2 = "boogado5@yahoo.com";
 
 	public static final String PASS_USER = "awad36148";
-	
+
 	private static final Boolean IS_ENABLED = true;
 	private static final Date PASSWORD_EXPIRY_DATE = new GregorianCalendar(2022,Calendar.AUGUST,11).getTime();
 
