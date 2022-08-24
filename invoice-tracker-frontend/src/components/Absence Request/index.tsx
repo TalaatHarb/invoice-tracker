@@ -63,6 +63,15 @@ const RequestForm = () => {
       .then((response) => {
         console.log(response);
         alert("Your request is sent and being processed.");
+        alert(
+          `You made a request on ${request.requestDate} to have ${
+            request.type
+          } from ${request.startDate} to ${request.endDate} (${
+            request.fullDay ? "full day" : "half day"
+          }) - ${request.numberOfDays} ${
+            request.numberOfDays > 1 ? "days" : "day"
+          } and this is your note: '${request.comment}'`
+        );
         navigate("/employee");
       })
       .catch((error) => console.log(error));
