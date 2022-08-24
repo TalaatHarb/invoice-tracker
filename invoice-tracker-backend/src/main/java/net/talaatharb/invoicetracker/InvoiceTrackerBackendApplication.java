@@ -54,10 +54,10 @@ public class InvoiceTrackerBackendApplication {
 
 			userService.saveUser(new User(EMAIL_USER, PASS_USER,new Date(),"0122303432","amr0"));
 			userService.saveUser(new User(EMAIL_EMPLOYEE, PASS_USER,"Gado",true));
-			userService.saveUser(new User(EMAIL_HR, PASS_USER,"Ahmed",false));
+			userService.saveUser(new User(EMAIL_HR, PASS_USER,"Ahmed",true));
 			userService.saveUser(new User(EMAIL_ADMIN_USER, PASS_USER,"mostafa",true));
 			userService.saveUser(new User(EMAIL_HR_2, PASS_USER,"hamada",false));
-			
+
 			userService.saveUser(new User(EMAIL_EMPLOYEE_2, PASS_USER,"hamada",IS_ENABLED,PASSWORD_EXPIRY_DATE));
 
 

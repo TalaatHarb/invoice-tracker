@@ -17,29 +17,40 @@ public class Request {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+//    @NotBlank
     private Date startDate;
+
+//    @NotBlank
     private Date requestDate;
+
+//    @NotBlank
     private Date endDate;
 
+//    @NotBlank
     private Long requestedBy;
-
-
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="reviewed_by_id", referencedColumnName = "id")
     private User reviewedBy;
 
-
-
+//    @NotBlank
     private String type;
+
+//    @NotBlank
     private boolean isFullDay;
+
     private String comments;
+//        @NotBlank
+
     private String status="Pending";
+
 
     private String attachmentName;
 
     private String attachmentUrl;
 
+//    @NotBlank
     private int numberOfDays;
 
 

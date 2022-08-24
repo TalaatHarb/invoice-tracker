@@ -12,6 +12,9 @@ import Navbar from './components/Navbar'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import ForgotPassword from './pages/password/ForgotPassword'
 import ResetPassword from './pages/password/ResetPassword'
+import EmployeesList from './pages/EmployeesList/EMployeesList'
+import EmployeesHub from './pages/EmployeesHub/EmployeesHub'
+import AbsenceHistory from './pages/AbsenceHistory'
 
 function App() {
   const { isAuthenticated } = useAppSelector(
@@ -26,12 +29,14 @@ function App() {
           <Route path='/user' element={<UserPage />} />
         </Route>
 
+        <Route path='/team/:teamId' element={<EmployeesList />} />
+        <Route path='/empList' element={<EmployeesHub />} />
+
         {/* reset password routes */}
         <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/reset-password/:resetToken' element={<ResetPassword />} />
 
-        <Route path='page1' element={<Navbar />} />
-        <Route path='page2' element={<AbsenceHistoryAccordionList />} />
+        <Route path='absencehistory' element={<AbsenceHistory />} />
 
         {/* protected user page */}
 

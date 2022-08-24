@@ -7,6 +7,7 @@ import Button from '../../components/Button'
 import UserDisplay from '../../components/UserDisplay'
 import RequesCard from '../../components/RequestCard'
 import { logoutUser } from '../../services/redux/slices/AuthenticationSlice'
+import { CONSTANTS } from '../../utils/constants'
 
 const EmployeePage = (props: any) => {
   const { isAuthenticated, ID } = useAppSelector(

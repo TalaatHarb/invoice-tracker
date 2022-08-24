@@ -26,57 +26,59 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-//		@NotBlank
+	//		@NotBlank
 	private String nationalId;
 
-//		@NotBlank
+	//		@NotBlank
 	private String englishName;
 
-//		@NotBlank
+	//		@NotBlank
 	private String arabicName;
+	//		@NotBlank
+	private String jobTitle;
 
-		@NotBlank
+	@NotBlank
 	@Size(max = 50)
 	@Email
 	private String email;
 
-		@NotBlank
+	@NotBlank
 	@Size(min = 8, max = 120)
 	private String password;
 
-//		@NotBlank
+	//		@NotBlank
 	private String englishAddress;
 
-//		@NotBlank
+	//		@NotBlank
 	private String arabicAddress;
 
-//		@NotBlank
+	//		@NotBlank
 	private int allowedBalance;
 
-//	@NotBlank
+	//	@NotBlank
 	private int remainingBalance;
 
-//	@NotBlank
+	//	@NotBlank
 	private boolean billable;
 
-//	@NotBlank
+	//	@NotBlank
 	private boolean isDisabled;
 
 	private boolean isResigned;
 
-//	@NotBlank
+	//	@NotBlank
 	private Date joiningDate;
 
 	private Date endDate;
 
-//	@NotBlank
+	//	@NotBlank
 	private Date birthDate;
 
 	private String imgUrl;
 
 	private String mobileNumber;
 
-//	@NotBlank
+	//	@NotBlank
 	private boolean isFullTime;
 
 	private Date insuranceDate;
