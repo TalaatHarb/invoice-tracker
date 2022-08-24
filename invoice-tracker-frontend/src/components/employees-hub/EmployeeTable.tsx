@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { employeeType } from "./types";
 import {
   createColumnHelper,
@@ -11,6 +11,7 @@ import { CheckIcon, XIcon } from "@heroicons/react/solid";
 import ColumnSelect from "./ColumnSelector";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import formatDate from "../../utils/FormatDate";
 
 type employeeTableProps = {
   employees: employeeType[];
@@ -19,6 +20,9 @@ type employeeTableProps = {
 const EmployeeTab = ({ employees }: employeeTableProps) => {
   const navigate = useNavigate();
   const data = employees;
+  const [rowSelection, setRowSelection] = React.useState({});
+  const [columnVisibility, setColumnVisibility] = React.useState({});
+
   const columnHelper = createColumnHelper<employeeType>();
 
   const columns = [
@@ -87,14 +91,12 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
     columnHelper.accessor((row) => row.joiningDate, {
       id: "Joining date",
       header: "Joining date",
-      cell: (info) =>
-        info.getValue() ? info.getValue().toLocaleString() : "N/A",
+      cell: (info) => (info.getValue() ? formatDate(info.getValue()) : "N/A"),
     }),
     columnHelper.accessor((row) => row.endDate, {
       id: "End date",
       header: "End date",
-      cell: (info) =>
-        info.getValue() ? info.getValue().toLocaleString() : "N/A",
+      cell: (info) => (info.getValue() ? formatDate(info.getValue()) : "N/A"),
     }),
     columnHelper.accessor((row) => row.allowedBalance, {
       id: "Allowed balance",
@@ -148,13 +150,15 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
       id: "View employees",
       cell: ({ row }) => {
         return (
-          <button
-            className="rounded-full text-white text-sm bg-blueCegedim px-4 py-1 "
-            value={row.getValue("Id")}
-            onClick={viewEmployeeHandler}
-          >
-            View
-          </button>
+          <Link to={"/hr/employee/" + row.getValue("Id")}>
+            <button
+              className="rounded-full text-white text-sm bg-blueCegedim px-4 py-1 "
+              value={row.getValue("Id")}
+              onClick={viewEmployeeHandler}
+            >
+              View
+            </button>
+          </Link>
         );
       },
     }),
@@ -163,11 +167,22 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
     data,
     columns,
     enableRowSelection: true,
+    state: {
+      columnVisibility,
+      rowSelection,
+    },
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
     debugTable: true,
     debugHeaders: true,
     debugColumns: true,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+  });
+
+  useEffect(() => {
+    console.log(rowSelection);
+    console.log(columnVisibility);
   });
 
   const viewEmployeeHandler = (event: any) => {
@@ -204,7 +219,7 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
               >
                 {row.getVisibleCells().map((cell) => (
                   <td key={cell.id}>
-                    <div className="mx-2 py-2">
+                    <div className="mx-2 py-2 whitespace-nowrap">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
