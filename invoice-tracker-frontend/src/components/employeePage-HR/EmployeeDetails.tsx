@@ -205,7 +205,6 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
               className=" focus:border-blueCegedim focus:border-2 outline-none text-lg shadow-lg  ml-20 px-5 py-2 text-center w-full"
               id="joiningDate"
               onChange={employeeChangeHandler}
-              value={formatDate(editEmployee.joiningDate)}
               placeholder="Please enter data in the dd/mm/yyyy format"
             />
           ) : (
@@ -233,7 +232,6 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
                 placeholder="Please enter data in the dd/mm/yyyy format"
                 disabled={!resignedActive}
                 onChange={employeeChangeHandler}
-                value={formatDate(editEmployee.endDate)}
               />
             </>
           ) : (
