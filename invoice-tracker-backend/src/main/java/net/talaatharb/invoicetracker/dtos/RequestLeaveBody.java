@@ -25,7 +25,7 @@ public class RequestLeaveBody {
     private Date requestDate;
     private List<Team> teams;
 	private boolean billable;
-    private RequestType type;
+    private String type;
 
 
 

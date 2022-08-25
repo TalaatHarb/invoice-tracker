@@ -12,10 +12,11 @@ import net.talaatharb.invoicetracker.models.Request;
 import net.talaatharb.invoicetracker.models.User;
 import net.talaatharb.invoicetracker.repositories.RequestRepository;
 import net.talaatharb.invoicetracker.repositories.UserRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
-
+@Transactional
 @Data
 public class RequestLeaveServices {
 	@Autowired
@@ -39,7 +40,7 @@ public class RequestLeaveServices {
 			body.setRemainingBalance(user.getRemainingBalance());
 			body.setTeams(user.getTeams());
 			body.setBillable(user.isBillable());
-			//body.setType(requests.get(i).getType());
+			body.setType(requests.get(i).getType());
 			body.setRequestDate(requests.get(i).getRequestDate());
 			
 
@@ -54,7 +55,7 @@ public class RequestLeaveServices {
 	public Request update_a_leave_request(int requestId, Request request) {
 		Request requestFromDB = requestRepo.findById((long) requestId).get();
 		System.out.println(requestFromDB.toString());
-		//requestFromDB.setComments(request.getComments());
+		requestFromDB.setComment(request.getComment());
 		requestFromDB.setEndDate(request.getEndDate());
 		requestFromDB.setEndDate(request.getEndDate());
 		requestFromDB.setFullDay(request.isFullDay());
