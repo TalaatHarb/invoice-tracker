@@ -1,6 +1,6 @@
 package net.talaatharb.invoicetracker.services;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -29,17 +29,19 @@ public class FilterUserServiceImp implements FilterUserService{
         return userList;
     }
 
-//    @Override
-//    public List<User> filterEmployeeByTeamName(List<String> teamName) {
-//        List<User>userList=filterUserRepository.filterEmployeesByTeamName(teamName);
-//        return userList;
-//    }
+    @Override
+    public List<User> filterEmployeeByTeamName(List<String> teamName) {
+        List<User>userList=filterUserRepository.filterEmployeesByTeamName(teamName);
+        return userList;
+    }
 
     @Override
     public List<User> filterEmployeeByJobTitle(List<String> jobTitle) {
         List<User>userList=filterUserRepository.filterEmployeesByJobTitle(jobTitle);
         return userList;
     }
+
+
 
     @Override
     public List<User> filterEmployeeById(List<Long> id) {
@@ -60,21 +62,51 @@ public class FilterUserServiceImp implements FilterUserService{
     }
 
     @Override
-    public User createEmployee(User user) {
-        return filterUserRepository.save(user);
+    public List<User> filterEmployeeByJoinDate(Date JoinDate) {
+        List<User>userList=filterUserRepository.filterEmployeesByJoinDate(JoinDate);
+        return userList;
     }
 
+    @Override
+    public List<User> filterEmployeeByEndDate(Date endDate) {
+        List<User>userList=filterUserRepository.filterEmployeesByEndDate(endDate);
+        return userList;
+    }
+
+    @Override
+    public List<User> filterEmployeeByBillable(boolean billable) {
+        List<User>userList=filterUserRepository.filterEmployeesByBillable(billable);
+        return userList;
+    }
+
+    @Override
+    public List<User> filterEmployeeByISDisabled(boolean isDisabled) {
+        List<User>userList=filterUserRepository.filterEmployeesByIsDisabled(isDisabled);
+        return userList;
+    }
+
+    @Override
+    public List<User> filterEmployeeByISFullTime(boolean isFullTime) {
+        List<User>userList=filterUserRepository.filterEmployeesByIsDisabled(isFullTime);
+        return userList;
+    }
+
+//    @Override
+//    public User createEmployee(User user) {
+//        return filterUserRepository.save(user);
+//    }
+//
 //    @Override
 //    public List<User> getAllEmployeesByTeamName(List<String> teamName) {
 //        List<User> employees = new ArrayList<User>();
 //        employees.addAll(filterUserRepository.filterEmployeesByTeamName(teamName));
 //        return employees;
 //    }
-
-    @Override
-    public List<User> getAllEmployees() {
-        List<User> employees = new ArrayList<User>();
-        employees.addAll(filterUserRepository.findAll());
-        return employees;
-    }
+//
+//    @Override
+//    public List<User> getAllEmployees() {
+//        List<User> employees = new ArrayList<User>();
+//        employees.addAll(filterUserRepository.findAll());
+//        return employees;
+//    }
 }

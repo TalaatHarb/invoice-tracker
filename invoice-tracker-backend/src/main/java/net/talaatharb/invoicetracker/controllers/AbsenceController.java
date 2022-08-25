@@ -22,7 +22,6 @@ import net.talaatharb.invoicetracker.models.Request;
 import net.talaatharb.invoicetracker.services.AbsenceService;
 import net.talaatharb.invoicetracker.services.RequestLeaveServices;
 
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/user/absence")
@@ -58,7 +57,7 @@ public class AbsenceController {
 		@PutMapping("/UpdateLeaveRequest/{request_id}")
 		public ResponseEntity<Request> UpdateEmployeeRequest(@RequestBody Request req, @RequestParam int request_id) {
 
-			return new ResponseEntity<>(leaveServices.update_a_leave_request(request_id, req), HttpStatus.OK);
+			return new ResponseEntity<>(req, HttpStatus.OK);
 
 		}
 }

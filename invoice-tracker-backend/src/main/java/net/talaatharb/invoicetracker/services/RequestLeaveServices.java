@@ -45,7 +45,7 @@ public class RequestLeaveServices {
 			
 			RequestType requestType = new RequestType();
 			requestType.setTypeName(requests.get(i).getType());
-			body.setType(requestType);
+			body.setType(requestType.getTypeName());
 			
 
 			requestsBody.add(body);
@@ -54,10 +54,10 @@ public class RequestLeaveServices {
 
 		return requestsBody;
 	}
-    @Transactional
+
 
 	public Request update_a_leave_request(int requestId, Request request) {
-		Request requestFromDB = requestRepo.findById((long)requestId).get();
+		Request requestFromDB = requestRepo.findById((long) requestId).get();
 		System.out.println(requestFromDB.toString());
 		requestFromDB.setComment(request.getComment());
 		requestFromDB.setEndDate(request.getEndDate());

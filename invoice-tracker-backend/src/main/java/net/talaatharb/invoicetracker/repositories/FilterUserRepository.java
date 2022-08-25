@@ -1,5 +1,6 @@
 package net.talaatharb.invoicetracker.repositories;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,6 +10,7 @@ import net.talaatharb.invoicetracker.models.User;
 
 public interface FilterUserRepository extends JpaRepository<User,Long> {
 
+
     @Query(
             "SELECT e FROM User e WHERE " +
                     "e.englishName IN :names"
@@ -16,16 +18,16 @@ public interface FilterUserRepository extends JpaRepository<User,Long> {
     List<User> filterEmployeesByName(List<String>names);
     @Query(
             "SELECT e FROM User e WHERE " +
-                    "e.arabicAddress IN :arabicName "
+                    "e.arabicName IN :arabicName "
 
     )
     List<User> filterEmployeesByArabicName(List<String> arabicName);
-//    @Query(
-//            "SELECT e FROM User e WHERE " +
-//                    "e.teams IN :teamName"
-//
-//    )
-//    List<User> filterEmployeesByTeamName(List<String> teamName);
+    @Query(
+            "SELECT e FROM User e WHERE " +
+                    "e.teams IN :teamName"
+
+    )
+    List<User> filterEmployeesByTeamName(List<String> teamName);
     @Query(
             "SELECT e FROM User e WHERE " +
                     "e.jobTitle IN :jobTitle"
@@ -48,5 +50,37 @@ public interface FilterUserRepository extends JpaRepository<User,Long> {
 
     )
     List<User> filterEmployeesByRemainBalance(List<Integer> remainBalance);
+
+    @Query(
+            "SELECT e FROM User e WHERE e.joiningDate = :joinDate"
+
+    )
+
+    List<User> filterEmployeesByJoinDate(Date joinDate);
+    @Query(
+            "SELECT e FROM User e WHERE e.endDate = :endDate"
+
+    )
+
+    List<User> filterEmployeesByEndDate(Date endDate);
+    @Query(
+            "SELECT e FROM User e WHERE e.billable = :billable"
+
+    )
+
+    List<User> filterEmployeesByBillable(boolean billable);
+
+    @Query(
+            "SELECT e FROM User e WHERE e.isDisabled = :isDisabled"
+
+    )
+
+    List<User> filterEmployeesByIsDisabled(boolean isDisabled);
+    @Query(
+            "SELECT e FROM User e WHERE e.isFullTime= :isFullTime"
+
+    )
+
+    List<User> filterEmployeesByIsFullTime(boolean isFullTime);
 
 }
