@@ -2,6 +2,8 @@ package net.talaatharb.invoicetracker.services;
 
 import java.util.List;
 
+import net.talaatharb.invoicetracker.repositories.RequestTypeRepository;
+import net.talaatharb.invoicetracker.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
