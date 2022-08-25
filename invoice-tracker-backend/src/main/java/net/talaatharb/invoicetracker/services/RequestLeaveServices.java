@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +13,6 @@ import net.talaatharb.invoicetracker.models.Request;
 import net.talaatharb.invoicetracker.models.User;
 import net.talaatharb.invoicetracker.repositories.RequestRepository;
 import net.talaatharb.invoicetracker.repositories.UserRepository;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor

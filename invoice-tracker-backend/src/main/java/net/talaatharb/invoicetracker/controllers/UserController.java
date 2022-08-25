@@ -95,7 +95,7 @@ public class UserController {
             return ResponseEntity.ok(filterUserService.filterEmployeeByBillable(billable));
 
         }
-        else if (type.equals("isDisabled")) {
+        else if (type.equals("disabled")) {
 
             String boolInString = values.get(0);
             boolean isDisabled=Boolean.parseBoolean(boolInString);
