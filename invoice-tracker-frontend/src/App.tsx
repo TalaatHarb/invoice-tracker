@@ -9,8 +9,8 @@ import {
   Route,
   Routes
 } from "react-router-dom";
-import PopUpStart from './components/fake-user-login/ecxel_component/PopUpStart';
-import Employee_Add from './components/fake-user-login/add_employee_component/Employee_Add';
+import PopUpStart from './components/fake-user-login/import-excel/PopUpStart';
+import Employee_Add from './components/fake-user-login/add-employee/Employee_Add';
 
 function App() {
   return (

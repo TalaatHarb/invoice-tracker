@@ -7,17 +7,10 @@ import {BsFillArrowUpSquareFill} from "react-icons/bs";
 import { BsFillPlusSquareFill } from "react-icons/bs";
 
 import { BsFillArrowDownSquareFill } from "react-icons/bs";
-import Employee_Add from '../add_employee_component/Employee_Add';
 
 
 
    
-import {
-  BrowserRouter,
-  Navigate,
-  Route,
-  Routes
-} from "react-router-dom";
 
 
 
@@ -26,14 +19,7 @@ function PopUpStart() {
 
   function OpenAddEmployee()
   {
-    <BrowserRouter>
-    <Routes>
    
-      <Route path="Emplooyee Add Page" element={<Employee_Add />} />
-     
-    </Routes>
-  </BrowserRouter>
-
   }
   /*  */
   
