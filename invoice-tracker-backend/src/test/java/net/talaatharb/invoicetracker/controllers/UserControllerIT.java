@@ -70,5 +70,16 @@ class UserControllerIT extends AbstractControllerIT {
 		mvc.perform(get("/api/users/filter?type=id&values=1").contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(objectMapper.writeValueAsString(user))).andExpect(status().isOk());
 	}
+	@Test
+	@WithMockUser
+	void test() throws Exception {
+		assert(true);
+	}
+
+	@Test
+	@WithMockUser
+	void testadd() throws Exception {
+		assert(true);
+	}
 
 }
