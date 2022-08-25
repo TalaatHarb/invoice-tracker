@@ -69,6 +69,8 @@
       font-weight: 400;
       transform: translateY(+28px);
       &:focus {
+         background-color: gainsboro;
+         text-indent:3px;
       }
       
       &:focus,

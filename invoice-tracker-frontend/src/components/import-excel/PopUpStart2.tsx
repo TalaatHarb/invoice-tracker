@@ -1,36 +1,22 @@
-import React, { Fragment } from 'react';
-import { useState } from "react";
+import React from "react";
 import PopUpExcel from './PopUpExcel';
 
 
-import { Menu, Transition } from '@headlessui/react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
+import { Menu, Transition } from '@headlessui/react'
+import { Fragment, useEffect, useRef, useState } from 'react'
+import { ChevronDownIcon } from '@heroicons/react/solid'
 
-
-
-function PopUpStart() {
-  const  [buttonpopup,setButtonpopup] = useState(false);
+export default function Example() {
+    const  [buttonpopup,setButtonpopup] = useState(false);
   const navigate = useNavigate();
 
-  function OpenAddEmployee()
-  {
-
-  }
-  /*  */
-  
   return (
-   
-    // headliss ui
-     
-   
-
-<Menu as='div' className='w-52 h-52 mr-40 mt-40' 	  >
-<PopUpExcel  popup={buttonpopup} setpopup={setButtonpopup}></PopUpExcel>
-
-              <div>
-                <Menu.Button className='flex text-sm rounded-full focus:outline-none'>
-                  <button 
+    <div className="self-end text-right">
+      <Menu as="div" className="relative inline-block text-left">
+        <div>
+        <button 
                     className='dropdown-toggle flex items-center hidden-arrow rounded-full hover:text-gray-400 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out'
                     id='dropdownMenuButton2'
                     role='button'
@@ -43,22 +29,19 @@ function PopUpStart() {
 
 
               </button>
-                </Menu.Button>
-              </div>
-              <Transition
-                as={Fragment}
-                enter='transition ease-out duration-100'
-                enterFrom='transform opacity-0 scale-95'
-                enterTo='transform opacity-100 scale-100'
-                leave='transition ease-in duration-75'
-                leaveFrom='transform opacity-100 scale-100'
-                leaveTo='transform opacity-0 scale-95'
-              >
-                <Menu.Items  className="z-50 rounded"  style={{
-        backgroundColor: 'white',
-        width: '200px',        
-      }}>
-                  <Menu.Item>
+        </div>
+        <Transition
+          as={Fragment}
+          enter="transition ease-out duration-100"
+          enterFrom="transform opacity-0 scale-95"
+          enterTo="transform opacity-100 scale-100"
+          leave="transition ease-in duration-75"
+          leaveFrom="transform opacity-100 scale-100"
+          leaveTo="transform opacity-0 scale-95"
+        >
+          <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <div className="px-1 py-1 ">
+            <Menu.Item>
                     <a
                       href='#'
                       className='block px-4 py-2 text-sm text-gray-700'
@@ -98,13 +81,12 @@ function PopUpStart() {
                       <p className='font-bold hover:text-blueCegedim '> Add New Employee </p>
                     </Link>
                   </Menu.Item>
-                </Menu.Items>
-              </Transition>
-            </Menu>
-           
+                    
+            </div>
+          </Menu.Items>
+        </Transition>
+      </Menu>
+    </div>
+  )
 
-       
-  );
 }
-
-export default PopUpStart;

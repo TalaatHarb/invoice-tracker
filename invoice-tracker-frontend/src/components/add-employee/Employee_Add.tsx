@@ -8,17 +8,9 @@ import Navbar from '../Navbar';
 
 import axios from 'axios';
 import { useAppSelector } from '../../hooks/toolkit-types';
-import Select from 'react-select/dist/declarations/src/Select';
 
 
 
-const Field = ({ label, id, error, ...rest } : any) => (
-  <div>
-    <label htmlFor={id}>{label}</label>
-    <input id={id} {...rest} />
-    {error && <p>{error}</p>}
-  </div>
-);
 
 
 
@@ -31,7 +23,8 @@ const Options = [
   { value: 'team3', label: 'Team3' }
 ]
 
-
+const min = 8;
+const max = 120;
 
 
 function Employee_Add() {
@@ -61,8 +54,9 @@ function Employee_Add() {
 
 
   const handleSubmit = (event  : any) => {
-    event.preventDefault();
+    // event.preventDefault();
     
+       
     const object1 = {
       userId:userId,
       englishName:englishName,
@@ -84,18 +78,27 @@ function Employee_Add() {
       isDisabled:isDisabled
 
     };
-   
+
+     if(password!=confirm_password)
+     {
+      alert("password not equal confirm password !");
+      return;
+     }
+
+     if(password.length<8)
+     {
+      alert("password should be more than 8 digit !");
+      return;
+     }
+
+
+ 
     fetch_employee(object1);
   }
   /*  */
 
-  const handleOnChangeFullTime = () => {
-    setIsFullTime(!isFullTime);
-  };
 
-  const handleOnChangeMultiplieTeam = () => {
-    setMultiplieTeam(!MultiplieTeams);
-  };
+
 
   const handleOnChangeBillable = () => {
     setBilliable(!billable);
@@ -180,6 +183,14 @@ function Employee_Add() {
     //hellow test 
    }
 
+
+  function add_teams()
+  {
+    
+  }
+
+
+
   return (
   
     <div>
@@ -187,7 +198,7 @@ function Employee_Add() {
        <br></br>
        <div className="lg:w-100 bg-white shadow rounded">
      
-    <form className="contact-form row" onSubmit={handleSubmit}>
+    <form className="contact-form row" onSubmit={e => e.preventDefault()}>
       <div>
        <div className="form-field col x-50">
          
@@ -222,9 +233,11 @@ function Employee_Add() {
           <input 
           required
           type="password" 
+          
           className="input-text js-input"
           value={password}
           onChange={(e) => setpassword(e.target.value)}
+         
         />
           <label className="employee_label" >Password</label>
        </div>
@@ -236,6 +249,8 @@ function Employee_Add() {
           className="input-text js-input"
           value={confirm_password}
           onChange={(e) => setconfirm_password(e.target.value)}
+          min="8"
+          max="120"
         />
           <label className="employee_label">Confirm Password</label>
        </div>
@@ -431,7 +446,7 @@ function Employee_Add() {
 
 
        <div className="form-field col x-100 align-center">
-          <input className="employee-submit-btn" type="submit" value="Add User"  />
+          <input className="employee-submit-btn" type="button" onClick={handleSubmit} value="Add User"  />
        </div>
 
     </form>

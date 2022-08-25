@@ -2,7 +2,6 @@ package net.talaatharb.invoicetracker.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -38,7 +37,7 @@ public class ExcelHelper {
         try {
 
             User employee = new User();
-
+            System.out.println("heelo1");
             employee.setNationalId(income_user.getNationalId());
             employee.setEnglishName(income_user.getEnglishName());
             employee.setArabicName(income_user.getArabicName());
@@ -55,13 +54,15 @@ public class ExcelHelper {
             employee.setMobileNumber(income_user.getMobileNumber());
             employee.setFullTime(income_user.isFullTime());
 
-//            List<Team> teams = new ArrayList<>();
-//            if(income_user.getTeams().size()>0)
-//            teams = find_teams(income_user.getTeams());
-//
-//            employee.setTeams(teams);
+            List<Team> teams = new ArrayList<>();
+            if(!income_user.getTeams().isEmpty())
+            teams = find_teams(income_user.getTeams());
+
+            employee.setTeams(teams);
             employee.setJopTitle(income_user.getJopTitle());
             employee.setUserId(income_user.getUserId());
+
+            System.out.println("heelo1");
             return employee;
         }
         catch(Exception e){
@@ -74,19 +75,24 @@ public class ExcelHelper {
     private  List<Team> find_teams(List<String> income_teams_names)
     {
         System.out.println("hello find");
-        List<Team> teams = new ArrayList<>() ;
+        List<Team> teams = teamRepository.findAll();
 
-        for(int i=0;i< income_teams_names.size();i++) {
-            Optional<Team> team = teamRepository.findByName(income_teams_names.get(i));
-            if(team.isPresent()) {
-                Team team1 = new Team();
-                team1 =  team.get();
+        System.out.println(teams.get(0).getName());
 
-                teams.add(team1);
-                System.out.println(team.get().getName());
+        List<Team> teams2 = new ArrayList<>();
+        if(!teams.isEmpty()){
+            for(int i=0;i< teams.size();i++)
+            {
+                if(teams.get(i).getName().equals(income_teams_names.get(0)))
+                {
+                    teams2.add(teams.get(i));
+                }
             }
+
+
         }
-        return  teams;
+
+        return  teams2;
     }
 
 

@@ -41,10 +41,10 @@ public class UserDto {
     private String arabicAddress;
 
     //		@NotBlank
-    private int allowedBalance;
+    private float allowedBalance;
 
     //	@NotBlank
-    private int remainingBalance;
+    private float remainingBalance;
 
     //	@NotBlank
     private boolean billable;

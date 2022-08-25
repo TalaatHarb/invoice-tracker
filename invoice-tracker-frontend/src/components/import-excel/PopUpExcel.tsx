@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React from 'react'
 import {useState} from 'react'
-import { Button } from 'react-bootstrap';
 
 import * as XLSX from 'xlsx'
 import { useAppSelector } from '../../hooks/toolkit-types';
@@ -104,21 +103,20 @@ const fetch_employees = async (prop : any) => {
         <form className='form-group' autoComplete="off"
         onSubmit={handleSubmit}>
           
-          {/* <label><h5>Upload Excel file</h5></label> */}
          
           <input type='file' className='form-control'
           onChange={handleFile} required></input>   
           <br></br>       
           <br></br>        
-          {excelFileError&&<div className='text-danger text-green'
+          {excelFileError&&<div className='text-danger text-blueCegedim'
           style={{}}>{excelFileError}</div>}
           <br></br>
-          {/* <button type='submit'  className='btn-success'
-          style={{marginTop:5+'px'}}>Submit</button> */}
+        
           
-          <Button className='btn-success' type='submit' >submit</Button>{' '}
+          <button type="submit" className="py-2 px-3 text-sm font-medium text-center text-white bg-blueCegedim rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+          <button onClick={(()=> props.setpopup(false))} type="button" className="py-2 px-3 text-sm font-medium text-center text-white bg-blueCegedim rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ml-5">Close</button>
 
-          <Button className='PopUpclosebtn' onClick={(()=> props.setpopup(false))} variant="close">Close</Button>{' '}
+
           
           
    

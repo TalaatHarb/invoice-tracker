@@ -8,6 +8,7 @@ import { useAppSelector } from "../../hooks/toolkit-types";
 import { employeeType } from "../../components/employees-hub/types";
 import { CONSTANTS } from "../../utils/constants";
 import PopUpStart from "../../components/import-excel/PopUpStart";
+import PopUpStart2 from "../../components/import-excel/PopUpStart2";
 
 const EmployeesHub = () => {
   const isAuthenticated: any = useAppSelector(
@@ -188,15 +189,21 @@ const EmployeesHub = () => {
 
   return (
     <div>
+      
       <Navbar />
 
       <div className="flex flex-col min-h-screen  bg-lightGrey bg-opacity-20 items-center">
         <div className="flex flex-row justify-between w-full items-center">
-          <h1 className=" drop-shadow-xl ml-60 my-12 text-5xl text-blueCegedim font-bold">
+          <h1 className=" drop-shadow-xl ml-40 my-12 text-5xl text-blueCegedim font-bold ">
             Cegedim Members
+
           </h1>
-          <div><PopUpStart /></div>
+          <PopUpStart/>
         </div>
+        <br></br>
+       <br></br>
+       <br></br>
+
         <div className="flex flex-row justify-start w-full  ml-96">
           <div className="mx-12 my-10">
             <h3 className="text-xl text-black font-medium">Filter by</h3>
@@ -253,6 +260,8 @@ const EmployeesHub = () => {
             >
               Clear
             </button>
+
+
           </div>
         </div>
 
