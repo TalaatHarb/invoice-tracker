@@ -45,7 +45,7 @@ public class RequestLeaveServices {
 			
 			RequestType requestType = new RequestType();
 			requestType.setTypeName(requests.get(i).getType());
-			body.setType(requestType);
+			body.setType(requestType.getTypeName());
 			
 
 			requestsBody.add(body);
