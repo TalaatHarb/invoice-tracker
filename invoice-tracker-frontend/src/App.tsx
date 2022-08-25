@@ -2,7 +2,6 @@ import React from "react";
 import Login from "./pages/Login";
 import AdminPage from "./pages/AdminPage";
 import UserPage from "./pages/UserPage";
-import HrPage from "./pages/HrPage";
 import EmployeePage from "./pages/EmployeePage";
 import { useAppSelector } from "./hooks/toolkit-types";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
@@ -57,20 +56,15 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
 
-        <Route path="/edit" element={<EmployeePrivateRoute />}>
+        <Route path="/edit" element={<HrPrivateRoute />}>
           <Route path="/edit" element={<EditRequest />} />
         </Route>
 
         {/* route for request list hr */}
-        <Route path="/requestList" element={<EmployeePrivateRoute />}>
+        <Route path="/hr" element={<HrPrivateRoute />}>
           <Route path="/requestList" element={<RequestList />} />
         </Route>
 
-        {/* protected user page */}
-
-        <Route path="/hr" element={<EmployeePrivateRoute />}>
-          <Route path="/hr" element={<HrPage />} />
-        </Route>
         {/* protected admin page */}
         <Route path="/admin" element={<ManagerPrivateRoute />}>
           <Route path="/admin" element={<AdminPage />} />
