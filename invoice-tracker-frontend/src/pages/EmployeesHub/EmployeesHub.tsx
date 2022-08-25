@@ -40,7 +40,11 @@ const EmployeesHub = () => {
     },
   ]);
   const [currentField, setCurrentField] = useState<string>("id");
-  const [employeeFilter, setEmployeeFilter] = useState<employeeFilterType>({});
+  const [employeeFilter, setEmployeeFilter] = useState<employeeFilterType>({
+    billable: "all",
+    fullTime: "all",
+    disabled: "all",
+  });
 
   const filterApplyClearhandler = async (event: any) => {
     let value: any = "";
@@ -75,7 +79,7 @@ const EmployeesHub = () => {
       case "billable":
         value = employeeFilter.billable;
         break;
-      case "fullTime":
+      case "fulltime":
         value = employeeFilter.fullTime;
         break;
       case "disabled":
@@ -112,7 +116,6 @@ const EmployeesHub = () => {
   const employeeFilterHandler = (event: any) => {
     const targetId = event.target.id;
     const targetValue = event.target.value;
-    setCurrentField(targetId);
     let newData = {};
     switch (targetId) {
       case "id":
@@ -148,7 +151,7 @@ const EmployeesHub = () => {
       case "billable":
         newData = { billable: event.target.checked + "" };
         break;
-      case "fullTime":
+      case "fulltime":
         newData = { fullTime: event.target.checked + "" };
         break;
       case "disabled":
@@ -157,6 +160,9 @@ const EmployeesHub = () => {
     }
 
     setEmployeeFilter({
+      billable: employeeFilter.billable,
+      fullTime: employeeFilter.fullTime,
+      disabled: employeeFilter.disabled,
       ...newData,
     });
   };
@@ -220,7 +226,7 @@ const EmployeesHub = () => {
               <input
                 onChange={employeeFilterHandler}
                 className="mr-1"
-                id="fullTime"
+                id="fulltime"
                 type="checkbox"
               />
               Fulltime
