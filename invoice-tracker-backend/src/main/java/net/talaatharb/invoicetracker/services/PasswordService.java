@@ -27,14 +27,15 @@ public class PasswordService {
 
     @Value("${APPLICATION_URL:'http://localhost:300'}")
     private String appUrl;
-    private final int FIVE_MINUTES = 5 * 60 * 1000;
+    
+    private static final int FIVE_MINUTES = 5 * 60 * 1000;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     public void sendResetLink(String email) {
         // email validation
-        if(!RegexHelper.testWithPattern(RegexHelper.emailPattern, email)){
+        if(!RegexHelper.testWithPattern(RegexHelper.EMAIL_PATTERN, email)){
             return;
 //            throw new UserException("Something went wrong");
         }
@@ -72,7 +73,7 @@ public class PasswordService {
     public void resetPassword(String resetToken, String newPassword) {
 
         // token and password validation
-        if(!RegexHelper.testWithPattern(RegexHelper.noSpecialCharsRegex,resetToken) || !RegexHelper.testWithPattern(RegexHelper.passwordPattern, newPassword)){
+        if(!RegexHelper.testWithPattern(RegexHelper.NO_SPECIAL_CHARS_PATTERN,resetToken) || !RegexHelper.testWithPattern(RegexHelper.PASSWORD_PATTERN, newPassword)){
             throw new UserException("Something went wrong");
         }
 
