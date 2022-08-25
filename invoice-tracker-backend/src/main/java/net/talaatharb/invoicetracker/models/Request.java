@@ -50,7 +50,7 @@ public class Request {
 //    @NotBlank
     private String status = "pending";
 
-//    @LazyCollection(LazyCollectionOption.FALSE)
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "request")
     private List<AbsenceAttachments> absenceAttachments;
 

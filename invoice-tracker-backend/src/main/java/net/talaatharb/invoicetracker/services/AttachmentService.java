@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import net.talaatharb.invoicetracker.repositories.AttachmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -21,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import net.talaatharb.invoicetracker.exceptions.UserException;
 import net.talaatharb.invoicetracker.models.AbsenceAttachments;
 import net.talaatharb.invoicetracker.models.Request;
+import net.talaatharb.invoicetracker.repositories.AttachmentRepository;
 import net.talaatharb.invoicetracker.repositories.RequestRepository;
 
 @Service

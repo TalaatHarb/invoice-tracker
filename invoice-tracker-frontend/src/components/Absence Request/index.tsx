@@ -38,8 +38,9 @@ const RequestForm = () => {
   });
   const [attachments, setAttachments] = useState([] as File[]);
   // const [requestId, setRequestId] = useState<number>();
-  let requestId:number;
+  let requestId: number;
   const [formData, setFormData] = useState<FormData>(new FormData());
+  const [isBadFiles, setIsBadFiles] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const field: string = e.target.name;
@@ -65,6 +66,7 @@ const RequestForm = () => {
       const { type } = file;
       if (isValidAttachmentType(file.type)) {
         toast.error("please enter only an image or a document");
+        setIsBadFiles(true);
         return;
       }
       filesTotalSize += file.size;
@@ -73,6 +75,7 @@ const RequestForm = () => {
     }
     if (filesTotalSize > TWENTY_MEGAS) {
       toast.error("Attachments exceeded 20 mb");
+      setIsBadFiles(true);
       return;
     }
     console.log(filesTotalSize);
@@ -82,6 +85,9 @@ const RequestForm = () => {
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    if (isBadFiles) {
+      return alert("Please upload correct files");
+    }
     e.preventDefault();
     console.log(request);
     const d1: Date = new Date(request.startDate);
@@ -110,14 +116,19 @@ const RequestForm = () => {
         if (attachments.length === 0) navigate("/employee");
       })
       .then(() => {
+        if (attachments.length === 0) return;
         console.log(requestId);
-        axios.post(
-          `http://localhost:8080/api/attachments/upload?reqId=${requestId}`,
-          formData,
-          {
-            headers: { Authorization: `Bearer ${isAuthenticated}` },
-          }
-        );
+        axios
+          .post(
+            `http://localhost:8080/api/attachments/upload?reqId=${requestId}`,
+            formData,
+            {
+              headers: { Authorization: `Bearer ${isAuthenticated}` },
+            }
+          )
+          .then(() => {
+            navigate("/employee");
+          });
       })
       .catch((error) => console.log(error));
   };
