@@ -20,8 +20,7 @@ const EmployeesList=()=>{
                   <p className="ttext-gray-900 text-xl font-sm mb-2">123456789</p>
                   <p className="text-gray-900 text-xl font-sm mb-2">ahmed@gmail.com</p>
               </div>
-           </div> 
-           
+           </div>
            
         </div>
     </div>

@@ -24,7 +24,7 @@ public class AbsenceService {
 
     private final RequestTypeRepository requestTypeRepository;
 
-    public List<Request> postRequest(Request request) {
+    public Long postRequest(Request request) {
         Long ID = request.getRequestedBy();
         User user = userRepository.findById(ID).get();
         user.getRequests().add(request);
@@ -32,11 +32,10 @@ public class AbsenceService {
         request.setType(request.getType());
         Rtype.getRequests().add(request);
         userRepository.save(user);
-        return requestRepository.findAll();
+        return request.getId();
     }
 
         public List<Request> getAllAbsenceByEmployeeId(Long empId){
             return absenceRepository.findAllByRequestedBy(empId);
         }
-
-    }
+}

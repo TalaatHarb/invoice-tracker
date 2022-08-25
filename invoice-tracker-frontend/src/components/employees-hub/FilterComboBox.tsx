@@ -15,7 +15,7 @@ const fields = [
 ];
 
 type filterComboBoxProps = {
-  onOptionClick: React.MouseEventHandler<HTMLLIElement>;
+  onOptionClick?: React.MouseEventHandler<HTMLLIElement>;
 };
 
 const FilterComboBox = ({ onOptionClick }: filterComboBoxProps) => {

@@ -37,6 +37,8 @@ public class InvoiceTrackerBackendApplication {
 	private static final Boolean IS_ENABLED = true;
 	private static final Date PASSWORD_EXPIRY_DATE = new GregorianCalendar(2022,Calendar.AUGUST,11).getTime();
 
+	private static final String REAL_EMAIL = "esmailmostafa295@gmail.com";
+
 	public static void main(String[] args) {
 		SpringApplication.run(InvoiceTrackerBackendApplication.class, args);
 	}
@@ -63,7 +65,7 @@ public class InvoiceTrackerBackendApplication {
 			userService.saveUser(new User("124329374621","Amr Essam","عمرو عصام",EMAIL_ADMIN_USER,PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,21,true,jdate,edate,new Date(),"01002345324",2,0,150.0,"amr23"));
 
 			userService.saveUser(new User(EMAIL_HR_2, PASS_USER,"hamada",false));
-
+			userService.saveUser(new User(REAL_EMAIL, PASS_USER,"mostafa",true));
 			userService.saveUser(new User(EMAIL_EMPLOYEE_2, PASS_USER,"hamada",IS_ENABLED,PASSWORD_EXPIRY_DATE));
 
 

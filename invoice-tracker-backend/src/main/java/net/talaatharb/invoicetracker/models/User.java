@@ -127,8 +127,7 @@ public class User {
 	@Size(max = 20)
 	private String username;
 
-
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
 	@PrimaryKeyJoinColumn
 	private ResetTokenEntity resetToken;
 
