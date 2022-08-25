@@ -55,7 +55,7 @@ public class ExcelHelper {
             employee.setFullTime(income_user.isFullTime());
 
             List<Team> teams = new ArrayList<>();
-            if(!income_user.getTeams().isEmpty())
+            if(income_user.getTeams().size()>0)
             teams = find_teams(income_user.getTeams());
 
             employee.setTeams(teams);
@@ -74,10 +74,8 @@ public class ExcelHelper {
 
     private  List<Team> find_teams(List<String> income_teams_names)
     {
-        System.out.println("hello find");
         List<Team> teams = teamRepository.findAll();
 
-        System.out.println(teams.get(0).getName());
 
         List<Team> teams2 = new ArrayList<>();
         if(!teams.isEmpty()){

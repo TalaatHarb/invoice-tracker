@@ -179,7 +179,11 @@ function Employee_Add() {
 
     let multible = TotalDays * number;
     let balance =  multible.toFixed(2);
-    setAnnualBalance(balance);
+
+    
+    var intvalue = Math.ceil(parseFloat(balance)); 
+    setAnnualBalance(intvalue.toString());
+
     //hellow test 
    }
 

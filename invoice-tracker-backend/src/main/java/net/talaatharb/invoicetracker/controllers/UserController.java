@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import net.talaatharb.invoicetracker.dtos.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,10 +30,10 @@ public class UserController {
     private  final UserRepository userRepository;
 
 
-//    @GetMapping("/users")
-//    public ResponseEntity<List<UserDetails>> getUsers() {
-//        return ResponseEntity.ok().body(userService.getUsers());
-//    }
+    @GetMapping("/users")
+    public ResponseEntity<List<UserDetails>> getUsers() {
+        return ResponseEntity.ok().body(userService.getUsers());
+    }
 
     @GetMapping("/user")
     public ResponseEntity<User> getUser(@RequestParam long ID){

@@ -38,9 +38,9 @@ public class UserDetails {
 
     private Date endDate;
 
-    private float allowedBalance;
+    private int allowedBalance;
 
-    private float remainingBalance;
+    private int remainingBalance;
 
     private ArrayList<TeamDetails> team;
 

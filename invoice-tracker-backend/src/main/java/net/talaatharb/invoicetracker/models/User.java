@@ -59,10 +59,10 @@ public class User {
 	private String arabicAddress;
 
 	//		@NotBlank
-	private float allowedBalance;
+	private int allowedBalance;
 
 	//	@NotBlank
-	private float remainingBalance;
+	private int remainingBalance;
 
 	//	@NotBlank
 	private boolean billable;

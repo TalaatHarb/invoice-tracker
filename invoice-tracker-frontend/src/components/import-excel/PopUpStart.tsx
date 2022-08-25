@@ -25,7 +25,7 @@ function PopUpStart() {
      
    
 
-<Menu as='div' className='w-52 h-52 mr-40 mt-40' 	  >
+<Menu as='div' className='w-52 h-20 mr-40 mt-14' 	  >
 <PopUpExcel  popup={buttonpopup} setpopup={setButtonpopup}></PopUpExcel>
 
               <div>
