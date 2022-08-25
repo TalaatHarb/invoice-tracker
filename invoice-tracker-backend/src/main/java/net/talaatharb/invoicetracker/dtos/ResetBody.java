@@ -11,5 +11,4 @@ public class ResetBody {
 
     private String password;
     private String resetToken;
-
 }

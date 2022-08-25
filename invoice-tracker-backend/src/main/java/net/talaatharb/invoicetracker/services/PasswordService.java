@@ -29,7 +29,8 @@ public class PasswordService {
 
     @Value("${APPLICATION_URL:'http://localhost:300'}")
     private String appUrl;
-    private final int FIVE_MINUTES = 5 * 60 * 1000;
+    
+    private static final int FIVE_MINUTES = 5 * 60 * 1000;
 
     @Autowired
     private PasswordEncoder passwordEncoder;

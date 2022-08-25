@@ -10,4 +10,7 @@ public class RegexHelper {
     public static boolean testWithPattern(String pattern, String theString){
         return Pattern.compile(pattern).matcher(theString).matches();
     }
+    
+    private RegexHelper() {
+    }
 }

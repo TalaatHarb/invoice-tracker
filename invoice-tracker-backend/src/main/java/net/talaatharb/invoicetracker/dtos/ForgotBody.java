@@ -1,5 +1,4 @@
 package net.talaatharb.invoicetracker.dtos;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
