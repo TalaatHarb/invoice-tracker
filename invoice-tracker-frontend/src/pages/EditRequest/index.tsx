@@ -118,7 +118,9 @@ const Popup = ({datapage,submit}:any) => {
     <Span>Comment</Span> 
     <textarea id="w3review" name="w3review" rows={4}cols={77}></textarea>
     </Input>
-   <StyledButton onClick={()=>{ navigate("/requestList")}} >submit</StyledButton>
+    <StyledButton onClick={()=>{ navigate("/hr")}} >submit</StyledButton>
+   
+    
     </Wrapper>
    </StyledWrapper>
    

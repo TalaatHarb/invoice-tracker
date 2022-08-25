@@ -5,6 +5,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import net.talaatharb.invoicetracker.services.FilterUserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -23,6 +24,9 @@ class UserControllerIT extends AbstractControllerIT {
 
 	@Autowired
 	private UserDetailsService userDetailsService;
+
+	@Autowired
+	private FilterUserService filterUserService;
 
 	@Test
 	@WithMockUser
@@ -55,6 +59,16 @@ class UserControllerIT extends AbstractControllerIT {
 		Role role = new Role(45L, ERole.ROLE_USER);
 		mvc.perform(post("/api/role/save").contentType(MediaType.APPLICATION_JSON_VALUE)
 				.content(objectMapper.writeValueAsString(role))).andExpect(status().isCreated());
+	}
+
+	@Test
+	@WithMockUser
+	void testfilterUser() throws Exception {
+		UserDetailsImpl user = (UserDetailsImpl) userDetailsService
+				.loadUserByUsername(InvoiceTrackerBackendApplication.EMAIL_USER);
+
+		mvc.perform(get("/api/users/filter?type=id&values=1").contentType(MediaType.APPLICATION_JSON_VALUE)
+				.content(objectMapper.writeValueAsString(user))).andExpect(status().isOk());
 	}
 
 }
