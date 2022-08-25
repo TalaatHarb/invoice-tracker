@@ -42,7 +42,7 @@ public class PasswordService {
     @Transactional
     public void sendResetLink(String email) {
         // email validation
-        if(email == null || !RegexHelper.testWithPattern(RegexHelper.emailPattern, email)){
+        if(email == null || !RegexHelper.testWithPattern(RegexHelper.EMAIL_PATTERN, email)){
             return;
 //            throw new UserException("Something went wrong");
         }
@@ -81,7 +81,7 @@ public class PasswordService {
         UserException somethingWentWrong = new UserException("something went wrong");
 
         // token and password validation
-        if(resetToken == null || !RegexHelper.testWithPattern(RegexHelper.noSpecialCharsRegex,resetToken) || newPassword == null || !RegexHelper.testWithPattern(RegexHelper.passwordPattern, newPassword)){
+        if(resetToken == null || !RegexHelper.testWithPattern(RegexHelper.NO_SPECIAL_CHARS_PATTERN,resetToken) || newPassword == null || !RegexHelper.testWithPattern(RegexHelper.PASSWORD_PATTERN, newPassword)){
             throw somethingWentWrong;
         }
 
