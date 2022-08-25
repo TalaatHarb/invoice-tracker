@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 import net.bytebuddy.utility.RandomString;
 import net.talaatharb.invoicetracker.exceptions.UserException;
@@ -33,9 +35,14 @@ public class PasswordService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    public void deleteUserToken(Long uid){
+        resetTokenRepo.deleteById(uid);
+    }
+
+    @Transactional
     public void sendResetLink(String email) {
         // email validation
-        if(!RegexHelper.testWithPattern(RegexHelper.EMAIL_PATTERN, email)){
+        if(email == null || !RegexHelper.testWithPattern(RegexHelper.EMAIL_PATTERN, email)){
             return;
 //            throw new UserException("Something went wrong");
         }
@@ -54,33 +61,34 @@ public class PasswordService {
         }
 
         User userReturned = userReturnedOptional.get();
-        Optional<ResetTokenEntity> resetTokenReturnedOptional = resetTokenRepo.findByUserId(userReturned.getId());
-
         ResetTokenEntity resetToken = new ResetTokenEntity();
         resetToken.setResetToken(token);
         resetToken.setExpTimeStamp(System.currentTimeMillis() + FIVE_MINUTES);
         resetToken.setUser(userReturned);
 
-        if(resetTokenReturnedOptional.isPresent()){
-            userReturned.setResetToken(null);
-            resetTokenRepo.deleteById(userReturned.getId());
+        if(userReturned.getResetToken() == null){
+            userReturned.setResetToken(resetToken);
+        }else{
+            userReturned.getResetToken().setExpTimeStamp(System.currentTimeMillis() + FIVE_MINUTES);
+            userReturned.getResetToken().setResetToken(token);
         }
-
-        resetTokenRepo.save(resetToken);
         mailService.sendMail(email, mailSubject, mailBody);
     }
 
+    @Transactional
     public void resetPassword(String resetToken, String newPassword) {
 
+        UserException somethingWentWrong = new UserException("something went wrong");
+
         // token and password validation
-        if(!RegexHelper.testWithPattern(RegexHelper.NO_SPECIAL_CHARS_PATTERN,resetToken) || !RegexHelper.testWithPattern(RegexHelper.PASSWORD_PATTERN, newPassword)){
-            throw new UserException("Something went wrong");
+        if(resetToken == null || !RegexHelper.testWithPattern(RegexHelper.NO_SPECIAL_CHARS_PATTERN,resetToken) || newPassword == null || !RegexHelper.testWithPattern(RegexHelper.PASSWORD_PATTERN, newPassword)){
+            throw somethingWentWrong;
         }
 
         Optional<ResetTokenEntity> resetTokenReturnedOptional = resetTokenRepo.findByResetToken(resetToken);
 
         if(resetTokenReturnedOptional.isEmpty()) {
-            throw new UserException("You are not authorized to make this operation");
+            throw somethingWentWrong;
         }
 
         ResetTokenEntity resetTokenReturned = resetTokenReturnedOptional.get();
@@ -95,9 +103,7 @@ public class PasswordService {
         String hashedPassword = passwordEncoder.encode(newPassword);
 
         userReturned.setPassword(hashedPassword);
-        userRepo.save(userReturned);
-
         userReturned.setResetToken(null);
-        resetTokenRepo.deleteById(resetTokenReturned.getId());
+        userRepo.save(userReturned);
     }
 }

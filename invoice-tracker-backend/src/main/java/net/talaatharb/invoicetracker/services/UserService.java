@@ -29,7 +29,8 @@ import net.talaatharb.invoicetracker.repositories.UserRepository;
 @Service
 @AllArgsConstructor
 @Transactional
-public class UserService {
+public class
+UserService {
 
 	private final PasswordEncoder passwordEncoder;
 	@Autowired
