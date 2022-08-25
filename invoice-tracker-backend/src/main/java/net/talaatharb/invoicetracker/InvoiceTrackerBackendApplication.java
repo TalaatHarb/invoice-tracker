@@ -23,6 +23,7 @@ import net.talaatharb.invoicetracker.services.UserService;
 @SpringBootApplication
 public class InvoiceTrackerBackendApplication {
 
+	public static final String USERNAME = "amr0";
 	private static final String EMAIL_ADMIN_USER = "boogado2@yahoo.com";
 	private static final String EMAIL_EMPLOYEE = "boogado@yahoo.com";
 	private static final String EMAIL_HR = "boogado1@yahoo.com";

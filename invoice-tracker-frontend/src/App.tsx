@@ -62,15 +62,12 @@ function App() {
         </Route>
 
         {/* route for request list hr */}
-        <Route path="/requestList" element={<EmployeePrivateRoute />}>
-          <Route path="/requestList" element={<RequestList />} />
+        <Route path="/hr" element={<HrPrivateRoute />}>
+          <Route path="/hr" element={<RequestList />} />
         </Route>
 
         {/* protected user page */}
 
-        <Route path="/hr" element={<EmployeePrivateRoute />}>
-          <Route path="/hr" element={<HrPage />} />
-        </Route>
         {/* protected admin page */}
         <Route path="/admin" element={<ManagerPrivateRoute />}>
           <Route path="/admin" element={<AdminPage />} />

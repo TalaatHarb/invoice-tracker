@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import net.talaatharb.invoicetracker.dtos.RequestLeaveBody;
 import net.talaatharb.invoicetracker.models.Request;
+import net.talaatharb.invoicetracker.models.RequestType;
 import net.talaatharb.invoicetracker.models.User;
 import net.talaatharb.invoicetracker.repositories.RequestRepository;
 import net.talaatharb.invoicetracker.repositories.UserRepository;
@@ -40,8 +41,11 @@ public class RequestLeaveServices {
 			body.setRemainingBalance(user.getRemainingBalance());
 			body.setTeams(user.getTeams());
 			body.setBillable(user.isBillable());
-			body.setType(requests.get(i).getType());
 			body.setRequestDate(requests.get(i).getRequestDate());
+			
+			RequestType requestType = new RequestType();
+			requestType.setTypeName(requests.get(i).getType());
+			body.setType(requestType);
 			
 
 			requestsBody.add(body);
