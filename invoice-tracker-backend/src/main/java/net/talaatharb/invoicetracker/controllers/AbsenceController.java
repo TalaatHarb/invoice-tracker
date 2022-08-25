@@ -57,7 +57,7 @@ public class AbsenceController {
 		@PutMapping("/UpdateLeaveRequest/{request_id}")
 		public ResponseEntity<Request> UpdateEmployeeRequest(@RequestBody Request req, @RequestParam int request_id) {
 
-			return new ResponseEntity<>(null, HttpStatus.OK);
+			return new ResponseEntity<>(req, HttpStatus.OK);
 
 		}
 }
