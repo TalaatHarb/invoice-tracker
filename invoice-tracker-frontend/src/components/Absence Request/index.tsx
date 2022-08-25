@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "react-datepicker/dist/react-datepicker.css";
 import { useAppSelector } from "../../hooks/toolkit-types";
+import { toast } from "react-toastify";
+import { SERVER, TWENTY_MEGAS } from "../../utils/config";
+import { isValidAttachmentType } from "../../utils/helper";
 
 interface requestInterface {
   type: string;
@@ -34,6 +36,11 @@ const RequestForm = () => {
     // reviewedBy: null,
     numberOfDays: 1,
   });
+  const [attachments, setAttachments] = useState([] as File[]);
+  // const [requestId, setRequestId] = useState<number>();
+  let requestId: number;
+  const [formData, setFormData] = useState<FormData>(new FormData());
+  const [isBadFiles, setIsBadFiles] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const field: string = e.target.name;
@@ -47,13 +54,46 @@ const RequestForm = () => {
     });
   };
 
+  const handleFileChange = async (e: any) => {
+    const formData = new FormData();
+    setAttachments([]);
+    const { files }: { files: File[] } = e.target;
+
+    let filesTotalSize = 0;
+
+    for (const file of files) {
+      // console.log(file);
+      const { type } = file;
+      if (isValidAttachmentType(file.type)) {
+        toast.error("please enter only an image or a document");
+        setIsBadFiles(true);
+        return;
+      }
+      filesTotalSize += file.size;
+      console.log(file.type);
+      formData.append("attachments", file);
+    }
+    if (filesTotalSize > TWENTY_MEGAS) {
+      toast.error("Attachments exceeded 20 mb");
+      setIsBadFiles(true);
+      return;
+    }
+    console.log(filesTotalSize);
+    setAttachments(files);
+    console.log(attachments);
+    setFormData(formData);
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    if (isBadFiles) {
+      return alert("Please upload correct files");
+    }
     e.preventDefault();
     console.log(request);
     const d1: Date = new Date(request.startDate);
     const d2: Date = new Date(request.endDate);
     const numberOfDays: number =
-      (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24);
+      (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24) + 1;
     request.numberOfDays = numberOfDays;
 
     axios
@@ -61,7 +101,8 @@ const RequestForm = () => {
         headers: { Authorization: `Bearer ${isAuthenticated}` },
       })
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
+        requestId = response.data;
         alert("Your request is sent and being processed.");
         alert(
           `You made a request on ${request.requestDate} to have ${
@@ -72,7 +113,22 @@ const RequestForm = () => {
             request.numberOfDays > 1 ? "days" : "day"
           } and this is your note: '${request.comment}'`
         );
-        navigate("/employee");
+        if (attachments.length === 0) navigate("/employee");
+      })
+      .then(() => {
+        if (attachments.length === 0) return;
+        console.log(requestId);
+        axios
+          .post(
+            `http://localhost:8080/api/attachments/upload?reqId=${requestId}`,
+            formData,
+            {
+              headers: { Authorization: `Bearer ${isAuthenticated}` },
+            }
+          )
+          .then(() => {
+            navigate("/employee");
+          });
       })
       .catch((error) => console.log(error));
   };
@@ -151,6 +207,8 @@ const RequestForm = () => {
             }
           />
         </label>
+
+        <input type="file" multiple onChange={handleFileChange} />
 
         <input
           className="mt-5 cursor-pointer float-right text-white bg-blueCegedim hover:bg-darkGrey focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"

@@ -5,7 +5,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import net.talaatharb.invoicetracker.services.FilterUserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,6 +17,7 @@ import net.talaatharb.invoicetracker.InvoiceTrackerBackendApplication;
 import net.talaatharb.invoicetracker.api.AbstractControllerIT;
 import net.talaatharb.invoicetracker.models.ERole;
 import net.talaatharb.invoicetracker.models.Role;
+import net.talaatharb.invoicetracker.services.FilterUserService;
 import net.talaatharb.invoicetracker.services.UserDetailsImpl;
 
 class UserControllerIT extends AbstractControllerIT {
