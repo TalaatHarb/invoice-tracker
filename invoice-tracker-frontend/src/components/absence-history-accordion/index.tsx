@@ -4,7 +4,11 @@ import AbsenceHistoryItem from "./item";
 import { useAppSelector } from "../../hooks/toolkit-types";
 import axios from "axios";
 
-const AbsenceHistoryAccordionList = () => {
+type accordionProps = {
+  id: number;
+};
+
+const AbsenceHistoryAccordionList = ({ id }: accordionProps) => {
   const { isAuthenticated } = useAppSelector(
     (state) => state.AuthenticationSlice
   );
@@ -19,7 +23,7 @@ const AbsenceHistoryAccordionList = () => {
 
     // TODO: Change the empId to be generic
     let res = await axios.get(
-      `http://localhost:8080/user/absence/request?empId=1`,
+      `http://localhost:8080/api/user/absence/request?empId=${id}`,
       config
     );
 
@@ -33,19 +37,21 @@ const AbsenceHistoryAccordionList = () => {
 
   return (
     <>
-      <br></br>
       <h2>Absence History</h2>
       <br />
-      {absences.map((absence: AbsenseItem) => {
-        return (
-          <AbsenceHistoryItem
-            key={absence.id}
-            record={absence}
-            items={absences}
-            setItems={setAbsences}
-          />
-        );
-      })}
+      <div className="shadow-lg">
+        {absences.map((absence: AbsenseItem) => {
+          return (
+            <AbsenceHistoryItem
+              key={absence.id}
+              record={absence}
+              items={absences}
+              setItems={setAbsences}
+            />
+          );
+        })}
+      </div>
+
       <br />
       <div className="flex flex-row-reverse">
         <button
@@ -54,7 +60,7 @@ const AbsenceHistoryAccordionList = () => {
         >
           Cancel
         </button>
-        <button className="inline-flex items-center px-3 py-1.5 bg-lightGrey hover:bg-darkGrey text-sm font-medium rounded-md mx-2">
+        <button className="inline-flex items-center px-3 py-1.5  bg-blueCegedim hover:opacity-75 text-white text-sm font-medium rounded-md mx-2">
           Save
         </button>
       </div>

@@ -23,7 +23,7 @@ import net.talaatharb.invoicetracker.services.UserService;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*" , allowedHeaders = "*", maxAge = 3600)
 public class UserController {
 
     @Autowired
@@ -41,6 +41,10 @@ public class UserController {
         return ResponseEntity.ok().body(userService.getUser(ID));
     }
 
+    @PutMapping("/user/update/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable  long id, @RequestBody UserDetails userDetails){
+        return userService.updateUser(id,userDetails);
+    }
     @PostMapping("/user/save")
     public ResponseEntity<User>saveUser(@RequestBody User user) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
@@ -52,6 +56,7 @@ public class UserController {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveRole(role));
     }
+
 
     @GetMapping("/users/filter")
     public ResponseEntity<List<User>> filterEmployees(@RequestParam("type") String type, @RequestParam("values") List<String> values) throws ParseException {

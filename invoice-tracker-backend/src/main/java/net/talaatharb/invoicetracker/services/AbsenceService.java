@@ -5,20 +5,39 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.RequiredArgsConstructor;
 import net.talaatharb.invoicetracker.models.Request;
+import net.talaatharb.invoicetracker.models.RequestType;
+import net.talaatharb.invoicetracker.models.User;
 import net.talaatharb.invoicetracker.repositories.RequestRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Service
+@RequiredArgsConstructor
 public class AbsenceService {
-    @Autowired
-    RequestRepository absenceRepository;
+    private final RequestRepository requestRepository;
 
-    public List<Request> getAllAbsenceByEmployeeId(Long empId) {
-        return absenceRepository.findAllByRequestedBy(empId);
+    private final UserRepository userRepository;
+
+
+    private final RequestRepository absenceRepository;
+
+    private final RequestTypeRepository requestTypeRepository;
+
+    public List<Request> postRequest(Request request) {
+        Long ID = request.getRequestedBy();
+        User user = userRepository.findById(ID).get();
+        user.getRequests().add(request);
+        RequestType Rtype = requestTypeRepository.findByTypeName(request.getType());
+        request.setType(request.getType());
+        Rtype.getRequests().add(request);
+        userRepository.save(user);
+        return requestRepository.findAll();
     }
 
-    public List<Request> postRequest(Request request){
-        absenceRepository.save(request);
-        return absenceRepository.findAll();
+        public List<Request> getAllAbsenceByEmployeeId(Long empId){
+            return absenceRepository.findAllByRequestedBy(empId);
+        }
+
     }
-}

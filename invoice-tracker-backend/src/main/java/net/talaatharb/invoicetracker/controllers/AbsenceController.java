@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
 import net.talaatharb.invoicetracker.models.Request;
 import net.talaatharb.invoicetracker.services.AbsenceService;
+import net.talaatharb.invoicetracker.services.RequestLeaveServices;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,7 +20,8 @@ import net.talaatharb.invoicetracker.services.AbsenceService;
 public class AbsenceController {
     @Autowired
     private AbsenceService absenceService;
-
+    @Autowired
+	RequestLeaveServices leaveServices;
     // http://localhost:8080/api/user/absence
     @PostMapping(consumes = {
             MediaType.APPLICATION_JSON_VALUE,
@@ -36,5 +38,15 @@ public class AbsenceController {
     public ResponseEntity<List<Request>> getAbsenceHistoryByEmployeeId(@RequestParam Long empId) {
         return ResponseEntity.ok().body(absenceService.getAllAbsenceByEmployeeId(empId));
     }
+ @GetMapping("/LeaveRequests")
+		public ResponseEntity<ArrayList<RequestLeaveBody>> getUsers() {
+			return ResponseEntity.ok().body(leaveServices.get_EmployeesRequests());
+		}
 
+		@PutMapping("/UpdateLeaveRequest/{request_id}")
+		public ResponseEntity<Request> UpdateEmployeeRequest(@RequestBody Request req, @RequestParam int request_id) {
+
+			return new ResponseEntity<>(leaveServices.update_a_leave_request(request_id, req), HttpStatus.OK);
+
+		}
 }
