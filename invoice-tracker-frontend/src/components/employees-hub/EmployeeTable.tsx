@@ -127,7 +127,7 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
       id: "Teams",
       header: "Team Name",
       cell: (info) =>
-        info.getValue()
+        info.getValue().length
           ? info.getValue().map((team) => {
               return (
                 <Link
@@ -139,7 +139,12 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
                 </Link>
               );
             })
-          : "N/A",
+          : <Link
+          className="text-black no-underline block hover:underline"
+          to={"/team/"+1}
+        >
+          <p>Team A</p>
+        </Link>
     }),
     columnHelper.accessor((row) => row.fullTime, {
       id: "Fulltime",

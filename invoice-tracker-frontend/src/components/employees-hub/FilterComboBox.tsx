@@ -4,7 +4,6 @@ import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 
 const fields = [
   { id: "id", name: "Id" },
-  { id: "employeeId", name: "Employee Id" },
   { id: "englishName", name: "English Name" },
   { id: "arabicName", name: "Arabic name" },
   { id: "jobTitle", name: "Job title" },

@@ -41,9 +41,6 @@ const EmployeesHub = () => {
   ]);
   const [currentField, setCurrentField] = useState<string>("id");
   const [employeeFilter, setEmployeeFilter] = useState<employeeFilterType>({
-    billable: "all",
-    fullTime: "all",
-    disabled: "all",
   });
 
   const filterApplyClearhandler = async (event: any) => {
@@ -116,6 +113,7 @@ const EmployeesHub = () => {
   const employeeFilterHandler = (event: any) => {
     const targetId = event.target.id;
     const targetValue = event.target.value;
+    setCurrentField(targetId);
     let newData = {};
     switch (targetId) {
       case "id":
@@ -160,9 +158,6 @@ const EmployeesHub = () => {
     }
 
     setEmployeeFilter({
-      billable: employeeFilter.billable,
-      fullTime: employeeFilter.fullTime,
-      disabled: employeeFilter.disabled,
       ...newData,
     });
   };

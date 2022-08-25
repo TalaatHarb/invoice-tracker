@@ -7,7 +7,7 @@ const EmployeesList=()=>{
 <div className="flex flex-col min-h-screen  bg-lightGrey bg-opacity-20 items-center">
 
         <div className="flex flex-row justify-start w-full">
-            <h2 className=" drop-shadow-xl mx-8 my-12 text-5xl text-blueCegedim font-bold">Team Members</h2>
+            <h2 className=" drop-shadow-xl mx-8 my-12 text-5xl text-blueCegedim font-bold">Team A</h2>
         </div>
     <div>
         <div className="grid gap-10 grid-cols-2">
@@ -20,7 +20,8 @@ const EmployeesList=()=>{
                   <p className="ttext-gray-900 text-xl font-sm mb-2">123456789</p>
                   <p className="text-gray-900 text-xl font-sm mb-2">ahmed@gmail.com</p>
               </div>
-           </div>
+           </div> 
+           
            
         </div>
     </div>
