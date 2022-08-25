@@ -21,6 +21,8 @@ public class AbsenceController {
     private AbsenceService absenceService;
 
     // http://localhost:8080/api/user/absence
+    
+    // TODO replace entity in request body or response with an actual DTO
     @PostMapping(consumes = {
             MediaType.APPLICATION_JSON_VALUE,
             MediaType.APPLICATION_XML_VALUE },

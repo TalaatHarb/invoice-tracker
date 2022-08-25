@@ -26,6 +26,7 @@ import net.talaatharb.invoicetracker.services.UserService;
 @SpringBootApplication
 public class InvoiceTrackerBackendApplication {
 
+	public static final String USERNAME = "amr0";
 	private static final String EMAIL_ADMIN_USER = "boogado2@yahoo.com";
 	private static final String EMAIL_EMPLOYEE = "boogado@yahoo.com";
 	private static final String EMAIL_HR = "boogado1@yahoo.com";
@@ -53,7 +54,7 @@ public class InvoiceTrackerBackendApplication {
 
 //			create new object of User Class
 
-			userService.saveUser(new User(EMAIL_USER, PASS_USER,21,21,new Date(),"0122303432","amr0"));
+			userService.saveUser(new User(EMAIL_USER, PASS_USER,21,21,new Date(),"0122303432",USERNAME));
 			userService.saveUser(new User(EMAIL_EMPLOYEE, PASS_USER,21,21,new Date(),"0122303432","Gado"));
 			userService.saveUser(new User(EMAIL_HR, PASS_USER,"Ahmed",true));
 			userService.saveUser(new User("124329374621","Amr Essam","عمرو عصام",EMAIL_ADMIN_USER,PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,21,true,new Date(),new Date(),new Date(),"01002345324",2,0,150.0,"amr23"));
