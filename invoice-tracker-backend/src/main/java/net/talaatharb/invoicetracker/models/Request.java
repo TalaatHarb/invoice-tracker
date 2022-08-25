@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Table
 @Entity
-public class Request {  
+public class Request {
     public Request(Date startDate, Date requestDate, Date endDate, Long requestedBy, String type, boolean isFullDay, String comments, String status, String attachmentName, String attachmentUrl, int numberOfDays) {
         this.startDate = startDate;
         this.requestDate = requestDate;

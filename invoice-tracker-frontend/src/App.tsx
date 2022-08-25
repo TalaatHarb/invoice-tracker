@@ -57,7 +57,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
 
-        <Route path="/edit" element={<EmployeePrivateRoute />}>
+        <Route path="/edit" element={<HrPrivateRoute />}>
           <Route path="/edit" element={<EditRequest />} />
         </Route>
 
