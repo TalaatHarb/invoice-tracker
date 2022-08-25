@@ -28,11 +28,11 @@ spring:
       name: invoice-tracker-backend
     lifecycle:
       timeout-per-shutdown-phase: 30s
-  http:
+  servlet:
     multipart:
       enabled: true
-      max -file- size: 20MB
-      max -request-size: 20MB
+      max-file-size: 20MB
+      max-request-size: 20MB
 
 server:
   port: ${PORT:8080}
