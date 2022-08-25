@@ -22,7 +22,6 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-      <Route path='/empList' element={<EmployeesHub />} />
 
 
 
