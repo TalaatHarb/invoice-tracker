@@ -7,6 +7,8 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,8 @@ import net.talaatharb.invoicetracker.dtos.UserDetails;
 import net.talaatharb.invoicetracker.dtos.UserDto;
 import net.talaatharb.invoicetracker.models.*;
 import net.talaatharb.invoicetracker.models.ERole;
+import net.talaatharb.invoicetracker.models.Request;
+import net.talaatharb.invoicetracker.models.RequestType;
 import net.talaatharb.invoicetracker.models.Role;
 import net.talaatharb.invoicetracker.models.Team;
 import net.talaatharb.invoicetracker.models.User;
@@ -27,7 +31,8 @@ import net.talaatharb.invoicetracker.repositories.UserRepository;
 @Service
 @AllArgsConstructor
 @Transactional
-public class UserService {
+public class
+UserService {
 
 	private final PasswordEncoder passwordEncoder;
 
@@ -42,13 +47,11 @@ public class UserService {
 	@Autowired
 	private final UserRepository userRepository;
 
-
 	@Autowired
 	private final RequestRepository requestRepository;
 
 	@Autowired
 	private final RequestTypeRepository requestTypeRepository;
-
 
 	public void addRoleToUser(String email, ERole userRole) {
 		Optional<User> user = userRepository.findByEmail(email);
@@ -58,19 +61,17 @@ public class UserService {
 		}
 	}
 
-
 	public User getUser(long id) {
 		return userRepository.findById(id).orElse(null);
-
 
 	}
 
 	public List<UserDetails> getUsers() {
 
 		ArrayList<User> users = (ArrayList<User>) userRepository.findAll();
-		ArrayList<UserDetails> usersDetails =  new ArrayList<>();
+		ArrayList<UserDetails> usersDetails = new ArrayList<>();
 
-		for(User user: users){
+		for (User user : users) {
 			ArrayList<TeamDetails> teamsDetails = new ArrayList<>();
 			UserDetails userDetails = new UserDetails();
 			userDetails.setId(user.getId());
@@ -90,7 +91,7 @@ public class UserService {
 			userDetails.setDisabled(user.isDisabled());
 			userDetails.setFullTime(user.isFullTime());
 			userDetails.setResigned(user.isResigned());
-			for(Team team: user.getTeams()){
+			for (Team team : user.getTeams()) {
 				TeamDetails teamDetails = new TeamDetails();
 				teamDetails.setId(team.getId());
 				teamDetails.setName(team.getName());
@@ -111,16 +112,14 @@ public class UserService {
 		return userRepository.save(user);
 	}
 
-
 	public void saveRequest(Long ID, String type, Request request) {
 		requestRepository.save(request);
 		User user = userRepository.findById(ID).get();
 		user.getRequests().add(request);
 		request.setRequestedBy(ID);
-		RequestType Rtype= requestTypeRepository.findByTypeName(type);
+		RequestType Rtype = requestTypeRepository.findByTypeName(type);
 		request.setType(type);
 		Rtype.getRequests().add(request);
-
 
 	}
 
@@ -151,4 +150,32 @@ public class UserService {
 		}
 	}
 
+	@Transactional
+	public ResponseEntity<String> updateUser(long id, UserDetails userDetails) {
+		System.out.println(userDetails.toString());
+		System.out.println("entered service");
+		User user = userRepository.findById(id).get();
+		if (userDetails.getEnglishName() != null) {
+			user.setEnglishName(userDetails.getEnglishName());
+		}
+		if (userDetails.getJobTitle() != null) {
+			user.setJobTitle(userDetails.getJobTitle());
+		}
+		if (userDetails.getEmail() != null) {
+			user.setEmail(userDetails.getEmail());
+		}
+		if (userDetails.getMobileNumber() != null) {
+			user.setMobileNumber(userDetails.getMobileNumber());
+		}
+		if (userDetails.getJoiningDate() != null) {
+			user.setJoiningDate(userDetails.getJoiningDate());
+		}
+		if (userDetails.getEndDate() != null) {
+			if (userDetails.isResigned()) {
+				user.setEndDate(userDetails.getEndDate());
+				user.setResigned(userDetails.isResigned());
+			}
+		}
+		return new ResponseEntity<>("Updating employee data success", HttpStatus.OK);
+	}
 }

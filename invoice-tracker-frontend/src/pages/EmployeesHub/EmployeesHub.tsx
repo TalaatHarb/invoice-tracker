@@ -43,9 +43,9 @@ const EmployeesHub = () => {
   ]);
   const [currentField, setCurrentField] = useState<string>("id");
   const [employeeFilter, setEmployeeFilter] = useState<employeeFilterType>({
-    billable: false,
-    fullTime: false,
-    disabled: false,
+    billable: "all",
+    fullTime: "all",
+    disabled: "all",
   });
 
   const filterApplyClearhandler = async (event: any) => {
@@ -63,7 +63,7 @@ const EmployeesHub = () => {
       case "jobTitle":
         value = employeeFilter.jobTitle;
         break;
-      case "joiningDate":
+      case "joinDate":
         value = employeeFilter.joiningDate;
         break;
       case "endDate":
@@ -99,11 +99,7 @@ const EmployeesHub = () => {
           setEmployeeData(response.data);
         });
     } else {
-      setEmployeeFilter({
-        billable: false,
-        fullTime: false,
-        disabled: false,
-      });
+      setEmployeeFilter({ billable: "all", fullTime: "all", disabled: "all" });
       await axios
         .get(allEmployeeDataUrl, {
           headers: { Authorization: `Bearer ${isAuthenticated}` },
@@ -122,7 +118,6 @@ const EmployeesHub = () => {
   const employeeFilterHandler = (event: any) => {
     const targetId = event.target.id;
     const targetValue = event.target.value;
-    let newFilter = { ...employeeFilter };
     let newData = {};
     switch (targetId) {
       case "id":
@@ -140,7 +135,7 @@ const EmployeesHub = () => {
       case "jobTitle":
         newData = { jobTitle: targetValue };
         break;
-      case "joiningDate":
+      case "joinDate":
         newData = { joiningDate: targetValue };
         break;
       case "endDate":
@@ -156,22 +151,22 @@ const EmployeesHub = () => {
         newData = { team: targetValue };
         break;
       case "billable":
-        newData = { billable: event.target.checked };
+        newData = { billable: event.target.checked + "" };
         break;
       case "fulltime":
-        newData = { fulltime: event.target.checked };
+        newData = { fullTime: event.target.checked + "" };
         break;
       case "disabled":
-        newData = { isDisabled: event.target.checked };
+        newData = { disabled: event.target.checked + "" };
         break;
     }
-    newFilter = {
+
+    setEmployeeFilter({
       billable: employeeFilter.billable,
-      disabled: employeeFilter.disabled,
       fullTime: employeeFilter.fullTime,
+      disabled: employeeFilter.disabled,
       ...newData,
-    };
-    setEmployeeFilter(newFilter);
+    });
   };
 
   useEffect(() => {
