@@ -49,11 +49,17 @@ public class InvoiceTrackerBackendApplication {
 			userService.saveRole(new Role(null, ROLE_ADMIN));
 
 //			create new object of User Class
+			SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
+			String joinDate = "13-jul-2022";
+			String endDate = "25-aug-2022";
+			Date jdate = formatter.parse(joinDate);
+			Date edate = formatter.parse(endDate);
 
-			userService.saveUser(new User(EMAIL_USER, PASS_USER,21,21,new Date(),"0122303432","amr0"));
+
+			userService.saveUser(new User(EMAIL_USER, PASS_USER,21,21,jdate,"0122303432","amr0"));
 			userService.saveUser(new User(EMAIL_EMPLOYEE, PASS_USER,21,21,new Date(),"0122303432","Gado"));
 			userService.saveUser(new User(EMAIL_HR, PASS_USER,"Ahmed",true));
-			userService.saveUser(new User("124329374621","Amr Essam","عمرو عصام",EMAIL_ADMIN_USER,PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,21,true,new Date(),new Date(),new Date(),"01002345324",2,0,150.0,"amr23"));
+			userService.saveUser(new User("124329374621","Amr Essam","عمرو عصام",EMAIL_ADMIN_USER,PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,21,true,jdate,edate,new Date(),"01002345324",2,0,150.0,"amr23"));
 
 			userService.saveUser(new User(EMAIL_HR_2, PASS_USER,"hamada",false));
 

@@ -2,12 +2,13 @@ package net.talaatharb.invoicetracker.dtos;
 
 import java.util.Date;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import net.talaatharb.invoicetracker.models.RequestType;
 import net.talaatharb.invoicetracker.models.Team;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

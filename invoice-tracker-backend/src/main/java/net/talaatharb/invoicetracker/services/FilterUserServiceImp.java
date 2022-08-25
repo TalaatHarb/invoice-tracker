@@ -69,7 +69,7 @@ public class FilterUserServiceImp implements FilterUserService{
 
     @Override
     public List<User> filterEmployeeByEndDate(Date endDate) {
-        List<User>userList=filterUserRepository.filterEmployeesByJoinDate(endDate);
+        List<User>userList=filterUserRepository.filterEmployeesByEndDate(endDate);
         return userList;
     }
 

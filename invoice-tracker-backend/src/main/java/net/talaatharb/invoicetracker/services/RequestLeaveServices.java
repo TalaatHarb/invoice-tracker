@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +15,7 @@ import net.talaatharb.invoicetracker.repositories.UserRepository;
 
 @Service
 @AllArgsConstructor
-@Transactional
+
 @Data
 public class RequestLeaveServices {
 	@Autowired
@@ -41,7 +39,7 @@ public class RequestLeaveServices {
 			body.setRemainingBalance(user.getRemainingBalance());
 			body.setTeams(user.getTeams());
 			body.setBillable(user.isBillable());
-			body.setType(requests.get(i).getType());
+			//body.setType(requests.get(i).getType());
 			body.setRequestDate(requests.get(i).getRequestDate());
 			
 
@@ -51,12 +49,12 @@ public class RequestLeaveServices {
 
 		return requestsBody;
 	}
-    @Transactional
+
 
 	public Request update_a_leave_request(int requestId, Request request) {
-		Request requestFromDB = requestRepo.findById(requestId).get();
+		Request requestFromDB = requestRepo.findById((long) requestId).get();
 		System.out.println(requestFromDB.toString());
-		requestFromDB.setComments(request.getComments());
+		//requestFromDB.setComments(request.getComments());
 		requestFromDB.setEndDate(request.getEndDate());
 		requestFromDB.setEndDate(request.getEndDate());
 		requestFromDB.setFullDay(request.isFullDay());

@@ -3,7 +3,6 @@ package net.talaatharb.invoicetracker.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.talaatharb.invoicetracker.dtos.RequestLeaveBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import lombok.RequiredArgsConstructor;
+import net.talaatharb.invoicetracker.dtos.RequestLeaveBody;
 import net.talaatharb.invoicetracker.models.Request;
 import net.talaatharb.invoicetracker.services.AbsenceService;
 import net.talaatharb.invoicetracker.services.RequestLeaveServices;
@@ -48,7 +48,7 @@ public class AbsenceController {
 		@PutMapping("/UpdateLeaveRequest/{request_id}")
 		public ResponseEntity<Request> UpdateEmployeeRequest(@RequestBody Request req, @RequestParam int request_id) {
 
-			return new ResponseEntity<>(leaveServices.update_a_leave_request(request_id, req), HttpStatus.OK);
+			return new ResponseEntity<>(null, HttpStatus.OK);
 
 		}
 }

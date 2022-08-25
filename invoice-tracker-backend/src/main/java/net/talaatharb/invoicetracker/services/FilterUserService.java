@@ -9,7 +9,7 @@ public interface FilterUserService {
 
     List<User> filterEmployeeByName(List<String>names);
     List<User>filterEmployeeByArabicName(List<String> arabicName);
-//    List<User>filterEmployeeByTeamName(List<String> teamName);
+
     List<User>filterEmployeeByJobTitle(List<String> jobTitle);
     List<User>filterEmployeeByTeamName(List<String> teamName);
     List<User>filterEmployeeById(List<Long> id);
