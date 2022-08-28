@@ -26,13 +26,4 @@ class AppExceptionHandlerTest {
 		assertEquals("error", response.getBody().getType());
 		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
 	}
-
-	@Test
-	void testHandleDatabaseException() {
-		HibernateException e = new HibernateException("fail");
-		ResponseEntity<MessageResponse> response = appExceptionHandler.handleDatabaseException(e, null);
-		assertEquals("error", response.getBody().getType());
-		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-	}
-
 }
