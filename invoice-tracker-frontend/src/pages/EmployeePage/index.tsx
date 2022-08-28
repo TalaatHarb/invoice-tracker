@@ -7,6 +7,7 @@ import UserDisplay from '../../components/UserDisplay'
 import RequesCard from '../../components/RequestCard'
 import { logoutUser } from '../../services/redux/slices/AuthenticationSlice'
 import Navbar from '../../components/Navbar'
+import { CONSTANTS } from '../../utils/constants'
 
 const EmployeePage = (props: any) => {
   const { isAuthenticated, ID } = useAppSelector(
@@ -19,9 +20,9 @@ const EmployeePage = (props: any) => {
     mobileNumber: '',
     joiningDate: '',
     allowedBalance: 21,
-    remainingBalance:21,
+    remainingBalance: 21,
     requests: [{ id: null, type: '', startDate: '', endDate: '', status: '' }],
-    requestsTypesNumber:[{name:'',numberOfDays:0}]
+    requestsTypesNumber: [{ name: '', numberOfDays: 0 }],
   })
   const dispatch = useAppDispatch()
   const [requests, setRequests] = useState([{ name: '', numberOfDays: 0 }])
@@ -36,7 +37,10 @@ const EmployeePage = (props: any) => {
       headers: { Authorization: `Bearer ${isAuthenticated}` },
     }
 
-    let res = await axios.get(`http://localhost:8080/api/user?ID=${ID}`, config)
+    let res = await axios.get(
+      `${CONSTANTS.BACKEND_URL}/api/user?ID=${ID}`,
+      config
+    )
 
     setEmployee(res?.data)
   }
@@ -47,17 +51,17 @@ const EmployeePage = (props: any) => {
       <div className='containerr p-11 b bg-lightGrey'>
         <div className='data flex '>
           <UserDisplay
-          name={employee?.username}
-          roles={employee?.roles}
-          phoneNumber={employee?.mobileNumber}
-          email={employee?.email}
-          joiningDate={employee?.joiningDate?.substring(0, 10)}
-        />
-        <RequesCard
-          requests={employee?.requestsTypesNumber}
-          allowedBalance={employee?.allowedBalance}
-          remainingBalance={employee?.remainingBalance}
-        />
+            name={employee?.username}
+            roles={employee?.roles}
+            phoneNumber={employee?.mobileNumber}
+            email={employee?.email}
+            joiningDate={employee?.joiningDate?.substring(0, 10)}
+          />
+          <RequesCard
+            requests={employee?.requestsTypesNumber}
+            allowedBalance={employee?.allowedBalance}
+            remainingBalance={employee?.remainingBalance}
+          />
         </div>
         <div className='requests  bg-white mt-7 w-full border-12  rounded '>
           <div>
