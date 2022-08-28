@@ -2,7 +2,7 @@ import React from 'react'
 import Button from '../Button';
 import { useNavigate } from "react-router-dom";
 
-const RequesCard = (props:any) => {
+const RequestCard = (props:any) => {
     const navigate = useNavigate();
   return (
     <div className="w-80 text-center  bg-white rounded ">
@@ -39,4 +39,4 @@ const RequesCard = (props:any) => {
   )
 }
 
-export default RequesCard
+export default RequestCard

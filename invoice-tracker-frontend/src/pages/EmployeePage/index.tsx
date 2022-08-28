@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useAppDispatch, useAppSelector } from '../../hooks/toolkit-types'
 import Button from '../../components/Button'
 import UserDisplay from '../../components/UserDisplay'
-import RequesCard from '../../components/RequestCard'
+import RequestCard from '../../components/RequestCard'
 import { logoutUser } from '../../services/redux/slices/AuthenticationSlice'
 import Navbar from '../../components/Navbar'
 import { CONSTANTS } from '../../utils/constants'
@@ -22,7 +22,7 @@ const EmployeePage = (props: any) => {
     allowedBalance: 21,
     remainingBalance: 21,
     requests: [{ id: null, type: '', startDate: '', endDate: '', status: '' }],
-    requestsTypesNumber: [{ name: '', numberOfDays: 0 }],
+    requestsTypesNumber: [{ name: '', numberOfDays: null }],
   })
   const dispatch = useAppDispatch()
   const [requests, setRequests] = useState([{ name: '', numberOfDays: 0 }])
@@ -56,14 +56,16 @@ const EmployeePage = (props: any) => {
             phoneNumber={employee?.mobileNumber}
             email={employee?.email}
             joiningDate={employee?.joiningDate?.substring(0, 10)}
+            id='user-display'
           />
-          <RequesCard
+          <RequestCard
             requests={employee?.requestsTypesNumber}
             allowedBalance={employee?.allowedBalance}
             remainingBalance={employee?.remainingBalance}
+            id='employee-request-card'
           />
         </div>
-        <div className='requests  bg-white mt-7 w-full border-12  rounded '>
+        <div className='requests  bg-white mt-7 w-full border-12  rounded ' id='absence-history'>
           <div>
             <h1 className='text-3xl font-semibold text-gray-900 h-16 p-4 text-white bg-blueCegedim'>
               Abscence History
