@@ -19,8 +19,8 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler{
         return new ResponseEntity<>(new MessageResponse(message, "error"), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(value = {Exception.class})
-    public ResponseEntity<MessageResponse> handleDatabaseException(Exception e, WebRequest request){
-        return new ResponseEntity<>(new MessageResponse("Unexpected error occurred", "error"), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+//    @ExceptionHandler(value = {Exception.class})
+//    public ResponseEntity<MessageResponse> handleDatabaseException(Exception e, WebRequest request){
+//        return new ResponseEntity<>(new MessageResponse("Unexpected error occurred", "error"), HttpStatus.INTERNAL_SERVER_ERROR);
+//    }
 }
