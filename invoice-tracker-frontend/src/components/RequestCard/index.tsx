@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const RequestCard = (props:any) => {
     const navigate = useNavigate();
   return (
-    <div className="w-80 text-center  bg-white rounded ">
+    <div className="w-80 text-center  bg-white sm:rounded-lg shadow overflow-hidden  ">
     <div className="bg-blueCegedim">
       <h1 className="font-semibold w-40 h-16 ml-20 p-5 text-white rounded-xl text-xl  ">
         All absence
