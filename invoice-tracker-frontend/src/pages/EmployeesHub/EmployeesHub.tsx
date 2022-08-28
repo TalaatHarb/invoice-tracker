@@ -181,7 +181,7 @@ const EmployeesHub = () => {
 
       <div className="flex flex-col min-h-screen  bg-lightGrey bg-opacity-20 items-center">
         <div className="flex flex-row justify-between w-full items-center">
-          <h1 className=" drop-shadow-xl ml-60 my-12 text-5xl text-blueCegedim font-bold">
+          <h1 className=" drop-shadow-xl ml-36 my-12 text-5xl text-blueCegedim font-bold">
             Cegedim Members
           </h1>
           <div>{/* add drop down here */}</div>
