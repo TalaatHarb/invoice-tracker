@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,7 +106,8 @@ class UserControllerIT extends AbstractControllerIT {
 	@WithMockUser
 	void testaddemployee() throws Exception {
 		UserDto user = new UserDto();
-		user.setUserId(523L);
+		long generatedLong = new Random().nextLong();
+		user.setUserId(generatedLong);
 		user.setEnglishName("Abdelrhman Adel");
 		user.setEmail("apdaodel@gmail.com");
 		user.setPassword("0231231DSDAdas");
