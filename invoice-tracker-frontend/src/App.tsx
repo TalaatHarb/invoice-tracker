@@ -17,6 +17,7 @@ import EmployeePrivateRoute from './components/EmployeePrivateRoute'
 import ManagerPrivateRoute from './components/ManagerPrivateRoute'
 import EditRequest from './pages/EditRequest'
 import RequestList from './pages/RequestList/RequestList'
+import Employee_Add from './components/add-employee/Employee_Add'
 
 function App() {
   const { isAuthenticated } = useAppSelector(
@@ -24,7 +25,14 @@ function App() {
   )
   return (
     <BrowserRouter>
+
+    
+
       <Routes>
+
+      <Route path="/empadd" element={<Employee_Add />}>
+        </Route>
+
         {!isAuthenticated && <Route path='/login' element={<Login />} />}
         {/* protected user page */}
         <Route path='/user' element={<EmployeePrivateRoute />}>
