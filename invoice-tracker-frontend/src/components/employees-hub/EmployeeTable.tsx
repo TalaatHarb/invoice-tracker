@@ -127,7 +127,7 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
       id: "Teams",
       header: "Team Name",
       cell: (info) =>
-        info.getValue().length
+        (info.getValue() && info.getValue().length)
           ? info.getValue().map((team) => {
               return (
                 <Link
