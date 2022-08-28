@@ -86,20 +86,19 @@ public class InvoiceTrackerBackendApplication {
 
 
 
-			userService.saveRequestType(new RequestType("sickness",new ArrayList<>()));
-			userService.saveRequestType(new RequestType("vacation",new ArrayList<>()));
-			userService.saveRequestType(new RequestType("troll",new ArrayList<>()));
-			userService.saveRequestType(new RequestType("Annual leave",new ArrayList<>()));
+			userService.saveRequestType(new RequestType("sick leave",new ArrayList<>()));
+			userService.saveRequestType(new RequestType("bereavement leave",new ArrayList<>()));
+			userService.saveRequestType(new RequestType("annual leave",new ArrayList<>()));
 
 			String pattern = "yyyy-MM-dd";
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
 			long l=2;
-			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"Annual leave",2));
-			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"sickness",4));
-			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"sickness",2));
-			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"vacation",2));
-			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"troll",2));
+			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"annual leave",2));
+			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"sick leave",4));
+			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"sick leave",2));
+			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"sick leave",2));
+			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"bereavement leave",2));
 
 			teamService.SaveTeam(new Team("IT",new Company("Cegedim","cegedim@gmail.com","Egypt,Cairo")));
 			teamService.SaveTeam(new Team("DevOps",new Company("Cegedim","cegedim@gmail.com","Egypt,Cairo")));
