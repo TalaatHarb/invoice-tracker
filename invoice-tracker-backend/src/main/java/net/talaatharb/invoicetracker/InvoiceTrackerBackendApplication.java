@@ -8,20 +8,20 @@ import static net.talaatharb.invoicetracker.models.ERole.ROLE_USER;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import net.talaatharb.invoicetracker.models.Request;
-import net.talaatharb.invoicetracker.models.RequestType;
-import net.talaatharb.invoicetracker.models.Role;
-import net.talaatharb.invoicetracker.models.User;
+import net.talaatharb.invoicetracker.models.*;
 import net.talaatharb.invoicetracker.services.AbsenceService;
+import net.talaatharb.invoicetracker.services.TeamService;
 import net.talaatharb.invoicetracker.services.UserService;
 
 @SpringBootApplication
 public class InvoiceTrackerBackendApplication {
+
 
 
 	public static final String USERNAME = "amr0";
@@ -44,6 +44,10 @@ public class InvoiceTrackerBackendApplication {
 	private static final Date PASSWORD_EXPIRY_DATE = new GregorianCalendar(2022,Calendar.AUGUST,11).getTime();
 
 	private static final String REAL_EMAIL = "esmailmostafa295@gmail.com";
+
+
+	@Autowired
+	private TeamService teamService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(InvoiceTrackerBackendApplication.class, args);
@@ -106,6 +110,16 @@ public class InvoiceTrackerBackendApplication {
 			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"sickness",2));
 			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"vacation",2));
 			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"troll",2));
+
+
+			teamService.SaveTeam(new Team("IT",new Company("Cegedim","cegedim@gmail.com","Egypt,Cairo")));
+			teamService.SaveTeam(new Team("DevOps",new Company("Cegedim","cegedim@gmail.com","Egypt,Cairo")));
+			teamService.SaveTeam(new Team("Software Engineer",new Company("Cegedim","cegedim@gmail.com","Egypt,Cairo")));
+
+
+
+
+
 		};
 	}
 }

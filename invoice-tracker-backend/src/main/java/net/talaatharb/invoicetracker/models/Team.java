@@ -38,4 +38,9 @@ public class Team {
         this.company = company;
         this.employees = employees;
     }
+
+    public Team(String name, Company company) {
+        this.name = name;
+        this.company = company;
+    }
 }

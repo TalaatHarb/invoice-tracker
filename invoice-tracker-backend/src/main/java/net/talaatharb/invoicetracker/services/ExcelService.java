@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import net.talaatharb.invoicetracker.models.User;
@@ -16,9 +17,14 @@ public class ExcelService {
     @Autowired
     private final UserRepository userRepository;
 
-    public ExcelService(UserRepository userRepository) {
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
+
+    public ExcelService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
+
 
 
     // add list of user to data base
@@ -55,8 +61,8 @@ public class ExcelService {
                 employee.setBirthDate(income_list.get(i).getBirthDate());
                 employee.setMobileNumber(income_list.get(i).getMobileNumber());
                 employee.setFullTime(income_list.get(i).isFullTime());
-//                employee.setTeams(income_list.get(i).getTeams());
-                employee.setJopTitle(income_list.get(i).getJopTitle());
+                employee.setTeams(income_list.get(i).getTeams());
+                employee.setJobTitle(income_list.get(i).getJobTitle());
                 employee.setUserId(income_list.get(i).getUserId());
                 employeeList.add(employee);
             }

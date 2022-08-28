@@ -3,7 +3,6 @@ package net.talaatharb.invoicetracker.models;
 import java.util.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.LazyCollection;
@@ -55,8 +54,7 @@ public class User {
 
 
 	@JsonIgnore
-	@NotBlank
-
+//	@NotBlank
 	@Size(min = 8, max = 120)
 	private String password;
 
@@ -107,7 +105,6 @@ public class User {
 	@JsonIgnore
 	private Date lastTimePasswordChanged;
 
-    private String jopTitle;
 	private Long userId;
 
 	@LazyCollection(LazyCollectionOption.FALSE)

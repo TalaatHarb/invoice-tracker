@@ -37,7 +37,6 @@ public class ExcelHelper {
         try {
 
             User employee = new User();
-            System.out.println("heelo1");
             employee.setNationalId(income_user.getNationalId());
             employee.setEnglishName(income_user.getEnglishName());
             employee.setArabicName(income_user.getArabicName());
@@ -59,7 +58,7 @@ public class ExcelHelper {
             teams = find_teams(income_user.getTeams());
 
             employee.setTeams(teams);
-            employee.setJopTitle(income_user.getJopTitle());
+            employee.setJobTitle(income_user.getJopTitle());
             employee.setUserId(income_user.getUserId());
 
             System.out.println("heelo1");
