@@ -7,6 +7,7 @@ import axios from "axios";
 import { useAppSelector } from "../../hooks/toolkit-types";
 import { employeeType } from "../../components/employees-hub/types";
 import { CONSTANTS } from "../../utils/constants";
+import PopUpStart from "../../components/import-excel/PopUpStart";
 
 const EmployeesHub = () => {
   const isAuthenticated: any = useAppSelector(
@@ -184,7 +185,7 @@ const EmployeesHub = () => {
           <h1 className=" drop-shadow-xl ml-36 my-12 text-5xl text-blueCegedim font-bold">
             Cegedim Members
           </h1>
-          <div>{/* add drop down here */}</div>
+          <PopUpStart/>
         </div>
         <div className="flex flex-row justify-start w-full  ml-96">
           <div className="mx-12 my-10">

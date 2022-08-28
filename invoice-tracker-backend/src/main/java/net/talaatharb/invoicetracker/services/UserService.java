@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import lombok.AllArgsConstructor;
 import net.talaatharb.invoicetracker.dtos.TeamDetails;
 import net.talaatharb.invoicetracker.dtos.UserDetails;
+import net.talaatharb.invoicetracker.dtos.UserDto;
 import net.talaatharb.invoicetracker.models.ERole;
 import net.talaatharb.invoicetracker.models.Request;
 import net.talaatharb.invoicetracker.models.RequestType;
@@ -32,6 +33,10 @@ import net.talaatharb.invoicetracker.repositories.UserRepository;
 public class
 UserService {
 
+	@Autowired
+	private final ExcelHelper excelHelper;
+	@Autowired
+	private final ExcelService excelService;
 	private final PasswordEncoder passwordEncoder;
 	@Autowired
 	private final RoleRepositry roleRepositry;
@@ -147,4 +152,27 @@ UserService {
 		}
 		return new ResponseEntity<>("Updating employee data success", HttpStatus.OK);
 	}
+
+
+	public void SaveEmployee(UserDto employee) {
+		try {
+			User employee1 = excelHelper.add_employee_helper(employee);
+			userRepository.save(employee1);
+			System.out.println("done");
+
+		} catch (Exception e) {
+			throw new RuntimeException("fail to save New User : " + e.getMessage());
+		}
+	}
+
+
+	public void saveemployee_excel(List<User> Income_list) {
+		try {
+			List<User> Employees = excelService.excelToTutorials(Income_list);
+			userRepository.saveAll(Employees);
+		} catch (Exception e) {
+			throw new RuntimeException("fail to store excel data: " + e.getMessage());
+		}
+	}
+
 }

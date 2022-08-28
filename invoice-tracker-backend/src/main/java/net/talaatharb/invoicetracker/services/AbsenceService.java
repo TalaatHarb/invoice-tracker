@@ -2,12 +2,12 @@ package net.talaatharb.invoicetracker.services;
 
 import java.util.List;
 
-import net.talaatharb.invoicetracker.models.RequestType;
-import net.talaatharb.invoicetracker.models.User;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import net.talaatharb.invoicetracker.models.Request;
+import net.talaatharb.invoicetracker.models.RequestType;
+import net.talaatharb.invoicetracker.models.User;
 import net.talaatharb.invoicetracker.repositories.RequestRepository;
 import net.talaatharb.invoicetracker.repositories.RequestTypeRepository;
 import net.talaatharb.invoicetracker.repositories.UserRepository;
