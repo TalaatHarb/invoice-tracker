@@ -43,9 +43,6 @@ const EmployeesHub = () => {
   ]);
   const [currentField, setCurrentField] = useState<string>("id");
   const [employeeFilter, setEmployeeFilter] = useState<employeeFilterType>({
-    billable: "all",
-    fullTime: "all",
-    disabled: "all",
   });
 
   const filterApplyClearhandler = async (event: any) => {
@@ -118,6 +115,7 @@ const EmployeesHub = () => {
   const employeeFilterHandler = (event: any) => {
     const targetId = event.target.id;
     const targetValue = event.target.value;
+    setCurrentField(targetId);
     let newData = {};
     switch (targetId) {
       case "id":
@@ -162,9 +160,6 @@ const EmployeesHub = () => {
     }
 
     setEmployeeFilter({
-      billable: employeeFilter.billable,
-      fullTime: employeeFilter.fullTime,
-      disabled: employeeFilter.disabled,
       ...newData,
     });
   };
@@ -190,6 +185,7 @@ const EmployeesHub = () => {
       <div className="flex flex-col min-h-screen  bg-lightGrey bg-opacity-20 items-center">
         <div className="flex flex-row justify-between w-full items-center">
           <h1 className=" drop-shadow-xl ml-40 my-12 text-5xl text-blueCegedim font-bold ">
+
             Cegedim Members
 
           </h1>

@@ -18,11 +18,10 @@ interface RequestCardProps {
 function RequestCard({ request, fetchRequests }: RequestCardProps) {
   const dispatch = useDispatch()
 
-  const { isAuthenticated,ID } = useAppSelector(
+  const { isAuthenticated, ID } = useAppSelector(
     (state) => state.AuthenticationSlice
   )
 
-  
   const { isOpen } = useAppSelector((state) => state.ModalSlice)
 
   const config = {
@@ -31,7 +30,7 @@ function RequestCard({ request, fetchRequests }: RequestCardProps) {
 
   const handleReuqestApproval = async () => {
     const reponse = await axios.post(
-      `${CONSTANTS.BACKEND_URL}/api/editRequest?isAccepted=true&reqID=${request.request.id}&managerID=${ID}`,
+      `${CONSTANTS.BACKEND_URL}/api/editRequest?isAccepted=true&reqID=${request?.request?.id}&managerID=${ID}`,
       {},
       config
     )
@@ -44,7 +43,7 @@ function RequestCard({ request, fetchRequests }: RequestCardProps) {
   }
   const handleRequestRejection = async () => {
     const reponse = await axios.post(
-      `${CONSTANTS.BACKEND_URL}/api/editRequest?isAccepted=false&reqID=${request.request.id}&managerID=${ID}`,
+      `${CONSTANTS.BACKEND_URL}/api/editRequest?isAccepted=false&reqID=${request?.request?.id}&managerID=${ID}`,
       {},
       config
     )
@@ -109,23 +108,31 @@ function RequestCard({ request, fetchRequests }: RequestCardProps) {
         </div>
         <div className='flex-shrink-0 items-center flex gap-4'>
           <BsCheck2Circle
+            id='approve'
             className='text-blueCegedim cursor-pointer hover:text-green'
             size={50}
             onClick={handleReuqestApproval}
           />
           <BsXCircle
+            id='reject'
             className='text-blueCegedim cursor-pointer hover:text-red'
             size={40}
             onClick={handleRequestRejection}
           />
           <BsFillEyeFill
+            id='view'
             className='text-blueCegedim cursor-pointer hover:text-black'
             size={40}
             onClick={() => {
               dispatch(ModalScreenActions.openModal())
             }}
           />
-          {isOpen && <RequestsModal notes={request?.request?.comments} />}
+          {isOpen && (
+            <RequestsModal
+              notes={request?.request?.comments}
+              downloadLink={request?.request.absenceAttachments[0]}
+            />
+          )}
         </div>
       </div>
     </div>
