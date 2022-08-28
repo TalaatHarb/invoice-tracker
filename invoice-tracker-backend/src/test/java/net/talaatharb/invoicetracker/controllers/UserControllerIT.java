@@ -109,7 +109,7 @@ class UserControllerIT extends AbstractControllerIT {
 		long generatedLong = new Random().nextLong();
 		user.setUserId(generatedLong);
 		user.setEnglishName("Abdelrhman Adel");
-		user.setEmail("apdaodel@gmail.com");
+		user.setEmail("apdaohdel@gmail.com");
 		user.setPassword("0231231DSDAdas");
 
 
