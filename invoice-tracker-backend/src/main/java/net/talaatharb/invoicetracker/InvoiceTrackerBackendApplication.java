@@ -37,7 +37,7 @@ public class InvoiceTrackerBackendApplication {
 	private static final Boolean IS_ENABLED = true;
 	private static final Date PASSWORD_EXPIRY_DATE = new GregorianCalendar(2022,Calendar.AUGUST,11).getTime();
 
-	private static final String REAL_EMAIL = "esmailmostafa295@gmail.com";
+	private static final String REAL_EMAIL = "ahmedmohamed1263066@yahoo.com";
 
 	public static void main(String[] args) {
 		SpringApplication.run(InvoiceTrackerBackendApplication.class, args);
@@ -82,9 +82,6 @@ public class InvoiceTrackerBackendApplication {
 			userService.addRoleToUser(EMAIL_ADMIN_USER, ROLE_USER);
 
 
-
-
-
 			userService.saveRequestType(new RequestType("sickness",new ArrayList<>()));
 			userService.saveRequestType(new RequestType("vacation",new ArrayList<>()));
 			userService.saveRequestType(new RequestType("troll",new ArrayList<>()));
@@ -99,6 +96,13 @@ public class InvoiceTrackerBackendApplication {
 			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"sickness",2));
 			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"vacation",2));
 			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"troll",2));
+
+			// SAMIR
+			for(int i = 1; i <= 7; ++i) {
+                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long) i, "sickness", true, "Accepted", "", new ArrayList<>(), 2));
+                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "sickness", true, "Pending", "Hi, This is a comment", new ArrayList<>(), 2));
+                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "sickness", true, "Rejected", "Hi again, this is the second comment", new ArrayList<>(), 2));
+            }
 		};
 	}
 }

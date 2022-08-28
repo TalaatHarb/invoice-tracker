@@ -8,7 +8,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import net.bytebuddy.utility.RandomString;
 import net.talaatharb.invoicetracker.exceptions.UserException;
 import net.talaatharb.invoicetracker.models.ResetTokenEntity;
@@ -27,7 +26,7 @@ public class PasswordService {
     @Autowired
     private MailService mailService;
 
-    @Value("${APPLICATION_URL:'http://localhost:300'}")
+    @Value("${APPLICATION_URL:'http://localhost:3000'}")
     private String appUrl;
     
     private static final int FIVE_MINUTES = 5 * 60 * 1000;
@@ -52,7 +51,7 @@ public class PasswordService {
 
         String mailSubject = "Reset password request";
         String mailBody = "<h2>Reset Password Request</h2>" +
-                          "<p>Please visit <a href=\"http://" + resetLink + "\"><bold>this link</bold> </a> to reset your password </p>";
+                          "<p>Please visit <a href=\"" + resetLink + "\"><bold>this link</bold> </a> to reset your password </p>";
 
         Optional<User> userReturnedOptional = userRepo.findByEmail(email);
         if(userReturnedOptional.isEmpty()) {
@@ -81,7 +80,7 @@ public class PasswordService {
         UserException somethingWentWrong = new UserException("something went wrong");
 
         // token and password validation
-        if(resetToken == null || !RegexHelper.testWithPattern(RegexHelper.NO_SPECIAL_CHARS_PATTERN,resetToken) || newPassword == null || !RegexHelper.testWithPattern(RegexHelper.PASSWORD_PATTERN, newPassword)){
+        if(isInvalidTokenAndPassword(resetToken, newPassword)){
             throw somethingWentWrong;
         }
 
@@ -106,4 +105,8 @@ public class PasswordService {
         userReturned.setResetToken(null);
         userRepo.save(userReturned);
     }
+
+	private boolean isInvalidTokenAndPassword(String resetToken, String newPassword) {
+		return resetToken == null || !RegexHelper.testWithPattern(RegexHelper.NO_SPECIAL_CHARS_PATTERN,resetToken) || newPassword == null || !RegexHelper.testWithPattern(RegexHelper.PASSWORD_PATTERN, newPassword);
+	}
 }

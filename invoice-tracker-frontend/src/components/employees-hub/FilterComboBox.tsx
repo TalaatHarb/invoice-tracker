@@ -4,7 +4,6 @@ import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 
 const fields = [
   { id: "id", name: "Id" },
-  { id: "employeeId", name: "Employee Id" },
   { id: "englishName", name: "English Name" },
   { id: "arabicName", name: "Arabic name" },
   { id: "jobTitle", name: "Job title" },
@@ -16,7 +15,7 @@ const fields = [
 ];
 
 type filterComboBoxProps = {
-  onOptionClick: React.MouseEventHandler<HTMLLIElement>;
+  onOptionClick?: React.MouseEventHandler<HTMLLIElement>;
 };
 
 const FilterComboBox = ({ onOptionClick }: filterComboBoxProps) => {
@@ -36,7 +35,7 @@ const FilterComboBox = ({ onOptionClick }: filterComboBoxProps) => {
             .includes(query.toLowerCase().replace(/\s+/g, ""))
         );
   return (
-    <div>
+    <div >
       <Combobox value={selected} onChange={setSelected}>
         <div className="relative mt-1">
           <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">

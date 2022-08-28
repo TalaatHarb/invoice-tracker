@@ -1,6 +1,7 @@
 interface Request {
   attachmentName: string
   attachmentUrl: string
+  absenceAttachments: string[]
   comments: string
   endDate: string
   fullDay: boolean

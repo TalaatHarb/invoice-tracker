@@ -3,13 +3,29 @@ import React, { Fragment } from 'react'
 import { useDispatch } from 'react-redux'
 import { useAppSelector } from '../../../../hooks/toolkit-types'
 import { ModalScreenActions } from '../../../../services/redux/slices/DetailsModal'
+import { MdCloudDownload } from 'react-icons/md'
+import axios from 'axios'
+import { CONSTANTS } from '../../../../utils/constants'
 
 interface Props {
   notes: string
+  downloadLink: string
 }
-export default function MyModal({ notes }: Props) {
+export default function MyModal({ notes, downloadLink }: Props) {
   const dispatch = useDispatch()
   const { isOpen } = useAppSelector((state) => state.ModalSlice)
+  const { isAuthenticated } = useAppSelector(
+    (state) => state.AuthenticationSlice
+  )
+
+  const downloadFiles = async () => {
+    const config = {
+      headers: { Authorization: `Bearer ${isAuthenticated}` },
+    }
+    const response = await axios.post(downloadLink, {}, config)
+    const data = response.data
+    console.log(data)
+  }
 
   return (
     <Transition.Root appear show={isOpen} as={Fragment}>
@@ -53,8 +69,21 @@ export default function MyModal({ notes }: Props) {
                 <div className='grid grid-cols-1 gap-4 p-4'>
                   {notes || 'No notes'}
                 </div>
+                <div className='mt-4'>
+                  <button
+                    id='download-button'
+                    className='text-base rounded-md px-2 max-h-7 bg-yeellowLightCegedim text-blueCegedim flex items-center'
+                    onClick={() => {
+                      downloadFiles()
+                    }}
+                  >
+                    <MdCloudDownload size={30} className='mr-2' /> Download
+                    Notes
+                  </button>
+                </div>
                 <div className='flex justify-end mt-8 min-w-0'>
                   <button
+                    id='close-modal'
                     type='button'
                     className='inline-flex bg-blueCegedim justify-center px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500'
                     onClick={() => {

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { AbsenseItem } from "../../models/absence-item";
+import React, { useState } from 'react'
+import { AbsenseItem, Attatchment } from '../../models/absence-item'
 
 const AbsenceHistoryItem = (props: any): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,77 +7,78 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
   const [tempDataTest, setTempDataTest] = useState(props.record);
   const [tempData, setTempData] = useState(props.record);
   const dropDownClickHandler = () => {
-    setIsOpen(!isOpen);
-  };
+    setIsOpen(!isOpen)
+  }
 
   const deleteItemClickHandler = () => {
     const items = props.items.filter((item: AbsenseItem) => {
-      return item.id !== props.record.id;
-    });
-    props.setItems(items);
-  };
+      return item.id !== props.record.id
+    })
+    props.setItems(items)
+  }
 
   const editItemClickHandler = () => {
     setShowModal(true);
   };
 
+  console.log(tempData);
   return (
     <>
-      <div className="border border-slate-600 flex justify-between bg-white shadow-lg">
-        <div className="relative flex items-center py-4 px-5 text-base text-gray-800 text-left  border-0 rounded-none transition focus:outline-none">
-          <strong>
+      <div id= {"accordion-" + props.record.id} className='border border-slate-600 flex justify-between bg-white shadow-lg'>
+        <div className='relative flex items-center py-4 px-5 text-base text-gray-800 text-left border-0 rounded-none transition focus:outline-none'>
+          <strong id = {"accordion-header" +  + props.record.id}>
             {tempData.type} {tempData.startDate.substr(0, 10)},{" "}
             {tempData.fullDay ? "full-day" : "half-day"}{" "}
           </strong>
         </div>
         <div className="py-4 px-5">
-          <button onClick={editItemClickHandler}>
+          <button onClick={editItemClickHandler} id = {"accordion-edit-button" + props.record.id}>
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              viewBox="0 0 20 20"
-              fill="currentColor"
+              xmlns='http://www.w3.org/2000/svg'
+              className='h-5 w-5'
+              viewBox='0 0 20 20'
+              fill='currentColor'
             >
-              <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" />
+              <path d='M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z' />
               <path
-                fillRule="evenodd"
-                d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
-                clipRule="evenodd"
+                fillRule='evenodd'
+                d='M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z'
+                clipRule='evenodd'
               />
             </svg>
           </button>
-          <button onClick={deleteItemClickHandler}>
+          <button onClick={deleteItemClickHandler} id = {"accordion-delete-button" + props.record.id}>
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              viewBox="0 0 20 20"
-              fill="currentColor"
+              xmlns='http://www.w3.org/2000/svg'
+              className='h-5 w-5'
+              viewBox='0 0 20 20'
+              fill='currentColor'
             >
               <path
-                fillRule="evenodd"
-                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                clipRule="evenodd"
+                fillRule='evenodd'
+                d='M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z'
+                clipRule='evenodd'
               />
             </svg>
           </button>
-          <button onClick={dropDownClickHandler}>
+          <button onClick={dropDownClickHandler} id = {"accordion-dropdown-button" + props.record.id}>
             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              viewBox="0 0 20 20"
-              fill="currentColor"
+              xmlns='http://www.w3.org/2000/svg'
+              className='h-5 w-5'
+              viewBox='0 0 20 20'
+              fill='currentColor'
             >
               {isOpen ? (
                 <path
-                  fillRule="evenodd"
-                  d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
-                  clipRule="evenodd"
+                  fillRule='evenodd'
+                  d='M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z'
+                  clipRule='evenodd'
                 />
               ) : (
                 <path
-                  fillRule="evenodd"
-                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                  clipRule="evenodd"
+                  fillRule='evenodd'
+                  d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
+                  clipRule='evenodd'
                 />
               )}
             </svg>
@@ -86,41 +87,45 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
       </div>
 
       {isOpen && (
-        <div className="border border-slate-600 items-center py-4 px-5 text-base text-left bg-white rounded-none">
-          <div className="">
-            <p>
+        <div className='border border-slate-600 items-center py-4 px-5 text-base text-left bg-white rounded-none' id={"accordion-body" + props.record.id}>
+          <div>
+            <p id={"status" + props.record.id}>
               <strong>Status: </strong> {tempData.status}
             </p>
-            <p>
+            <p id = {"comment" + props.record.id}>
               <strong>Comment: </strong>{" "}
               {tempData.comment ? tempData.comment : "No comment."}
             </p>
             <p>
-              <strong>Attachment: </strong>{" "}
-              {tempData.attachmentUrl ? (
-                <a
-                  href={tempData.attachmentUrl}
+              <strong id={"attachment" + props.record.id}>Attachment: </strong>{" "}
+              {tempData.absenceAttachments > 0 ? (
+                tempData.absenceAttachments.map((attachment: Attatchment) => {
+                  <a
+                  href={attachment.attachmentUrl}
                   className="text-blueCegedim"
                   target="_blank"
                   rel="noreferrer"
                 >
                   {" "}
-                  {tempData.attachmentName}
+                  {attachment.attachmentName}
+                  HEYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
                 </a>
-              ) : (
-                "No Attachment"
-              )}
+                })
+              )
+              : 
+                'No Attachment'
+              }
             </p>
-            <p>
+            <p id={"number-of-days" + props.record.id}>
               <strong>No. of days requested: </strong> {tempData.numberOfDays}
             </p>
             <p>
-              <strong>Request Date: </strong>{" "}
+              <strong id={"reuqest-date" + props.record.id}>Request Date: </strong>{" "}
               {tempData.requestDate
                 ? tempData.requestDate.substr(0, 10)
                 : "Unkown"}
             </p>
-            <p>
+            <p id ={"end-date" + props.record.id}>
               <strong>End Date: </strong> {tempData.endDate.substr(0, 10)}
             </p>
           </div>
@@ -133,11 +138,11 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
           <div className="justify-center items-center fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="w-auto m-8 mx-auto max-w-3xl ">
               {/*content*/}
-              <div className="px-8 m-8 border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+              <div id = {"edit-request-body" + props.record.id} className="px-8 m-8 border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
-                <div className="m-8 flex items-start justify-between p-5 border-b border-solid rounded-t">
+                <div id = {"edit-request-header" + props.record.id} className="m-8 flex items-start justify-between p-5 border-b border-solid rounded-t">
                   <h3 className="text-3xl font-semibold">Edit Leave Request</h3>
-                  <button
+                  <button id = {"edit-request-close-button" + props.record.id}
                     className="p-1 ml-auto border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => {
                       setShowModal(false);
@@ -153,9 +158,9 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                 {/*body*/}
                 <div className="flex-row">
                   <div className="flex-1">
-                    <label className="mb-2 mx-auto md:w-6/12 text-lg font-medium text-black dark:text-lightGrey">
+                    <label className="mb-2 mx-auto md:w-6/12 text-lg font-medium text-black dark:text-lightGrey" id = {"edit-request-absence-type-label" + props.record.id}>
                       Absence Type:
-                      <select
+                      <select id = {"edit-request-absence-type-select" + props.record.id}
                         name="type"
                         value={tempDataTest.type}
                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -174,9 +179,9 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                   </div>
 
                   <div className="flex-1">
-                    <label className="mb-2 mx-auto md:w-6/12 text-lg font-medium text-black dark:text-lightGrey">
+                    <label id = {"edit-request-start-date-label" + props.record.id} className="mb-2 mx-auto md:w-6/12 text-lg font-medium text-black dark:text-lightGrey">
                       Start Date:
-                      <input
+                      <input id = {"edit-request-start-date-input" + props.record.id}
                         type="date"
                         name="startDate"
                         onChange={(e) => {
@@ -191,9 +196,9 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                   </div>
 
                   <div className="flex-1">
-                    <label className="mb-2 text-lg font-medium text-black dark:text-lightGrey">
+                    <label className="mb-2 text-lg font-medium text-black dark:text-lightGrey" id = {"edit-request-end-date-label" + props.record.id}>
                       End Date:
-                      <input
+                      <input id = {"edit-request-end-date-input" + props.record.id}
                         type="date"
                         name="endDate"
                         onChange={(e) => {
@@ -205,9 +210,9 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                       />
                     </label>
                   </div>
-                  <label className="mb-2 mx-auto md:w-6/12 text-lg font-medium text-black dark:text-lightGrey">
+                  <label id = {"edit-request-day-type-label" + props.record.id} className="mb-2 mx-auto md:w-6/12 text-lg font-medium text-black dark:text-lightGrey">
                     Day Type:
-                    <select
+                    <select id = {"edit-request-day-type-select" + props.record.id}
                       name="fullDay"
                       value={tempDataTest.fullDay ? "full day" : "half day"}
                       onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -235,9 +240,9 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                     </select>
                   </label>
 
-                  <label className="block mb-2 text-lg font-medium text-black dark:text-lightGrey">
+                  <label id = {"edit-request-comment-label" + props.record.id} className="block mb-2 text-lg font-medium text-black dark:text-lightGrey">
                     Comment:
-                    <textarea
+                    <textarea id = {"edit-request-comment-textarea" + props.record.id}
                       className="block p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       name="comment"
                       onChange={(e) => {
@@ -251,7 +256,7 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
 
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 rounded-b">
-                  <button
+                  <button id = {"edit-request-close-button" + props.record.id}
                     className="bg-lightGrey rounded-md hover:bg-darkGrey background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
                     onClick={() => {
@@ -261,7 +266,7 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                   >
                     Close
                   </button>
-                  <button
+                  <button id = {"edit-request-save-button" + props.record.id}
                     className=" text-black font-bold rounded-md bg-blueCegedim text-white uppercase text-sm px-6 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
                     onClick={() => {
@@ -275,14 +280,14 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                             const numberOfDays: number =
                               (d2.getTime() - d1.getTime()) /
                               (1000 * 60 * 60 * 24);
-
+                            tempDataTest.numberOfDays = numberOfDays;
                             return {
                               ...absence,
                               comment: tempDataTest.comment,
                               startDate: tempDataTest.startDate,
                               endDate: tempDataTest.endDate,
                               type: tempDataTest.type,
-                              numberOfDays: numberOfDays,
+                              numberOfDays: tempDataTest.numberOfDays
                             };
                           }
                           return absence;
@@ -300,7 +305,7 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
         </>
       ) : null}
     </>
-  );
-};
+  )
+}
 
-export default AbsenceHistoryItem;
+export default AbsenceHistoryItem

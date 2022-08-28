@@ -9,7 +9,6 @@ public interface FilterUserService {
 
     List<User> filterEmployeeByName(List<String>names);
     List<User>filterEmployeeByArabicName(List<String> arabicName);
-
     List<User>filterEmployeeByJobTitle(List<String> jobTitle);
     List<User>filterEmployeeByTeamName(List<String> teamName);
     List<User>filterEmployeeById(List<Long> id);
@@ -22,7 +21,4 @@ public interface FilterUserService {
     List<User>filterEmployeeByISFullTime( boolean isFullTime);
 
 
-//    User createEmployee(User user);
-//   List<User> getAllEmployeesByTeamName(List<String> teamName);
-//    List<User> getAllEmployees();
 }
