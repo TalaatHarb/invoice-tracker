@@ -27,4 +27,10 @@ public class Company {
 
     @OneToMany(mappedBy = "company")
     private List<Team> teams;
+
+    public Company(String name, String email, String address) {
+        this.name = name;
+        this.email = email;
+        this.address = address;
+    }
 }

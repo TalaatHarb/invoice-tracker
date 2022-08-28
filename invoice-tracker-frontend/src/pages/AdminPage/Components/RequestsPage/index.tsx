@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useAppSelector } from '../../../../hooks/toolkit-types'
 import { RequestDetails } from '../../../../models/requestDetails'
+import { CONSTANTS } from '../../../../utils/constants'
 import RequestCard from '../RequestCard'
 
 const AdminRequests = () => {
@@ -16,7 +17,7 @@ const AdminRequests = () => {
       headers: { Authorization: `Bearer ${isAuthenticated}` },
     }
     const reponse = await axios.get(
-      'http://localhost:8080/api/requests',
+      `${CONSTANTS.BACKEND_URL}/api/requests`,
       config
     )
     if (reponse.status === 200) {
