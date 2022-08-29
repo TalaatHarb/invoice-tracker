@@ -1,56 +1,70 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AbsenseItem } from '../../models/absence-item'
 import AbsenceHistoryItem from './item'
-import Navbar from '../../components/Navbar'
+import { useAppSelector } from '../../hooks/toolkit-types'
+import axios from 'axios'
+import { CONSTANTS } from '../../utils/constants'
 
-let dummyData: AbsenseItem = {
-  id: 1,
-  absenceType: 'Sick Leave',
-  Date: '22-22-222',
-  comment: 'LAVAVAVAVAVA',
-  numberOfDaysRequested: 1,
-  dayType: 'full day',
-  Attachment: 'https://www.google.com/',
-  startDate: '22-22-2222',
-  endDate: '22-22-2222',
+type accordionProps = {
+  id: number
 }
 
-let dummyData2: AbsenseItem = {
-  id: 2,
-  absenceType: 'Sick Leave',
-  Date: '22-22-222',
-  comment: 'LAVAVAVAVAVA',
-  numberOfDaysRequested: 1,
-  dayType: 'full day',
-  Attachment: '',
-  startDate: '22-22-2222',
-  endDate: '22-22-2222',
-}
+const AbsenceHistoryAccordionList = ({ id }: accordionProps) => {
+  const { isAuthenticated } = useAppSelector(
+    (state) => state.AuthenticationSlice
+  )
 
-const AbsenceHistoryAccordionList = () => {
-  const test: AbsenseItem[] = [dummyData, dummyData2]
+  const [absences, setAbsences] = useState([])
+  let tempData: []
 
-  const [items, setItems] = useState(test)
+  const fetchAbsences = async () => {
+    const config = {
+      headers: { Authorization: `Bearer ${isAuthenticated}` },
+    }
 
-  test.map((item) => {
-    console.log(item)
-  })
+    // TODO: Change the empId to be generic
+    let res = await axios.get(
+      `${CONSTANTS.BACKEND_URL}/api/user/absence/request?empId=${id}`,
+      config
+    )
+
+    setAbsences(res.data)
+    tempData = res.data
+  }
+
+  useEffect(() => {
+    fetchAbsences()
+  }, [])
 
   return (
     <>
-      <br></br>
       <h2>Absence History</h2>
       <br />
-      {items.map((item) => {
-        return (
-          <AbsenceHistoryItem
-            key={item.id}
-            record={item}
-            items={items}
-            setItems={setItems}
-          />
-        )
-      })}
+      <div className='shadow-lg'>
+        {absences.map((absence: AbsenseItem) => {
+          return (
+            <AbsenceHistoryItem
+              key={absence.id}
+              record={absence}
+              items={absences}
+              setItems={setAbsences}
+            />
+          )
+        })}
+      </div>
+
+      <br />
+      <div className='flex flex-row-reverse'>
+        <button
+          onClick={fetchAbsences}
+          className='inline-flex items-center px-3 py-1.5 bg-lightGrey hover:bg-darkGrey text-sm font-medium rounded-md mx-2'
+        >
+          Cancel
+        </button>
+        <button className='inline-flex items-center px-3 py-1.5  bg-blueCegedim hover:opacity-75 text-white text-sm font-medium rounded-md mx-2'>
+          Save
+        </button>
+      </div>
     </>
   )
 }

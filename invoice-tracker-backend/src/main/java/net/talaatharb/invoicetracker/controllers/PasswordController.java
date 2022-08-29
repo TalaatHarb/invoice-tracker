@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import net.talaatharb.invoicetracker.dtos.ForgotBody;
 import net.talaatharb.invoicetracker.dtos.MessageResponse;
 import net.talaatharb.invoicetracker.dtos.ResetBody;
@@ -20,12 +21,12 @@ public class PasswordController {
     @PostMapping(path="/forgot")
     public ResponseEntity<MessageResponse> forgotPassword(@RequestBody ForgotBody fBody) {
         passwordService.sendResetLink(fBody.getEmail());
-        return new ResponseEntity<>(new MessageResponse("message", "We sent you an email"), HttpStatus.OK);
+        return new ResponseEntity<>(new MessageResponse("We sent you an email", "message"), HttpStatus.OK);
     }
 
     @PostMapping(path="/reset")
     public ResponseEntity<MessageResponse> updatePassword(@RequestBody ResetBody resetBody){
         passwordService.resetPassword(resetBody.getResetToken(), resetBody.getPassword());
-        return new ResponseEntity<>(new MessageResponse("message", "Password changed successfully"),HttpStatus.OK);
+        return new ResponseEntity<>(new MessageResponse("Password changed successfully", "message"),HttpStatus.OK);
     }
 }

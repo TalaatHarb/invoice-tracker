@@ -1,7 +1,13 @@
 package net.talaatharb.invoicetracker.models;
 
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.*;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,39 +18,73 @@ import lombok.NoArgsConstructor;
 @Table
 @Entity
 public class Request {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+//    @NotBlank
     private Date startDate;
+
+//    @NotBlank
     private Date requestDate;
+
+//    @NotBlank
     private Date endDate;
 
+    //    @NotBlank
     private Long requestedBy;
 
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="reviewed_by_id", referencedColumnName = "id")
-    private User reviewedBy;
-
+    private Long reviewedBy;
 
 
     private String type;
+
+//    @NotBlank
     private boolean isFullDay;
-    private String comments;
-    private String status="pending";
 
-    private String attachmentName;
+//        @NotBlank
 
-    private String attachmentUrl;
+    private String status="Pending";
 
+    private String comment;
+
+//    @NotBlank
+
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "request")
+    private List<AbsenceAttachments> absenceAttachments;
+
+//    @NotBlank
     private int numberOfDays;
 
 
     public Request(Date startDate, Date endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
-
     }
 
+    public Request(Date startDate, Date endDate, Long requestedBy, String type, int numberOfDays) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.requestedBy = requestedBy;
+        this.type = type;
+        this.numberOfDays = numberOfDays;
+    }
+
+    public Request(Date startDate, Date requestDate, Date endDate, Long requestedBy, String type, boolean isFullDay, String status, String comment, List<AbsenceAttachments> absenceAttachments, int numberOfDays) {
+        this.startDate = startDate;
+        this.requestDate = requestDate;
+        this.endDate = endDate;
+        this.requestedBy = requestedBy;
+        this.type = type;
+        this.isFullDay = isFullDay;
+        this.status = status;
+        this.comment = comment;
+        this.absenceAttachments = absenceAttachments;
+        this.numberOfDays = numberOfDays;
+    }
 }

@@ -19,7 +19,7 @@ public class ResetTokenEntity {
     @Column
     private String resetToken;
 
-    @OneToOne
+    @OneToOne(orphanRemoval = true)
     @MapsId
     @JoinColumn(name="user_id")
     private User user;

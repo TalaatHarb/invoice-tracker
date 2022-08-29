@@ -2,10 +2,10 @@ import React from 'react'
 import Button from '../Button';
 import { useNavigate } from "react-router-dom";
 
-const RequesCard = (props:any) => {
+const RequestCard = (props:any) => {
     const navigate = useNavigate();
   return (
-    <div className="w-80 text-center  bg-white rounded ">
+    <div className="w-80 text-center  bg-white sm:rounded-lg shadow overflow-hidden  ">
     <div className="bg-blueCegedim">
       <h1 className="font-semibold w-40 h-16 ml-20 p-5 text-white rounded-xl text-xl  ">
         All absence
@@ -16,7 +16,7 @@ const RequesCard = (props:any) => {
         {props.requests.map((req:any) => (
           <div className=" text-center mt-10  text-lg " key={req.name}>
             <h1 className="  p-1 rounded">{req.name}</h1>
-            <p className="mt-10 "> {req.rating}</p>
+            <p className="mt-10 "> {req.numberOfDays}</p>
           </div>
         ))}
       </div>
@@ -24,7 +24,7 @@ const RequesCard = (props:any) => {
         <h1 className="mt-10  rounded  text-lg ">
           Anuual leaves to take
         </h1>
-        <p className="mt-12  "> {props.annuealLeaves}</p>
+        <p className="mt-12  "> {props.allowedBalance}/{props.remainingBalance}</p>
         <Button
           onClick={() => {
             navigate("/request");
@@ -39,4 +39,4 @@ const RequesCard = (props:any) => {
   )
 }
 
-export default RequesCard
+export default RequestCard

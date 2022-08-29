@@ -10,7 +10,8 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/employeedb
     username: root
-    password: awad36148
+    password: 1234
+
 
   mail:
     host: ${MAIL_HOST}
@@ -28,11 +29,14 @@ spring:
       name: invoice-tracker-backend
     lifecycle:
       timeout-per-shutdown-phase: 30s
-
-
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 20MB
+      max-request-size: 20MB
 
 server:
-  port: 8080
+  port: ${PORT:8080}
   shutdown: graceful
 
 logging:
@@ -43,9 +47,12 @@ management:
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: "*"
   endpoint:
     health:
       show-details: always
       probes:
         enabled: true
+
+
+ATTACHMENTS_LOCATION: attachments

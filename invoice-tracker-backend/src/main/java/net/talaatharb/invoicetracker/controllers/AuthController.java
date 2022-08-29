@@ -13,7 +13,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import net.talaatharb.invoicetracker.dtos.JwtResponse;
 import net.talaatharb.invoicetracker.dtos.LoginRequest;
 import net.talaatharb.invoicetracker.repositories.RoleRepositry;
@@ -22,13 +27,11 @@ import net.talaatharb.invoicetracker.security.JwtProperties;
 import net.talaatharb.invoicetracker.security.JwtUtils;
 import net.talaatharb.invoicetracker.services.UserDetailsImpl;
 
-@CrossOrigin(origins = "*" , maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
-	private static final String ERROR_ROLE_IS_NOT_FOUND = "Error: Role is not found.";
-	private static final String USER_REGISTERED_SUCCESSFULLY = "User registered successfully!";
 	@Autowired
 	AuthenticationManager authenticationManager;
 	@Autowired
