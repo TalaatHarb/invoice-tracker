@@ -3,22 +3,21 @@ import { Combobox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 
 const fields = [
-  { id: "id", name: "Id" },
+  { id: "employeeId", name: "employeeId" },
   { id: "englishName", name: "English Name" },
   { id: "arabicName", name: "Arabic name" },
-  { id: "jobTitle", name: "Job title" },
+  { id: "profileNumber", name: "Profile Number" },
   { id: "joinDate", name: "Joining date" },
-  { id: "endDate", name: "End date" },
-  { id: "allowedBalance", name: "Allowed Balance" },
-  { id: "remainingBalance", name: "Remaining Balance" },
+  { id: "numberWD", name: "No. of Working Days" },
+  { id: "amountWD", name: "Amount/Working Day" },
+  { id: "numberPH", name: "No. of Public Holidays" },
+  { id: "amountPH", name: "Amount/ Public Holidays" },
+  { id: "company", name: "Company" },
+  { id: "country", name: "Country" },
   { id: "teams", name: "Teams" },
 ];
 
-type filterComboBoxProps = {
-  onOptionClick?: React.MouseEventHandler<HTMLLIElement>;
-};
-
-const FilterComboBox = ({ onOptionClick }: filterComboBoxProps) => {
+const FilterComboBox = () => {
   const [selected, setSelected] = useState("");
   const [query, setQuery] = useState("");
   type fieldType = {
@@ -78,7 +77,6 @@ const FilterComboBox = ({ onOptionClick }: filterComboBoxProps) => {
                       <>
                         <span
                           id={field.id}
-                          onClick={onOptionClick}
                           className={`block truncate ${
                             selected ? "font-medium" : "font-normal"
                           }`}
