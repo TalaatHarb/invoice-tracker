@@ -10,8 +10,9 @@ import { CONSTANTS } from '../../../../utils/constants'
 interface Props {
   notes: string
   downloadLink: string
+  attachmentName: string
 }
-export default function MyModal({ notes, downloadLink }: Props) {
+export default function MyModal({ notes, downloadLink, attachmentName }: Props) {
   const dispatch = useDispatch()
   const { isOpen } = useAppSelector((state) => state.ModalSlice)
   const { isAuthenticated } = useAppSelector(
@@ -20,11 +21,18 @@ export default function MyModal({ notes, downloadLink }: Props) {
 
   const downloadFiles = async () => {
     const config = {
+      method: "POST",
       headers: { Authorization: `Bearer ${isAuthenticated}` },
     }
-    const response = await axios.post(downloadLink, {}, config)
-    const data = response.data
-    console.log(data)
+    const response = await fetch(downloadLink, config)
+    const data = await response.blob();
+    const a = document.createElement("a");
+    const url = window.URL.createObjectURL(data);
+    a.href = url;
+    a.download = attachmentName;
+    a.click();
+    window.URL.revokeObjectURL(url);
+    // console.log(data)
   }
 
   return (

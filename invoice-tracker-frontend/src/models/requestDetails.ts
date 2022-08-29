@@ -1,7 +1,13 @@
+interface absenceAttachment {
+  attachmentUrl: string
+  attachmentName: string
+}
+
+
 interface Request {
   attachmentName: string
   attachmentUrl: string
-  absenceAttachments: string[]
+  absenceAttachments: absenceAttachment[]
   comments: string
   endDate: string
   fullDay: boolean
@@ -19,3 +25,4 @@ export interface RequestDetails {
   request: Request
   requestedBy: string
 }
+

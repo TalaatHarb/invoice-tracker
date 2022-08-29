@@ -2,10 +2,12 @@ package net.talaatharb.invoicetracker.controllers;
 
 import javax.servlet.ServletContext;
 
+import net.talaatharb.invoicetracker.utils.FileWithType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,8 +35,11 @@ public class AttachmentController {
 
     @PostMapping("/{atchName}")
     public ResponseEntity<Resource> downloadAttachment(@PathVariable String atchName){
-        Resource attachmentResource = attachmentService.downloadAttachment(atchName);
+        FileWithType fileWithType = attachmentService.downloadAttachment(atchName);
+        Resource attachmentResource = fileWithType.getResource();
+        String type = fileWithType.getType();
         return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(type))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + attachmentResource.getFilename())
                 .body(attachmentResource);
     }
