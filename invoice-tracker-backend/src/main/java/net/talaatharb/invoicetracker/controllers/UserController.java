@@ -109,9 +109,9 @@ public class UserController {
             return ResponseEntity.ok(filterUserService.filterEmployeeByISFullTime(isFullTime));
 
         }
-//        else if (type.equals("teamName")) {
-//            return ResponseEntity.ok(filterUserService.filterEmployeeByTeamName(values));
-
+        else if (type.equals("team")) {
+            return ResponseEntity.ok(filterUserService.filterEmployeeByTeamName(values));
+        }
         else if (type.equals("id")) {
             List<Long> longList = new ArrayList<Long>();
             for (String s : values) longList.add(Long.valueOf(s));

@@ -21,10 +21,11 @@ public interface FilterUserRepository extends JpaRepository<User,Long> {
                     "e.arabicName IN :arabicName "
 
     )
+
     List<User> filterEmployeesByArabicName(List<String> arabicName);
     @Query(
-            "SELECT e FROM User e WHERE " +
-                    "e.teams IN :teamName"
+            "SELECT e.employees FROM Team e WHERE " +
+                    "e.name IN :teamName"
 
     )
     List<User> filterEmployeesByTeamName(List<String> teamName);
