@@ -3,20 +3,21 @@ package net.talaatharb.invoicetracker.controllers;
 import java.net.URI;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import lombok.RequiredArgsConstructor;
 import net.talaatharb.invoicetracker.dtos.UserDetails;
+import net.talaatharb.invoicetracker.dtos.UserDto;
+import net.talaatharb.invoicetracker.exceptions.ExcelResponseMessage;
 import net.talaatharb.invoicetracker.models.Role;
 import net.talaatharb.invoicetracker.models.User;
+import net.talaatharb.invoicetracker.repositories.UserRepository;
 import net.talaatharb.invoicetracker.services.FilterUserService;
 import net.talaatharb.invoicetracker.services.UserService;
 
@@ -25,6 +26,8 @@ import net.talaatharb.invoicetracker.services.UserService;
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*" , allowedHeaders = "*", maxAge = 3600)
 public class UserController {
+
+    private final UserRepository userRepository;
 
     @Autowired
     private final UserService userService;
@@ -128,5 +131,53 @@ public class UserController {
         }
         return null;
     }
+
+
+    // add users from excel sheet
+    @PostMapping(path = "/employee/uploadexcel")
+    public ResponseEntity<ExcelResponseMessage> uploadFile(@RequestBody List<User> Employees_list) {
+
+        String message = "";
+
+
+
+        try {
+            userService.saveemployee_excel(Employees_list);
+            message = "Uploaded the file successfully ";
+            return ResponseEntity.status(HttpStatus.OK).body(new ExcelResponseMessage(message));
+        } catch (Exception e) {
+            message = "Could not upload the file: !";
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ExcelResponseMessage(message));
+        }
+
+
+    }
+
+
+
+    // add employee apdo
+    @PostMapping(path = "/employee/add")
+    public ResponseEntity<ExcelResponseMessage> Add_Employee(@RequestBody UserDto employee) {
+        String message = "";
+        try {
+            Optional<User> test_user = userRepository.findByUserId(employee.getUserId());
+            if (!test_user.isPresent()) {
+
+                userService.SaveEmployee(employee);
+                message = "User Saved successfully ";
+                return ResponseEntity.status(HttpStatus.OK).body(new ExcelResponseMessage(message));
+            } else {
+                message = "User ID already taken ! ";
+                return ResponseEntity.status(HttpStatus.OK).body(new ExcelResponseMessage(message));
+
+            }
+        } catch (Exception e) {
+            message = "Faild to Save User !";
+
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ExcelResponseMessage(message));
+        }
+    }
+
+
 
 }
