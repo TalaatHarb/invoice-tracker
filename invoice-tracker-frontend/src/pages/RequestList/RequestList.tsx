@@ -74,7 +74,7 @@ const RequestList=()=>{
         <div className="flex flex-row justify-start w-full">
             <div className="mx-12 my-9">
                 <h3 className="text-xl text-black font-medium">Filter by</h3>
-                <FilterComboBox/>
+               
             </div>
                 <input type="text" className="px-4 py-2 shadow-lg rounded-md max-h-18 text-sm self-center mt-8 " placeholder="search value here"/>
             <div  className="mx-11 my-12">

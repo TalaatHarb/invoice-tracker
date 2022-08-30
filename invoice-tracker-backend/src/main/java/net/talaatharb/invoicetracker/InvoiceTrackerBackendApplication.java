@@ -17,6 +17,7 @@ import net.talaatharb.invoicetracker.models.Request;
 import net.talaatharb.invoicetracker.models.RequestType;
 import net.talaatharb.invoicetracker.models.Role;
 import net.talaatharb.invoicetracker.models.User;
+import net.talaatharb.invoicetracker.services.AbsenceService;
 import net.talaatharb.invoicetracker.services.UserService;
 
 @SpringBootApplication
@@ -37,7 +38,7 @@ public class InvoiceTrackerBackendApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(InvoiceTrackerBackendApplication.class, args);
-		System.out.println("hello rashidy");
+
 	}
 
 	@Bean
@@ -49,8 +50,11 @@ public class InvoiceTrackerBackendApplication {
 			userService.saveRole(new Role(null, ROLE_ADMIN));
 
 //			create new object of User Class
+			SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
 
-			userService.saveUser(new User(EMAIL_USER, PASS_USER,new Date(),"0122303432","amr0"));
+			String dateInString = "1-jan-2013";
+			Date date = formatter.parse(dateInString);
+			userService.saveUser(new User(EMAIL_USER, PASS_USER,date,"0122303432","amr0"));
 			userService.saveUser(new User(EMAIL_EMPLOYEE, PASS_USER,"Gado",true));
 			userService.saveUser(new User(EMAIL_HR, PASS_USER,"Ahmed",true));
 			userService.saveUser(new User("124329374621","Amr Essam","عمرو عصام",EMAIL_ADMIN_USER,PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,21,true,new Date(),new Date(),new Date(),"01002345324",2,0,150.0,"amr23"));

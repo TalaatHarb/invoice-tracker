@@ -84,7 +84,7 @@ public class UserController {
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
             String dateInString = values.get(0);
             Date date = formatter.parse(dateInString);
-            return ResponseEntity.ok(filterUserService.filterEmployeeByJoinDate(date));
+            return ResponseEntity.ok(filterUserService.filterEmployeeByEndDate(date));
 
         }
 
