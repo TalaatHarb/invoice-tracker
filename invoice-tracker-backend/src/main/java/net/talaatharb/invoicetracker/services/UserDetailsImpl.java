@@ -33,8 +33,9 @@ public class UserDetailsImpl implements UserDetails {
 	private String password;
 
 	private String username;
-	
-	private Boolean isEnabled;
+
+
+	private Boolean isEnabled = true;
     
 	private Boolean isCredentialsNonExpired;
 
@@ -112,6 +113,8 @@ public class UserDetailsImpl implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
+		if(isEnabled==null)
+			return true;
 		return isEnabled;
 	}
 }

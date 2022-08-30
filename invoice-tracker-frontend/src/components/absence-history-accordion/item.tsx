@@ -19,8 +19,8 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
 
   return (
     <>
-      <div className="border border-slate-600 flex justify-between">
-        <div className="relative flex items-center py-4 px-5 text-base text-gray-800 text-left bg-white border-0 rounded-none transition focus:outline-none">
+      <div className="border border-slate-600 flex justify-between bg-white shadow-lg">
+        <div className="relative flex items-center py-4 px-5 text-base text-gray-800 text-left  border-0 rounded-none transition focus:outline-none">
           <strong>
             {props.record.type} {props.record.startDate.substr(0, 10)},{" "}
             {props.record.fullDay ? "full-day" : "part-day"}{" "}
