@@ -106,9 +106,9 @@ public class InvoiceTrackerBackendApplication {
 
 			// SAMIR
 			for(int i = 1; i <= 7; ++i) {
-                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long) i, "sickness", true, "Accepted", "", new ArrayList<>(), 2));
-                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "sickness", true, "Pending", "Hi, This is a comment", new ArrayList<>(), 2));
-                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "sickness", true, "Rejected", "Hi again, this is the second comment", new ArrayList<>(), 2));
+                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long) i, "sick leave", true, "Accepted", "", new ArrayList<>(), 2));
+                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "sick leave", true, "Pending", "Hi, This is a comment", new ArrayList<>(), 2));
+                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "sick leave", true, "Rejected", "Hi again, this is the second comment", new ArrayList<>(), 2));
             }
 			teamService.SaveTeam(new Team("IT",new Company("Cegedim","cegedim@gmail.com","Egypt,Cairo")));
 			teamService.SaveTeam(new Team("DevOps",new Company("Cegedim","cegedim@gmail.com","Egypt,Cairo")));
