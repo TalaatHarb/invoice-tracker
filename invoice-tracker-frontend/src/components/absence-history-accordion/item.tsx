@@ -21,7 +21,6 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
     setShowModal(true);
   };
 
-  console.log(tempData);
   return (
     <>
       <div id= {"accordion-" + props.record.id} className='border border-slate-600 flex justify-between bg-white shadow-lg'>
@@ -108,7 +107,6 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                 >
                   {" "}
                   {attachment.attachmentName}
-                  HEYYYYYYYYYYYYYYYYYYYYYYYYYYYYY
                 </a>
                 })
               )
