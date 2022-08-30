@@ -32,7 +32,7 @@ class AbsenceControllerIT extends AbstractControllerIT {
 	private WebApplicationContext webApplicationContext;
 
 	@Test
-	@Disabled
+//	@Disabled
 	@WithUserDetails(value = InvoiceTrackerBackendApplication.EMAIL_USER)
 	void testPostRequest() throws JsonProcessingException, Exception {
 		Request request = new Request();
@@ -55,15 +55,15 @@ class AbsenceControllerIT extends AbstractControllerIT {
 	}
 
 	@Test
-	@Disabled
+//	@Disabled
 	@WithUserDetails(value = InvoiceTrackerBackendApplication.EMAIL_USER)
 	void testPostAttachments() throws JsonProcessingException, Exception {
 
 		MockMultipartFile file
 				= new MockMultipartFile(
-				"file",
-				"hello.txt",
-				MediaType.TEXT_PLAIN_VALUE,
+				"attachments",
+				"hello.png",
+				MediaType.IMAGE_PNG_VALUE,
 				"Hello, World!".getBytes()
 		);
 		UserDetailsImpl user = (UserDetailsImpl)userDetailsService.loadUserByUsername(InvoiceTrackerBackendApplication.EMAIL_USER);
@@ -71,7 +71,7 @@ class AbsenceControllerIT extends AbstractControllerIT {
 
 		MockMvc mockMvc
 				= MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-		mockMvc.perform(MockMvcRequestBuilders.multipart("/api/attachments/upload").file(file))
+		mockMvc.perform(MockMvcRequestBuilders.multipart("/api/attachments/upload?reqId=1").file(file))
 				.andExpect(status().isOk());
 	}
 }
