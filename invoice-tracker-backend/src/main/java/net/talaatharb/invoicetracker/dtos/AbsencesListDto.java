@@ -1,9 +1,9 @@
 package net.talaatharb.invoicetracker.dtos;
 
+import java.util.List;
+
 import lombok.Getter;
 import net.talaatharb.invoicetracker.models.Request;
-
-import java.util.List;
 
 @Getter
 public class AbsencesListDto {
