@@ -3,6 +3,7 @@ package net.talaatharb.invoicetracker.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.talaatharb.invoicetracker.dtos.AbsencesListDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -50,15 +51,20 @@ public class AbsenceController {
     public ResponseEntity<List<Request>> getAbsenceHistoryByEmployeeId(@RequestParam Long empId) {
         return ResponseEntity.ok().body(absenceService.getAllAbsenceByEmployeeId(empId));
     }
- @GetMapping("/LeaveRequests")
-		public ResponseEntity<ArrayList<RequestLeaveBody>> getUsers() {
-			return ResponseEntity.ok().body(leaveServices.get_EmployeesRequests());
-		}
 
-		@PutMapping("/UpdateLeaveRequest/{request_id}")
-		public ResponseEntity<Request> UpdateEmployeeRequest(@RequestBody Request req, @RequestParam int request_id) {
+    @PostMapping("/update-requests")
+    public ResponseEntity<List<Request>> updateListOfRequests(@RequestBody List<Request> absences) {
+        return ResponseEntity.ok().body(absenceService.updateAllEmployeeAbsences(absences));
+    }
 
-			return new ResponseEntity<>(req, HttpStatus.OK);
+    @GetMapping("/LeaveRequests")
+    public ResponseEntity<ArrayList<RequestLeaveBody>> getUsers() {
+        return ResponseEntity.ok().body(leaveServices.get_EmployeesRequests());
+    }
 
-		}
+	@PutMapping("/UpdateLeaveRequest/{request_id}")
+	public ResponseEntity<Request> UpdateEmployeeRequest(@RequestBody Request req, @RequestParam int request_id) {
+		return new ResponseEntity<>(req, HttpStatus.OK);
+	}
+
 }
