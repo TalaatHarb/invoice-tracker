@@ -30,7 +30,7 @@ const Navbar = () => {
       {/* Container of all the items in the navbar */}
       <div className="container flex flex-wrap justify-between md:w-auto mx-auto">
         {/* The logo and company title */}
-        <Link to={isHR ? "/hr" : "/"} className="flex">
+        <Link to={isHR ? "/hr" : "/"} className="flex" id="Logo-button">
           <img src={logo} className="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
           <span className="self-center text-xl font-semibold whitespace-nowrap text-blueCegedim">
             Cegedim
@@ -41,21 +41,21 @@ const Navbar = () => {
           <div className="flex item-center space-x-2">
             {/* Cegedim Members */}
             {isManager ? (
-              <Link
+              <Link id="Cegedim-admin-link"
                 to="/admin"
                 className="block py-2 pr-4 pl-3 active:text-blueCegedim text-darkGrey rounded hover:bg-lightGrey md:hover:bg-transparent md:p-0"
               >
-                Cegedim Admins
+                Cegedim Admin
               </Link>
             ) : isHR ? (
-              <Link
+              <Link id="Cegedim-hr-link"
                 to="/hr/allEmployees"
                 className="block py-2 pr-4 pl-3 active:text-blueCegedim text-darkGrey rounded hover:bg-lightGrey md:hover:bg-transparent md:p-0"
               >
                 Cegedim Members
               </Link>
             ) : (
-              <Link
+              <Link id="Cegedim-employee-link"
                 to="/"
                 className="block py-2 pr-4 pl-3 active:text-blueCegedim text-darkGrey rounded hover:bg-lightGrey md:hover:bg-transparent md:p-0"
               >
@@ -69,7 +69,7 @@ const Navbar = () => {
             {/* Container for the User Icon and the dropdown menu */}
             <Menu as="div" className="ml-3 relative">
               <div>
-                <Menu.Button className="flex text-sm rounded-full focus:outline-none">
+                <Menu.Button className="flex text-sm rounded-full focus:outline-none" id="menu-button">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="w-6 h-6"
@@ -95,7 +95,7 @@ const Navbar = () => {
               >
                 <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                   <Menu.Item>
-                    <Link
+                    <Link id="menu-button-profile"
                       to="/employee"
                       className="block px-4 py-2 text-sm text-gray-700"
                     >
@@ -103,7 +103,7 @@ const Navbar = () => {
                     </Link>
                   </Menu.Item>
                   <Menu.Item>
-                    <button
+                    <button id="menu-button-sign-out"
                       className="block px-4 py-2 text-sm text-gray-700 pointer-events-auto"
                       onClick={() => dispatch(logoutUser())}
                     >

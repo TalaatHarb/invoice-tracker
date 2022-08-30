@@ -18,7 +18,6 @@ type employeeTableProps = {
 };
 
 const EmployeeTab = ({ employees }: employeeTableProps) => {
-  const navigate = useNavigate();
   const data = employees;
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] = React.useState({});
