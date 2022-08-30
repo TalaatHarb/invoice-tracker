@@ -38,7 +38,7 @@ public class User {
 	//		@NotBlank
 	private String jobTitle;
 
-//	@NotBlank
+	//	@NotBlank
 	@Size(max = 50)
 	@Email
 	private String email;
@@ -92,7 +92,7 @@ public class User {
 
 	private Boolean isEnabled;
 
-	private  Long userId;
+	private Long userId;
 	@JsonIgnore
 	private Date lastTimePasswordChanged;
 
@@ -100,7 +100,7 @@ public class User {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(
 
-			cascade= CascadeType.ALL,
+			cascade = CascadeType.ALL,
 			orphanRemoval = true
 	)
 	private List<RequestsTypesNumber> requestsTypesNumber;
@@ -114,7 +114,7 @@ public class User {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(
 
-			cascade= CascadeType.ALL,
+			cascade = CascadeType.ALL,
 			orphanRemoval = true
 	)
 	private List<Request> requests = new ArrayList<>();
@@ -124,7 +124,7 @@ public class User {
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 
-//	@NotBlank
+	//	@NotBlank
 	@Size(max = 20)
 	private String username;
 
@@ -133,18 +133,15 @@ public class User {
 	private ResetTokenEntity resetToken;
 
 
-
-
-
 	public boolean isNotPasswordExpired() {
 		long PASSWORD_EXPIRATION_TIME = 30L * 24L * 60L * 60L * 1000L;
-        if (this.lastTimePasswordChanged == null) return true;
-         
-        long currentTime = System.currentTimeMillis();
-        long lastChangedTime = this.lastTimePasswordChanged.getTime();
-         
-        return currentTime < lastChangedTime + PASSWORD_EXPIRATION_TIME;
-    }
+		if (this.lastTimePasswordChanged == null) return true;
+
+		long currentTime = System.currentTimeMillis();
+		long lastChangedTime = this.lastTimePasswordChanged.getTime();
+
+		return currentTime < lastChangedTime + PASSWORD_EXPIRATION_TIME;
+	}
 
 	public User(String username, String email, String encode) {
 		this.username = username;
@@ -152,15 +149,28 @@ public class User {
 		this.password = encode;
 	}
 
-	public User(String email, String password,String username, boolean isEnabled) {
+	public User(String email, String password, String username, boolean isEnabled,String nationalId, String englishName, String arabicName,String englishAddress, String arabicAddress,String jobTitle ,int allowedBalance, int remainingBalance, boolean billable, Date joiningDate, Date endDate) {
 		this.email = email;
 		this.password = password;
 		this.username = username;
 		this.isEnabled = isEnabled;
+		this.nationalId = nationalId;
+		this.englishName = englishName;
+		this.arabicName = arabicName;
+		this.englishAddress = englishAddress;
+		this.arabicAddress = arabicAddress;
+		this.jobTitle=jobTitle;
+		this.allowedBalance = allowedBalance;
+		this.remainingBalance = remainingBalance;
+		this.billable = billable;
+		this.joiningDate = joiningDate;
+		this.endDate = endDate;
 	}
 
-	public User(String email,String password,String username,
-			Boolean isEnabled, Date lastTimePasswordChanged) {
+	public User(String email, String password, String username,
+				Boolean isEnabled, Date lastTimePasswordChanged,
+				String nationalId, String englishName, String arabicName,
+				String englishAddress, String arabicAddress,String jobTitle ,int allowedBalance, int remainingBalance, boolean billable, Date joiningDate, Date endDate) {
 		super();
 		this.email = email;
 		this.password = password;
@@ -168,9 +178,21 @@ public class User {
 		this.isEnabled = isEnabled;
 		this.lastTimePasswordChanged = lastTimePasswordChanged;
 		this.username = username;
+		this.nationalId = nationalId;
+		this.englishName = englishName;
+		this.arabicName = arabicName;
+		this.englishAddress = englishAddress;
+		this.arabicAddress = arabicAddress;
+		this.jobTitle=jobTitle;
+		this.allowedBalance = allowedBalance;
+		this.remainingBalance = remainingBalance;
+		this.billable = billable;
+		this.joiningDate = joiningDate;
+		this.endDate = endDate;
+
+
+
 	}
-	
-	
 
 
 	public User(String email, String password, Date joiningDate, String mobileNumber, String username) {
@@ -181,19 +203,19 @@ public class User {
 		this.username = username;
 	}
 
-	public User(String email, String password, Date joiningDate, String mobileNumber, String username,boolean billable) {
+	public User(String email, String password, Date joiningDate, String mobileNumber, String username, boolean billable) {
 		this.email = email;
 		this.password = password;
 		this.joiningDate = joiningDate;
 		this.mobileNumber = mobileNumber;
 		this.username = username;
-		this.billable=billable;
+		this.billable = billable;
 	}
 
 
-	public void setRequestsTypes(String typeName,int numberOfDays) {
-		boolean exists=false;
-		if(!typeName.equals("Annual leave")) {
+	public void setRequestsTypes(String typeName, int numberOfDays) {
+		boolean exists = false;
+		if (!typeName.equals("Annual leave")) {
 			for (int i = 0; i < this.requestsTypesNumber.size(); i++) {
 
 				if (this.requestsTypesNumber.get(i).getName().equals(typeName)) {
@@ -208,18 +230,25 @@ public class User {
 		}
 	}
 
-	public User(String email, String password, int allowedBalance, int remainingBalance, Date joiningDate, String mobileNumber,String username) {
+	public User(String email, String password,String nationalId,String englishName, String arabicName, String englishAddress, String arabicAddress,String jobTitle,int allowedBalance, int remainingBalance, Date joiningDate, Date endDate, String mobileNumber, String username) {
 		this.email = email;
 		this.password = password;
+		this.nationalId = nationalId;
+		this.englishName = englishName;
+		this.arabicName = arabicName;
+		this.englishAddress = englishAddress;
+		this.arabicAddress = arabicAddress;
+		this.jobTitle=jobTitle;
 		this.allowedBalance = allowedBalance;
 		this.remainingBalance = remainingBalance;
 		this.joiningDate = joiningDate;
+		this.endDate=endDate;
 		this.mobileNumber = mobileNumber;
-		this.username=username;
+		this.username = username;
 	}
 
 
-	public User(String nationalId, String englishName, String arabicName, String email, String password, String englishAddress, String arabicAddress, int allowedBalance, int remainingBalance, boolean billable, Date joiningDate, Date endDate, Date birthDate, String mobileNumber, int yearsOfInsurance, int overtime, double payRate, String username) {
+	public User(String nationalId, String englishName, String arabicName, String email, String password, String englishAddress, String arabicAddress,String jobTitle ,int allowedBalance, int remainingBalance, boolean billable, Date joiningDate, Date endDate, Date birthDate, String mobileNumber, int yearsOfInsurance, int overtime, double payRate, String username) {
 		this.nationalId = nationalId;
 		this.englishName = englishName;
 		this.arabicName = arabicName;
@@ -227,6 +256,7 @@ public class User {
 		this.password = password;
 		this.englishAddress = englishAddress;
 		this.arabicAddress = arabicAddress;
+		this.jobTitle=jobTitle;
 		this.allowedBalance = allowedBalance;
 		this.remainingBalance = remainingBalance;
 		this.billable = billable;
@@ -239,4 +269,11 @@ public class User {
 		this.payRate = payRate;
 		this.username = username;
 	}
+
+
+
+
+
+
+
 }

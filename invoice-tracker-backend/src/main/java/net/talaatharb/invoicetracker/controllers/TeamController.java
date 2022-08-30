@@ -27,4 +27,5 @@ public class TeamController {
         return ResponseEntity.ok().body(teamService.get_all_teams());
     }
 
+
 }

@@ -187,7 +187,7 @@ const EmployeesHub = () => {
           </h1>
           <PopUpStart/>
         </div>
-        <div className="flex flex-row justify-start w-full  ml-96">
+        <div className="flex flex-row justify-start w-full  pl-28">
           <div className="mx-12 my-10">
             <h3 className="text-xl text-black font-medium">Filter by</h3>
             <FilterComboBox onOptionClick={currentFieldChangeHandler} />

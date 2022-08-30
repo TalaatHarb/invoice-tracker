@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
@@ -91,9 +88,6 @@ public class UserDto {
 
 
     private List<String> teams = new ArrayList<>();
-
-
-
 
 
     //	@NotBlank

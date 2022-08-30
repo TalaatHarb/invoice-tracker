@@ -24,6 +24,9 @@ public class InvoiceTrackerBackendApplication {
 
 	public static final String USERNAME = "amr0";
 	private static final String EMAIL_ADMIN_USER = "boogado2@yahoo.com";
+	private static final String EMAIL_ADMIN_USER2 = "boogado222@yahoo.com";
+	private static final String EMAIL_ADMIN_USER3= "boogado2223@yahoo.com";
+	private static final String EMAIL_ADMIN_USER4 = "boogado2224@yahoo.com";
 	private static final String EMAIL_EMPLOYEE = "boogado@yahoo.com";
 	private static final String EMAIL_HR = "boogado1@yahoo.com";
 	private static final String EMAIL_HR_2 = "boogado3@yahoo.com";
@@ -40,6 +43,9 @@ public class InvoiceTrackerBackendApplication {
 
 	@Autowired
 	private TeamService teamService;
+
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(InvoiceTrackerBackendApplication.class, args);
 	}
@@ -56,18 +62,28 @@ public class InvoiceTrackerBackendApplication {
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
 			String joinDate = "13-jul-2022";
 			String endDate = "25-aug-2022";
+			String joinDate2 = "22-jul-2022";
+			String endDate2 = "18-aug-2022";
 			Date jdate = formatter.parse(joinDate);
 			Date edate = formatter.parse(endDate);
+			Date jdate2 = formatter.parse(joinDate2);
+			Date edate2 = formatter.parse(endDate2);
 
 
-			userService.saveUser(new User(EMAIL_USER, PASS_USER,21,21,jdate,"0122303432","amr0"));
-			userService.saveUser(new User(EMAIL_EMPLOYEE, PASS_USER,21,21,new Date(),"0122303432","Gado"));
-			userService.saveUser(new User(EMAIL_HR, PASS_USER,"Ahmed",true));
-			userService.saveUser(new User("124329374621","Amr Essam","عمرو عصام",EMAIL_ADMIN_USER,PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,21,true,jdate,edate,new Date(),"01002345324",2,0,150.0,"amr23"));
+			userService.saveUser(new User(EMAIL_USER, PASS_USER,"124329374633","Moustafa","مصطفى","Menofia,Egypt","المنوفية،مصر","Developer",21,21,jdate,edate,"0122303432","amr0"));
+			userService.saveUser(new User(EMAIL_EMPLOYEE, PASS_USER,"124329374621","ِAbdelrahman","عبدالرحمن","Alex,Egypt","الاسكندرية،مصر","Developer",21,21,jdate,edate,"0122303432","Gado"));
 
-			userService.saveUser(new User(EMAIL_HR_2, PASS_USER,"hamada",false));
-			userService.saveUser(new User(REAL_EMAIL, PASS_USER,"mostafa",true));
-			userService.saveUser(new User(EMAIL_EMPLOYEE_2, PASS_USER,"hamada",IS_ENABLED,PASSWORD_EXPIRY_DATE));
+			userService.saveUser(new User(EMAIL_HR, PASS_USER,"Ahmed",true,"124329366621","Khaled","خالد","Cairo,Egypt","القاهرة،مصر","Developer",21,15,true,jdate2,edate2));
+
+			userService.saveUser(new User("129329374621","Amr Essam","عمرو عصام",EMAIL_ADMIN_USER,PASS_USER,"Cairo,Egypt","القاهرة،مصر","Developer",21,21,true,jdate2,edate,new Date(),"01002345324",2,0,150.0,"amr23"));
+			userService.saveUser(new User("124329795669","Ahmed Ali","احمد علي",EMAIL_ADMIN_USER2,PASS_USER,"Cairo,Egypt","القاهرة،مصر","DevOps",21,21,true,jdate,edate,new Date(),"010023444424",2,0,150.0,"ahmed22"));
+			userService.saveUser(new User("124324474621","Omar Aly","عمر علي",EMAIL_ADMIN_USER3,PASS_USER,"Cairo,Egypt","القاهرة،مصر","Tester",21,10,false,jdate,edate2,new Date(),"01002345324",2,0,150.0,"amr24"));
+			userService.saveUser(new User("124322234621","Mahmoud Mohamed","محمود محمد",EMAIL_ADMIN_USER4,PASS_USER,"Cairo,Egypt","القاهرة،مصر","Developer",21,21,true,jdate2,edate,new Date(),"01002345324",2,0,150.0,"amr25"));
+
+
+			userService.saveUser(new User(EMAIL_HR_2, PASS_USER,"hamada",false,"124329374621","Moataz","معتز","Cairo,Egypt","القاهرة،مصر","Tester",21,15,true,jdate,edate));
+			userService.saveUser(new User(REAL_EMAIL, PASS_USER,"mostafa",true,"124329374621","Mohamed","محمد","Cairo,Egypt","القاهرة،مصر","Developer",21,15,true,jdate2,edate));
+			userService.saveUser(new User(EMAIL_EMPLOYEE_2, PASS_USER,"hamada",IS_ENABLED,PASSWORD_EXPIRY_DATE,"1243567874621","Omar Fathy","عمر فتحي","Cairo,Egypt","القاهرة،مصر","Tester",21,5,true,jdate,edate));
 
 
 //			userService.saveUser(new User(EMAIL_HR, null, PASS_USER, new HashSet<>(), "Gado1"));
@@ -104,9 +120,17 @@ public class InvoiceTrackerBackendApplication {
                 absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "sickness", true, "Pending", "Hi, This is a comment", new ArrayList<>(), 2));
                 absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "sickness", true, "Rejected", "Hi again, this is the second comment", new ArrayList<>(), 2));
             }
-			teamService.SaveTeam(new Team("IT",new Company("Cegedim","cegedim@gmail.com","Egypt,Cairo")));
-			teamService.SaveTeam(new Team("DevOps",new Company("Cegedim","cegedim@gmail.com","Egypt,Cairo")));
-			teamService.SaveTeam(new Team("Software Engineer",new Company("Cegedim","cegedim@gmail.com","Egypt,Cairo")));
+			Team  team1 = new Team("Team A",new Company("Cegedim","cegedim@gmail.com","Egypt,Cairo"));
+			Team  team2 = new Team("Team B",new Company("Cegedim","cegedim@gmail.com","Egypt,Cairo"));
+			Team  team3 = new Team("Team C",new Company("Cegedim","cegedim@gmail.com","Egypt,Cairo"));
+
+
+			teamService.SaveTeam(team1);
+			teamService.SaveTeam(team2);
+			teamService.SaveTeam(team3);
 		};
+
+
+
 	}
 }

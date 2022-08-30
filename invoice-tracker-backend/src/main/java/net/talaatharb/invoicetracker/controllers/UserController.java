@@ -34,100 +34,96 @@ public class UserController {
     @Autowired
     private FilterUserService filterUserService;
 
+
     @GetMapping("/users")
     public ResponseEntity<List<UserDetails>> getUsers() {
         return ResponseEntity.ok().body(userService.getUsers());
     }
 
     @GetMapping("/user")
-    public ResponseEntity<User> getUser(@RequestParam long ID){
+    public ResponseEntity<User> getUser(@RequestParam long ID) {
         return ResponseEntity.ok().body(userService.getUser(ID));
     }
 
     @PutMapping("/user/update/{id}")
-    public ResponseEntity<String> updateUser(@PathVariable  long id, @RequestBody UserDetails userDetails){
-        return userService.updateUser(id,userDetails);
+    public ResponseEntity<String> updateUser(@PathVariable long id, @RequestBody UserDetails userDetails) {
+        return userService.updateUser(id, userDetails);
     }
+
     @PostMapping("/user/save")
-    public ResponseEntity<User>saveUser(@RequestBody User user) {
+    public ResponseEntity<User> saveUser(@RequestBody User user) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/user/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
 
     @PostMapping("/role/save")
-    public ResponseEntity<Role>saveRole(@RequestBody Role role) {
+    public ResponseEntity<Role> saveRole(@RequestBody Role role) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
         return ResponseEntity.created(uri).body(userService.saveRole(role));
     }
 
 
     @GetMapping("/users/filter")
-    public ResponseEntity<List<User>> filterEmployees(@RequestParam("type") String type, @RequestParam("values") List<String> values) throws ParseException {
+    public ResponseEntity<List<UserDetails>> filterEmployees(@RequestParam("type") String type, @RequestParam("values") List<String> values) throws ParseException {
 
         if (type.equals("englishName")) {
-            return ResponseEntity.ok(filterUserService.filterEmployeeByName(values));
-        }
-        else if (type.equals("arabicName")) {
-            return ResponseEntity.ok(filterUserService.filterEmployeeByArabicName(values));
-        }
-        else if (type.equals("jobTitle")) {
-            return ResponseEntity.ok(filterUserService.filterEmployeeByJobTitle(values));
+            return ResponseEntity.ok(filterUserService.convert_user_userdto(filterUserService.filterEmployeeByName(values)));
+        } else if (type.equals("arabicName")) {
+            return ResponseEntity.ok(filterUserService.convert_user_userdto(filterUserService.filterEmployeeByArabicName(values)));
+        } else if (type.equals("jobTitle")) {
+            return ResponseEntity.ok(filterUserService.convert_user_userdto(filterUserService.filterEmployeeByJobTitle(values)));
 
-        }
-        else if (type.equals("joinDate")) {
+        } else if (type.equals("joinDate")) {
 
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
             String dateInString = values.get(0);
             Date date = formatter.parse(dateInString);
-            return ResponseEntity.ok(filterUserService.filterEmployeeByJoinDate(date));
+            return ResponseEntity.ok(filterUserService.convert_user_userdto(filterUserService.filterEmployeeByJoinDate(date)));
 
-       }
-        else if (type.equals("endDate")) {
+        } else if (type.equals("endDate")) {
 
             SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
             String dateInString = values.get(0);
             Date date = formatter.parse(dateInString);
-            return ResponseEntity.ok(filterUserService.filterEmployeeByEndDate(date));
+            return ResponseEntity.ok(filterUserService.convert_user_userdto(filterUserService.filterEmployeeByEndDate(date)));
 
-        }
-
-        else if (type.equals("billable")) {
+        } else if (type.equals("billable")) {
 
             String boolInString = values.get(0);
-            boolean billable=Boolean.parseBoolean(boolInString);
-            return ResponseEntity.ok(filterUserService.filterEmployeeByBillable(billable));
+            boolean billable = Boolean.parseBoolean(boolInString);
+            return ResponseEntity.ok(filterUserService.convert_user_userdto(filterUserService.filterEmployeeByBillable(billable)));
 
-        }
-        else if (type.equals("disabled")) {
-
-            String boolInString = values.get(0);
-            boolean isDisabled=Boolean.parseBoolean(boolInString);
-            return ResponseEntity.ok(filterUserService.filterEmployeeByISDisabled(isDisabled));
-
-        }
-        else if (type.equals("isFullTime")) {
+        } else if (type.equals("disabled")) {
 
             String boolInString = values.get(0);
-            boolean isFullTime=Boolean.parseBoolean(boolInString);
-            return ResponseEntity.ok(filterUserService.filterEmployeeByISFullTime(isFullTime));
+            boolean isDisabled = Boolean.parseBoolean(boolInString);
+            return ResponseEntity.ok(filterUserService.convert_user_userdto(filterUserService.filterEmployeeByISDisabled(isDisabled)));
 
-        }
-        else if (type.equals("team")) {
-            return ResponseEntity.ok(filterUserService.filterEmployeeByTeamName(values));
-        }
-        else if (type.equals("id")) {
+        } else if (type.equals("isFullTime")) {
+
+            String boolInString = values.get(0);
+            boolean isFullTime = Boolean.parseBoolean(boolInString);
+            return ResponseEntity.ok(filterUserService.convert_user_userdto(filterUserService.filterEmployeeByISFullTime(isFullTime)));
+
+        } else if (type.equals("teams")) {
+            List<User> ulist = filterUserService.FindUsersByTeamsName(values);
+
+            return ResponseEntity.ok(filterUserService.convert_user_userdto(ulist));
+
+        } else if (type.equals("id")) {
             List<Long> longList = new ArrayList<Long>();
             for (String s : values) longList.add(Long.valueOf(s));
-            return ResponseEntity.ok(filterUserService.filterEmployeeById(longList));
+            return ResponseEntity.ok(filterUserService.convert_user_userdto(filterUserService.filterEmployeeById(longList)));
 
         } else if (type.equals("allowedBalance")) {
             List<Integer> intList = new ArrayList<Integer>();
             for (String s : values) intList.add(Integer.parseInt(s));
-            return ResponseEntity.ok(filterUserService.filterEmployeeByBalance(intList));
+            return ResponseEntity.ok(filterUserService.convert_user_userdto(filterUserService.filterEmployeeByBalance(intList)));
+
         } else if (type.equals("remainingBalance")) {
             List<Integer> intList = new ArrayList<Integer>();
             for (String s : values) intList.add(Integer.parseInt(s));
-            return ResponseEntity.ok(filterUserService.filterEmployeeByRemainBalance(intList));
+            return ResponseEntity.ok(filterUserService.convert_user_userdto(filterUserService.filterEmployeeByRemainBalance(intList)));
         }
         return null;
     }
@@ -138,7 +134,6 @@ public class UserController {
     public ResponseEntity<ExcelResponseMessage> uploadFile(@RequestBody List<User> Employees_list) {
 
         String message = "";
-
 
 
         try {
@@ -152,7 +147,6 @@ public class UserController {
 
 
     }
-
 
 
     // add employee apdo

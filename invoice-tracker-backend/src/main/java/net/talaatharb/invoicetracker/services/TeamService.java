@@ -80,4 +80,32 @@ public class TeamService {
     }
 
 
+//    public Object get_all_users(String team_name) {
+//        Team team = find_teams(team_name);
+//        List<User> userList = team.getEmployees();
+//        List<U>
+//    }
+//
+//
+//
+//    private  Team find_teams(String income_team_name)
+//    {
+//        List<Team> teams = teamRepository.findAll();
+//
+//
+//        List<Team> teams2 = new ArrayList<>();
+//        if(!teams.isEmpty()){
+//            for(int i=0;i< teams.size();i++)
+//            {
+//                if(teams.get(i).getName().equals(income_team_name))
+//                {
+//                    teams2.add(teams.get(i));
+//                }
+//            }
+//
+//
+//        }
+//
+//        return  teams2.get(0);
+//    }
 }
