@@ -9,7 +9,6 @@ import {
 } from "@tanstack/react-table";
 import { CheckIcon, XIcon } from "@heroicons/react/solid";
 import ColumnSelect from "./ColumnSelector";
-import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import formatDate from "../../utils/FormatDate";
 
