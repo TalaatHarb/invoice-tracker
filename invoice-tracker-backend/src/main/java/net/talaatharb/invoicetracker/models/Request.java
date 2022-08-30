@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -59,6 +60,7 @@ public class Request {
     private List<AbsenceAttachments> absenceAttachments;
 
     //NEW
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id_FK", referencedColumnName = "id")
     private User user;
