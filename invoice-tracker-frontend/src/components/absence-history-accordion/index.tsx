@@ -13,29 +13,36 @@ const AbsenceHistoryAccordionList = ({ id }: accordionProps) => {
   const { isAuthenticated } = useAppSelector(
     (state) => state.AuthenticationSlice
   )
+  
+  const config = {
+    headers: { Authorization: `Bearer ${isAuthenticated}` },
+  }
 
   const [absences, setAbsences] = useState([])
-  let tempData: []
-
+  
   const fetchAbsences = async () => {
-    const config = {
-      headers: { Authorization: `Bearer ${isAuthenticated}` },
-    }
-
-    // TODO: Change the empId to be generic
     let res = await axios.get(
       `${CONSTANTS.BACKEND_URL}/api/user/absence/request?empId=${id}`,
       config
     )
 
     setAbsences(res.data)
-    tempData = res.data
   }
 
   useEffect(() => {
     fetchAbsences()
   }, [])
 
+
+  const save_requests = async (prop : any) => {
+    const config = {
+      headers: { Authorization: `Bearer ${isAuthenticated}` },
+    };
+    
+    let res = await axios.post(`${CONSTANTS.BACKEND_URL}/api/user/absence/update-requests`, absences, config);
+    setAbsences(absences);
+  }
+  
   return (
     <>
       <h2>Absence History</h2>
@@ -61,7 +68,7 @@ const AbsenceHistoryAccordionList = ({ id }: accordionProps) => {
         >
           Cancel
         </button>
-        <button className='inline-flex items-center px-3 py-1.5  bg-blueCegedim hover:opacity-75 text-white text-sm font-medium rounded-md mx-2'>
+        <button onClick = {save_requests} className='inline-flex items-center px-3 py-1.5  bg-blueCegedim hover:opacity-75 text-white text-sm font-medium rounded-md mx-2'>
           Save
         </button>
       </div>
