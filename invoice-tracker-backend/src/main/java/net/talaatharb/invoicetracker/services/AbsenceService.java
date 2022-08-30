@@ -58,17 +58,22 @@ public class AbsenceService {
 //    }
 
     public Long postRequest(Request request) {
-        User user = userRepository.findById(request.getRequestedBy()).get();
-        user.getRequests().add(request);
-        userRepository.save(user);
 
         if(requestTypeRepository.findByTypeName(request.getType()) == null){
             RequestType requestType = new RequestType(request.getType());
             requestTypeRepository.save(requestType);
         }
+
         RequestType requestType = requestTypeRepository.findByTypeName(request.getType());
-        requestType.getRequests().add(request);
-        requestTypeRepository.save(requestType);
+
+        request.setRequestType(requestType);
+
+        User user = userRepository.findById(request.getRequestedBy()).get();
+        request.setUser(user);
+        user.getRequests().add(request);
+        userRepository.save(user);
+
+
 //        userRepository.save(user);
         return requestRepository.count();
     }

@@ -21,7 +21,7 @@ public class RequestType {
 
 	private String typeName;
 
-		@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	//NEW
 //	@JsonIgnore
 //	@OneToMany(mappedBy = "requestType")
