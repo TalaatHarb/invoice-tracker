@@ -54,8 +54,8 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
       },
     }),
     columnHelper.accessor((row) => row.id, {
-      id: "Id",
-      header: "Id",
+      id: "Employee Id",
+      header: "Employee Id",
       cell: (info) => info.getValue(),
     }),
     columnHelper.accessor((row) => row.nationalId, {
@@ -127,24 +127,26 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
       id: "Teams",
       header: "Team Name",
       cell: (info) =>
-        (info.getValue() && info.getValue().length)
-          ? info.getValue().map((team) => {
-              return (
-                <Link
-                  className="text-black no-underline block hover:underline"
-                  key={team.id + team.name}
-                  to={"/team/" + team.id}
-                >
-                  {team.name}
-                </Link>
-              );
-            })
-          : <Link
-          className="text-black no-underline block hover:underline"
-          to={"/team/"+1}
-        >
-          <p>Team A</p>
-        </Link>
+        info.getValue() && info.getValue().length ? (
+          info.getValue().map((team) => {
+            return (
+              <Link
+                className="text-black no-underline block hover:underline"
+                key={team.id + team.name}
+                to={"/team/" + team.id}
+              >
+                {team.name}
+              </Link>
+            );
+          })
+        ) : (
+          <Link
+            className="text-black no-underline block hover:underline"
+            to={"/team/" + 1}
+          >
+            <p>Team A</p>
+          </Link>
+        ),
     }),
     columnHelper.accessor((row) => row.fullTime, {
       id: "Fulltime",
@@ -155,7 +157,7 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
       id: "View employees",
       cell: ({ row }) => {
         return (
-          <Link to={"/hr/employee/" + row.getValue("Id")}>
+          <Link to={"/hr/employee/" + row.getValue("employeeId")}>
             <button
               className="rounded-full text-white text-sm bg-blueCegedim px-4 py-1 "
               value={row.getValue("Id")}
@@ -194,10 +196,10 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
     const id: number = event.target.value;
   };
   return (
-    <div className="w-10/12 flex flex-col py-10">
+    <div className="w-10/12 flex flex-col py-10" id="tableContainer">
       <ColumnSelect table={table} />
       <div className="overflow-x-auto shadow-lg rounded-lg">
-        <table className=" text-black">
+        <table className=" text-black" id="table">
           <thead className="bg-blueCegedim text-lg whitespace-nowrap text-left">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
@@ -216,9 +218,13 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
               </tr>
             ))}
           </thead>
-          <tbody className="text-base text-left divide-y divide-lightGrey">
+          <tbody
+            className="text-base text-left divide-y divide-lightGrey"
+            id="tableBody"
+          >
             {table.getRowModel().rows.map((row, idx) => (
               <tr
+                id={row.getValue("employeeId")}
                 key={row.id}
                 className={idx % 2 == 0 ? "bg-lightGrey bg-opacity-30" : ""}
               >
@@ -237,8 +243,9 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
           </tbody>
         </table>
       </div>
-      <div className="flex items-center gap-2 mt-4">
+      <div className="flex items-center gap-2 mt-4" id="pagination">
         <button
+          id="firstPage"
           className=" rounded px-1 bg-blueCegedim border-none shadow-lg"
           onClick={() => table.setPageIndex(0)}
           disabled={!table.getCanPreviousPage()}
@@ -246,6 +253,7 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
           {"<<"}
         </button>
         <button
+          id="previousPage"
           className="border-none shadow-lg rounded px-2 bg-blueCegedim"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
@@ -253,6 +261,7 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
           {"<"}
         </button>
         <button
+          id="nextPage"
           className="border-none shadow-lg rounded px-2 bg-blueCegedim"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
@@ -260,6 +269,7 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
           {">"}
         </button>
         <button
+          id="lastPage"
           className=" rounded px-1 bg-blueCegedim border-none shadow-lg"
           onClick={() => table.setPageIndex(table.getPageCount() - 1)}
           disabled={!table.getCanNextPage()}
@@ -276,6 +286,7 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
         <span className="flex items-center gap-1">
           | Go to page:
           <input
+            id="goToPage"
             type="number"
             defaultValue={table.getState().pagination.pageIndex + 1}
             onChange={(e) => {
@@ -286,6 +297,7 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
           />
         </span>
         <select
+          id="pageSizeSelect"
           className="border-2 border-blueCegedim rounded shadow-lg outline-none"
           value={table.getState().pagination.pageSize}
           onChange={(e) => {
@@ -293,7 +305,7 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
           }}
         >
           {[10, 20, 30, 40, 50].map((pageSize) => (
-            <option key={pageSize} value={pageSize}>
+            <option key={pageSize} value={pageSize} id={"pageSize" + pageSize}>
               Show {pageSize}
             </option>
           ))}
