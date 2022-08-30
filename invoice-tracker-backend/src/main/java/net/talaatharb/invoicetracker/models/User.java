@@ -117,6 +117,12 @@ public class User {
 			cascade= CascadeType.ALL,
 			orphanRemoval = true
 	)
+	//NEW
+//	@JsonIgnore
+//	@OneToMany(mappedBy = "user")
+	//NEW 2
+//	@OneToMany(targetEntity = Request.class, cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+	@JoinColumn(name = "user_id_fk", referencedColumnName = "id")
 	private List<Request> requests = new ArrayList<>();
 
 

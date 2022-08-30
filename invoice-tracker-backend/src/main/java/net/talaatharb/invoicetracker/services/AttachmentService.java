@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import net.talaatharb.invoicetracker.utils.FileWithType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -23,6 +22,7 @@ import net.talaatharb.invoicetracker.models.AbsenceAttachments;
 import net.talaatharb.invoicetracker.models.Request;
 import net.talaatharb.invoicetracker.repositories.AttachmentRepository;
 import net.talaatharb.invoicetracker.repositories.RequestRepository;
+import net.talaatharb.invoicetracker.utils.FileWithType;
 
 @Service
 public class AttachmentService {

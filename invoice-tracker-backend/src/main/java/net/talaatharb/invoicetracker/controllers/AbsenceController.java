@@ -41,7 +41,7 @@ public class AbsenceController {
             produces = {
                     MediaType.APPLICATION_JSON_VALUE,
                     MediaType.APPLICATION_XML_VALUE })
-    public ResponseEntity<Integer> postRequest(@RequestBody Request request){
+    public ResponseEntity<Long> postRequest(@RequestBody Request request){
 
         return new ResponseEntity<>(absenceService.postRequest(request), HttpStatus.OK);
     }

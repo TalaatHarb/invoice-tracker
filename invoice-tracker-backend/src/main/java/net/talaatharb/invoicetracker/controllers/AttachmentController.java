@@ -2,7 +2,6 @@ package net.talaatharb.invoicetracker.controllers;
 
 import javax.servlet.ServletContext;
 
-import net.talaatharb.invoicetracker.utils.FileWithType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import net.talaatharb.invoicetracker.services.AttachmentService;
+import net.talaatharb.invoicetracker.utils.FileWithType;
 
 @RestController
 @RequestMapping("/api/attachments")

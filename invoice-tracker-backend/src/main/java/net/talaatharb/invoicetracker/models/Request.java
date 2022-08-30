@@ -58,6 +58,16 @@ public class Request {
     @OneToMany(mappedBy = "request")
     private List<AbsenceAttachments> absenceAttachments;
 
+    //NEW
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "user_id_FK", referencedColumnName = "id")
+//    private User user;
+
+    //NEW
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "request_typeId_FK", referencedColumnName = "id")
+//    private RequestType requestType;
+
 //    @NotBlank
     private int numberOfDays;
 
@@ -74,4 +84,16 @@ public class Request {
         this.type = type;
         this.numberOfDays = numberOfDays;
     }
+
+    //NEW
+//    public void assignUserToRequest(User user) {
+//        this.user = user;
+//    }
+
+    //NEW
+
+//    public void assignRequestTypeToRequest(RequestType requestType) {
+//        this.requestType = requestType;
+//    }
+
 }

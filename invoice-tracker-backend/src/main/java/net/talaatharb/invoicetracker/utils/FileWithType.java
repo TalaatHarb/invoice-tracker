@@ -1,10 +1,10 @@
 package net.talaatharb.invoicetracker.utils;
 
+import org.springframework.core.io.Resource;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.core.io.Resource;
 
 @Data
 @NoArgsConstructor
