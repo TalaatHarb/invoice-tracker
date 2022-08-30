@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 
 import net.talaatharb.invoicetracker.models.*;
 import net.talaatharb.invoicetracker.services.AbsenceService;
+import net.talaatharb.invoicetracker.services.FilterUserServiceImp;
 import net.talaatharb.invoicetracker.services.TeamService;
 import net.talaatharb.invoicetracker.services.UserService;
 
@@ -49,6 +50,8 @@ public class InvoiceTrackerBackendApplication {
 	@Autowired
 	private TeamService teamService;
 
+	@Autowired
+	private FilterUserServiceImp filterUserServiceImp;
 
 
 	public static void main(String[] args) {
@@ -133,6 +136,8 @@ public class InvoiceTrackerBackendApplication {
 			teamService.SaveTeam(team1);
 			teamService.SaveTeam(team2);
 			teamService.SaveTeam(team3);
+
+			filterUserServiceImp.mockData();
 		};
 
 

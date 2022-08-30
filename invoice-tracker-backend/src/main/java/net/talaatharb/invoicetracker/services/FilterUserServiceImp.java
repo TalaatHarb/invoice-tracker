@@ -18,7 +18,7 @@ import net.talaatharb.invoicetracker.repositories.UserRepository;
 @Service
 public class FilterUserServiceImp implements FilterUserService{
 
-    public static  int count=0;
+
     @Autowired
     FilterUserRepository filterUserRepository;
 
@@ -37,99 +37,97 @@ public class FilterUserServiceImp implements FilterUserService{
 
     @Override
     public List<User> filterEmployeeByName(List<String> names) {
-        if(count==0) mockData();
+
         List<User>userList=filterUserRepository.filterEmployeesByName(names);
-        count++;
+
         return userList;
     }
 
     @Override
     public List<User> filterEmployeeByArabicName(List<String> arabicName) {
-        if(count==0) mockData();
+
         List<User>userList=filterUserRepository.filterEmployeesByArabicName(arabicName);
-        count++;
+
         return userList;
     }
 
     @Override
     public List<User> filterEmployeeByJobTitle(List<String> jobTitle) {
-        if(count==0) mockData();
+
         List<User>userList=filterUserRepository.filterEmployeesByJobTitle(jobTitle);
-        count++;
+
         return userList;
     }
 
     @Override
     public List<User> filterEmployeeByTeamName(List<String> teamName) {
-        if(count==0) mockData();
+
         List<User>userList=filterUserRepository.filterEmployeesByTeamName(teamName);
-        count++;
+
         return userList;
     }
 
 
     public List<User> filterEmployeeById(List<Long> id) {
-        if(count==0) mockData();
+
         List<User>userList=filterUserRepository.filterEmployeesById(id);
-        count++;
+
         return userList;
     }
 
     @Override
     public List<User> filterEmployeeByBalance(List<Integer> balance) {
-        if(count==0) mockData();
+
         List<User>userList=filterUserRepository.filterEmployeesByBalance(balance);
-        count++;
+
         return userList;
     }
 
     @Override
     public List<User> filterEmployeeByRemainBalance(List<Integer> remainBalance) {
-        if(count==0) mockData();
+
         List<User>userList=filterUserRepository.filterEmployeesByRemainBalance(remainBalance);
-        count++;
+
         return userList;
     }
 
     @Override
     public List<User> filterEmployeeByJoinDate(Date JoinDate) {
-        if(count==0) mockData();
+
         List<User>userList=filterUserRepository.filterEmployeesByJoinDate(JoinDate);
-        count++;
+
         return userList;
     }
 
     @Override
     public List<User> filterEmployeeByEndDate(Date endDate) {
-        if(count==0) mockData();
+
         List<User>userList=filterUserRepository.filterEmployeesByEndDate(endDate);
-        count++;
+
         return userList;
     }
 
     @Override
     public List<User> filterEmployeeByBillable(boolean billable) {
-        if(count==0) mockData();
+
         List<User>userList=filterUserRepository.filterEmployeesByBillable(billable);
-        count++;
+
         return userList;
     }
 
     @Override
     public List<User> filterEmployeeByISDisabled(boolean isDisabled) {
-        if(count==0) mockData();
-        mockData();
+
         List<User>userList=filterUserRepository.filterEmployeesByIsDisabled(isDisabled);
-        count++;
+
         return userList;
     }
 
     @Override
     public List<User> filterEmployeeByISFullTime(boolean isFullTime) {
-        if(count==0) mockData();
 
         List<User>userList=filterUserRepository.filterEmployeesByIsFullTime(isFullTime);
-        count++;
+
         return userList;
     }
 
@@ -176,8 +174,6 @@ public class FilterUserServiceImp implements FilterUserService{
     @Override
     public List<User> FindUsersByTeamsName(List<String> teams_name) {
 
-        if(count==0)
-        mockData();
 
         List<User> users = userRepository.findAll();
         List<User> users2= new ArrayList<>();
@@ -192,7 +188,7 @@ public class FilterUserServiceImp implements FilterUserService{
                }
         }
 
-         count++;
+
         return  users2;
 
     }
