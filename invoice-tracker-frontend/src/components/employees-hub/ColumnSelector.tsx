@@ -52,6 +52,7 @@ const ColumnSelector = ({ table }: selectorProps) => {
                       <div key={column.id} className="px-1">
                         <label>
                           <input
+                            id={column.id}
                             className="mr-2"
                             {...{
                               type: "checkbox",

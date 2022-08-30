@@ -18,7 +18,6 @@ type employeeTableProps = {
 };
 
 const EmployeeTab = ({ employees }: employeeTableProps) => {
-  const navigate = useNavigate();
   const data = employees;
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] = React.useState({});
@@ -127,24 +126,26 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
       id: "Teams",
       header: "Team Name",
       cell: (info) =>
-        (info.getValue() && info.getValue().length)
-          ? info.getValue().map((team) => {
-              return (
-                <Link
-                  className="text-black no-underline block hover:underline"
-                  key={team.id + team.name}
-                  to={"/team/" + team.id}
-                >
-                  {team.name}
-                </Link>
-              );
-            })
-          : <Link
-          className="text-black no-underline block hover:underline"
-          to={"/team/"+1}
-        >
-          <p>Team A</p>
-        </Link>
+        info.getValue() && info.getValue().length ? (
+          info.getValue().map((team) => {
+            return (
+              <Link
+                className="text-black no-underline block hover:underline"
+                key={team.id + team.name}
+                to={"/team/" + team.id}
+              >
+                {team.name}
+              </Link>
+            );
+          })
+        ) : (
+          <Link
+            className="text-black no-underline block hover:underline"
+            to={"/team/" + 1}
+          >
+            <p>Team A</p>
+          </Link>
+        ),
     }),
     columnHelper.accessor((row) => row.fullTime, {
       id: "Fulltime",
