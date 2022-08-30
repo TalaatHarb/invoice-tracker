@@ -59,13 +59,6 @@ public class FilterUserServiceImp implements FilterUserService{
         return userList;
     }
 
-    @Override
-    public List<User> filterEmployeeByTeamName(List<String> teamName) {
-
-        List<User>userList=filterUserRepository.filterEmployeesByTeamName(teamName);
-
-        return userList;
-    }
 
 
     public List<User> filterEmployeeById(List<Long> id) {
