@@ -7,7 +7,7 @@ function AbsenceHistory() {
     <>
       <Navbar />
       <div className="mx-56 leading-tight text-2xl mt-0 mb-2">
-        <AbsenceHistoryAccordionList />
+        {/* <AbsenceHistoryAccordionList /> */}
       </div>
     </>
   );
