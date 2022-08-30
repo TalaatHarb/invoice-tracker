@@ -232,6 +232,7 @@
 						<exclude>net/talaatharb/**/*Application.*</exclude>
 						<exclude>net/talaatharb/**/*DTO.*</exclude>
 						<exclude>**/config/*</exclude>
+						<exclude>**/utils/*</exclude>
 					</excludes>
 				</configuration>
 				<executions>
