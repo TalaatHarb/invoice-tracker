@@ -45,6 +45,7 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
         })
         .then((response) => {
           setEmployee(response.data)
+          setEditEmployee(response.data)
         })
     }
     getData()
@@ -62,23 +63,23 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
     let tempEmployee = { ...editEmployee }
     let newData = {}
     switch (targetId) {
-      case 'name':
+      case 'nameEdit':
         newData = { englishName: targetValue }
         break
-      case 'jobTitle':
+      case 'jobTitleEdit':
         newData = { jobTitle: targetValue }
         break
-      case 'mobileNumber':
+      case 'mobileNumberEdit':
         newData = { mobileNumber: targetValue }
         break
-      case 'email':
+      case 'emailEdit':
         newData = { email: targetValue }
         break
-      case 'joiningDate':
+      case 'joiningDateEdit':
         newData = { joiningDate: new Date(targetValue) }
         break
-      case 'resigned':
-        newData = { endDate: targetValue }
+      case 'resignedEdit':
+        newData = { endDate: targetValue, resigned: true }
         break
     }
     tempEmployee = { ...tempEmployee, ...newData }
@@ -135,26 +136,26 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
             {edit ? (
               <input
                 className=' focus:border-blueCegedim focus:border-2 outline-none  text-lg mb-5 shadow-lg px-5 py-2 text-center'
-                id='name'
+                id='nameEdit'
                 onChange={employeeChangeHandler}
                 value={editEmployee.englishName}
                 placeholder={employee.englishName}
               />
             ) : (
-              <p className='mb-5 bg-white shadow-lg px-5 py-2'>
+              <p id='name' className='mb-5 bg-white shadow-lg px-5 py-2'>
                 {employee.englishName}
               </p>
             )}
             {edit ? (
               <input
                 className=' focus:border-blueCegedim focus:border-2 outline-none text-lg shadow-lg px-5 py-2 text-center'
-                id='jobTitle'
+                id='jobTitleEdit'
                 onChange={employeeChangeHandler}
                 value={editEmployee.jobTitle}
                 placeholder={employee.jobTitle}
               />
             ) : (
-              <p className=' bg-white shadow-lg px-5 py-2'>
+              <p id='jobTitle' className=' bg-white shadow-lg px-5 py-2'>
                 {employee.jobTitle}
               </p>
             )}
@@ -167,14 +168,17 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
           </label>
           {edit ? (
             <input
-              id='mobileNumber'
+              id='mobileNumberEdit'
               className=' focus:border-blueCegedim focus:border-2 outline-none text-lg ml-12 shadow-lg px-5 py-2 text-center w-full'
               onChange={employeeChangeHandler}
               value={editEmployee.mobileNumber}
               placeholder={employee.mobileNumber}
             />
           ) : (
-            <p className='bg-white shadow-lg ml-12 px-5 py-2 w-full'>
+            <p
+              id='mobileNumber'
+              className='bg-white shadow-lg ml-12 px-5 py-2 w-full'
+            >
               {employee.mobileNumber}
             </p>
           )}
@@ -184,14 +188,14 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
           <label className='whitespace-nowrap drop-shadow-md'>Email: </label>
           {edit ? (
             <input
-              id='email'
+              id='emailEdit'
               className=' focus:border-blueCegedim focus:border-2 outline-none text-lg  shadow-lg  ml-28 px-5 py-2 text-center w-full'
               onChange={employeeChangeHandler}
               value={editEmployee.email}
               placeholder={employee.email}
             />
           ) : (
-            <p className='bg-white shadow-lg ml-28 px-5 py-2 w-full'>
+            <p id='email' className='bg-white shadow-lg ml-28 px-5 py-2 w-full'>
               {employee.email}
             </p>
           )}
@@ -204,12 +208,15 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
           {edit ? (
             <input
               className=' focus:border-blueCegedim focus:border-2 outline-none text-lg shadow-lg  ml-20 px-5 py-2 text-center w-full'
-              id='joiningDate'
+              id='joiningDateEdit'
               onChange={employeeChangeHandler}
               placeholder='Please enter data in the dd/mm/yyyy format'
             />
           ) : (
-            <p className='bg-white shadow-lg ml-20 px-5 py-2 w-full'>
+            <p
+              id='joiningDate'
+              className='bg-white shadow-lg ml-20 px-5 py-2 w-full'
+            >
               {formatDate(employee.joiningDate)}
             </p>
           )}
@@ -220,6 +227,7 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
             <>
               <label className='whitespace-nowrap drop-shadow-md'>
                 <input
+                  id='resignedCheckboxEdit'
                   className='mr-1'
                   type='checkbox'
                   checked={resignedActive}
@@ -228,7 +236,7 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
                 Is resigned
               </label>
               <input
-                id='resigned'
+                id='resignedEdit'
                 className=' focus:border-blueCegedim focus:border-2 outline-none text-lg shadow-lg  ml-20 px-5 py-2 text-center w-full'
                 placeholder='Please enter data in the dd/mm/yyyy format'
                 disabled={!resignedActive}
@@ -239,13 +247,17 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
             <>
               <label className='whitespace-nowrap drop-shadow-md'>
                 <input
+                  id='resignedCheckbox'
                   className='mr-1'
                   type='checkbox'
                   checked={employee.resigned}
                 />
                 Is resigned
               </label>
-              <p className='bg-white shadow-lg ml-20 px-5 py-2 w-full '>
+              <p
+                id='resigned'
+                className='bg-white shadow-lg ml-20 px-5 py-2 w-full '
+              >
                 {employee.resigned
                   ? formatDate(employee.endDate)
                   : 'not resigned'}
@@ -334,6 +346,3 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
 }
 
 export default EmployeeDetails
-function response(response: any) {
-  throw new Error('Function not implemented.')
-}

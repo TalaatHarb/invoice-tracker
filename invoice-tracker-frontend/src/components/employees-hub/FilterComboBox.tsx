@@ -3,7 +3,7 @@ import { Combobox, Transition } from "@headlessui/react";
 import { CheckIcon, SelectorIcon } from "@heroicons/react/solid";
 
 const fields = [
-  { id: "id", name: "Id" },
+  { id: "id", name: "Employee Id" },
   { id: "englishName", name: "English Name" },
   { id: "arabicName", name: "Arabic name" },
   { id: "jobTitle", name: "Job title" },

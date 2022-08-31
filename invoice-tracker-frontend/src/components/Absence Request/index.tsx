@@ -149,6 +149,7 @@ const RequestForm = () => {
           <label className='block mb-2 mx-auto md:w-6/12 text-lg font-medium text-black'>
             Absenece Type:
             <select
+              id='selectAbsenceTypeDropDown'
               value={request.type}
               name='type'
               onChange={handleChange}
@@ -163,6 +164,7 @@ const RequestForm = () => {
           <label className='float-left mb-2 mx-auto text-lg font-medium text-black'>
             Start Date:
             <input
+              id='selectStartDateInput'
               type='date'
               name='startDate'
               min={new Date().toISOString().slice(0, 10)}
@@ -173,9 +175,9 @@ const RequestForm = () => {
               className='inline-block p-2 mb-6 ml-2 text-sm text-darkGrey bg-white rounded-lg border border-darkGrey focus:blueCegedim focus:darkBlue dark:darkGrey dark:placeholder-yellowDarkCegedim  dark:focus:darkBlue dark:focus:blueCegedim'
             />
           </label>
-
           <label>
             <select
+              id='selectIsFullDayDropDown'
               value={request.fullDay ? 'full day' : 'half day'}
               name='fullDay'
               onChange={handleChange}
@@ -189,6 +191,7 @@ const RequestForm = () => {
           <label className=' mb-2 text-lg font-medium text-black '>
             End Date:
             <input
+              id='selectEndDateInput'
               type='date'
               name='endDate'
               min={request.startDate}
@@ -203,6 +206,7 @@ const RequestForm = () => {
           <label className='block mb-2 text-lg font-medium text-black '>
             Notes:
             <textarea
+              id='addCommentInput'
               className='block p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500'
               value={request.comment}
               name='comment'
@@ -211,10 +215,15 @@ const RequestForm = () => {
               }
             />
           </label>
-
-          <input type='file' multiple onChange={handleFileChange} />
+          <input
+            id='attachFilesInput'
+            type='file'
+            multiple
+            onChange={handleFileChange}
+          />
 
           <input
+            id='submitAbsenceRequestForm'
             className='mt-5 cursor-pointer float-right text-white bg-blueCegedim hover:bg-darkGrey focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'
             type='submit'
             value='Submit'

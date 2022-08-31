@@ -3,13 +3,9 @@ package net.talaatharb.invoicetracker.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,7 +23,9 @@ public class RequestType {
 
 	private String typeName;
 
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@JoinColumn(name = "request_typeId_fk", referencedColumnName = "id")
 	private List<Request> requests = new ArrayList<>();
 
 	public RequestType(String typeName, List<Request> requests) {
@@ -35,4 +33,7 @@ public class RequestType {
 		this.requests = requests;
 	}
 
+	public RequestType(String typeName){
+		this.typeName = typeName;
+	}
 }
