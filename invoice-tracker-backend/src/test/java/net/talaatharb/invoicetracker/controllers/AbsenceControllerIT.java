@@ -4,12 +4,16 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.test.context.support.WithUserDetails;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -23,8 +27,11 @@ class AbsenceControllerIT extends AbstractControllerIT {
 	@Autowired
 	private UserDetailsService userDetailsService;
 
+	@Autowired
+	private WebApplicationContext webApplicationContext;
+
 	@Test
-	@Disabled
+//	@Disabled
 	@WithUserDetails(value = InvoiceTrackerBackendApplication.EMAIL_USER)
 	void testPostRequest() throws JsonProcessingException, Exception {
 		Request request = new Request();
@@ -46,4 +53,24 @@ class AbsenceControllerIT extends AbstractControllerIT {
 		mvc.perform(get("/api/user/absence/request").param("empId", user.getId()+"")).andExpect(status().isOk());
 	}
 
+	@Test
+//	@Disabled
+	@WithUserDetails(value = InvoiceTrackerBackendApplication.EMAIL_USER)
+	void testPostAttachments() throws JsonProcessingException, Exception {
+
+		MockMultipartFile file
+				= new MockMultipartFile(
+				"attachments",
+				"hello.png",
+				MediaType.IMAGE_PNG_VALUE,
+				"Hello, World!".getBytes()
+		);
+		UserDetailsImpl user = (UserDetailsImpl)userDetailsService.loadUserByUsername(InvoiceTrackerBackendApplication.EMAIL_USER);
+
+
+		MockMvc mockMvc
+				= MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+		mockMvc.perform(MockMvcRequestBuilders.multipart("/api/attachments/upload?reqId=1").file(file))
+				.andExpect(status().isOk());
+	}
 }
