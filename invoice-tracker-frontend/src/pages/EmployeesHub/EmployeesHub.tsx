@@ -41,8 +41,7 @@ const EmployeesHub = () => {
     },
   ]);
   const [currentField, setCurrentField] = useState<string>("id");
-  const [employeeFilter, setEmployeeFilter] = useState<employeeFilterType>({
-  });
+  const [employeeFilter, setEmployeeFilter] = useState<employeeFilterType>({});
 
   const filterApplyClearhandler = async (event: any) => {
     let value: any = "";
@@ -185,7 +184,7 @@ const EmployeesHub = () => {
           <h1 className=" drop-shadow-xl ml-36 my-12 text-5xl text-blueCegedim font-bold">
             Cegedim Members
           </h1>
-          <PopUpStart/>
+          <PopUpStart />
         </div>
         <div className="flex flex-row justify-start w-full  ml-96">
           <div className="mx-12 my-10">
