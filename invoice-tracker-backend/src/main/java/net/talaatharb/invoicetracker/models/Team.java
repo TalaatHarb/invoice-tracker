@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,6 +26,7 @@ public class Team {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="company_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
     private Company company;
 
     @ManyToMany(fetch = FetchType.LAZY)
