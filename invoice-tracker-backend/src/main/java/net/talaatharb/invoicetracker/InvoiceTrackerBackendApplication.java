@@ -25,7 +25,7 @@ public class InvoiceTrackerBackendApplication {
 	public static final String USERNAME = "amr0";
 	private static final String EMAIL_ADMIN_USER = "boogado2@yahoo.com";
 	private static final String EMAIL_EMPLOYEE = "boogado@yahoo.com";
-	private static final String EMAIL_HR = "boogado1@yahoo.com";
+	public static final String EMAIL_HR = "boogado1@yahoo.com";
 	private static final String EMAIL_HR_2 = "boogado3@yahoo.com";
 	public static final String EMAIL_USER = "boogado4@yahoo.com";
 
@@ -106,10 +106,11 @@ public class InvoiceTrackerBackendApplication {
 
 			// SAMIR
 			for(int i = 1; i <= 7; ++i) {
-                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long) i, "sick leave", true, "Accepted", "", new ArrayList<>(), 2));
-                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "sick leave", true, "Pending", "Hi, This is a comment", new ArrayList<>(), 2));
-                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "sick leave", true, "Rejected", "Hi again, this is the second comment", new ArrayList<>(), 2));
+                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long) i, "sick leave", true, "Pending", "", new ArrayList<>(), 1));
+                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "sick leave", true, "Pending", "Hi, I have COVID and I need some rest", new ArrayList<>(), 1));
+                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "bereavement leave", true, "Pending", "Hi, I'm very tired today and I need some rest", new ArrayList<>(), 1));
             }
+
 			teamService.SaveTeam(new Team("IT",new Company("Cegedim","cegedim@gmail.com","Egypt,Cairo")));
 			teamService.SaveTeam(new Team("DevOps",new Company("Cegedim","cegedim@gmail.com","Egypt,Cairo")));
 			teamService.SaveTeam(new Team("Software Engineer",new Company("Cegedim","cegedim@gmail.com","Egypt,Cairo")));

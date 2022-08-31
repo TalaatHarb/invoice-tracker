@@ -16,7 +16,6 @@ import net.talaatharb.invoicetracker.repositories.UserRepository;
 @Service
 @RequiredArgsConstructor
 public class AbsenceService {
-    private final RequestRepository requestRepository;
 
     private final UserRepository userRepository;
 
@@ -50,7 +49,7 @@ public class AbsenceService {
         if(absences.size() == 0) return absences;
         User user = userRepository.findById(absences.get(0).getRequestedBy()).get();
         user.setRequests(absences);
-        userRepository.save(user);
+        userRepository.saveAndFlush(user);
         return absences;
     }
 
