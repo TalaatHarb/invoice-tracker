@@ -3,12 +3,10 @@ package net.talaatharb.invoicetracker.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.talaatharb.invoicetracker.dtos.AbsencesListDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -66,5 +64,4 @@ public class AbsenceController {
 	public ResponseEntity<Request> UpdateEmployeeRequest(@RequestBody Request req, @RequestParam int request_id) {
 		return new ResponseEntity<>(req, HttpStatus.OK);
 	}
-
 }
