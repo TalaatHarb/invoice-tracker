@@ -1,4 +1,4 @@
-package net.talaatharb.invoicetracker.utils;
+package net.talaatharb.invoicetracker.dtos;
 
 import org.springframework.core.io.Resource;
 

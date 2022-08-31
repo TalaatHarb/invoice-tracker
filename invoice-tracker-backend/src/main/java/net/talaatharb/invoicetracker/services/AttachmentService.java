@@ -17,12 +17,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import net.talaatharb.invoicetracker.dtos.FileWithType;
 import net.talaatharb.invoicetracker.exceptions.UserException;
 import net.talaatharb.invoicetracker.models.AbsenceAttachments;
 import net.talaatharb.invoicetracker.models.Request;
 import net.talaatharb.invoicetracker.repositories.AttachmentRepository;
 import net.talaatharb.invoicetracker.repositories.RequestRepository;
-import net.talaatharb.invoicetracker.utils.FileWithType;
 
 @Service
 public class AttachmentService {

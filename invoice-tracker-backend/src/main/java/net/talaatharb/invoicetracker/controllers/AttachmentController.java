@@ -11,8 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import net.talaatharb.invoicetracker.dtos.FileWithType;
 import net.talaatharb.invoicetracker.services.AttachmentService;
-import net.talaatharb.invoicetracker.utils.FileWithType;
 
 @RestController
 @RequestMapping("/api/attachments")
