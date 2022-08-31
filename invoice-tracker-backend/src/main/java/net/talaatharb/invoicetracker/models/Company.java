@@ -5,6 +5,9 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +28,7 @@ public class Company {
 
     private String address;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "company")
     private List<Team> teams;
 

@@ -32,7 +32,7 @@ public class InvoiceTrackerBackendApplication {
 	private static final String EMAIL_HR = "boogado1@yahoo.com";
 	private static final String EMAIL_HR_2 = "boogado3@yahoo.com";
 	public static final String EMAIL_USER = "boogado4@yahoo.com";
-
+	public static final String EMAIL_USER_MO= "esmailmostafa295@gmail.com";
 	private static final String EMAIL_EMPLOYEE_2 = "boogado5@yahoo.com";
 	private static final String EMAIL_EMPLOYEE_3 = "boogado6@yahoo.com";
 
@@ -79,7 +79,9 @@ public class InvoiceTrackerBackendApplication {
 			Date edate2 = formatter.parse(endDate2);
 
 
-			userService.saveUser(new User(EMAIL_USER, PASS_USER,"124329374633","Moustafa","مصطفى","Menofia,Egypt","المنوفية،مصر","Developer",21,21,jdate,edate,"0122303432","amr0"));
+			userService.saveUser(new User(EMAIL_USER, PASS_USER,"124329374633","Mohamed Esmail","محمد اسماعيل","Qena,Egypt","قنا،مصر","Developer",21,21,jdate,edate,"01223043432","amr0"));
+			userService.saveUser(new User(EMAIL_USER_MO, PASS_USER,"1243294474633","Moustafa","مصطفى","Menofia,Egypt","المنوفية،مصر","Developer",21,21,jdate,edate,"0122303432","som3aa"));
+
 			userService.saveUser(new User(EMAIL_EMPLOYEE, PASS_USER,"124329374621","ِAbdelrahman","عبدالرحمن","Alex,Egypt","الاسكندرية،مصر","Developer",21,21,jdate,edate,"0122303432","Gado"));
 
 			userService.saveUser(new User(EMAIL_HR, PASS_USER,"Ahmed",true,"124329366621","Khaled","خالد","Cairo,Egypt","القاهرة،مصر","Developer",21,15,true,jdate2,edate2));
