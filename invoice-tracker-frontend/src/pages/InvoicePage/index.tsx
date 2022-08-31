@@ -33,10 +33,9 @@ const EmployeesHub = () => {
   ]);
 
   return (
-    <div>
+    <div className="max-w-screen">
       <Navbar />
-
-      <div className="flex flex-col min-h-screen  bg-lightGrey bg-opacity-20 items-center">
+      <div className="flex flex-col min-h-screen  bg-lightGrey bg-opacity-20 items-center overflow-hidden">
         <div className="flex flex-row justify-between w-full items-center">
           <h1 className=" drop-shadow-xl ml-36 my-12 text-5xl text-blueCegedim font-bold">
             Hello Manager

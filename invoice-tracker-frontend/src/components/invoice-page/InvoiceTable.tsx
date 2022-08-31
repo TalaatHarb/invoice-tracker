@@ -47,8 +47,8 @@ const EmployeeTab = ({ employees }: any) => {
       },
     }),
     columnHelper.accessor((row) => row.employeeId, {
-      id: "employeeId",
-      header: "employeeId",
+      id: "Employee Id",
+      header: "Employee Id",
       cell: (info) => info.getValue(),
     }),
 
@@ -123,13 +123,13 @@ const EmployeeTab = ({ employees }: any) => {
         ),
     }),
     columnHelper.accessor((row) => row.company, {
-      id: "company",
-      header: "company",
+      id: "Company",
+      header: "Company",
       cell: (info) => info.getValue(),
     }),
     columnHelper.accessor((row) => row.country, {
-      id: "country",
-      header: "country",
+      id: "Country",
+      header: "Country",
       cell: (info) => info.getValue(),
     }),
   ];
@@ -159,11 +159,11 @@ const EmployeeTab = ({ employees }: any) => {
     const id: number = event.target.value;
   };
   return (
-    <div className="w-10/12 flex flex-col py-10">
+    <div className="min-w-fit flex flex-col py-10">
       <ColumnSelect table={table} />
       <div className="overflow-x-auto shadow-lg rounded-lg">
         <table className=" text-black">
-          <thead className="bg-blueCegedim text-lg whitespace-nowrap text-left">
+          <thead className="bg-blueCegedim text-base whitespace-nowrap text-left">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
@@ -181,7 +181,7 @@ const EmployeeTab = ({ employees }: any) => {
               </tr>
             ))}
           </thead>
-          <tbody className="text-base text-left divide-y divide-lightGrey">
+          <tbody className="text-sm text-center divide-y divide-lightGrey">
             {table.getRowModel().rows.map((row, idx) => (
               <tr
                 key={row.id}
