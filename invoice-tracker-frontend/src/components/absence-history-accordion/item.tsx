@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useAppSelector } from '../../hooks/toolkit-types';
 import { AbsenseItem, Attatchment } from '../../models/absence-item'
 
 const AbsenceHistoryItem = (props: any): JSX.Element => {
@@ -20,6 +21,29 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
   const editItemClickHandler = () => {
     setShowModal(true);
   };
+
+  const { isAuthenticated } = useAppSelector(
+    (state) => state.AuthenticationSlice
+  )
+
+  const downloadFiles = async (downloadLink: string, attachmentName: string) => {
+    
+
+    const config = {
+      method: "POST",
+      headers: { Authorization: `Bearer ${isAuthenticated}` },
+    }
+
+    const response = await fetch(downloadLink, config)
+    const data = await response.blob();
+    const a = document.createElement("a");
+    const url = window.URL.createObjectURL(data);
+    a.href = url;
+    a.download = attachmentName;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
+
 
 
   return (
@@ -102,18 +126,17 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
             </p>
             <p>
               <strong id={"attachment" + props.record.id}>Attachment: </strong>{" "}
-              {props.record.absenceAttachments > 0 ? (
+              {props.record.absenceAttachments.length > 0 ? (
                 props.record.absenceAttachments.map((attachment: Attatchment) => {
-                  <a
-                  href={attachment.attachmentUrl}
+                  return ( <button
+                  key={1}
                   className="text-blueCegedim"
-                  target="_blank"
-                  rel="noreferrer"
+                  onClick={() => downloadFiles(attachment.attachmentUrl, attachment.attachmentName)}
                 >
                   {" "}
                   {attachment.attachmentName}
-                </a>
-                })
+                </button>
+                 ) })
               )
               : 
                 'No Attachment'
@@ -167,18 +190,19 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                       Absence Type:
                       <select id = {"edit-request-absence-type-select" + props.record.id}
                         name="type"
-                        value={props.record.type}
+                        value={tempData.type}
                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                          const text = e.target.value;
+                          const text = e.target.value.toLowerCase();
+                          console.log(text);
                           {/* Updating the temp Absence Type */}
                           setTempData({ ...tempData, type: text });
                         }}
                         className="p-2 mb-6 ml-2 md:w-50 text-md text-darkGrey bg-white rounded-lg border border-darkGrey focus:blueCegedim focus:darkBlue dark:darkGrey dark:placeholder-yellowDarkCegedim dark:text-white dark:focus:darkBlue dark:focus:blueCegedim"
                       >
-                        <option value="Emergency">Emergency</option>
-                        <option value="Sick Leave">Sick Leave</option>
-                        <option value="Maternity">
-                          Maternity
+                        <option value="annual leave">Annual Leave</option>
+                        <option value="sick leave">Sick Leave</option>
+                        <option value="bereavement leave">
+                          Bereavement Leave
                         </option>
                       </select>
                     </label>
@@ -197,7 +221,6 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                           setTempData({ ...tempData, startDate: text });
                         }}
                         min={new Date().toISOString().slice(0, 10)}
-                        value= {props.record.startDate}
                         required
                         className="inline-block p-2 mb-6 ml-2 text-sm text-darkGrey bg-white rounded-lg border border-darkGrey focus:blueCegedim focus:darkBlue dark:darkGrey dark:placeholder-yellowDarkCegedim dark:text-white dark:focus:darkBlue dark:focus:blueCegedim"
                       />
@@ -217,7 +240,6 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                           setTempData({ ...tempData, endDate: text });
                         }}
                         required
-                        value= {props.record.endDate}
                         className="inline-block p-2 mb-6 ml-2 text-sm text-darkGrey bg-white rounded-lg border border-darkGrey focus:blueCegedim focus:darkBlue dark:darkGrey dark:placeholder-yellowDarkCegedim dark:text-white dark:focus:darkBlue dark:focus:blueCegedim"
                       />
                     </label>
@@ -227,7 +249,7 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                     Day Type:
                     <select id = {"edit-request-day-type-select" + props.record.id}
                       name="fullDay"
-                      value={props.record.fullDay ? "full day" : "half day"}
+                      value={tempData.fullDay ? "full day" : "half day"}
                       onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                         const text = e.target.value;
                         {/* Updating The Day Type */}
@@ -296,6 +318,7 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                             tempData.numberOfDays = numberOfDays;
                             return tempData;
                           }
+                          return absence;
                         })
                       );
                     }

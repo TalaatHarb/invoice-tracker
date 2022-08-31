@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import net.talaatharb.invoicetracker.dtos.FileWithType;
 import net.talaatharb.invoicetracker.exceptions.UserException;
 import net.talaatharb.invoicetracker.models.AbsenceAttachments;
 import net.talaatharb.invoicetracker.models.Request;
@@ -75,8 +76,15 @@ public class AttachmentService {
         }
     }
 
-    public Resource downloadAttachment(String name){
+    public FileWithType downloadAttachment(String name){
         Path path = Paths.get(attachmentLocation).toAbsolutePath().resolve(name);
+        String type;
+
+        try {
+            type = Files.probeContentType(path);
+        }catch(Exception e){
+            throw new UserException("try again");
+        }
 
         Resource resource;
         try {
@@ -86,7 +94,7 @@ public class AttachmentService {
         }
 
         if(resource.exists() && resource.isReadable()){
-            return resource;
+            return new FileWithType(type, resource);
         }else{
             throw new UserException("try again");
         }

@@ -90,25 +90,25 @@ public class InvoiceTrackerBackendApplication {
 			userService.addRoleToUser(EMAIL_ADMIN_USER, ROLE_USER);
 
 
-			userService.saveRequestType(new RequestType("Emergency",new ArrayList<>()));
-			userService.saveRequestType(new RequestType("Sick Leave",new ArrayList<>()));
-            userService.saveRequestType(new RequestType("Maternity",new ArrayList<>()));
+			userService.saveRequestType(new RequestType("sick leave",new ArrayList<>()));
+			userService.saveRequestType(new RequestType("bereavement leave",new ArrayList<>()));
+			userService.saveRequestType(new RequestType("annual leave",new ArrayList<>()));
 
 			String pattern = "yyyy-MM-dd";
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
 			long l=2;
-			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"Maternity",2));
-			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"Sick Leave",4));
-			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"Sick Leave",2));
-			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"Sick Leave",2));
-			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"Emergency",2));
+			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"annual leave",2));
+			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"sick leave",4));
+			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"sick leave",2));
+			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"sick leave",2));
+			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"bereavement leave",2));
 
 			// SAMIR
 			for(int i = 1; i <= 7; ++i) {
-                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long) i, "Emergency", true, "Pending", "", new ArrayList<>(), 2));
-                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "Sick Leave", true, "Pending", "I need to stay at home, I have COVID!", new ArrayList<>(), 2));
-                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "Maternity", true, "Pending", "I'm tired today, I need some rest", new ArrayList<>(), 2));
+                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long) i, "sick leave", true, "Pending", "", new ArrayList<>(), 1));
+                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "sick leave", true, "Pending", "Hi, I have COVID and I need some rest", new ArrayList<>(), 1));
+                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "bereavement leave", true, "Pending", "Hi, I'm very tired today and I need some rest", new ArrayList<>(), 1));
             }
 
 			teamService.SaveTeam(new Team("IT",new Company("Cegedim","cegedim@gmail.com","Egypt,Cairo")));
