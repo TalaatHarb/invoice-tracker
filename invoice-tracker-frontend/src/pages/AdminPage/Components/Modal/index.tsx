@@ -6,6 +6,7 @@ import { ModalScreenActions } from '../../../../services/redux/slices/DetailsMod
 import { MdCloudDownload } from 'react-icons/md'
 import axios from 'axios'
 import { CONSTANTS } from '../../../../utils/constants'
+import { downloadFiles } from '../../../../utils/helper'
 
 interface Props {
   notes: string
@@ -13,32 +14,12 @@ interface Props {
   attachmentName: string
 }
 export default function MyModal({ notes, downloadLink, attachmentName }: Props) {
+  console.log("the download link is " + downloadLink);
   const dispatch = useDispatch()
   const { isOpen } = useAppSelector((state) => state.ModalSlice)
   const { isAuthenticated } = useAppSelector(
     (state) => state.AuthenticationSlice
   )
-
-  const downloadFiles = async () => {
-    
-    const config = {
-      method: "POST",
-      headers:
-       { Authorization: `Bearer ${isAuthenticated}` },
-    }
-
-    const response = await fetch(downloadLink, config)
-    const data = await response.blob();
-    const a = document.createElement("a");
-    const url = window.URL.createObjectURL(data);
-    a.href = url;
-    a.download = attachmentName;
-    a.click();
-    a.remove();
-    window.URL.revokeObjectURL(url);
-
-    console.log(data)
-  }
 
   return (
     <Transition.Root appear show={isOpen} as={Fragment}>
@@ -87,7 +68,7 @@ export default function MyModal({ notes, downloadLink, attachmentName }: Props) 
                     id='download-button'
                     className='text-base rounded-md px-2 max-h-7 bg-yeellowLightCegedim text-blueCegedim flex items-center'
                     onClick={() => {
-                      downloadFiles()
+                      downloadFiles(downloadLink, attachmentName, isAuthenticated as string)
                     }}
                   >
                     <MdCloudDownload size={30} className='mr-2' /> Download

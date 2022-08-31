@@ -25,5 +25,6 @@ export const downloadFiles = async (downloadLink: string, attachmentName: string
   a.href = url;
   a.download = attachmentName;
   a.click();
+  a.remove();
   window.URL.revokeObjectURL(url);
 }
