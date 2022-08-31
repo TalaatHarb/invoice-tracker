@@ -44,8 +44,8 @@ function App() {
         </Route>
 
         {/* route for InvoicePage */}
-        <Route path="/manager/invoice" element={<ManagerPrivateRoute />}>
-          <Route path="/manager/invoice" element={<InvoicePage />} />
+        <Route path="/admin/invoice" element={<ManagerPrivateRoute />}>
+          <Route path="/admin/invoice" element={<InvoicePage />} />
         </Route>
 
         {/* route for team page */}
