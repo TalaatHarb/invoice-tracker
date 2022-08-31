@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -62,7 +63,7 @@ class AbsenceControllerIT extends AbstractControllerIT {
 	@WithUserDetails(value = InvoiceTrackerBackendApplication.EMAIL_HR)
 	void testUpdateListOfRequests() throws JsonProcessingException, Exception {
 		// Arrange
-		UserDetailsImpl user = (UserDetailsImpl)userDetailsService.loadUserByUsername(InvoiceTrackerBackendApplication.EMAIL_HR);
+		UserDetailsImpl user = (UserDetailsImpl) userDetailsService.loadUserByUsername(InvoiceTrackerBackendApplication.EMAIL_HR);
 
 		String pattern = "yyyy-MM-dd";
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -70,7 +71,7 @@ class AbsenceControllerIT extends AbstractControllerIT {
 				new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), user.getId(), "Sick leave", true, "Pending", "", new ArrayList<>(), 2),
 				new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), user.getId(), "Sick leave", true, "Pending", "", new ArrayList<>(), 2),
 				new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), user.getId(), "Sick leave", true, "Pending", "", new ArrayList<>(), 2)
-				);
+		);
 
 		// Act, Assert
 		MvcResult result = mvc.perform(post("/api/user/absence/update-requests").contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -78,7 +79,9 @@ class AbsenceControllerIT extends AbstractControllerIT {
 
 		String content = result.getResponse().getContentAsString();
 		Assertions.assertThat(content).isEqualTo(objectMapper.writeValueAsString(absences));
-//	@Disabled
+	}
+
+	//	@Disabled
 	@WithUserDetails(value = InvoiceTrackerBackendApplication.EMAIL_USER)
 	void testPostAttachments() throws JsonProcessingException, Exception {
 
