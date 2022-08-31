@@ -32,6 +32,7 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
     allowedBalance: 21,
     remainingBalance: 15,
   });
+
   const [editEmployee, setEditEmployee] = useState<employeeType>(employee);
   const [edit, setEdit] = useState<boolean>(false);
   const [resignedActive, setResignedActive] = useState<boolean>(false);
@@ -46,11 +47,10 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
         .then((response) => {
           setEmployee(response.data);
           setEditEmployee(response.data);
+          console.log(response.data);
         });
     };
     getData();
-    console.log(employee);
-    console.log(formatDate(employee.joiningDate));
   }, []);
 
   const resignedCheckBoxHandler = () => {
@@ -306,31 +306,26 @@ const EmployeeDetails = ({ id }: employeeDetailsProps) => {
         <h3 className="text-2xl bg-blueCegedim text-white shadow-lg px-5 py-2 rounded-xl">
           All absences
         </h3>
-        <div className="flex flex-row mt-6 text-lg">
-          <div className="flex flex-col items-center mr-8">
-            <p className="bg-darkGrey px-5 py-2  text-white mb-3 rounded-md">
-              Sick
-            </p>
-            <p className="bg-yellowDarkCegedim text-white rounded-full px-3 py-1 w-fit">
-              0
-            </p>
-          </div>
-          <div className="flex flex-col items-center mr-8">
-            <p className="bg-darkGrey px-5 py-2  text-white mb-3 rounded-md">
-              Emergency
-            </p>
-            <p className="bg-yellowDarkCegedim text-white rounded-full px-3 py-1 w-fit">
-              0
-            </p>
-          </div>
-          <div className="flex flex-col items-center">
-            <p className="bg-darkGrey px-5 py-2  text-white mb-3 rounded-md">
-              Maternity
-            </p>
-            <p className="bg-yellowDarkCegedim text-white rounded-full px-3 py-1 w-fit">
-              0
-            </p>
-          </div>
+        <div className="mx-10 flex flex-row mt-6 text-lg flex-wrap justify-center">
+          {employee.requestTypesNumber?.length ? (
+            employee.requestTypesNumber?.map((requestType) => {
+              return (
+                <div
+                  key={requestType.name}
+                  className="flex flex-col items-center mx-3 mb-3"
+                >
+                  <p className="bg-darkGrey px-5 py-2  text-white mb-3 rounded-md">
+                    {requestType.name}
+                  </p>
+                  <p className="bg-yellowDarkCegedim text-white rounded-full px-3 py-1 w-fit">
+                    {requestType.number}
+                  </p>
+                </div>
+              );
+            })
+          ) : (
+            <p>No leaves taken</p>
+          )}
         </div>
         <div className="flex flex-col items-center mt-20">
           <p className="text-2xl bg-darkGrey px-5 py-2  text-white mb-3 rounded-md">
