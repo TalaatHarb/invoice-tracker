@@ -5,27 +5,24 @@ import { useAppSelector } from '../../../../hooks/toolkit-types'
 import { ModalScreenActions } from '../../../../services/redux/slices/DetailsModal'
 import { MdCloudDownload } from 'react-icons/md'
 import axios from 'axios'
-import { CONSTANTS } from '../../../../utils/constants'
+import { downloadFiles } from '../../../../utils/helper'
 
 interface Props {
   notes: string
-  downloadLink: string
+  downloadLink: any
+  isOpen: boolean
+  setIsOpen: (isOpen: boolean) => void
 }
-export default function MyModal({ notes, downloadLink }: Props) {
+export default function MyModal({
+  notes,
+  downloadLink,
+  isOpen,
+  setIsOpen,
+}: Props) {
   const dispatch = useDispatch()
-  const { isOpen } = useAppSelector((state) => state.ModalSlice)
   const { isAuthenticated } = useAppSelector(
     (state) => state.AuthenticationSlice
   )
-
-  const downloadFiles = async () => {
-    const config = {
-      headers: { Authorization: `Bearer ${isAuthenticated}` },
-    }
-    const response = await axios.post(downloadLink, {}, config)
-    const data = response.data
-    console.log(data)
-  }
 
   return (
     <Transition.Root appear show={isOpen} as={Fragment}>
@@ -33,7 +30,7 @@ export default function MyModal({ notes, downloadLink }: Props) {
         as='div'
         className='relative z-10'
         onClose={() => {
-          dispatch(ModalScreenActions.closeModal())
+          setIsOpen(false)
         }}
       >
         <Transition.Child
@@ -45,7 +42,7 @@ export default function MyModal({ notes, downloadLink }: Props) {
           leaveFrom='opacity-100'
           leaveTo='opacity-0'
         >
-          <div className='fixed inset-0 bg-black bg-opacity-30' />
+          <div className='fixed inset-0 bg-black bg-opacity-50' />
         </Transition.Child>
 
         <div className='fixed inset-0 overflow-y-auto'>
@@ -73,9 +70,7 @@ export default function MyModal({ notes, downloadLink }: Props) {
                   <button
                     id='download-button'
                     className='text-base rounded-md px-2 max-h-7 bg-yeellowLightCegedim text-blueCegedim flex items-center'
-                    onClick={() => {
-                      downloadFiles()
-                    }}
+                    onClick={() => {}}
                   >
                     <MdCloudDownload size={30} className='mr-2' /> Download
                     Notes
@@ -87,7 +82,7 @@ export default function MyModal({ notes, downloadLink }: Props) {
                     type='button'
                     className='inline-flex bg-blueCegedim justify-center px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500'
                     onClick={() => {
-                      dispatch(ModalScreenActions.closeModal())
+                      setIsOpen(false)
                     }}
                   >
                     Close

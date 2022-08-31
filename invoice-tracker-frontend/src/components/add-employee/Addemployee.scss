@@ -4,17 +4,16 @@
 
 // Helpers
 @mixin clearfix {
-   &:after {
-      content: "";
-      display: table;
-      clear: both;
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
   }
 }
 
 .align-center {
-   text-align: center;
+  text-align: center;
 }
-
 
 // Basics
 // html {
@@ -27,128 +26,97 @@
 // }
 // Grid
 .row {
-   @include clearfix;
-   margin: -20px 0;
-   
-   margin-left: 20%;
-   .col {
-      
-      padding: 0 20px;
-      float: left;
-      box-sizing: border-box;
-      &.x-50 {
-         width: 35%;
-      }
-      &.x-100 {
-         width: 70%;
-      }
-   }
+  @include clearfix;
+  margin: -20px 0;
+
+  margin-left: 20%;
+  .col {
+    padding: 0 20px;
+    float: left;
+    box-sizing: border-box;
+    &.x-50 {
+      width: 35%;
+    }
+    &.x-100 {
+      width: 70%;
+    }
+  }
 }
 
 .content-wrapper {
-   min-height: 100%;
-   position: relative;
+  min-height: 100%;
+  position: relative;
 }
-
-
 
 .contact-form {
-   .form-field {
-      position: relative;
-      margin: 32px 0;
-   }
-   .input-text {
-      display: block;
-      width: 100%;
-      height: 36px;
-      border-width: 2px;
-      border-color: #000;
-      font-family: Lusitana, serif;
-      font-size: 18px;
-      line-height: 26px;
-      font-weight: 400;
-      transform: translateY(+28px);
-      &:focus {
-         background-color: gainsboro;
-         text-indent:3px;
+  .form-field {
+    position: relative;
+    margin: 32px 0;
+  }
+  .input-text {
+    display: block;
+    width: 100%;
+    height: 36px;
+    border-width: 2px;
+    border-color: #000;
+    font-family: Lusitana, serif;
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 400;
+    transform: translateY(+28px);
+    &:focus {
+      background-color: gainsboro;
+      text-indent: 3px;
+    }
+
+    &:focus,
+    &.not-empty {
+      + .label {
       }
-      
-      &:focus,
-      &.not-empty {
-         + .label {
-           
-           
-         }
-      }
-      
-   }
-   .employee_label {
-      position: absolute;
-      left: 20px;
-      bottom: 11px;
-      font-family: Lusitana, serif;
-      font-size: 18px;
-      line-height: 26px;
-      font-weight: 400;
-      color: #000;
-      cursor: text;
-      transition: transform .2s ease-in-out;
-   }
-   
-   .employee-submit-btn {
-      display: inline-block;
-      background-color: deepskyblue;
-      color: #fff;
-      font-family: Raleway, sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 16px;
-      line-height: 24px;
-      padding: 8px 16px;
-      border: none;
-      cursor: pointer;
-      border-radius:10px;
-   }
+    }
+  }
+  .employee_label {
+    position: absolute;
+    left: 20px;
+    bottom: 11px;
+    font-family: Lusitana, serif;
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 400;
+    color: #000;
+    cursor: text;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .employee-submit-btn {
+    display: inline-block;
+    background-color: deepskyblue;
+    color: #fff;
+    font-family: Raleway, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+  }
 }
 
-
-
-input[type=date]:required:invalid::-webkit-datetime-edit {
-   color: transparent;
+input[type='date']:required:invalid::-webkit-datetime-edit {
+  color: transparent;
 }
-input[type=date]:focus::-webkit-datetime-edit {
-   color: black !important;
+input[type='date']:focus::-webkit-datetime-edit {
+  color: black !important;
 }
 
 .dot {
-   height: 30px;
-   width: 50px;
-   background-color: #bbb;
-   border-radius: 40%;
-   display: inline-block;
-   text-align: center;
-   background-color: deepskyblue;
- }
-
-
- input[type=text]{
-   border-radius:10px;
- }
- 
- input[type=date]{
-   border-radius:10px;
- }
-
- input[type=number]{
-   border-radius:10px;
- }
-
- input[type=email]{
-   border-radius:10px;
- }
-
- input[type=password]{
-   border-radius:10px;
- }
-
- 
+  height: 30px;
+  width: 50px;
+  background-color: #bbb;
+  border-radius: 40%;
+  display: inline-block;
+  text-align: center;
+  background-color: deepskyblue;
+}
