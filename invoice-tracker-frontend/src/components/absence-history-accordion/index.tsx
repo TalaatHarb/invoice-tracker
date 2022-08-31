@@ -25,7 +25,6 @@ const AbsenceHistoryAccordionList = ({ id }: accordionProps) => {
       `${CONSTANTS.BACKEND_URL}/api/user/absence/request?empId=${id}`,
       config
     )
-
     setAbsences(res.data)
   }
 

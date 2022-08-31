@@ -1,8 +1,9 @@
 export type employeeType = {
   id: number;
+  employeeid:string;
   englishName: string;
   RequestType : string,
-  requestDate :Date;
+  requestDate :String;
   arabicName: string;
   allowedBalance: number;
   remainingBalance: number;

@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
+import { useAppSelector } from '../../hooks/toolkit-types';
 import { AbsenseItem, Attatchment } from '../../models/absence-item'
 
 const AbsenceHistoryItem = (props: any): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [tempDataTest, setTempDataTest] = useState(props.record);
-  const [tempData, setTempData] = useState(props.record);
+  const [tempData, setTempData] = useState(props.record); // saving temp data in modal.
+
   const dropDownClickHandler = () => {
     setIsOpen(!isOpen)
   }
@@ -21,15 +22,42 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
     setShowModal(true);
   };
 
+  const { isAuthenticated } = useAppSelector(
+    (state) => state.AuthenticationSlice
+  )
+
+  const downloadFiles = async (downloadLink: string, attachmentName: string) => {
+    
+
+    const config = {
+      method: "POST",
+      headers: { Authorization: `Bearer ${isAuthenticated}` },
+    }
+
+    const response = await fetch(downloadLink, config)
+    const data = await response.blob();
+    const a = document.createElement("a");
+    const url = window.URL.createObjectURL(data);
+    a.href = url;
+    a.download = attachmentName;
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
+
+
+
   return (
     <>
       <div id= {"accordion-" + props.record.id} className='border border-slate-600 flex justify-between bg-white shadow-lg'>
+        {/* Accordion Header */}
         <div className='relative flex items-center py-4 px-5 text-base text-gray-800 text-left border-0 rounded-none transition focus:outline-none'>
           <strong id = {"accordion-header" +  + props.record.id}>
-            {tempData.type} {tempData.startDate.substr(0, 10)},{" "}
-            {tempData.fullDay ? "full-day" : "half-day"}{" "}
+            {props.record.type} {props.record.startDate.substr(0, 10)},{" "}
+            {props.record.fullDay ? "full-day" : "half-day"}{" "}
           </strong>
         </div>
+
+        {/* Accordion Buttons */}
         <div className="py-4 px-5">
           <button onClick={editItemClickHandler} id = {"accordion-edit-button" + props.record.id}>
             <svg
@@ -85,66 +113,67 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
         </div>
       </div>
 
+      {/* Accordion Body */}
       {isOpen && (
         <div className='border border-slate-600 items-center py-4 px-5 text-base text-left bg-white rounded-none' id={"accordion-body" + props.record.id}>
           <div>
             <p id={"status" + props.record.id}>
-              <strong>Status: </strong> {tempData.status}
+              <strong>Status: </strong> {props.record.status}
             </p>
             <p id = {"comment" + props.record.id}>
               <strong>Comment: </strong>{" "}
-              {tempData.comment ? tempData.comment : "No comment."}
+              {props.record.comment ? props.record.comment : "No comment."}
             </p>
             <p>
               <strong id={"attachment" + props.record.id}>Attachment: </strong>{" "}
-              {tempData.absenceAttachments > 0 ? (
-                tempData.absenceAttachments.map((attachment: Attatchment) => {
-                  <a
-                  href={attachment.attachmentUrl}
+              {props.record.absenceAttachments.length > 0 ? (
+                props.record.absenceAttachments.map((attachment: Attatchment) => {
+                  return ( <button
+                  key={1}
                   className="text-blueCegedim"
-                  target="_blank"
-                  rel="noreferrer"
+                  onClick={() => downloadFiles(attachment.attachmentUrl, attachment.attachmentName)}
                 >
                   {" "}
                   {attachment.attachmentName}
-                </a>
-                })
+                </button>
+                 ) })
               )
               : 
                 'No Attachment'
               }
             </p>
             <p id={"number-of-days" + props.record.id}>
-              <strong>No. of days requested: </strong> {tempData.numberOfDays}
+              <strong>No. of days requested: </strong> {props.record.numberOfDays}
             </p>
             <p>
               <strong id={"reuqest-date" + props.record.id}>Request Date: </strong>{" "}
-              {tempData.requestDate
-                ? tempData.requestDate.substr(0, 10)
+              {props.record.requestDate
+                ? props.record.requestDate.substr(0, 10)
                 : "Unkown"}
             </p>
             <p id ={"end-date" + props.record.id}>
-              <strong>End Date: </strong> {tempData.endDate.substr(0, 10)}
+              <strong>End Date: </strong> {props.record.endDate.substr(0, 10)}
             </p>
           </div>
         </div>
       )}
 
       {/* TODO: Change this modal to a separate component */}
+      {/* Edit Modal */}
       {showModal ? (
         <>
           <div className="justify-center items-center fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="w-auto m-8 mx-auto max-w-3xl ">
-              {/*content*/}
+              {/* Modal Container*/}
               <div id = {"edit-request-body" + props.record.id} className="px-8 m-8 border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                {/*header*/}
+                {/* Modal Header*/}
                 <div id = {"edit-request-header" + props.record.id} className="m-8 flex items-start justify-between p-5 border-b border-solid rounded-t">
                   <h3 className="text-3xl font-semibold">Edit Leave Request</h3>
                   <button id = {"edit-request-close-button" + props.record.id}
                     className="p-1 ml-auto border-0 text-black float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                     onClick={() => {
                       setShowModal(false);
-                      setTempDataTest(props.record);
+                      setTempData(props.record);
                     }}
                   >
                     <span className="text-blueCegedim h-6 w-6 text-2xl block outline-none focus:outline-none">
@@ -153,23 +182,26 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                   </button>
                 </div>
 
-                {/*body*/}
+                {/* Modal Body*/}
                 <div className="flex-row">
                   <div className="flex-1">
+                    {/* Absence History Dropdown */}
                     <label className="mb-2 mx-auto md:w-6/12 text-lg font-medium text-black dark:text-lightGrey" id = {"edit-request-absence-type-label" + props.record.id}>
                       Absence Type:
                       <select id = {"edit-request-absence-type-select" + props.record.id}
                         name="type"
-                        value={tempDataTest.type}
+                        value={tempData.type}
                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                          const text = e.target.value;
-                          setTempDataTest({ ...tempDataTest, type: text });
+                          const text = e.target.value.toLowerCase();
+                          console.log(text);
+                          {/* Updating the temp Absence Type */}
+                          setTempData({ ...tempData, type: text });
                         }}
                         className="p-2 mb-6 ml-2 md:w-50 text-md text-darkGrey bg-white rounded-lg border border-darkGrey focus:blueCegedim focus:darkBlue dark:darkGrey dark:placeholder-yellowDarkCegedim dark:text-white dark:focus:darkBlue dark:focus:blueCegedim"
                       >
-                        <option value="Annual Leave">Annual leave</option>
-                        <option value="Sick Leave">Sick leave</option>
-                        <option value="Bereavement Leave">
+                        <option value="annual leave">Annual Leave</option>
+                        <option value="sick leave">Sick Leave</option>
+                        <option value="bereavement leave">
                           Bereavement Leave
                         </option>
                       </select>
@@ -177,6 +209,7 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                   </div>
 
                   <div className="flex-1">
+                    {/* Start Date */}
                     <label id = {"edit-request-start-date-label" + props.record.id} className="mb-2 mx-auto md:w-6/12 text-lg font-medium text-black dark:text-lightGrey">
                       Start Date:
                       <input id = {"edit-request-start-date-input" + props.record.id}
@@ -184,7 +217,8 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                         name="startDate"
                         onChange={(e) => {
                           const text = e.target.value;
-                          setTempDataTest({ ...tempDataTest, startDate: text });
+                          {/* Updating the temp start date */}
+                          setTempData({ ...tempData, startDate: text });
                         }}
                         min={new Date().toISOString().slice(0, 10)}
                         required
@@ -194,6 +228,7 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                   </div>
 
                   <div className="flex-1">
+                    {/* End Date */}
                     <label className="mb-2 text-lg font-medium text-black dark:text-lightGrey" id = {"edit-request-end-date-label" + props.record.id}>
                       End Date:
                       <input id = {"edit-request-end-date-input" + props.record.id}
@@ -201,7 +236,8 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                         name="endDate"
                         onChange={(e) => {
                           const text = e.target.value;
-                          setTempDataTest({ ...tempDataTest, endDate: text });
+                          {/* Updating End Date */}
+                          setTempData({ ...tempData, endDate: text });
                         }}
                         required
                         className="inline-block p-2 mb-6 ml-2 text-sm text-darkGrey bg-white rounded-lg border border-darkGrey focus:blueCegedim focus:darkBlue dark:darkGrey dark:placeholder-yellowDarkCegedim dark:text-white dark:focus:darkBlue dark:focus:blueCegedim"
@@ -209,14 +245,16 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                     </label>
                   </div>
                   <label id = {"edit-request-day-type-label" + props.record.id} className="mb-2 mx-auto md:w-6/12 text-lg font-medium text-black dark:text-lightGrey">
+                    {/* Day Type */}
                     Day Type:
                     <select id = {"edit-request-day-type-select" + props.record.id}
                       name="fullDay"
-                      value={tempDataTest.fullDay ? "full day" : "half day"}
+                      value={tempData.fullDay ? "full day" : "half day"}
                       onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                         const text = e.target.value;
-                        setTempDataTest({
-                          ...tempDataTest,
+                        {/* Updating The Day Type */}
+                        setTempData({
+                          ...tempData,
                           fullDay:
                             text.toLowerCase() === "full day" ? true : false,
                         });
@@ -225,13 +263,11 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                     >
                       <option
                         value="full day"
-                        selected={tempDataTest.fullDay ? true : false}
                       >
                         Full day
                       </option>
                       <option
                         value="half day"
-                        selected={tempDataTest.fullDay ? false : true}
                       >
                         Half day
                       </option>
@@ -239,15 +275,17 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                   </label>
 
                   <label id = {"edit-request-comment-label" + props.record.id} className="block mb-2 text-lg font-medium text-black dark:text-lightGrey">
+                    {/* Comment Section */}
                     Comment:
                     <textarea id = {"edit-request-comment-textarea" + props.record.id}
                       className="block p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       name="comment"
                       onChange={(e) => {
                         const text = e.target.value;
-                        setTempDataTest({ ...tempDataTest, comment: text });
+                        {/* Updating the comment */}
+                        setTempData({ ...tempData, comment: text });
                       }}
-                      defaultValue={tempDataTest.comment}
+                      defaultValue={props.record.comment}
                     />
                   </label>
                 </div>
@@ -259,7 +297,7 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                     type="button"
                     onClick={() => {
                       setShowModal(false);
-                      setTempDataTest(props.record);
+                      setTempData(props.record);
                     }}
                   >
                     Close
@@ -269,29 +307,22 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
                     type="button"
                     onClick={() => {
                       setShowModal(false);
-                      setTempData(tempDataTest);
                       props.setItems(
                         props.items.map((absence: AbsenseItem) => {
                           if (absence.id === props.record.id) {
-                            const d1: Date = new Date(tempDataTest.startDate);
-                            const d2: Date = new Date(tempDataTest.endDate);
+                            const d1: Date = new Date(tempData.startDate);
+                            const d2: Date = new Date(tempData.endDate);
                             const numberOfDays: number =
                               (d2.getTime() - d1.getTime()) /
                               (1000 * 60 * 60 * 24);
-                            tempDataTest.numberOfDays = numberOfDays;
-                            return {
-                              ...absence,
-                              comment: tempDataTest.comment,
-                              startDate: tempDataTest.startDate,
-                              endDate: tempDataTest.endDate,
-                              type: tempDataTest.type,
-                              numberOfDays: tempDataTest.numberOfDays
-                            };
+                            tempData.numberOfDays = numberOfDays;
+                            return tempData;
                           }
                           return absence;
                         })
                       );
-                    }}
+                    }
+                  }
                   >
                     Save Changes
                   </button>

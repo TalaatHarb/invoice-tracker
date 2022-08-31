@@ -8,6 +8,8 @@ import javax.persistence.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -60,6 +62,15 @@ public class Request {
 
 //    @NotBlank
     private int numberOfDays;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "user_id_FK", referencedColumnName = "id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "request_typeId_FK", referencedColumnName = "id")
+    private RequestType requestType;
 
 
     public Request(Date startDate, Date endDate) {

@@ -2,6 +2,8 @@ package net.talaatharb.invoicetracker.models;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,6 +26,7 @@ public class AbsenceAttachments {
 
     private String attachmentUrl;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="request_id", referencedColumnName = "id")
     private Request request;
