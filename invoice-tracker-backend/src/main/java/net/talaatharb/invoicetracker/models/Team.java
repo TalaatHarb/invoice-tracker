@@ -19,6 +19,7 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    
     private String name;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -28,4 +29,10 @@ public class Team {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "employee_teams", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "team_id"))
     private List<User> employees;
+
+
+    public Team(String name, Company company) {
+        this.name = name;
+        this.company = company;
+    }
 }

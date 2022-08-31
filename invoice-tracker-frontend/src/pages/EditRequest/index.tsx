@@ -80,6 +80,7 @@ margin-left: 54px;
 const Popup = ({datapage,submit}:any) => {
     const navigate = useNavigate();
 
+    const [EndDate, setEndDate] = useState(new Date());
 
   const [startDate, setStartDate] = useState(new Date());
 
@@ -111,13 +112,15 @@ const Popup = ({datapage,submit}:any) => {
   </Styleddropdown>
      </Input>
  <Input>
-    <Span>End</Span> <Styleddate> <DatePicker selected={startDate} onChange={(date:Date) => setStartDate(date)} /></Styleddate>
+    <Span>End</Span> <Styleddate> <DatePicker selected={EndDate} onChange={(date:Date) => setEndDate(date)} /></Styleddate>
    </Input>
   <Input>
     <Span>Comment</Span> 
     <textarea id="w3review" name="w3review" rows={4}cols={77}></textarea>
     </Input>
-   <StyledButton onClick={()=>{ navigate("/requestList")}} >submit</StyledButton>
+    <StyledButton onClick={()=>{ navigate("/hr")}} >submit</StyledButton>
+   
+    
     </Wrapper>
    </StyledWrapper>
    

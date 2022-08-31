@@ -1,26 +1,25 @@
 // types used
 
 export interface IForgotPasswordBody {
-    email:string
+  email: string
 }
-
 
 export interface IResetPasswrodBody {
-    resetToken:string;
-    password:string;
+  resetToken: string
+  password: string
 }
 
-export interface IMessageBar{
-    type:string;
-    message:string;
+export interface IMessageBar {
+  type: string
+  message: string
 }
 
-export class MessageBar implements IMessageBar{
-    public type:string;
-    public message:string;
+export class MessageBar implements IMessageBar {
+  public type: string
+  public message: string
 
-    constructor(type:string, message:string){
-        this.type = type;
-        this.message = message;
-    }
+  constructor(type: string, message: string) {
+    this.type = type
+    this.message = message
+  }
 }

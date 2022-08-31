@@ -1,5 +1,6 @@
 package net.talaatharb.invoicetracker.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class AbsenceService {
 
     private final RequestTypeRepository requestTypeRepository;
 
-    public List<Request> postRequest(Request request) {
+    public Long postRequest(Request request) {
         Long ID = request.getRequestedBy();
         User user = userRepository.findById(ID).get();
         user.getRequests().add(request);
@@ -32,11 +33,24 @@ public class AbsenceService {
         request.setType(request.getType());
         Rtype.getRequests().add(request);
         userRepository.save(user);
-        return requestRepository.findAll();
+        return request.getId();
     }
 
-        public List<Request> getAllAbsenceByEmployeeId(Long empId){
-            return absenceRepository.findAllByRequestedBy(empId);
-        }
-
+    public List<Request> getAllAbsenceByEmployeeId(Long empId){
+        return absenceRepository.findAllByRequestedBy(empId);
     }
+
+    public List<Request> updateAllEmployeeAbsences(List<Request> absences) {
+        if(absences.size() == 0) return absences;
+        User user = userRepository.findById(absences.get(0).getRequestedBy()).get();
+        user.setRequests(absences);
+        userRepository.save(user);
+        return absences;
+    }
+
+    public void deleteEmployeeAbsences(Long empId) {
+        User user = userRepository.findById(empId).get();
+        user.setRequests(new ArrayList<>());
+        userRepository.save(user);
+    }
+}

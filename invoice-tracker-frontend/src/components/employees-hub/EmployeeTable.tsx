@@ -24,7 +24,7 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
   const [columnVisibility, setColumnVisibility] = React.useState({});
 
   const columnHelper = createColumnHelper<employeeType>();
-
+  
   const columns = [
     columnHelper.group({
       header: ({ table }) => {
@@ -55,7 +55,7 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
     }),
     columnHelper.accessor((row) => row.id, {
       id: "Id",
-      header: "Id",
+      header: "Employee ID",
       cell: (info) => info.getValue(),
     }),
     columnHelper.accessor((row) => row.nationalId, {
@@ -127,19 +127,25 @@ const EmployeeTab = ({ employees }: employeeTableProps) => {
       id: "Teams",
       header: "Team Name",
       cell: (info) =>
-        info.getValue()
+        (info.getValue() && info.getValue().length)
           ? info.getValue().map((team) => {
               return (
                 <Link
                   className="text-black no-underline block hover:underline"
                   key={team.id + team.name}
-                  to={"/team/" + team.id}
+                  to={"/team/" + team.name}
                 >
                   {team.name}
                 </Link>
               );
             })
-          : "N/A",
+          : <Link
+          className="text-black no-underline block hover:underline"
+          to={"/team/"+1}
+        >
+          
+        </Link>
+
     }),
     columnHelper.accessor((row) => row.fullTime, {
       id: "Fulltime",

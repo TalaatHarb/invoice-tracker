@@ -8,8 +8,12 @@ export interface AbsenseItem {
   type: string
   comments: string
   status: string
-  attachmentName: string
-  attachmentUrl: string
+  absenceAttachments: Attatchment[]
   numberOfDays: number
   fullDay: boolean
+}
+
+export interface Attatchment {
+  attachmentName: string
+  attachmentUrl: string
 }

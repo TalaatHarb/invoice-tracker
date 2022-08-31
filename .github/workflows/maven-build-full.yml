@@ -7,13 +7,10 @@ on:
     branches: [ master, develop ]
   pull_request:
     branches: [ master, develop ]
-    paths:
-      - 'invoice-tracker-backend/**'
-      - '.github/workflows/maven-build-full.yml'
 
 jobs:
   build:
-
+    name: Build and test Bckend
     runs-on: ubuntu-latest
 
     steps:

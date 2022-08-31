@@ -1,16 +1,15 @@
 package net.talaatharb.invoicetracker.dtos;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class TeamDetails {
     private long id;
 
     private String name;
+
 }
