@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
-import { MailIcon, PhoneIcon } from '@heroicons/react/solid'
+import { MailIcon, PhoneIcon, UserAddIcon } from '@heroicons/react/solid'
 import { ManagerDetails } from '../../../../models/managerDetails'
 import moment from 'moment'
+import { useNavigate } from 'react-router'
 
 const team = [
   {
@@ -60,6 +61,8 @@ interface Props {
   managerDetails: ManagerDetails
 }
 function AdminProfilePage({ managerDetails }: Props) {
+  const navigate = useNavigate()
+
   const profile = {
     name: managerDetails?.username,
     imageUrl:
@@ -107,7 +110,7 @@ function AdminProfilePage({ managerDetails }: Props) {
                     <div className='flex'>
                       <img
                         className='h-24 w-24 rounded-full ring-4 ring-white sm:h-32 sm:w-32'
-                        src={profile.imageUrl}
+                        src={profile?.imageUrl}
                         alt=''
                       />
                     </div>
@@ -138,6 +141,19 @@ function AdminProfilePage({ managerDetails }: Props) {
                           />
                           <span>Call</span>
                         </button>
+                        <button
+                          onClick={() => {
+                            navigate('/admin/invoice')
+                          }}
+                          type='button'
+                          className='inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500'
+                        >
+                          <UserAddIcon
+                            className='-ml-1 mr-2 h-5 w-5 text-gray-400'
+                            aria-hidden='true'
+                          />
+                          <span>Manager Invoice</span>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -148,7 +164,6 @@ function AdminProfilePage({ managerDetails }: Props) {
                   </div>
                 </div>
               </div>
-
               {/* Description list */}
               <div className='mt-6 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8'>
                 <dl className='grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-5'>
