@@ -223,25 +223,25 @@ public class FilterUserServiceImp implements FilterUserService{
         user6.getTeams().add(team6);
         userRepository.save(user6);
 
-        User user7 = userRepository.findById(8L).get();
-        Team team7 = teamRepository.findById(1l).get();
-        user7.getTeams().add(team7);
-        userRepository.save(user7);
-
-        User user8 = userRepository.findById(9L).get();
-        Team team8 = teamRepository.findById(3l).get();
-        user8.getTeams().add(team8);
-        userRepository.save(user8);
-
-        User user9 = userRepository.findById(10L).get();
-        Team team9 = teamRepository.findById(2l).get();
-        user9.getTeams().add(team9);
-        userRepository.save(user9);
-
-        User user10 = userRepository.findById(11L).get();
-        Team team10 = teamRepository.findById(1l).get();
-        user10.getTeams().add(team10);
-        userRepository.save(user10);
+//        User user7 = userRepository.findById(8L).get();
+//        Team team7 = teamRepository.findById(1l).get();
+//        user7.getTeams().add(team7);
+//        userRepository.save(user7);
+//
+//        User user8 = userRepository.findById(9L).get();
+//        Team team8 = teamRepository.findById(3l).get();
+//        user8.getTeams().add(team8);
+//        userRepository.save(user8);
+//
+//        User user9 = userRepository.findById(10L).get();
+//        Team team9 = teamRepository.findById(2l).get();
+//        user9.getTeams().add(team9);
+//        userRepository.save(user9);
+//
+//        User user10 = userRepository.findById(11L).get();
+//        Team team10 = teamRepository.findById(1l).get();
+//        user10.getTeams().add(team10);
+//        userRepository.save(user10);
 
     }
 

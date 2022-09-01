@@ -4,6 +4,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +16,7 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -22,11 +27,6 @@ import net.talaatharb.invoicetracker.InvoiceTrackerBackendApplication;
 import net.talaatharb.invoicetracker.api.AbstractControllerIT;
 import net.talaatharb.invoicetracker.models.Request;
 import net.talaatharb.invoicetracker.services.UserDetailsImpl;
-import org.springframework.test.web.servlet.MvcResult;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 class AbsenceControllerIT extends AbstractControllerIT {
 	
