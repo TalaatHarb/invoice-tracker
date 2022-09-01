@@ -81,16 +81,19 @@ public class InvoiceTrackerBackendApplication {
 			Date edate2 = formatter.parse(endDate2);
 
 
-			
-			userService.saveUser(new User(EMAIL_USER, PASS_USER,21,21,jdate,"0122303432","amr0"));
-			userService.saveUser(new User(EMAIL_EMPLOYEE, PASS_USER,21,21,new Date(),"0122303432","Gado"));
-			userService.saveUser(new User(EMAIL_HR, PASS_USER,"Ahmed",true));
-			userService.saveUser(new User("124329374621","Amr Essam","عمرو عصام",EMAIL_ADMIN_USER,PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,21,true,jdate,edate,new Date(),"01002345324",2,0,150.0,"amr23"));
 
-			userService.saveUser(new User(EMAIL_HR_2, PASS_USER,"hamada",false));
+			userService.saveUser(new User("124329374578","Mohamed Zakaria","N/A",EMAIL_USER, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,21,true,jdate,edate,new Date(),"01002345324",2,0,150.0,"amr0",true,NONEXPIRED_DATE));
+			userService.saveUser(new User("124329374566","Mohamed Gado","N/A",EMAIL_EMPLOYEE, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,21,true,jdate,edate,new Date(),"01002345324",2,0,150.0,"gado",true,NONEXPIRED_DATE));
+			userService.saveUser(new User("124329374578","Ahmed","N/A",EMAIL_HR, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,21,true,jdate,edate,new Date(),"01002345324",2,0,150.0,"Ahmed",true,NONEXPIRED_DATE));
+			userService.saveUser(new User("124329374621","Amr Essam","عمرو عصام",EMAIL_ADMIN_USER,PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,21,true,jdate,edate,new Date(),"01002345324",2,0,150.0,"amr23",true,NONEXPIRED_DATE));
+			userService.saveUser(new User("124329374579","Mostafa","N/A",EMAIL_HR_2, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,21,true,jdate,edate,new Date(),"01002345324",2,0,150.0,"hamada",false,NONEXPIRED_DATE));
 
-			userService.saveUser(new User(EMAIL_EMPLOYEE_2, PASS_USER,"hamada",false,NONEXPIRED_DATE)); //DISABLED User
-			userService.saveUser(new User(EMAIL_EMPLOYEE_3, PASS_USER,"Sayed",true,EXPIRED_DATE));		//Expired Password User
+
+			userService.saveUser(new User("124329374580","Hamada","N/A",EMAIL_EMPLOYEE_2, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,21,true,jdate,edate,new Date(),"01002345324",2,0,150.0,"hamada",false,NONEXPIRED_DATE)); //DISABLED User
+			userService.saveUser(new User("124329374581","Sayed","N/A",EMAIL_EMPLOYEE_3, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,21,true,jdate,edate,new Date(),"01002345324",2,0,150.0,"Sayed",true,EXPIRED_DATE));		//Expired Password User
+
+
+
 
 //			userService.saveUser(new User(EMAIL_HR, null, PASS_USER, new HashSet<>(), "Gado1"));
 //			userService.saveUser(new User(EMAIL_ADMIN_USER, null, PASS_USER, new HashSet<>(), "Gado2"));
@@ -121,7 +124,7 @@ public class InvoiceTrackerBackendApplication {
 
 			// SAMIR
 			for(int i = 1; i <= 7; ++i) {
-                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long) i, "sick leave", true, "Pending", "", new ArrayList<>(), 1));
+                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long) i, "sick leave", true, "Accepted", "", new ArrayList<>(), 1));
                 absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "sick leave", true, "Pending", "Hi, I have COVID and I need some rest", new ArrayList<>(), 1));
                 absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "bereavement leave", true, "Pending", "Hi, I'm very tired today and I need some rest", new ArrayList<>(), 1));
             }
