@@ -238,6 +238,11 @@ public class FilterUserServiceImp implements FilterUserService{
         user9.getTeams().add(team9);
         userRepository.save(user9);
 
+        User user10 = userRepository.findById(11L).get();
+        Team team10 = teamRepository.findById(1l).get();
+        user10.getTeams().add(team10);
+        userRepository.save(user10);
+
     }
 
 

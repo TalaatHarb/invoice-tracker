@@ -16,7 +16,6 @@ import net.talaatharb.invoicetracker.repositories.UserRepository;
 @Service
 @RequiredArgsConstructor
 public class AbsenceService {
-    private final RequestRepository requestRepository;
 
     private final UserRepository userRepository;
 
@@ -26,14 +25,20 @@ public class AbsenceService {
     private final RequestTypeRepository requestTypeRepository;
 
     public Long postRequest(Request request) {
-        Long ID = request.getRequestedBy();
-        User user = userRepository.findById(ID).get();
+        if(requestTypeRepository.findByTypeName(request.getType()) == null){
+            RequestType requestType = new RequestType(request.getType());
+            requestTypeRepository.save(requestType);
+        }
+
+        RequestType requestType = requestTypeRepository.findByTypeName(request.getType());
+
+        request.setRequestType(requestType);
+
+        User user = userRepository.findById(request.getRequestedBy()).get();
+        request.setUser(user);
         user.getRequests().add(request);
-        RequestType Rtype = requestTypeRepository.findByTypeName(request.getType());
-        request.setType(request.getType());
-        Rtype.getRequests().add(request);
         userRepository.save(user);
-        return request.getId();
+        return absenceRepository.count();
     }
 
     public List<Request> getAllAbsenceByEmployeeId(Long empId){
@@ -44,7 +49,7 @@ public class AbsenceService {
         if(absences.size() == 0) return absences;
         User user = userRepository.findById(absences.get(0).getRequestedBy()).get();
         user.setRequests(absences);
-        userRepository.save(user);
+        userRepository.saveAndFlush(user);
         return absences;
     }
 

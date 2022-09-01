@@ -20,7 +20,7 @@ const ColumnSelector = ({ table }: selectorProps) => {
                 ${open ? "" : "text-opacity-90"}
                 group inline-flex items-center rounded-md bg-orange-700 px-3 py-2 text-base font-medium text-white hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}
             >
-              <CogIcon className="w-10 text-black" />
+              <CogIcon id="selectorIcon" className="w-10 text-black" />
             </Popover.Button>
             <Transition
               as={Fragment}
@@ -32,7 +32,10 @@ const ColumnSelector = ({ table }: selectorProps) => {
               leaveTo="opacity-0 translate-y-1"
             >
               <Popover.Panel className=" shadow-lg ring-1 ring-black ring-opacity-5 overflow-y-scroll absolute left-1/2 z-10 mt-3 w-60 h-80 max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl">
-                <div className=" bg-white rounded shadow-lg ring-1 ring-black ring-opacity-5 text-left text-base">
+                <div
+                  id="selectors"
+                  className=" bg-white rounded shadow-lg ring-1 ring-black ring-opacity-5 text-left text-base"
+                >
                   <div className="px-1">
                     <label>
                       <input
@@ -52,7 +55,7 @@ const ColumnSelector = ({ table }: selectorProps) => {
                       <div key={column.id} className="px-1">
                         <label>
                           <input
-                            id={column.id}
+                            id={column.id + "Selector"}
                             className="mr-2"
                             {...{
                               type: "checkbox",

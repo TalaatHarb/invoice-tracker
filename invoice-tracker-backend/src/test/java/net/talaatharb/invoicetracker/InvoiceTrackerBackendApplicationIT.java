@@ -21,7 +21,4 @@ class InvoiceTrackerBackendApplicationIT {
 	void testContextLoads() {
 		assertNotNull(applicationContext);
 	}
-
-
-
 }

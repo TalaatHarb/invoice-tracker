@@ -29,10 +29,10 @@ public class InvoiceTrackerBackendApplication {
 	private static final String EMAIL_ADMIN_USER3= "boogado2223@yahoo.com";
 	private static final String EMAIL_ADMIN_USER4 = "boogado2224@yahoo.com";
 	private static final String EMAIL_EMPLOYEE = "boogado@yahoo.com";
-	private static final String EMAIL_HR = "boogado1@yahoo.com";
+	public static final String EMAIL_HR = "boogado1@yahoo.com";
 	private static final String EMAIL_HR_2 = "boogado3@yahoo.com";
 	public static final String EMAIL_USER = "boogado4@yahoo.com";
-
+	public static final String EMAIL_USER_MO= "esmailmostafa295@gmail.com";
 	private static final String EMAIL_EMPLOYEE_2 = "boogado5@yahoo.com";
 	private static final String EMAIL_EMPLOYEE_3 = "boogado6@yahoo.com";
 
@@ -56,6 +56,7 @@ public class InvoiceTrackerBackendApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(InvoiceTrackerBackendApplication.class, args);
+
 	}
 
 	@Bean
@@ -78,10 +79,13 @@ public class InvoiceTrackerBackendApplication {
 			Date edate2 = formatter.parse(endDate2);
 
 
-			userService.saveUser(new User(EMAIL_USER, PASS_USER,"124329374633","Moustafa","مصطفى","Menofia,Egypt","المنوفية،مصر","Developer",21,21,jdate,edate,"0122303432","amr0"));
-			userService.saveUser(new User(EMAIL_EMPLOYEE, PASS_USER,"124329374621","ِAbdelrahman","عبدالرحمن","Alex,Egypt","الاسكندرية،مصر","Developer",21,21,jdate,edate,"0122303432","Gado"));
+			userService.saveUser(new User(EMAIL_USER, PASS_USER,"124329374633","Mohamed Esmail","محمد اسماعيل","Qena,Egypt","قنا،مصر","Developer",21,21,jdate,edate,"01223043432","amr0"));
+			userService.saveUser(new User(EMAIL_USER_MO, PASS_USER,"1243294474633","Moustafa","مصطفى","Menofia,Egypt","المنوفية،مصر","Developer",21,21,jdate,edate,"0122303432","som3aa"));
 
-			userService.saveUser(new User(EMAIL_HR, PASS_USER,"Ahmed",true,"124329366621","Khaled","خالد","Cairo,Egypt","القاهرة،مصر","Developer",21,15,true,jdate2,edate2));
+			userService.saveUser(new User(EMAIL_HR_2, PASS_USER,"hamada",false));
+			
+			userService.saveUser(new User(EMAIL_EMPLOYEE_2, PASS_USER,"hamada",false,NONEXPIRED_DATE)); //DISABLED User
+			userService.saveUser(new User(EMAIL_EMPLOYEE_3, PASS_USER,"Sayed",true,EXPIRED_DATE));		//Expired Password User
 
 			userService.saveUser(new User("129329374621","Amr Essam","عمرو عصام",EMAIL_ADMIN_USER,PASS_USER,"Cairo,Egypt","القاهرة،مصر","Developer",21,21,true,jdate2,edate,new Date(),"01002345324",2,0,150.0,"amr23"));
 			userService.saveUser(new User("124329795669","Ahmed Ali","احمد علي",EMAIL_ADMIN_USER2,PASS_USER,"Cairo,Egypt","القاهرة،مصر","DevOps",21,21,true,jdate,edate,new Date(),"010023444424",2,0,150.0,"ahmed22"));
@@ -107,26 +111,25 @@ public class InvoiceTrackerBackendApplication {
 			userService.addRoleToUser(EMAIL_ADMIN_USER, ROLE_USER);
 
 
-			userService.saveRequestType(new RequestType("sickness",new ArrayList<>()));
-			userService.saveRequestType(new RequestType("vacation",new ArrayList<>()));
-			userService.saveRequestType(new RequestType("troll",new ArrayList<>()));
-			userService.saveRequestType(new RequestType("Annual leave",new ArrayList<>()));
+			userService.saveRequestType(new RequestType("sick leave",new ArrayList<>()));
+			userService.saveRequestType(new RequestType("bereavement leave",new ArrayList<>()));
+			userService.saveRequestType(new RequestType("annual leave",new ArrayList<>()));
 
 			String pattern = "yyyy-MM-dd";
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
 			long l=2;
-			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"Annual leave",2));
-			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"sickness",4));
-			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"sickness",2));
-			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"vacation",2));
-			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"troll",2));
+			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"annual leave",2));
+			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"sick leave",4));
+			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"sick leave",2));
+			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"sick leave",2));
+			absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"),simpleDateFormat.parse("2018-09-09"),l,"bereavement leave",2));
 
 			// SAMIR
 			for(int i = 1; i <= 7; ++i) {
-                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long) i, "sickness", true, "Accepted", "", new ArrayList<>(), 2));
-                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "sickness", true, "Pending", "Hi, This is a comment", new ArrayList<>(), 2));
-                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "sickness", true, "Rejected", "Hi again, this is the second comment", new ArrayList<>(), 2));
+                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long) i, "sick leave", true, "Pending", "", new ArrayList<>(), 1));
+                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "sick leave", true, "Pending", "Hi, I have COVID and I need some rest", new ArrayList<>(), 1));
+                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "bereavement leave", true, "Pending", "Hi, I'm very tired today and I need some rest", new ArrayList<>(), 1));
             }
 			Team  team1 = new Team("Team A",new Company("Cegedim","cegedim@gmail.com","Egypt,Cairo"));
 			Team  team2 = new Team("Team B",new Company("Cegedim","cegedim@gmail.com","Egypt,Cairo"));

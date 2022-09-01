@@ -12,7 +12,6 @@ spring:
     username: root
     password: 1234
 
-
   mail:
     host: ${MAIL_HOST}
     port: ${MAIL_PORT}
@@ -53,6 +52,5 @@ management:
       show-details: always
       probes:
         enabled: true
-
 
 ATTACHMENTS_LOCATION: attachments
