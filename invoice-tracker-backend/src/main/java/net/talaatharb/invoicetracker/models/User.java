@@ -216,7 +216,7 @@ public class User {
 	}
 
 
-	public User(String nationalId, String englishName, String arabicName, String email, String password, String englishAddress, String arabicAddress, int allowedBalance, int remainingBalance, boolean billable, Date joiningDate, Date endDate, Date birthDate, String mobileNumber, int yearsOfInsurance, int overtime, double payRate, String username, boolean isEnabled, Date expiryDate) {
+	public User(String nationalId, String englishName, String arabicName, String email, String password, String englishAddress, String arabicAddress, int allowedBalance, int remainingBalance, boolean billable, Date joiningDate, Date endDate, Date birthDate, String mobileNumber, int yearsOfInsurance, int overtime, double payRate, String username, boolean isEnabled, Date expiryDate,String jobTitle) {
 		this.nationalId = nationalId;
 		this.englishName = englishName;
 		this.arabicName = arabicName;
@@ -237,6 +237,7 @@ public class User {
 		this.username = username;
 		this.isEnabled=isEnabled;
 		this.lastTimePasswordChanged = expiryDate;
+		this.jobTitle=jobTitle;
 	}
 
 
