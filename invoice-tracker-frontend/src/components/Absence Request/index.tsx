@@ -88,7 +88,7 @@ const RequestForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     if (isBadFiles) {
-      return alert('Please upload correct files')
+      return toast.error('Please upload correct files')
     }
     e.preventDefault()
     console.log(request)
@@ -105,8 +105,7 @@ const RequestForm = () => {
       .then((response) => {
         console.log(response.data)
         requestId = response.data
-        alert('Your request is sent and being processed.')
-        alert(
+        toast.success(
           `You made a request on ${request.requestDate} to have ${
             request.type
           } from ${request.startDate} to ${request.endDate} (${
