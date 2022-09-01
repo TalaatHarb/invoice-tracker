@@ -82,15 +82,15 @@ public class InvoiceTrackerBackendApplication {
 
 
 
-			userService.saveUser(new User("124329374578","Mohamed Zakaria","N/A",EMAIL_USER, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,15,true,jdate,edate,new Date(),"01002345324",2,0,150.0,"amr0",true,NONEXPIRED_DATE,"Developer"));
-			userService.saveUser(new User("124329374566","Mohamed Gado","N/A",EMAIL_EMPLOYEE, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,7,true,jdate,edate,new Date(),"01002345324",2,0,150.0,"gado",true,NONEXPIRED_DATE,"Tester"));
-			userService.saveUser(new User("124329374578","Ahmed","N/A",EMAIL_HR, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,2,true,jdate,edate,new Date(),"01002345324",2,0,150.0,"Ahmed",true,NONEXPIRED_DATE,"IT"));
-			userService.saveUser(new User("124329374621","Amr Essam","عمرو عصام",EMAIL_ADMIN_USER,PASS_USER,"Cairo,Egypt","القاهرة،مصر",5,15,true,jdate2,edate2,new Date(),"01002345324",2,0,150.0,"amr23",true,NONEXPIRED_DATE,"Developer"));
-			userService.saveUser(new User("124329374579","Mostafa","N/A",EMAIL_HR_2, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,4,true,jdate2,edate2,new Date(),"01002345324",2,0,150.0,"hamada",false,NONEXPIRED_DATE,"Product Owner"));
+			userService.saveUser(new User("124329374578","Mohamed Zakaria","محمد زكريا",EMAIL_USER, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,15,true,jdate,edate,new Date(),"01002345324",2,0,150.0,"amr0",true,NONEXPIRED_DATE,"Developer"));
+			userService.saveUser(new User("124329374566","Mohamed Gado","محمد جادو",EMAIL_EMPLOYEE, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,7,true,jdate,edate,new Date(),"01002345324",2,0,150.0,"gado",true,NONEXPIRED_DATE,"Tester"));
+			userService.saveUser(new User("124329374578","Ahmed","احمد",EMAIL_HR, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,2,true,jdate,edate,new Date(),"01002345324",2,0,150.0,"Ahmed",true,NONEXPIRED_DATE,"IT"));
+			userService.saveUser(new User("124329374621","Amr Essam","عمرو عصام",EMAIL_ADMIN_USER,PASS_USER,"Cairo,Egypt","القاهرة،مصر",5,15,false,jdate2,edate2,new Date(),"01002345324",2,0,150.0,"amr23",true,NONEXPIRED_DATE,"Developer"));
+			userService.saveUser(new User("124329374579","Mostafa","مصطفى",EMAIL_HR_2, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,4,true,jdate2,edate2,new Date(),"01002345324",2,0,150.0,"hamada",false,NONEXPIRED_DATE,"Product Owner"));
 
 
-			userService.saveUser(new User("124329374580","Hamada","N/A",EMAIL_EMPLOYEE_2, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,21,true,jdate,edate2,new Date(),"01002345324",2,0,150.0,"hamada",false,NONEXPIRED_DATE,"Developer")); //DISABLED User
-			userService.saveUser(new User("124329374581","Sayed","N/A",EMAIL_EMPLOYEE_3, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,9,true,jdate2,edate,new Date(),"01002345324",2,0,150.0,"Sayed",true,EXPIRED_DATE,"Tester"));		//Expired Password User
+			userService.saveUser(new User("124329374580","Hamada","حمادة",EMAIL_EMPLOYEE_2, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,21,true,jdate,edate2,new Date(),"01002345324",2,0,150.0,"hamada",false,NONEXPIRED_DATE,"Developer")); //DISABLED User
+			userService.saveUser(new User("124329374581","Sayed","سيد",EMAIL_EMPLOYEE_3, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,9,false,jdate2,edate,new Date(),"01002345324",2,0,150.0,"Sayed",true,EXPIRED_DATE,"Tester"));		//Expired Password User
 
 
 
