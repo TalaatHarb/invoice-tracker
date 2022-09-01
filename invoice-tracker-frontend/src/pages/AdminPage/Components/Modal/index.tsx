@@ -5,19 +5,23 @@ import { useAppSelector } from '../../../../hooks/toolkit-types'
 import { ModalScreenActions } from '../../../../services/redux/slices/DetailsModal'
 import { MdCloudDownload } from 'react-icons/md'
 import axios from 'axios'
+import { CONSTANTS } from '../../../../utils/constants'
 import { downloadFiles } from '../../../../utils/helper'
 
 interface Props {
   notes: string
-  downloadLink: any
   isOpen: boolean
   setIsOpen: (isOpen: boolean) => void
+  downloadLink: string
+  attachmentName: string
 }
+
 export default function MyModal({
   notes,
   downloadLink,
   isOpen,
   setIsOpen,
+  attachmentName
 }: Props) {
   const dispatch = useDispatch()
   const { isAuthenticated } = useAppSelector(
@@ -70,7 +74,9 @@ export default function MyModal({
                   <button
                     id='download-button'
                     className='text-base rounded-md px-2 max-h-7 bg-yeellowLightCegedim text-blueCegedim flex items-center'
-                    onClick={() => {}}
+                    onClick={() => {
+                      downloadFiles(downloadLink, attachmentName, isAuthenticated as string)
+                    }}
                   >
                     <MdCloudDownload size={30} className='mr-2' /> Download
                     Notes

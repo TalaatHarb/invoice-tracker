@@ -134,7 +134,8 @@ function RequestCard({ request, fetchRequests }: RequestCardProps) {
           isOpen={isModalOpen}
           setIsOpen={setIsModalOpen}
           notes={request?.request?.comments}
-          downloadLink={request?.request.absenceAttachments[0]}
+          downloadLink={request?.request.absenceAttachments[0]?.attachmentUrl}
+          attachmentName={request?.request.absenceAttachments[0]?.attachmentName}
         />
       )}
     </div>
