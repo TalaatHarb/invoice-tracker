@@ -11,4 +11,5 @@ public class TeamDetails {
     private long id;
 
     private String name;
+
 }

@@ -8,6 +8,8 @@ import javax.persistence.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -61,6 +63,15 @@ public class Request {
 //    @NotBlank
     private int numberOfDays;
 
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "user_id_FK", referencedColumnName = "id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "request_typeId_FK", referencedColumnName = "id")
+    private RequestType requestType;
+
 
     public Request(Date startDate, Date endDate) {
         this.startDate = startDate;
@@ -72,6 +83,19 @@ public class Request {
         this.endDate = endDate;
         this.requestedBy = requestedBy;
         this.type = type;
+        this.numberOfDays = numberOfDays;
+    }
+
+    public Request(Date startDate, Date requestDate, Date endDate, Long requestedBy, String type, boolean isFullDay, String status, String comment, List<AbsenceAttachments> absenceAttachments, int numberOfDays) {
+        this.startDate = startDate;
+        this.requestDate = requestDate;
+        this.endDate = endDate;
+        this.requestedBy = requestedBy;
+        this.type = type;
+        this.isFullDay = isFullDay;
+        this.status = status;
+        this.comment = comment;
+        this.absenceAttachments = absenceAttachments;
         this.numberOfDays = numberOfDays;
     }
 }

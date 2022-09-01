@@ -10,8 +10,7 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/employeedb
     username: root
-    password: 1234
-
+    password: root
 
   mail:
     host: ${MAIL_HOST}
@@ -53,6 +52,5 @@ management:
       show-details: always
       probes:
         enabled: true
-
 
 ATTACHMENTS_LOCATION: attachments

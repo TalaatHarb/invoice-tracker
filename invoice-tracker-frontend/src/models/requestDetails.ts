@@ -1,8 +1,11 @@
-interface Request {
-  attachmentName: string
+interface absenceAttachment {
   attachmentUrl: string
-  absenceAttachments: string[]
-  comments: string
+  attachmentName: string
+}
+
+interface Request {
+  absenceAttachments: absenceAttachment[]
+  comment: string
   endDate: string
   fullDay: boolean
   id: number

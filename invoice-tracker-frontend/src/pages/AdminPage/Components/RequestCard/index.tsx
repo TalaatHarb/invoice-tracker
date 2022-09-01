@@ -22,7 +22,7 @@ function RequestCard({ request, fetchRequests }: RequestCardProps) {
     (state) => state.AuthenticationSlice
   )
 
-  const { isOpen } = useAppSelector((state) => state.ModalSlice)
+  const [isModalOpen, setIsModalOpen] = React.useState(false)
 
   const config = {
     headers: { Authorization: `Bearer ${isAuthenticated}` },
@@ -124,17 +124,22 @@ function RequestCard({ request, fetchRequests }: RequestCardProps) {
             className='text-blueCegedim cursor-pointer hover:text-black'
             size={40}
             onClick={() => {
-              dispatch(ModalScreenActions.openModal())
+              setIsModalOpen((prev) => !prev)
             }}
           />
-          {isOpen && (
-            <RequestsModal
-              notes={request?.request?.comments}
-              downloadLink={request?.request.absenceAttachments[0]}
-            />
-          )}
         </div>
       </div>
+      {isModalOpen && (
+        <RequestsModal
+          isOpen={isModalOpen}
+          setIsOpen={setIsModalOpen}
+          notes={request?.request?.comment}
+          downloadLink={request?.request.absenceAttachments[0]?.attachmentUrl}
+          attachmentName={
+            request?.request.absenceAttachments[0]?.attachmentName
+          }
+        />
+      )}
     </div>
   )
 }

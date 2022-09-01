@@ -9,6 +9,5 @@ import net.talaatharb.invoicetracker.models.Request;
 
 @Repository
 public interface RequestRepository extends JpaRepository<Request, Long> {
-
     List<Request> findAllByRequestedBy(Long empId);
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,13 +21,23 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    
     private String name;
 
     @ManyToOne(cascade = CascadeType.ALL)
+
     @JoinColumn(name="company_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
     private Company company;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "employee_teams", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "team_id"))
+    @JsonIgnore
     private List<User> employees;
+
+
+    public Team(String name, Company company) {
+        this.name = name;
+        this.company = company;
+    }
 }

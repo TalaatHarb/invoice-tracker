@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,5 +27,12 @@ public class Company {
     private String address;
 
     @OneToMany(mappedBy = "company")
+
     private List<Team> teams;
+
+    public Company(String name, String email, String address) {
+        this.name = name;
+        this.email = email;
+        this.address = address;
+    }
 }
