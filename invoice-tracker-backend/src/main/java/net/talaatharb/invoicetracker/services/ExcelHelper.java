@@ -61,7 +61,6 @@ public class ExcelHelper {
             employee.setJobTitle(income_user.getJopTitle());
             employee.setUserId(income_user.getUserId());
 
-            System.out.println("heelo1");
             return employee;
         }
         catch(Exception e){
