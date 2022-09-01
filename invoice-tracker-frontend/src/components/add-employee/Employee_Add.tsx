@@ -106,7 +106,7 @@ function Employee_Add() {
       headers: { Authorization: `Bearer ${isAuthenticated}` },
     };
 
-    let res = await axios.post(`${CONSTANTS}/api/employee/add`, prop, config);
+    let res = await axios.post(`${CONSTANTS.BACKEND_URL}/api/employee/add`, prop, config);
 
     alert(res.data.message);
 
@@ -316,9 +316,9 @@ function Employee_Add() {
             <div className="form-field col x-50">
               <select className="input-text js-input" onChange={selectChange}>
                 <option defaultValue={""}></option>
-                <option value="IT">IT</option>
-                <option value="DevOps">DevOps</option>
-                <option value="Software Engineer">Software Engineer</option>
+                <option value="Team A">Team A</option>
+                <option value="Team B">Team A</option>
+                <option value="Team C">Team A</option>
               </select>
 
               <label className="employee_label">Team Name</label>

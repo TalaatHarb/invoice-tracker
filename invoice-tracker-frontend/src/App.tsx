@@ -27,7 +27,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/empadd" element={<Employee_Add />}></Route>
+      <Route path="/empadd" element={<Employee_Add />} />
+
 
         {!isAuthenticated && <Route path="/login" element={<Login />} />}
         {/* protected user page */}
@@ -57,6 +58,9 @@ function App() {
         <Route path="/hr/allEmployees" element={<HrPrivateRoute />}>
           <Route path="/hr/allEmployees" element={<EmployeesHub />} />
         </Route>
+
+     
+
 
         {/* reset password routes */}
         <Route path="/forgot-password" element={<ForgotPassword />} />
