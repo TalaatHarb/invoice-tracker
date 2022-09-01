@@ -41,8 +41,8 @@ public class AbsenceService {
         return absenceRepository.count();
     }
 
-    public List<Request> getAllAbsenceByEmployeeId(Long empId){
-        return absenceRepository.findAllByRequestedBy(empId);
+    public List<Request> getAllAbsenceByEmployeeId(Long empId) {
+        return userRepository.findById(empId).get().getRequests();
     }
 
     public List<Request> updateAllEmployeeAbsences(List<Request> absences) {

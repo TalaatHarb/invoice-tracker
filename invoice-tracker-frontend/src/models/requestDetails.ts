@@ -5,7 +5,7 @@ interface absenceAttachment {
 
 interface Request {
   absenceAttachments: absenceAttachment[]
-  comments: string
+  comment: string
   endDate: string
   fullDay: boolean
   id: number
