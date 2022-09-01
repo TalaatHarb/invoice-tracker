@@ -87,7 +87,7 @@ public class InvoiceTrackerBackendApplication {
 			userService.saveUser(new User("124329374578","Ahmed","احمد",EMAIL_HR, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,2,true,jdate,edate,new Date(),"01002345324",2,0,150.0,"Ahmed",true,NONEXPIRED_DATE,"IT"));
 			userService.saveUser(new User("124329374621","Amr Essam","عمرو عصام",EMAIL_ADMIN_USER,PASS_USER,"Cairo,Egypt","القاهرة،مصر",5,15,false,jdate2,edate2,new Date(),"01002345324",2,0,150.0,"amr23",true,NONEXPIRED_DATE,"Developer"));
 			userService.saveUser(new User("124329374579","Mostafa","مصطفى",EMAIL_HR_2, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,4,true,jdate2,edate2,new Date(),"01002345324",2,0,150.0,"hamada",false,NONEXPIRED_DATE,"Product Owner"));
-			userService.saveUser(new User("124329374579","Mostafa Som3aa","مصطفى",EMAIL_USER_MO, PASS_USER,"Menoufia,Egypt","المنوفية،مصر",21,4,true,jdate2,edate2,new Date(),"01002345324",2,0,150.0,"hamada",false,NONEXPIRED_DATE,"CEO"));
+			userService.saveUser(new User("124329374579","Mostafa Som3aa","مصطفى",EMAIL_USER_MO, PASS_USER,"Menoufia,Egypt","المنوفية،مصر",21,4,true,jdate2,edate2,new Date(),"01002345324",2,0,150.0,"hamada",true,NONEXPIRED_DATE,"CEO"));
 
 
 			userService.saveUser(new User("124329374580","Hamada","حمادة",EMAIL_EMPLOYEE_2, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,21,true,jdate,edate2,new Date(),"01002345324",2,0,150.0,"hamada",false,NONEXPIRED_DATE,"Developer")); //DISABLED User
@@ -107,6 +107,7 @@ public class InvoiceTrackerBackendApplication {
 			userService.addRoleToUser(EMAIL_HR_2, ROLE_HR);
 			userService.addRoleToUser(EMAIL_EMPLOYEE, ROLE_EMPLOYEE);
 			userService.addRoleToUser(EMAIL_ADMIN_USER, ROLE_USER);
+			userService.addRoleToUser(EMAIL_USER_MO, ROLE_EMPLOYEE);
 
 
 			userService.saveRequestType(new RequestType("sick leave",new ArrayList<>()));

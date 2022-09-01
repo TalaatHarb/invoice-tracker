@@ -128,6 +128,7 @@ public class User {
 	@Size(max = 20)
 	private String username;
 
+	@JsonIgnore
 	@OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
 	@PrimaryKeyJoinColumn
 	private ResetTokenEntity resetToken;
