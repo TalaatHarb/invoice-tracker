@@ -125,7 +125,7 @@ public class InvoiceTrackerBackendApplication {
 
 			// SAMIR
 			for(int i = 1; i <= 8; ++i) {
-                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long) i, "sick leave", true, "Accepted", "", new ArrayList<>(), 1));
+                absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long) i, "sick leave", true, "Pending", "", new ArrayList<>(), 1));
                 absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "sick leave", true, "Pending", "Hi, I have COVID and I need some rest", new ArrayList<>(), 1));
                 absenceService.postRequest(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)i, "bereavement leave", true, "Pending", "Hi, I'm very tired today and I need some rest", new ArrayList<>(), 1));
             }
