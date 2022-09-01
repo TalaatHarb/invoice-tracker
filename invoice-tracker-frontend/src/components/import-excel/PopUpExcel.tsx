@@ -75,7 +75,7 @@ function PopUpExcel(props: any) {
     };
 
     let res = await axios.post(
-      `${CONSTANTS}/api/employee/uploadexcel`,
+      `${CONSTANTS.BACKEND_URL}/api/employee/uploadexcel`,
       prop,
       config
     );

@@ -317,8 +317,9 @@ function Employee_Add() {
               <select className="input-text js-input" onChange={selectChange}>
                 <option defaultValue={""}></option>
                 <option value="Team A">Team A</option>
-                <option value="Team B">Team A</option>
-                <option value="Team C">Team A</option>
+                <option value="Team B">Team B</option>
+                <option value="Team C">Team C</option>
+
               </select>
 
               <label className="employee_label">Team Name</label>
