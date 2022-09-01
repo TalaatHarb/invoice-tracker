@@ -11,7 +11,7 @@ export function isValidAttachmentType(type: string) {
 }
 
 export const downloadFiles = async (downloadLink: string, attachmentName: string, token:string) => {
-    
+  if(!downloadLink) return;
 
   const config = {
     method: "POST",
