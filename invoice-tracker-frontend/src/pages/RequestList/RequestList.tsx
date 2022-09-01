@@ -78,13 +78,13 @@ const RequestList = () => {
   ]
   const [requestData, setRequestData] = useState<any>(employees)
 
-  const allEmployeeDataUrl = `${CONSTANTS.BACKEND_URL}/user/absence/LeaveRequests`
+  const allEmployeeDataUrl = `${CONSTANTS.BACKEND_URL}/api/user/absence/LeaveRequests`
   const fetchFacad = new FetchFacad()
   const [selectedDropdown, setSelectedDropdown] = useState("")
   const [searchText, setSearchText] = useState('')
 
   const options = [
-    { value: 'employeeid', label: 'Employee Id' },
+    { value: 'employeeid', label: 'Request Id' },
     { value: 'englishName', label: 'English Name' },
     { value: 'RequestType', label: 'Leave type' },
     { value: 'arabicName', label: 'Arabic Name' },
