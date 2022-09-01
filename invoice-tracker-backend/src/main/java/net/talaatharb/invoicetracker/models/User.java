@@ -38,7 +38,7 @@ public class User {
 	//		@NotBlank
 	private String jobTitle;
 
-//	@NotBlank
+	//	@NotBlank
 	@Size(max = 50)
 	@Email
 	private String email;
@@ -92,7 +92,7 @@ public class User {
 
 	private Boolean isEnabled;
 
-	private  Long userId;
+	private Long userId;
 	@JsonIgnore
 	private Date lastTimePasswordChanged;
 
@@ -100,7 +100,7 @@ public class User {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(
 
-			cascade= CascadeType.ALL,
+			cascade = CascadeType.ALL,
 			orphanRemoval = true
 	)
 	private List<RequestsTypesNumber> requestsTypesNumber;
@@ -114,7 +114,7 @@ public class User {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(
 
-			cascade= CascadeType.ALL,
+			cascade = CascadeType.ALL,
 			orphanRemoval = true
 	)
 	private List<Request> requests = new ArrayList<>();
@@ -124,7 +124,7 @@ public class User {
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 
-//	@NotBlank
+	//	@NotBlank
 	@Size(max = 20)
 	private String username;
 
@@ -133,18 +133,15 @@ public class User {
 	private ResetTokenEntity resetToken;
 
 
-
-
-
 	public boolean isNotPasswordExpired() {
 		long PASSWORD_EXPIRATION_TIME = 30L * 24L * 60L * 60L * 1000L;
-        if (this.lastTimePasswordChanged == null) return true;
-         
-        long currentTime = System.currentTimeMillis();
-        long lastChangedTime = this.lastTimePasswordChanged.getTime();
-         
-        return currentTime < lastChangedTime + PASSWORD_EXPIRATION_TIME;
-    }
+		if (this.lastTimePasswordChanged == null) return true;
+
+		long currentTime = System.currentTimeMillis();
+		long lastChangedTime = this.lastTimePasswordChanged.getTime();
+
+		return currentTime < lastChangedTime + PASSWORD_EXPIRATION_TIME;
+	}
 
 	public User(String username, String email, String encode) {
 		this.username = username;
@@ -160,7 +157,7 @@ public class User {
 	}
 
 	public User(String email,String password,String username,
-			Boolean isEnabled, Date lastTimePasswordChanged) {
+				Boolean isEnabled, Date lastTimePasswordChanged) {
 		super();
 		this.email = email;
 		this.password = password;
@@ -169,8 +166,8 @@ public class User {
 		this.lastTimePasswordChanged = lastTimePasswordChanged;
 		this.username = username;
 	}
-	
-	
+
+
 
 
 	public User(String email, String password, Date joiningDate, String mobileNumber, String username) {
@@ -219,7 +216,7 @@ public class User {
 	}
 
 
-	public User(String nationalId, String englishName, String arabicName, String email, String password, String englishAddress, String arabicAddress, int allowedBalance, int remainingBalance, boolean billable, Date joiningDate, Date endDate, Date birthDate, String mobileNumber, int yearsOfInsurance, int overtime, double payRate, String username) {
+	public User(String nationalId, String englishName, String arabicName, String email, String password, String englishAddress, String arabicAddress, int allowedBalance, int remainingBalance, boolean billable, Date joiningDate, Date endDate, Date birthDate, String mobileNumber, int yearsOfInsurance, int overtime, double payRate, String username, boolean isEnabled, Date expiryDate,String jobTitle) {
 		this.nationalId = nationalId;
 		this.englishName = englishName;
 		this.arabicName = arabicName;
@@ -238,5 +235,14 @@ public class User {
 		this.overtime = overtime;
 		this.payRate = payRate;
 		this.username = username;
+		this.isEnabled=isEnabled;
+		this.lastTimePasswordChanged = expiryDate;
+		this.jobTitle=jobTitle;
 	}
+
+
+
+
+
+
 }

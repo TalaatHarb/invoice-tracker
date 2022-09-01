@@ -1,15 +1,6 @@
 package net.talaatharb.invoicetracker.services;
 
-import net.talaatharb.invoicetracker.models.Request;
-import net.talaatharb.invoicetracker.models.User;
-import net.talaatharb.invoicetracker.repositories.RequestRepository;
-import net.talaatharb.invoicetracker.repositories.UserRepository;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,8 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import net.talaatharb.invoicetracker.models.Request;
+import net.talaatharb.invoicetracker.models.User;
+import net.talaatharb.invoicetracker.repositories.RequestRepository;
+import net.talaatharb.invoicetracker.repositories.UserRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class AbsenceServiceTest {

@@ -90,9 +90,6 @@ public class UserDto {
     private List<String> teams = new ArrayList<>();
 
 
-
-
-
     //	@NotBlank
     @Size(max = 20)
     private String username;

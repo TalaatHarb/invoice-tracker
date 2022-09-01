@@ -18,4 +18,5 @@ export type employeeType = {
   team?: { id: number; name: string }[];
   fullTime?: boolean;
   resigned?: boolean;
+  requestTypesNumber?: { id?: number; name?: string; number?: number }[];
 };
