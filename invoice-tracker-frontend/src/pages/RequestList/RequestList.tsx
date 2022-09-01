@@ -83,6 +83,20 @@ const RequestList = () => {
   const [selectedDropdown, setSelectedDropdown] = useState("")
   const [searchText, setSearchText] = useState('')
 
+
+  const config = {
+    headers: { Authorization: `Bearer ${isAuthenticated}` },
+  }
+
+  
+  const fetchAbsences = async () => {
+    let res = await axios.get(
+      allEmployeeDataUrl,
+      config
+    )
+    console.log(res.data)
+  }
+
   const options = [
     { value: 'employeeid', label: 'Request Id' },
     { value: 'englishName', label: 'English Name' },
@@ -95,19 +109,11 @@ const RequestList = () => {
   ]
 
   useEffect(() => {
-    const getData = async () => {
-      await axios
-        .get(allEmployeeDataUrl, {
-          headers: { Authorization: `Bearer ${isAuthenticated}` },
-        })
-        .then((response) => {
-          setRequestData(response.data)
-        })
-    }
-    getData()
+    fetchAbsences();
   }, [])
-const filterDta = ()=>{
- return (Boolean(selectedDropdown) && searchText.length > 0) && requestData.filter((item:any )=> {
+
+  const filterDta = ()=>{
+  return (Boolean(selectedDropdown) && searchText.length > 0) && requestData.filter((item:any )=> {
   console.log(">>>>>>>>>>>>>>>>>>", item[selectedDropdown], searchText)
   return item[selectedDropdown].includes(searchText)
  })
