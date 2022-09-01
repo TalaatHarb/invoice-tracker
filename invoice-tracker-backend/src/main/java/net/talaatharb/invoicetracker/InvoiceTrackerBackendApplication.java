@@ -39,7 +39,7 @@ public class InvoiceTrackerBackendApplication {
 	private static final String EMAIL_EMPLOYEE_4 = "boogado66@yahoo.com";
 
 
-		public static final String PASS_USER = "awad36148";
+	public static final String PASS_USER = "awad36148";
 	
 	private static final Date NONEXPIRED_DATE = new GregorianCalendar(2022,Calendar.AUGUST,11).getTime();
 	private static final Date EXPIRED_DATE = new GregorianCalendar(2021,Calendar.AUGUST,11).getTime();
@@ -87,7 +87,7 @@ public class InvoiceTrackerBackendApplication {
 			userService.saveUser(new User("124329374578","Ahmed","احمد",EMAIL_HR, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,2,true,jdate,edate,new Date(),"01002345324",2,0,150.0,"Ahmed",true,NONEXPIRED_DATE,"IT"));
 			userService.saveUser(new User("124329374621","Amr Essam","عمرو عصام",EMAIL_ADMIN_USER,PASS_USER,"Cairo,Egypt","القاهرة،مصر",5,15,false,jdate2,edate2,new Date(),"01002345324",2,0,150.0,"amr23",true,NONEXPIRED_DATE,"Developer"));
 			userService.saveUser(new User("124329374579","Mostafa","مصطفى",EMAIL_HR_2, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,4,true,jdate2,edate2,new Date(),"01002345324",2,0,150.0,"hamada",false,NONEXPIRED_DATE,"Product Owner"));
-			userService.saveUser(new User("124329374579","Mostafa Som3aa","مصطفى",EMAIL_USER_MO, PASS_USER,"Menoufia,Egypt","المنوفية،مصر",21,4,true,jdate2,edate2,new Date(),"01002345324",2,0,150.0,"hamada",false,NONEXPIRED_DATE,"CTEOS"));
+			userService.saveUser(new User("124329374579","Mostafa Som3aa","مصطفى",EMAIL_USER_MO, PASS_USER,"Menoufia,Egypt","المنوفية،مصر",21,4,true,jdate2,edate2,new Date(),"01002345324",2,0,150.0,"hamada",false,NONEXPIRED_DATE,"CEO"));
 
 
 			userService.saveUser(new User("124329374580","Hamada","حمادة",EMAIL_EMPLOYEE_2, PASS_USER,"Cairo,Egypt","القاهرة،مصر",21,21,true,jdate,edate2,new Date(),"01002345324",2,0,150.0,"hamada",false,NONEXPIRED_DATE,"Developer")); //DISABLED User
