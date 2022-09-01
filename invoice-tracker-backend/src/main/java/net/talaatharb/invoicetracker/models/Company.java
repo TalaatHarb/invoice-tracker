@@ -24,8 +24,10 @@ public class Company {
     private String email;
 
     private String address;
+   // @LazyCollection(LazyCollectionOption.FALSE)
 
     @OneToMany(mappedBy = "company")
+
     private List<Team> teams;
 
     public Company(String name, String email, String address) {
