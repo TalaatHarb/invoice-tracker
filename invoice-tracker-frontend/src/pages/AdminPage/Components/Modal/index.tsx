@@ -10,13 +10,20 @@ import { downloadFiles } from '../../../../utils/helper'
 
 interface Props {
   notes: string
+  isOpen: boolean
+  setIsOpen: (isOpen: boolean) => void
   downloadLink: string
   attachmentName: string
 }
-export default function MyModal({ notes, downloadLink, attachmentName }: Props) {
-  console.log("the download link is " + downloadLink);
+
+export default function MyModal({
+  notes,
+  downloadLink,
+  isOpen,
+  setIsOpen,
+  attachmentName
+}: Props) {
   const dispatch = useDispatch()
-  const { isOpen } = useAppSelector((state) => state.ModalSlice)
   const { isAuthenticated } = useAppSelector(
     (state) => state.AuthenticationSlice
   )
@@ -27,7 +34,7 @@ export default function MyModal({ notes, downloadLink, attachmentName }: Props) 
         as='div'
         className='relative z-10'
         onClose={() => {
-          dispatch(ModalScreenActions.closeModal())
+          setIsOpen(false)
         }}
       >
         <Transition.Child
@@ -39,7 +46,7 @@ export default function MyModal({ notes, downloadLink, attachmentName }: Props) 
           leaveFrom='opacity-100'
           leaveTo='opacity-0'
         >
-          <div className='fixed inset-0 bg-black bg-opacity-30' />
+          <div className='fixed inset-0 bg-black bg-opacity-50' />
         </Transition.Child>
 
         <div className='fixed inset-0 overflow-y-auto'>
@@ -81,7 +88,7 @@ export default function MyModal({ notes, downloadLink, attachmentName }: Props) 
                     type='button'
                     className='inline-flex bg-blueCegedim justify-center px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-red-500'
                     onClick={() => {
-                      dispatch(ModalScreenActions.closeModal())
+                      setIsOpen(false)
                     }}
                   >
                     Close
