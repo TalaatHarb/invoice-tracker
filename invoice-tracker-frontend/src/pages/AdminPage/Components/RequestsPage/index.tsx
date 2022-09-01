@@ -28,10 +28,6 @@ const AdminRequests = () => {
     fetchRequests()
   }, [])
 
-  useEffect(() => {
-    console.log(requests)
-  }, [requests])
-
   return (
     <div className='shadow-2xl px-4 py-5 sm:px-6 mt-8 sm:rounded-3xl mx-8'>
       <div className='px-4 py-5 sm:p-6 shadow sm:px-6 sm:rounded-lg border bottom-2'>
