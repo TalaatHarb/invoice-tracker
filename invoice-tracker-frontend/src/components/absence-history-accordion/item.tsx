@@ -20,6 +20,7 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
 
   const editItemClickHandler = () => {
     setShowModal(true);
+    setTempData(props.record);
   };
 
   const { isAuthenticated } = useAppSelector(
@@ -128,14 +129,17 @@ const AbsenceHistoryItem = (props: any): JSX.Element => {
               <strong id={"attachment" + props.record.id}>Attachment: </strong>{" "}
               {props.record.absenceAttachments.length > 0 ? (
                 props.record.absenceAttachments.map((attachment: Attatchment) => {
-                  return ( <button
+                  return ( 
+                  <>                  <button
                   key={1}
                   className="text-blueCegedim"
                   onClick={() => downloadFiles(attachment.attachmentUrl, attachment.attachmentName)}
                 >
-                  {" "}
                   {attachment.attachmentName}
                 </button>
+                <p> </p>
+                </>
+
                  ) })
               )
               : 

@@ -34,6 +34,7 @@ public class AbsenceServiceTest {
     @Test
     public void testGetAllAbsenceByEmployeeId() throws ParseException {
         // Arrange
+        User user = new User();
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         List<Request> absences = List.of(new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)1, "Sick leave", true, "Pending", "", new ArrayList<>(), 2),
@@ -41,8 +42,8 @@ public class AbsenceServiceTest {
                 new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)1, "Sick leave", true, "Pending", "", new ArrayList<>(), 2),
                 new Request(simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-09"), simpleDateFormat.parse("2018-09-10"), (long)1, "Sick leave", true, "Pending", "", new ArrayList<>(), 2)
         );
-
-        Mockito.when(absenceRepository.findAllByRequestedBy((long)1)).thenReturn(absences);
+        user.setRequests(absences);
+        Mockito.when(userRepository.findById((long)1)).thenReturn(Optional.of(user));
         // Act
         List<Request> result = absenceService.getAllAbsenceByEmployeeId((long)1);
         // Assert
