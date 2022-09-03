@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Default Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="CegedimLastSprint(failed)">
+    <classes>
+      <class name="InvoiceFilter.FilterStepDef">
+        <methods>
+          <include name="browserNavigatesToInvoiceGeneratorWebsiteAndLoginAsHRAndNavigatesToEmployeeList"/>
+          <include name="closeWindow"/>
+          <include name="tableContainsTheEmployeeWithTheSameEndDate"/>
+        </methods>
+      </class> <!-- InvoiceFilter.FilterStepDef -->
+    </classes>
+  </test> <!-- CegedimLastSprint(failed) -->
+</suite> <!-- Failed suite [Default Suite] -->
